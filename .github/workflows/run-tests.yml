@@ -28,7 +28,7 @@ jobs:
       -   uses: actions/checkout@v2
 
       -   name: Setup cache environment
-          id: extcache
+          id: extcache-${{ matrix.php }}
           uses: shivammathur/cache-extensions@v1
           with:
             php-version: ${{ matrix.php }}
