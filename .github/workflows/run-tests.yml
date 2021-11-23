@@ -27,14 +27,6 @@ jobs:
     steps:
       -   uses: actions/checkout@v2
 
-      -   name: Setup cache environment
-          id: extcache-${{ matrix.php }}
-          uses: shivammathur/cache-extensions@v1
-          with:
-            php-version: ${{ matrix.php }}
-            extensions: ${{ env.extensions }}
-            key: extensions-${{ hashFiles('composer.lock') }}
-
       -   name: Setup PHP
           uses: shivammathur/setup-php@v2
           with:
