@@ -31,16 +31,9 @@ jobs:
           id: extcache
           uses: shivammathur/cache-extensions@v1
           with:
-            php-version: '8.0'
+            php-version: ${{ matrix.php }}
             extensions: ${{ env.extensions }}
             key: extensions-${{ hashFiles('composer.lock') }}
-
-      -   name: Cache extensions
-          uses: actions/cache@v2
-          with:
-            path: ${{ steps.extcache.outputs.dir }}
-            key: ${{ steps.extcache.outputs.key }}
-            restore-keys: ${{ steps.extcache.outputs.key }}
 
       -   name: Setup PHP
           uses: shivammathur/setup-php@v2
