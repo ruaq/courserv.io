@@ -77,7 +77,10 @@ it('get blocked after 3 failed login tries', function () {
 
 it('can login', function () {
     $user = User::factory()->create(
-        ['password' => Hash::make('password')]
+        [
+            'password' => Hash::make('password'),
+            'active' => 1,
+        ]
     );
 
     Livewire::test('auth.login')
@@ -88,6 +91,25 @@ it('can login', function () {
         ->assertRedirect(route('home'));
 
     $this->assertAuthenticatedAs($user);
+});
+
+it('needs to be an active user to login', function () {
+    $user = User::factory()->create(
+        [
+            'password' => Hash::make('password'),
+            'active' => 0,
+        ]
+    );
+
+    Livewire::test('auth.login')
+        ->set('email', $user->email)
+        ->set('password', 'password')
+        ->emit('captchaSolved')
+        ->call('login')
+        ->assertHasErrors('email')
+        ->assertSee(trans('auth.inactive'));
+
+    $this->assertGuest();
 });
 
 it('can logout', function () {
