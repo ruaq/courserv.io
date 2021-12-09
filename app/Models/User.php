@@ -54,7 +54,9 @@ use Laravel\Sanctum\HasApiTokens;
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRoleIs($role = '', $team = null, $boolean = 'and')
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read string $status_color
  */
+
 class User extends Authenticatable
 {
     use LaratrustUserTrait;
@@ -71,6 +73,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'active',
     ];
 
     /**
@@ -95,5 +98,13 @@ class User extends Authenticatable
     public function teams()
     {
         return $this->belongsToMany(Team::class);
+    }
+
+    public function getStatusColorAttribute(): string
+    {
+        return [
+                '1' => 'green',
+                '0' => 'red',
+            ][$this->active] ?? 'cool-gray';
     }
 }

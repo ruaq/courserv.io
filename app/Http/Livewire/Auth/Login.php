@@ -68,6 +68,13 @@ class Login extends Component
             return;
         }
 
+        if (! Auth::user()->active) {
+            Auth::logout();
+            $this->addError('email', trans('auth.inactive'));
+
+            return;
+        }
+
         session()->regenerate();
 
         return redirect()->intended(route('home'));

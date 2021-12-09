@@ -34,4 +34,8 @@ Route::group(
     Route::get('teams', \App\Http\Livewire\Team::class)
         ->middleware('auth')
         ->name('teams');
+
+    Route::get('user', \App\Http\Livewire\User::class)
+        ->middleware('auth')
+        ->name('user');
 });

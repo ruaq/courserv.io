@@ -33,6 +33,24 @@ class PermissionSeeder extends Seeder
             'description' => 'can edit a team',
         ]);
 
+        Permission::create([
+            'name' => 'user.create',
+            'display_name' => 'Create User',
+            'description' => 'create a new user',
+        ]);
+
+        Permission::create([
+            'name' => 'user.view',
+            'display_name' => 'View User',
+            'description' => 'can see the user',
+        ]);
+
+        Permission::create([
+            'name' => 'user.update',
+            'display_name' => 'Edit User',
+            'description' => 'can edit a user',
+        ]);
+
         // create an administrator role as standard
         $admin = Role::create([
             'name' => 'admin',
