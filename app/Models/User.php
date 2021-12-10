@@ -100,11 +100,13 @@ class User extends Authenticatable
         return $this->belongsToMany(Team::class);
     }
 
-    public function getStatusColorAttribute(): string
-    {
-        return [
-                '1' => 'green',
-                '0' => 'red',
-            ][$this->active] ?? 'cool-gray';
-    }
+    // bg-{{ $user->status_color }}-100 text-{{ $user->status_color }}-800
+    // won't work with tailwind 3.0 out of the box TODO review later
+//    public function getStatusColorAttribute(): string
+//    {
+//        return [
+//                '1' => 'green',
+//                '0' => 'red',
+//            ][$this->active] ?? 'gray';
+//    }
 }

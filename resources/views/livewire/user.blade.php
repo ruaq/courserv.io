@@ -28,7 +28,7 @@
                                 <tr>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="flex items-center">
-                                            <div class="flex-shrink-0 h-10 w-10">
+                                            <div class="shrink-0 h-10 w-10">
                                                 <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60" alt="">
                                             </div>
                                             <div class="ml-4">
@@ -48,7 +48,7 @@
                                         @foreach($user->roles as $role){{ $role->email }}{{ !$loop->last ? ', ' : '' }}@endforeach
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-{{ $user->status_color }}-100 text-{{ $user->status_color }}-800">
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ $user->active ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
                                             @can('update', $user)
                                                 <x-button.badge wire:click="active({{ $user->id }})">{{ $user->active ? _i('active') : _i('inactive') }}</x-button.badge>
                                             @else
