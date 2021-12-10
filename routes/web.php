@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,14 +29,30 @@ Route::group(
         ->name('login');
 
     Route::get('home', \App\Http\Livewire\Home::class)
-        ->middleware('auth')
+        ->middleware(['auth', 'verified'])
         ->name('home');
 
     Route::get('teams', \App\Http\Livewire\Team::class)
-        ->middleware('auth')
+        ->middleware(['auth', 'verified'])
         ->name('teams');
 
     Route::get('user', \App\Http\Livewire\User::class)
-        ->middleware('auth')
+        ->middleware(['auth', 'verified'])
         ->name('user');
 });
+
+Route::get('/email/verify', function () {
+    return view('auth.verify-email'); // TODO correct message if still not confirmed email
+})->middleware('auth')->name('verification.notice');
+
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+
+    return redirect('/home');
+})->middleware(['auth', 'signed'])->name('verification.verify');
+
+Route::post('/email/verification-notification', function (Request $request) {
+    $request->user()->sendEmailVerificationNotification();
+
+    return back()->with('message', 'Verification link sent!');
+})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
