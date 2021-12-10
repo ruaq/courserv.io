@@ -10,6 +10,6 @@
 
       Current: "text-gray-500", Default: "text-gray-400 group-hover:text-gray-500"
     --}}
-    <i class="fas fa-{{ $fa }} {{ $active ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500' }} mr-3 flex-shrink-0 w-6"></i>
+    <i class="fas fa-{{ $fa }} {{ $active ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500' }} mr-3 shrink-0 w-6"></i>
     {{ $slot }}
 </a>
