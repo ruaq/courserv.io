@@ -14,31 +14,31 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(
-    [
-        'prefix' => LaravelLocalization::setLocale(),
-        'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath', '\App\Http\Middleware\Localization' ]
-    ], function()
-{
-    Route::get('/', function () {
-        return view('welcome');
+
+// TODO better way to combine it?
+Route::localized(function () {
+    Route::group(
+        [
+            'middleware' => [ '\App\Http\Middleware\Localization' ]
+        ], function()
+    {
+        Route::get('/', function () {
+            return view('welcome');
+        });
+
+        Route::get('login', \App\Http\Livewire\Auth\Login::class)
+            ->middleware('guest')
+            ->name('login');
+
+        Route::get('home', \App\Http\Livewire\Home::class)
+            ->name('home');
+
+        Route::get('teams', \App\Http\Livewire\Team::class)
+            ->name('teams');
+
+        Route::get('user', \App\Http\Livewire\User::class)
+            ->name('user');
     });
-
-    Route::get('login', \App\Http\Livewire\Auth\Login::class)
-        ->middleware('guest')
-        ->name('login');
-
-    Route::get('home', \App\Http\Livewire\Home::class)
-        ->middleware(['auth', 'verified'])
-        ->name('home');
-
-    Route::get('teams', \App\Http\Livewire\Team::class)
-        ->middleware(['auth', 'verified'])
-        ->name('teams');
-
-    Route::get('user', \App\Http\Livewire\User::class)
-        ->middleware(['auth', 'verified'])
-        ->name('user');
 });
 
 Route::get('/email/verify', function () {
@@ -56,3 +56,6 @@ Route::post('/email/verification-notification', function (Request $request) {
 
     return back()->with('message', 'Verification link sent!');
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+
+Route::fallback(\CodeZero\LocalizedRoutes\Controller\FallbackController::class)
+    ->middleware(\CodeZero\LocalizedRoutes\Middleware\SetLocale::class);

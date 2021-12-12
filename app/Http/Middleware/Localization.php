@@ -4,7 +4,6 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Xinax\LaravelGettext\Facades\LaravelGettext;
 
 class Localization
@@ -18,8 +17,7 @@ class Localization
      */
     public function handle(Request $request, Closure $next)
     {
-        $locale = LaravelLocalization::getCurrentLocaleRegional();
-        LaravelGettext::setLocale($locale);
+        LaravelGettext::setLocale(app()->getLocale());
 
         return $next($request);
     }

@@ -28,6 +28,10 @@ class Team extends Component
 
     public function mount()
     {
+        if (! Auth::check()) {
+            return $this->redirect(route('login'));
+        }
+
         $this->editing = $this->makeBlankTeam();
     }
 

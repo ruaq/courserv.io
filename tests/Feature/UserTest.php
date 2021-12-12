@@ -24,7 +24,7 @@ beforeEach(function () {
 it('has a user page', function () {
     $this->user->attachRole('admin');
 
-    $response = $this->get('/user');
+    $response = $this->get(route('user'));
 
     $response->assertStatus(200);
 
@@ -32,12 +32,12 @@ it('has a user page', function () {
 });
 
 it('shows the team members only if authorized', function () {
-    $response = $this->get('/user');
+    $response = $this->get(route('user'));
     $response->assertForbidden();
 
     $this->user->attachPermission('user.view');
 
-    $response = $this->get('/user');
+    $response = $this->get(route('user'));
 
     $response->assertStatus(200);
     $response->assertSeeLivewire('user');
@@ -53,7 +53,7 @@ it('shows only team member', function () {
     // Permission for team
     $this->user->attachPermission('user.view', $this->team);
 
-    $response = $this->get('/user');
+    $response = $this->get(route('user'));
 
     $response->assertStatus(200);
     $response->assertSee($user->name);
@@ -61,7 +61,7 @@ it('shows only team member', function () {
 
     $user->teams()->detach($this->team);
 
-    $response = $this->get('/user');
+    $response = $this->get(route('user'));
 
     $response->assertStatus(200);
     $response->assertDontSee($user->name);
@@ -70,7 +70,7 @@ it('shows only team member', function () {
     // global Permission
     $this->user->attachPermission('user.view');
 
-    $response = $this->get('/user');
+    $response = $this->get(route('user'));
 
     $response->assertStatus(200);
     $response->assertSee($user->name);

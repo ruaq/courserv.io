@@ -25,7 +25,7 @@ beforeEach(function () {
 });
 
 it('has team page', function () {
-    $response = $this->get('/teams');
+    $response = $this->get(route('teams'));
 
     $response->assertStatus(200);
 
@@ -33,13 +33,13 @@ it('has team page', function () {
 });
 
 it('shows team menu only to authorized users', function () {
-    $this->get('/home')->assertSee('Teams');
+    $this->get(route('home'))->assertSee('Teams');
 
     $this->user->detachRole('admin');
-    $this->get('/home')->assertDontSee('Teams');
+    $this->get(route('home'))->assertDontSee('Teams');
 
     $this->user->attachRole('admin', $this->team);
-    $this->get('/home')->assertSee('Teams');
+    $this->get(route('home'))->assertSee('Teams');
 });
 
 it('needs authorization to create a team', function () {

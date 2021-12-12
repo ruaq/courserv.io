@@ -10,13 +10,13 @@ beforeEach(function () {
 });
 
 it('has login page', function () {
-    $response = $this->get('/login');
+    $response = $this->get(route('login'));
 
     $response->assertStatus(200);
 });
 
 it('shows a Livewire component at Login', function () {
-    $this->get('/login')->assertSeeLivewire('auth.login');
+    $this->get(route('login'))->assertSeeLivewire('auth.login');
 });
 
 it('needs a valid e-mail address to login', function () {

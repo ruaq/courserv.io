@@ -1,0 +1,151 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: courserv.io\n"
+"POT-Creation-Date: 2021-12-12 19:53+0100\n"
+"PO-Revision-Date: 2021-12-12 20:13+0100\n"
+"Last-Translator: Holger Schmermbeck <hosch@mailbox.org>\n"
+"Language-Team: Holger Schmermbeck <hosch@mailbox.org>\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+"X-Poedit-KeywordsList: _;__;_i;_s;gettext;_n:1,2;ngettext:1,2;dgettext:2\n"
+"X-Poedit-Basepath: ../../../../../app\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: Http\n"
+"X-Poedit-SearchPath-1: ../resources/views\n"
+"X-Poedit-SearchPath-2: Console\n"
+"X-Poedit-SearchPath-3: ../storage/framework/messages\n"
+
+#: ../storage/framework/messages/1edd4c9adb64e6123d74f9eb7bdf111dbf1a20df.php.php:53
+#: Http/Livewire/Auth/Login.php:53
+#, php-format
+msgid "Too many login attempts. Please try again in a second."
+msgid_plural "Too many login attempts. Please try again in %s seconds."
+msgstr[0] "Zu viele Anmeldeversuche. Bitte versuchen Sie es in einer Sekunde erneut."
+msgstr[1] "Zu viele Anmeldeversuche. Bitte versuchen Sie es in %s Sekunden erneut."
+
+#: ../storage/framework/messages/1edd4c9adb64e6123d74f9eb7bdf111dbf1a20df.php.php:60
+#: Http/Livewire/Auth/Login.php:60
+msgid "Captcha not solved!"
+msgstr "Captcha nicht gelöst!"
+
+#: ../storage/framework/messages/2aa54796444fe211b2520010bec6c5f34a5cde5e.php.php:117
+#: ../storage/framework/messages/3a4ef801e8df3859ee98b45d434c72ae3106cb31.php.php:7
+#: ../storage/framework/messages/63070254417ac5756a98c379959c922b66d80c89.php.php:7
+#: Http/Livewire/User.php:117
+msgid "User"
+msgstr "Benutzer"
+
+#: ../storage/framework/messages/36c0179b32fa6c30898bf46febebec2b3be3584f.php.php:10
+#: ../storage/framework/messages/36c0179b32fa6c30898bf46febebec2b3be3584f.php.php:86
+#: ../storage/framework/messages/36c0179b32fa6c30898bf46febebec2b3be3584f.php.php:88
+#: ../storage/framework/messages/36c0179b32fa6c30898bf46febebec2b3be3584f.php.php:95
+msgid "team name"
+msgstr "Teamname"
+
+#: ../storage/framework/messages/36c0179b32fa6c30898bf46febebec2b3be3584f.php.php:14
+msgid "Display Name"
+msgstr "Angezeigter Name"
+
+#: ../storage/framework/messages/36c0179b32fa6c30898bf46febebec2b3be3584f.php.php:18
+#: ../storage/framework/messages/36c0179b32fa6c30898bf46febebec2b3be3584f.php.php:182
+#: ../storage/framework/messages/36c0179b32fa6c30898bf46febebec2b3be3584f.php.php:191
+msgid "Description"
+msgstr "Beschreibung"
+
+#: ../storage/framework/messages/36c0179b32fa6c30898bf46febebec2b3be3584f.php.php:27
+msgid "Add Team"
+msgstr "Team hinzufügen"
+
+#: ../storage/framework/messages/36c0179b32fa6c30898bf46febebec2b3be3584f.php.php:82
+msgid "edit team"
+msgstr "Team bearbeiten"
+
+#: ../storage/framework/messages/36c0179b32fa6c30898bf46febebec2b3be3584f.php.php:126
+msgid "The internal used team name."
+msgstr "Der intern verwendete Teamname."
+
+#: ../storage/framework/messages/36c0179b32fa6c30898bf46febebec2b3be3584f.php.php:134
+#: ../storage/framework/messages/36c0179b32fa6c30898bf46febebec2b3be3584f.php.php:143
+msgid "Display Team Name"
+msgstr "angezeigter Teamname"
+
+#: ../storage/framework/messages/36c0179b32fa6c30898bf46febebec2b3be3584f.php.php:174
+msgid "The displayed team name."
+msgstr "Der angezeigte Teamname."
+
+#: ../storage/framework/messages/36c0179b32fa6c30898bf46febebec2b3be3584f.php.php:222
+msgid "A description for this team. (optional)"
+msgstr "Eine Beschreibung für dieses Team. (optional)"
+
+#: ../storage/framework/messages/5b543a6f76ca66c34a132d9a2df6b6d1b92c3b5d.php.php:7
+msgid "Log in to your account"
+msgstr "Melden Sie sich an Ihrem Konto an"
+
+#: ../storage/framework/messages/5b543a6f76ca66c34a132d9a2df6b6d1b92c3b5d.php.php:16
+#: ../storage/framework/messages/5b543a6f76ca66c34a132d9a2df6b6d1b92c3b5d.php.php:24
+msgid "Email address"
+msgstr "E-Mail Adresse"
+
+#: ../storage/framework/messages/5b543a6f76ca66c34a132d9a2df6b6d1b92c3b5d.php.php:37
+#: ../storage/framework/messages/5b543a6f76ca66c34a132d9a2df6b6d1b92c3b5d.php.php:45
+msgid "Password"
+msgstr "Passwort"
+
+#: ../storage/framework/messages/5b543a6f76ca66c34a132d9a2df6b6d1b92c3b5d.php.php:63
+msgid "Remember me"
+msgstr "Angemeldet bleiben"
+
+#: ../storage/framework/messages/5b543a6f76ca66c34a132d9a2df6b6d1b92c3b5d.php.php:70
+msgid "Forgot your password?"
+msgstr "Passwort vergessen?"
+
+#: ../storage/framework/messages/5b543a6f76ca66c34a132d9a2df6b6d1b92c3b5d.php.php:95
+msgid "Log in"
+msgstr "Anmelden"
+
+#: ../storage/framework/messages/c99f5590cf744b55b44a0f2e7d11a17eb6c30cb5.php.php:13
+#: ../storage/framework/messages/ed332ebd47ba25bc141df69d92f906dfbd61238c.php.php:94
+#: Http/Livewire/Team.php:94
+msgid "Teams"
+msgstr "Teams"
+
+#: ../storage/framework/messages/c99f5590cf744b55b44a0f2e7d11a17eb6c30cb5.php.php:28
+msgid "Add User"
+msgstr "Benutzer hinzufügen"
+
+#: ../storage/framework/messages/c99f5590cf744b55b44a0f2e7d11a17eb6c30cb5.php.php:71
+#: ../storage/framework/messages/c99f5590cf744b55b44a0f2e7d11a17eb6c30cb5.php.php:83
+msgid "active"
+msgstr "aktiv"
+
+#: ../storage/framework/messages/c99f5590cf744b55b44a0f2e7d11a17eb6c30cb5.php.php:71
+#: ../storage/framework/messages/c99f5590cf744b55b44a0f2e7d11a17eb6c30cb5.php.php:83
+msgid "inactive"
+msgstr "inaktiv"
+
+#: ../storage/framework/messages/c99f5590cf744b55b44a0f2e7d11a17eb6c30cb5.php.php:99
+msgid "edit"
+msgstr "bearbeiten"
+
+#: ../storage/framework/messages/c99f5590cf744b55b44a0f2e7d11a17eb6c30cb5.php.php:123
+msgid "edit user"
+msgstr "Benutzer editieren"
+
+#: ../storage/framework/messages/c99f5590cf744b55b44a0f2e7d11a17eb6c30cb5.php.php:127
+#: ../storage/framework/messages/c99f5590cf744b55b44a0f2e7d11a17eb6c30cb5.php.php:129
+#: ../storage/framework/messages/c99f5590cf744b55b44a0f2e7d11a17eb6c30cb5.php.php:136
+msgid "name"
+msgstr "Name"
+
+#: ../storage/framework/messages/c99f5590cf744b55b44a0f2e7d11a17eb6c30cb5.php.php:173
+#: ../storage/framework/messages/c99f5590cf744b55b44a0f2e7d11a17eb6c30cb5.php.php:182
+msgid "e-mail address"
+msgstr "E-Mail-Adresse"
+
+#: ../storage/framework/messages/e38cd9d80b244cca9fe5cc31b33536d9c300a306.php.php:317
+msgid "Logout"
+msgstr "Ausloggen"

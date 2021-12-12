@@ -6,7 +6,7 @@
             </div>
 
             <div class="flex justify-center">
-                <div class="flex justify-center frc-captcha" data-sitekey="{{ config('services.fcaptcha.sitekey') }}" data-callback="captchaSolved" data-lang="{{ LaravelLocalization::getCurrentLocale() }}"></div>
+                <div class="flex justify-center frc-captcha" data-sitekey="{{ config('services.fcaptcha.sitekey') }}" data-callback="captchaSolved" data-lang="{{ app()->getLocale() }}"></div>
             </div>
         @endunless
     </div>
