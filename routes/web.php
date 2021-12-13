@@ -14,7 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
 // TODO better way to combine it?
 Route::localized(function () {
     Route::group(
@@ -38,6 +37,10 @@ Route::localized(function () {
 
         Route::get('user', \App\Http\Livewire\User::class)
             ->name('user');
+
+        Route::get('password/reset/{hashedId}', \App\Http\Livewire\PasswordReset::class)
+            ->middleware('signed')
+            ->name('password.reset');
     });
 });
 

@@ -64,6 +64,11 @@ class User extends Component
 
         $this->editing->active ? $this->editing->active = 0 : $this->editing->active = 1;
 
+        // prevent deactivating yourself...
+        if ($this->editing->id === auth()->id()) {
+            $this->editing->active = 1;
+        }
+
         $this->validate();
         $this->editing->save();
 

@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: courserv.io\n"
-"POT-Creation-Date: 2021-12-12 19:53+0100\n"
-"PO-Revision-Date: 2021-12-12 20:13+0100\n"
+"POT-Creation-Date: 2021-12-13 19:31+0100\n"
+"PO-Revision-Date: 2021-12-13 19:36+0100\n"
 "Last-Translator: Holger Schmermbeck <hosch@mailbox.org>\n"
 "Language-Team: Holger Schmermbeck <hosch@mailbox.org>\n"
 "Language: de\n"
@@ -19,23 +19,25 @@ msgstr ""
 "X-Poedit-SearchPath-2: Console\n"
 "X-Poedit-SearchPath-3: ../storage/framework/messages\n"
 
-#: ../storage/framework/messages/1edd4c9adb64e6123d74f9eb7bdf111dbf1a20df.php.php:53
-#: Http/Livewire/Auth/Login.php:53
+#: ../storage/framework/messages/1edd4c9adb64e6123d74f9eb7bdf111dbf1a20df.php.php:68
+#: Http/Livewire/Auth/Login.php:68
 #, php-format
 msgid "Too many login attempts. Please try again in a second."
 msgid_plural "Too many login attempts. Please try again in %s seconds."
-msgstr[0] "Zu viele Anmeldeversuche. Bitte versuchen Sie es in einer Sekunde erneut."
-msgstr[1] "Zu viele Anmeldeversuche. Bitte versuchen Sie es in %s Sekunden erneut."
+msgstr[0] ""
+"Zu viele Anmeldeversuche. Bitte versuchen Sie es in einer Sekunde erneut."
+msgstr[1] ""
+"Zu viele Anmeldeversuche. Bitte versuchen Sie es in %s Sekunden erneut."
 
-#: ../storage/framework/messages/1edd4c9adb64e6123d74f9eb7bdf111dbf1a20df.php.php:60
-#: Http/Livewire/Auth/Login.php:60
+#: ../storage/framework/messages/1edd4c9adb64e6123d74f9eb7bdf111dbf1a20df.php.php:75
+#: Http/Livewire/Auth/Login.php:75
 msgid "Captcha not solved!"
 msgstr "Captcha nicht gelöst!"
 
-#: ../storage/framework/messages/2aa54796444fe211b2520010bec6c5f34a5cde5e.php.php:117
+#: ../storage/framework/messages/2aa54796444fe211b2520010bec6c5f34a5cde5e.php.php:126
 #: ../storage/framework/messages/3a4ef801e8df3859ee98b45d434c72ae3106cb31.php.php:7
 #: ../storage/framework/messages/63070254417ac5756a98c379959c922b66d80c89.php.php:7
-#: Http/Livewire/User.php:117
+#: Http/Livewire/User.php:126
 msgid "User"
 msgstr "Benutzer"
 
@@ -81,35 +83,45 @@ msgstr "Der angezeigte Teamname."
 msgid "A description for this team. (optional)"
 msgstr "Eine Beschreibung für dieses Team. (optional)"
 
-#: ../storage/framework/messages/5b543a6f76ca66c34a132d9a2df6b6d1b92c3b5d.php.php:7
+#: ../storage/framework/messages/5b543a6f76ca66c34a132d9a2df6b6d1b92c3b5d.php.php:8
 msgid "Log in to your account"
 msgstr "Melden Sie sich an Ihrem Konto an"
 
-#: ../storage/framework/messages/5b543a6f76ca66c34a132d9a2df6b6d1b92c3b5d.php.php:16
-#: ../storage/framework/messages/5b543a6f76ca66c34a132d9a2df6b6d1b92c3b5d.php.php:24
+#: ../storage/framework/messages/5b543a6f76ca66c34a132d9a2df6b6d1b92c3b5d.php.php:17
+#: ../storage/framework/messages/5b543a6f76ca66c34a132d9a2df6b6d1b92c3b5d.php.php:27
 msgid "Email address"
 msgstr "E-Mail Adresse"
 
-#: ../storage/framework/messages/5b543a6f76ca66c34a132d9a2df6b6d1b92c3b5d.php.php:37
-#: ../storage/framework/messages/5b543a6f76ca66c34a132d9a2df6b6d1b92c3b5d.php.php:45
+#: ../storage/framework/messages/5b543a6f76ca66c34a132d9a2df6b6d1b92c3b5d.php.php:41
+#: ../storage/framework/messages/5b543a6f76ca66c34a132d9a2df6b6d1b92c3b5d.php.php:52
+#: ../storage/framework/messages/d203cf448e6306a3488a847767e4e1c68f87a593.php.php:14
+#: ../storage/framework/messages/d203cf448e6306a3488a847767e4e1c68f87a593.php.php:25
 msgid "Password"
 msgstr "Passwort"
 
-#: ../storage/framework/messages/5b543a6f76ca66c34a132d9a2df6b6d1b92c3b5d.php.php:63
+#: ../storage/framework/messages/5b543a6f76ca66c34a132d9a2df6b6d1b92c3b5d.php.php:72
 msgid "Remember me"
 msgstr "Angemeldet bleiben"
 
-#: ../storage/framework/messages/5b543a6f76ca66c34a132d9a2df6b6d1b92c3b5d.php.php:70
+#: ../storage/framework/messages/5b543a6f76ca66c34a132d9a2df6b6d1b92c3b5d.php.php:84
+#: ../storage/framework/messages/5b543a6f76ca66c34a132d9a2df6b6d1b92c3b5d.php.php:133
 msgid "Forgot your password?"
 msgstr "Passwort vergessen?"
 
-#: ../storage/framework/messages/5b543a6f76ca66c34a132d9a2df6b6d1b92c3b5d.php.php:95
+#: ../storage/framework/messages/5b543a6f76ca66c34a132d9a2df6b6d1b92c3b5d.php.php:119
 msgid "Log in"
 msgstr "Anmelden"
 
+#: ../storage/framework/messages/5b543a6f76ca66c34a132d9a2df6b6d1b92c3b5d.php.php:137
+#: ../storage/framework/messages/5b543a6f76ca66c34a132d9a2df6b6d1b92c3b5d.php.php:146
+#: ../storage/framework/messages/c99f5590cf744b55b44a0f2e7d11a17eb6c30cb5.php.php:173
+#: ../storage/framework/messages/c99f5590cf744b55b44a0f2e7d11a17eb6c30cb5.php.php:182
+msgid "e-mail address"
+msgstr "E-Mail-Adresse"
+
 #: ../storage/framework/messages/c99f5590cf744b55b44a0f2e7d11a17eb6c30cb5.php.php:13
-#: ../storage/framework/messages/ed332ebd47ba25bc141df69d92f906dfbd61238c.php.php:94
-#: Http/Livewire/Team.php:94
+#: ../storage/framework/messages/ed332ebd47ba25bc141df69d92f906dfbd61238c.php.php:98
+#: Http/Livewire/Team.php:98
 msgid "Teams"
 msgstr "Teams"
 
@@ -141,11 +153,93 @@ msgstr "Benutzer editieren"
 msgid "name"
 msgstr "Name"
 
-#: ../storage/framework/messages/c99f5590cf744b55b44a0f2e7d11a17eb6c30cb5.php.php:173
-#: ../storage/framework/messages/c99f5590cf744b55b44a0f2e7d11a17eb6c30cb5.php.php:182
-msgid "e-mail address"
-msgstr "E-Mail-Adresse"
+#: ../storage/framework/messages/d203cf448e6306a3488a847767e4e1c68f87a593.php.php:6
+#: ../storage/framework/messages/d203cf448e6306a3488a847767e4e1c68f87a593.php.php:68
+msgid "Reset password"
+msgstr "Passwort zurücksetzen"
+
+#: ../storage/framework/messages/d203cf448e6306a3488a847767e4e1c68f87a593.php.php:29
+#: ../storage/framework/messages/d203cf448e6306a3488a847767e4e1c68f87a593.php.php:40
+msgid "Password repeat"
+msgstr "Passwort Wiederholung"
 
 #: ../storage/framework/messages/e38cd9d80b244cca9fe5cc31b33536d9c300a306.php.php:317
 msgid "Logout"
 msgstr "Ausloggen"
+
+#: ../storage/framework/messages/e6ff46aca7a034a32e16f38c028afbbaab39f437.php.php:2
+msgid "Hello and Welcome"
+msgstr ""
+
+#: ../storage/framework/messages/e6ff46aca7a034a32e16f38c028afbbaab39f437.php.php:5
+#, php-format
+msgid "A new account was created for you at %s."
+msgstr "Für Sie wurde ein neues Konto bei %s erstellt."
+
+#: ../storage/framework/messages/e6ff46aca7a034a32e16f38c028afbbaab39f437.php.php:8
+msgid ""
+"To set a password click the link below. If you have further questions, "
+"please answer to this email."
+msgstr ""
+"Um ein Passwort festzulegen, klicken Sie auf den unten stehenden Link. "
+"Wenn Sie weitere Fragen haben, antworten Sie bitte auf diese E-Mail."
+
+#: ../storage/framework/messages/e6ff46aca7a034a32e16f38c028afbbaab39f437.php.php:12
+msgid "Set a new password"
+msgstr "Neues Passwort setzen"
+
+#: ../storage/framework/messages/e6ff46aca7a034a32e16f38c028afbbaab39f437.php.php:16
+#, php-format
+msgid ""
+"The link is limited valid. If it's expired, go to [login](%s) and use the "
+"password forgot function"
+msgstr ""
+"Der Link ist nur begrenzt gültig. Wenn er abgelaufen ist, gehen Sie zum "
+"[login](%s) und verwenden Sie die Passwort vergessen Funktion"
+
+#: ../storage/framework/messages/e6ff46aca7a034a32e16f38c028afbbaab39f437.php.php:19
+#: ../storage/framework/messages/f34a816243eb95b2723f9e060603846e76032a67.php.php:15
+msgid "If you didn't requested this e-mail, please ignore and delete it."
+msgstr ""
+"Wenn Sie diese E-Mail nicht angefordert haben, ignorieren und löschen Sie "
+"sie  bitte."
+
+#: ../storage/framework/messages/e6ff46aca7a034a32e16f38c028afbbaab39f437.php.php:23
+#: ../storage/framework/messages/f34a816243eb95b2723f9e060603846e76032a67.php.php:19
+msgid ""
+"If the button doesn't work click or copy and paste the following link in "
+"your browser: "
+msgstr ""
+"Wenn die Schaltfläche nicht funktioniert, klicken Sie auf den folgenden "
+"Link oder kopieren Sie ihn und fügen Sie ihn in Ihren Browser ein:"
+
+#: ../storage/framework/messages/f327b7674cd33e57897b8cbebdb95eed2da566ac.php.php:37
+#: Http/Livewire/PasswordReset.php:37
+msgid "The reset link has already been used."
+msgstr "Der Reset-Link wurde bereits verwendet."
+
+#: ../storage/framework/messages/f327b7674cd33e57897b8cbebdb95eed2da566ac.php.php:41
+#: Http/Livewire/PasswordReset.php:41
+msgid "The reset link has expired."
+msgstr "Der Link zum Zurücksetzen ist abgelaufen."
+
+#: ../storage/framework/messages/f327b7674cd33e57897b8cbebdb95eed2da566ac.php.php:62
+#: Http/Livewire/PasswordReset.php:62
+msgid "Password reset"
+msgstr "Passwort zurücksetzen"
+
+#: ../storage/framework/messages/f34a816243eb95b2723f9e060603846e76032a67.php.php:4
+msgid ""
+"We got your request to reset your password. Click the Button to reset it."
+msgstr ""
+"Wir haben Ihre Anfrage erhalten, Ihr Passwort zurückzusetzen. Klicken Sie "
+"auf die Schaltfläche, um es zurückzusetzen."
+
+#: ../storage/framework/messages/f34a816243eb95b2723f9e060603846e76032a67.php.php:8
+msgid "reset password"
+msgstr "Passwort zurücksetzen"
+
+#: ../storage/framework/messages/f34a816243eb95b2723f9e060603846e76032a67.php.php:12
+#, php-format
+msgid "The link is valid for only %s minutes."
+msgstr "Der Link ist nur für %s Minuten gültig."

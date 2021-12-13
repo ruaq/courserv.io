@@ -7,8 +7,10 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\URL;
 use Laratrust\Traits\LaratrustUserTrait;
 use Laravel\Sanctum\HasApiTokens;
+use Vinkla\Hashids\Facades\Hashids;
 
 /**
  * App\Models\User
@@ -57,6 +59,8 @@ use Laravel\Sanctum\HasApiTokens;
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
  * @mixin \Eloquent
  * @property-read string $status_color
+ * @property string|null $reset_valid_until
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereResetValidUntil($value)
  */
 
 class User extends Authenticatable implements MustVerifyEmail
@@ -95,6 +99,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'reset_valid_until' => 'datetime',
     ];
 
     /**
@@ -107,6 +112,19 @@ class User extends Authenticatable implements MustVerifyEmail
         $this->notify(new VerifyEmailQueued);
     }
 
+    public function generatePasswordResetLink($user, int $minutes = 30): string
+    {
+        $expireAt = now()->addMinutes($minutes);
+
+        $user->reset_valid_until = $expireAt;
+        $user->save();
+
+        $hashed_id = Hashids::encode($user->id);
+
+        return URL::signedRoute(
+            'password.reset', ['hashedId' => $hashed_id], $expireAt
+        );
+    }
 
     public function teams()
     {

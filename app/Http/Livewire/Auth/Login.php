@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\Auth;
 
+use App\Events\UserForgotPassword;
+use App\Models\User;
 use DanHarrin\LivewireRateLimiting\Exceptions\TooManyRequestsException;
 use DanHarrin\LivewireRateLimiting\WithRateLimiting;
 use Illuminate\Support\Facades\Auth;
@@ -10,6 +12,8 @@ use Livewire\Component;
 class Login extends Component
 {
     use WithRateLimiting;
+
+    public bool $showForgotModal = false;
 
     /** @var string */
     public $email = '';
@@ -41,6 +45,17 @@ class Login extends Component
     {
         $this->resetErrorBag();
         $this->validateOnly($propertyName);
+    }
+
+    public function forgot()
+    {
+        $this->validateOnly('email');
+
+        if ($user = User::whereEmail($this->email)->first()) {
+            event(new UserForgotPassword($user));
+        }
+
+        $this->showForgotModal = false;
     }
 
     public function login()
