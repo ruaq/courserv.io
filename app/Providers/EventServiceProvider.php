@@ -4,8 +4,6 @@ namespace App\Providers;
 
 use App\Events\UserCreated;
 use App\Events\UserForgotPassword;
-use App\Listeners\CreateUserPassword;
-use App\Listeners\GenerateUserPassword;
 use App\Listeners\SendPasswordResetEmail;
 use App\Listeners\SendWelcomeEmail;
 use App\Models\User;

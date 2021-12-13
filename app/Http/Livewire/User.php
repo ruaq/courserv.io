@@ -2,12 +2,12 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Team;
+use App\Models\User as UserModel;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
-use App\Models\User as UserModel;
-use App\Models\Team;
 
 class User extends Component
 {
@@ -71,7 +71,6 @@ class User extends Component
 
         $this->validate();
         $this->editing->save();
-
     }
 
     public function updated($propertyName)
@@ -103,7 +102,7 @@ class User extends Component
             // get all authorized teams
             foreach ($user_teams as $team) {
                 if (Auth::user()->isAbleTo('user.*', $team)) {
-                     $auth_teams[] = $team;
+                    $auth_teams[] = $team;
                 }
             }
 
@@ -131,7 +130,7 @@ class User extends Component
     protected function makeBlankUser(): UserModel
     {
         return new UserModel([
-            'active' => 1
+            'active' => 1,
         ]);
     }
 }

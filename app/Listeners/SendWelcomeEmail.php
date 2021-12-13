@@ -3,7 +3,6 @@
 namespace App\Listeners;
 
 use App\Events\UserCreated;
-use App\Mail\PasswordReset;
 use App\Mail\Welcome;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;

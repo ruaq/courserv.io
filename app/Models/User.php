@@ -109,7 +109,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function sendEmailVerificationNotification()
     {
-        $this->notify(new VerifyEmailQueued);
+        $this->notify(new VerifyEmailQueued());
     }
 
     public function generatePasswordResetLink($user, int $minutes = 30): string
@@ -122,7 +122,9 @@ class User extends Authenticatable implements MustVerifyEmail
         $hashed_id = Hashids::encode($user->id);
 
         return URL::signedRoute(
-            'password.reset', ['hashedId' => $hashed_id], $expireAt
+            'password.reset',
+            ['hashedId' => $hashed_id],
+            $expireAt
         );
     }
 

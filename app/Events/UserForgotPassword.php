@@ -8,7 +8,8 @@ use Illuminate\Queue\SerializesModels;
 
 class UserForgotPassword
 {
-    use Dispatchable, SerializesModels;
+    use Dispatchable;
+    use SerializesModels;
 
     public $user;
 
@@ -21,5 +22,4 @@ class UserForgotPassword
     {
         $this->user = $user;
     }
-
 }

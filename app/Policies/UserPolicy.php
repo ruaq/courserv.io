@@ -62,7 +62,6 @@ class UserPolicy
      */
     public function update(User $user, User $model)
     {
-
         if ($user->isAbleTo('user.update')) {
             return true;
         }

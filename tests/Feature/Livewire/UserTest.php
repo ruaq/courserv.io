@@ -12,9 +12,9 @@ beforeEach(function () {
         'name' => 'example-team',
         'display_name' => 'example team',
     ]);
-////
-////    $this->teams = $this->team;
-////
+    ////
+    ////    $this->teams = $this->team;
+    ////
     $this->user = User::factory()->create();
     $this->user->teams()->attach($this->team);
 
@@ -45,7 +45,7 @@ it('shows the team members only if authorized', function () {
 
 it('shows only team member', function () {
     $user = User::factory()->create([
-        'name' => 'second user'
+        'name' => 'second user',
     ]);
 
     $user->teams()->attach($this->team);
