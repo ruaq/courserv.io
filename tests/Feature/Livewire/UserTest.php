@@ -12,9 +12,7 @@ beforeEach(function () {
         'name' => 'example-team',
         'display_name' => 'example team',
     ]);
-    ////
-    ////    $this->teams = $this->team;
-    ////
+
     $this->user = User::factory()->create();
     $this->user->teams()->attach($this->team);
 
@@ -77,40 +75,50 @@ it('shows only team member', function () {
     $response->assertSee($this->user->name);
 });
 
-//it('needs authorization to create a user', function () {
-//
-////    $this->user->attachPermission('user.update');
-//
-////    $this->role = Role::find(1);
-////    $this->role->detachPermission('user.create');
-//
-////    dd('test');
-//
-//    Livewire::test('user')
-//        ->call('create')
-//        ->assertForbidden();
-//});
+it('needs authorization to create a user', function () {
 
-it('needs authorization to update a user', function () {
-//    $this->seed(PermissionSeeder::class);
-//
-//    $this->team = Team::create([
-//        'name' => 'example-team',
-//        'display_name' => 'example team',
-//    ]);
-
-//    $this->teams = $this->team;
-
-//    $this->user = User::factory()->create();
-//    $this->user->teams()->attach($this->team);
     $this->user->attachRole('admin');
 
-//    actingAs($this->user);
+    $this->role = Role::find(1);
+    $this->role->detachPermission('user.create');
+
+    Livewire::test('user')
+        ->call('create')
+        ->assertForbidden();
+
+    $this->role->attachPermission('user.create');
+
+    Livewire::test('user')
+        ->call('create')
+        ->assertSuccessful();
+});
+
+it('needs authorization to update a user', function () {
+    $this->user->attachRole('admin');
 
     $this->role = Role::find(1);
     $this->role->detachPermission('user.update');
 
-//    $this->user->deatachRole('admin');
+    Livewire::test('user')
+        ->call('edit')
+        ->assertForbidden();
+
+    $this->user->detachRole('admin');
+    $this->user->attachRole('admin', $this->team);
+
+    Livewire::test('user')
+        ->call('edit')
+        ->assertForbidden();
+
+    $this->user->attachRole('admin');
+    $this->role->attachPermission('user.update');
+
+    Livewire::test('user')
+        ->call('edit')
+        ->assertSuccessful();
+
+    $this->user->detachRole('admin');
+    $this->user->attachRole('admin', $this->team);
 
     Livewire::test('user')
         ->call('edit')

@@ -42,6 +42,14 @@ it('shows team menu only to authorized users', function () {
     $this->get(route('home'))->assertSee('Teams');
 });
 
+it('can see every team', function () {
+    $this->user->detachRole('admin');
+    $this->assertFalse($this->user->can('viewEvery', Team::class));
+
+    $this->user->attachRole('admin');
+    $this->assertTrue($this->user->can('viewEvery', Team::class));
+});
+
 it('needs authorization to create a team', function () {
     $this->role = Role::find(1);
     $this->role->detachPermission('team.create');
