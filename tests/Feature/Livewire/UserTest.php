@@ -76,7 +76,6 @@ it('shows only team member', function () {
 });
 
 it('needs authorization to create a user', function () {
-
     $this->user->attachRole('admin');
 
     $this->role = Role::find(1);
