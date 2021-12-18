@@ -38,6 +38,9 @@ Route::localized(function () {
         Route::get('user', \App\Http\Livewire\User::class)
             ->name('user');
 
+        Route::get('coursetype', \App\Http\Livewire\CourseType::class)
+            ->name('coursetype');
+
         Route::get('password/reset/{hashedId}', \App\Http\Livewire\PasswordReset::class)
             ->middleware('signed')
             ->name('password.reset');

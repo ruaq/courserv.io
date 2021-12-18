@@ -51,6 +51,18 @@ class PermissionSeeder extends Seeder
             'description' => 'can edit a user',
         ]);
 
+        Permission::create([
+            'name' => 'courseType.create',
+            'display_name' => 'Create Course Type',
+            'description' => 'create a new course type',
+        ]);
+
+        Permission::create([
+            'name' => 'courseType.update',
+            'display_name' => 'Update Course Type',
+            'description' => 'can update a course type',
+        ]);
+
         // create an administrator role as standard
         $admin = Role::create([
             'name' => 'admin',
