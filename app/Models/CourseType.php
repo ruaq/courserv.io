@@ -46,7 +46,7 @@ class CourseType extends Model
         'seats' => 20,
     ];
 
-    const WSDL = [
+    public const WSDL = [
         1 => 'EH-Ausbildung',
         2 => 'EH-Fortbildung',
         8 => 'EH Bildungseinrichtungen',
