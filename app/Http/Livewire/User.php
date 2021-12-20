@@ -16,6 +16,10 @@ class User extends Component
     public bool $showEditModal = false;
     public Collection $users;
     public UserModel $editing;
+    public Collection $teams;
+    public Collection $roles;
+    public array $teamIds = [];
+    public array $roleIds = [];
 
     protected function rules(): array
     {
@@ -33,6 +37,8 @@ class User extends Component
         }
 
         $this->editing = $this->makeBlankUser();
+        $this->teams = Team::all();
+        $this->roles = \App\Models\Role::all();
     }
 
     public function create()
@@ -41,6 +47,8 @@ class User extends Component
 
         if ($this->editing->getKey()) {
             $this->editing = $this->makeBlankUser();
+            $this->teamIds = [];
+            $this->roleIds = [];
         }
 
         $this->showEditModal = true;
@@ -52,6 +60,16 @@ class User extends Component
 
         if ($this->editing->isNot($user)) {
             $this->editing = $user;
+
+            $this->teamIds = [];
+            foreach ($this->editing->teams->pluck('id') as $team) {
+                $this->teamIds[] = (string)$team;
+            }
+
+                        $this->roleIds = [];
+            foreach ($this->editing->roles->pluck('id') as $role) {
+                $this->roleIds[] = (string)$role;
+            }
         }
         $this->showEditModal = true;
     }
@@ -84,6 +102,9 @@ class User extends Component
 
         $this->validate();
         $this->editing->save();
+
+        $this->editing->teams()->sync($this->teamIds);
+        $this->editing->syncRoles($this->roleIds);
         $this->showEditModal = false;
     }
 

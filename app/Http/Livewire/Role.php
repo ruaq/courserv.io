@@ -17,7 +17,7 @@ class Role extends Component
     public Collection $roles;
     public Collection $permissions;
     public RoleModel $editing;
-    public $permIds = [];
+    public array $permIds = [];
 
     protected function rules(): array
     {

@@ -42,10 +42,10 @@
                                         </div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        @foreach($user->teams as $team){{ $team->email }}{{ !$loop->last ? ', ' : '' }}@endforeach
+                                        @foreach($user->teams as $team){{ $team->display_name }}{{ !$loop->last ? ', ' : '' }}@endforeach
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        @foreach($user->roles as $role){{ $role->email }}{{ !$loop->last ? ', ' : '' }}@endforeach
+                                        @foreach($user->roles as $role){{ $role->display_name }}{{ !$loop->last ? ', ' : '' }}@endforeach
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ $user->active ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
@@ -63,7 +63,6 @@
                                     </td>
                                 </tr>
                             @endforeach
-                        <!-- More people... -->
                         </tbody>
                     </table>
                 </div>
@@ -109,6 +108,46 @@
                         @error('editing.email')
                             <p class="mt-2 text-sm text-red-600" id="name-error">{{ $errors->first('editing.email') }}</p>
                         @enderror
+                    </div>
+                    <div>
+                        <div class="font-bold mt-4">{{ _i('Teams') }}</div>
+                        <div>
+                            <fieldset class="border-t border-b border-gray-200">
+                                <legend class="sr-only">{{ _i('Teams') }}</legend>
+                                <div class="divide-y divide-gray-200">
+                                    @foreach($teams as $team)
+                                        <div class="relative flex items-start py-4">
+                                            <div class="min-w-0 flex-1 text-sm">
+                                                <label for="{{ $team->id }}" class="font-medium text-gray-700">{{ $team->display_name }}</label>
+                                                <p id="{{ $team->id }}-description" class="text-gray-500">{{ $team->description }}</p>
+                                            </div>
+                                            <div class="ml-3 flex items-center h-5">
+                                                <input wire:model="teamIds" value="{{ $team->id }}" id="{{ $team->id }}" aria-describedby="{{ $team->id }}-description" type="checkbox" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded">
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </fieldset>
+                        </div>
+                        <div class="font-bold mt-4">{{ _i('Roles') }}</div>
+                        <div>
+                            <fieldset class="border-t border-b border-gray-200">
+                                <legend class="sr-only">{{ _i('Roles') }}</legend>
+                                <div class="divide-y divide-gray-200">
+                                    @foreach($roles as $role)
+                                        <div class="relative flex items-start py-4">
+                                            <div class="min-w-0 flex-1 text-sm">
+                                                <label for="{{ $role->id }}" class="font-medium text-gray-700">{{ $role->display_name }}</label>
+                                                <p id="{{ $role->id }}-description" class="text-gray-500">{{ $role->description }}</p>
+                                            </div>
+                                            <div class="ml-3 flex items-center h-5">
+                                                <input wire:model="roleIds" value="{{ $role->id }}" id="{{ $role->id }}" aria-describedby="{{ $role->id }}-description" type="checkbox" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded">
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </fieldset>
+                        </div>
                     </div>
                 </div>
             </x-slot>
