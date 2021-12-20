@@ -66,7 +66,7 @@ class User extends Component
                 $this->teamIds[] = (string)$team;
             }
 
-                        $this->roleIds = [];
+            $this->roleIds = [];
             foreach ($this->editing->roles->pluck('id') as $role) {
                 $this->roleIds[] = (string)$role;
             }
