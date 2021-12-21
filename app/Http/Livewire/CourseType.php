@@ -14,7 +14,7 @@ class CourseType extends Component
 
     public bool $showEditModal = false;
     public bool $showCategoryInput = false;
-    public array $courseTypeCategorys;
+    public array $courseTypeCategories;
     public string $new_category = '';
     public Collection $courseTypes;
     public CourseTypeModel $editing;
@@ -67,8 +67,8 @@ class CourseType extends Component
 
     public function updatedNewCategory($value)
     {
-        $this->courseTypeCategorys[] = $value;
-        sort($this->courseTypeCategorys);
+        $this->courseTypeCategories[] = $value;
+        sort($this->courseTypeCategories);
         $this->editing->category = $value;
         $this->showCategoryInput = false;
         $this->new_category = '';
@@ -118,8 +118,8 @@ class CourseType extends Component
 
     protected function makeBlankCourseType(): CourseTypeModel
     {
-        $categorys = CourseTypeModel::all()->sortBy('category')->pluck('category')->toArray();
-        $this->courseTypeCategorys = array_unique($categorys);
+        $categories = CourseTypeModel::all()->sortBy('category')->pluck('category')->toArray();
+        $this->courseTypeCategories = array_unique($categories);
 
         return new CourseTypeModel();
     }
