@@ -88,6 +88,10 @@
                     <nav class="px-2 space-y-1">
                         <x-nav.home :active="$active" />
 
+                        @can('viewAny', \App\Models\Course::class)
+                            <x-nav.course :active="$active" />
+                        @endcan
+
                         @can('viewAny', \App\Models\Team::class)
                             <x-nav.teams :active="$active" />
                         @endcan
@@ -154,6 +158,10 @@
                 <div class="mt-5 grow flex flex-col">
                     <nav class="flex-1 px-2 pb-4 space-y-1">
                         <x-nav.home-static :active="$active" />
+
+                        @can('viewAny', \App\Models\Course::class)
+                            <x-nav.course-static :active="$active" />
+                        @endcan
 
                         @can('viewAny', \App\Models\Team::class)
                             <x-nav.teams-static :active="$active" />
