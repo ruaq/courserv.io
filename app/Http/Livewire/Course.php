@@ -2,6 +2,9 @@
 
 namespace App\Http\Livewire;
 
+use App\Events\CourseCancelled;
+use App\Events\CourseCreated;
+use App\Events\CourseUpdated;
 use App\Models\Course as CourseModel;
 use App\Models\CourseType as CourseTypeModel;
 use App\Models\Team as TeamModel;
@@ -17,6 +20,7 @@ class Course extends Component
 
     public array $courseTypeCategories;
     public bool $showEditModal = false;
+    public bool $showCancelModal = false;
     public bool $registerCourse = false;
     public bool $courseRegistered = false;
     public bool $showRegisterCourse = false;
@@ -27,10 +31,7 @@ class Course extends Component
 
     public array $options = [
         'minDate' => 'today',
-    //    'maxDate' => "2022-05-31",
         'defaultHour' => '9',
-//    //    'inline' => true,
-//    //    'monthSelectorType' => 'static',
         'dateFormat' => 'Y-m-d H:i',
         'weekNumbers' => true,
         'enableTime' => true,
@@ -154,11 +155,41 @@ class Course extends Component
         $this->showEditModal = true;
     }
 
+    public function cancel()
+    {
+        $this->authorize('save', $this->editing);
+
+        if (config('app.qsehCodeNumber') && config('app.qsehPassword')) {
+            // it's a QSEH course and already registered
+            if ($this->editing->registration_number && $this->editing->registration_number != 'queued' && $this->editing->registration_number != 'failed' && $this->editing->type->wsdl_id) {
+                event(new CourseCancelled($this->editing));
+            }
+        }
+
+        $this->editing->cancelled = now();
+        $this->editing->save();
+
+        $this->showEditModal = false;
+        $this->showCancelModal = false;
+    }
+
     public function save()
     {
         $this->authorize('save', $this->editing);
 
         $this->validate();
+
+        if (config('app.qsehCodeNumber') && config('app.qsehPassword')) {
+            if ($this->registerCourse) {
+                event(new CourseCreated($this->editing));
+                $this->editing->registration_number = 'queued';
+            }
+
+            // it's a QSEH course and already registered
+            if ($this->editing->registration_number && $this->editing->registration_number != 'queued' && $this->editing->registration_number != 'failed' && $this->editing->type->wsdl_id) {
+                event(new CourseUpdated($this->editing));
+            }
+        }
 
         $this->editing->save();
         $this->showEditModal = false;

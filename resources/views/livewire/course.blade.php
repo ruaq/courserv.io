@@ -108,9 +108,9 @@
                     <div>
                         @if($showRegisterCourse)
                             <div x-data="{ registerCourse: @entangle('registerCourse').defer }" class="space-y-3">
-                                @if(!$courseRegistered)
+                                @if(!$courseRegistered && config('app.qsehPassword'))
                                     <div class="flex items-center">
-                                        <button {{ !config('app.qsehPassword') ? 'disabled' : '' }} type="button" class="relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 bg-gray-200" role="switch" aria-checked="false" x-ref="switch" :aria-checked="registerCourse.toString()" @click="registerCourse = !registerCourse" x-state:on="Enabled" x-state:off="Not Enabled" :class="{ 'bg-indigo-600': registerCourse, 'bg-gray-200': !(registerCourse) }">
+                                        <button type="button" class="relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 bg-gray-200" role="switch" aria-checked="false" x-ref="switch" :aria-checked="registerCourse.toString()" @click="registerCourse = !registerCourse" x-state:on="Enabled" x-state:off="Not Enabled" :class="{ 'bg-indigo-600': registerCourse, 'bg-gray-200': !(registerCourse) }">
                                             <span class="sr-only">{{ _i('register automatically at QSEH') }}</span>
                                             <span class="pointer-events-none relative inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200 translate-x-0" x-state:on="Enabled" x-state:off="Not Enabled" :class="{ 'translate-x-5': registerCourse, 'translate-x-0': !(registerCourse) }">
                                                 <span class="absolute inset-0 h-full w-full flex items-center justify-center transition-opacity opacity-100 ease-in duration-200" aria-hidden="true" x-state:on="Enabled" x-state:off="Not Enabled" :class="{ 'opacity-0 ease-out duration-100': registerCourse, 'opacity-100 ease-in duration-200': !(registerCourse) }">
@@ -125,7 +125,7 @@
                                                 </span>
                                             </span>
                                         </button>
-                                        <span class="ml-3" id="annual-billing-label" @if(config('app.qsehPassword')) @click="registerCourse = !registerCourse; $refs.switch.focus()" @endif>
+                                        <span class="ml-3" id="annual-billing-label" @click="registerCourse = !registerCourse; $refs.switch.focus()">
                                             <span class="text-sm font-medium text-gray-900">{{ _i('register automatically at QSEH') }}</span>
                                         </span>
                                     </div>
@@ -258,17 +258,33 @@
                             @enderror
                         </div>
                         @error('editing.seats')
-                        <p class="mt-2 text-sm text-red-600" id="seats-error">{{ $errors->first('editing.seats') }}</p>
+                            <p class="mt-2 text-sm text-red-600" id="seats-error">{{ $errors->first('editing.seats') }}</p>
                         @enderror
                     </div>
                 </div>
             </x-slot>
 
             <x-slot name="footer">
-                <x-button.secondary wire:click="$set('showEditModal', false)">Cancel</x-button.secondary>
+                <x-button.danger wire:click="$set('showCancelModal', true)">{{ _i('Cancel course') }}</x-button.danger>
+                <x-button.secondary wire:click="$set('showEditModal', false)">{{ _i('Cancel') }}</x-button.secondary>
                 <x-button.primary type="submit">Save</x-button.primary>
             </x-slot>
         </x-modal.dialog>
     </form>
 
+    <form wire:submit.prevent="cancel">
+        <x-modal.confirmation wire:model.defer="showCancelModal">
+            <x-slot name="title">{{ _i('Cancel course') }}</x-slot>
+            <x-slot name="content">
+                <p class="text-sm text-gray-500">
+                    {{ _i('Are you sure you want to cancel this course? This action cannot be undone.') }}
+                </p>
+            </x-slot>
+
+            <x-slot name="footer">
+                <x-button.secondary wire:click="$set('showCancelModal', false)">{{ _i('Cancel') }}</x-button.secondary>
+                <x-button.danger type="submit">{{ _i('Cancel course') }}</x-button.danger>
+            </x-slot>
+        </x-modal.confirmation>
+    </form>
 </div>
