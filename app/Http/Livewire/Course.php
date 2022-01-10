@@ -36,7 +36,7 @@ class Course extends Component
         'weekNumbers' => true,
         'enableTime' => true,
         'time_24hr' => true,
-        'altFormat' =>  'j. F Y H:i',
+        'altFormat' => 'j. F Y H:i',
         'altInput' => true,
         'locale' => 'de',
     ];
@@ -101,7 +101,7 @@ class Course extends Component
 
     public function checkCourseLength()
     {
-        if (!$this->editing->course_type_id) {
+        if (! $this->editing->course_type_id) {
             $this->editing->course_type_id = CourseTypeModel::first()->id;
         }
 
@@ -114,7 +114,7 @@ class Course extends Component
         $breaks = $this->editing->type->breaks;
         $length = $unit_length + $breaks;
 
-        if (!isset($this->editing->end) || $this->editing->end->subMinutes($length)->lt($this->editing->start)) {
+        if (! isset($this->editing->end) || $this->editing->end->subMinutes($length)->lt($this->editing->start)) {
             $this->editing->end = now();
             $this->editing->end = $this->editing->start->addMinutes($length);
         }

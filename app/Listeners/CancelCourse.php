@@ -29,8 +29,9 @@ class CancelCourse implements ShouldQueue
      */
     public function handle(CourseCancelled $event)
     {
-        if (!$event->course->registration_number || $event->course->registration_number == 'queued' || $event->course->registration_number == 'failed') {
+        if (! $event->course->registration_number || $event->course->registration_number == 'queued' || $event->course->registration_number == 'failed') {
             $this->delete();
+
             return;
         }
 
@@ -38,7 +39,7 @@ class CancelCourse implements ShouldQueue
 
         $response = $qsehService->connect($event->course, 'cancel');
 
-        if (!$response['success'] || $response['response'] != $event->course->registration_number) {
+        if (! $response['success'] || $response['response'] != $event->course->registration_number) {
             $this->fail();
         }
     }

@@ -25,7 +25,7 @@ beforeEach(function () {
     $this->user = User::factory()->create();
     $this->user->teams()->attach($this->team);
 
-  //  $this->user->attachRole('admin');
+    //  $this->user->attachRole('admin');
 
     actingAs($this->user);
 });

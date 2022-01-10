@@ -21,10 +21,10 @@ class QsehService
     private function initClient(): PendingRequest
     {
         return Http::withHeaders([
-            'SOAPAction' => 'Ehaf3LehrgangService.wsdl'
+            'SOAPAction' => 'Ehaf3LehrgangService.wsdl',
         ])
             ->withOptions([
-                'base_uri' => 'https://www.bg-qseh.de/login/perl/service.pl?LehrgangsService'
+                'base_uri' => 'https://www.bg-qseh.de/login/perl/service.pl?LehrgangsService',
             ])
             ->accept('text/xml');
     }
@@ -36,11 +36,11 @@ class QsehService
      */
     public function connect(Course $course, string $action = 'new'): Collection
     {
-        if (!config('app.qsehCodeNumber') || !config('app.qsehPassword')) { // no service without credentials
+        if (! config('app.qsehCodeNumber') || ! config('app.qsehPassword')) { // no service without credentials
             exit();
         }
 
-        if (!$course->type->wsdl_id) { // abort if it isn't an QSEH course (anymore)
+        if (! $course->type->wsdl_id) { // abort if it isn't an QSEH course (anymore)
             exit();
         }
 
@@ -109,7 +109,7 @@ class QsehService
 
         return collect([
             'response' => $result['soapenv:Envelope']['soapenv:Body']['ns2:ehaf3RequestHandlerResponse']['return']['ns1:beschreibung'],
-            'success' => $result['soapenv:Envelope']['soapenv:Body']['ns2:ehaf3RequestHandlerResponse']['return']['ns1:code']
+            'success' => $result['soapenv:Envelope']['soapenv:Body']['ns2:ehaf3RequestHandlerResponse']['return']['ns1:code'],
         ]);
     }
 

@@ -8,7 +8,8 @@ use Illuminate\Queue\SerializesModels;
 
 class CourseCancelled
 {
-    use Dispatchable, SerializesModels;
+    use Dispatchable;
+    use SerializesModels;
 
     public Course $course;
 

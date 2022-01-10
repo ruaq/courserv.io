@@ -73,5 +73,3 @@ it('has anyView function', function () {
 
     $this->assertTrue($this->user->can('viewAny', Course::class));
 });
-
-

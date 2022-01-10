@@ -3,7 +3,6 @@
 namespace App\Policies;
 
 use App\Models\Course;
-use App\Models\Team;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -25,6 +24,7 @@ class CoursePolicy
                     return true;
                 }
             }
+
             return false;
         }
 
@@ -57,6 +57,7 @@ class CoursePolicy
                     return true;
                 }
             }
+
             return false;
         }
 
@@ -78,6 +79,7 @@ class CoursePolicy
                     return true;
                 }
             }
+
             return false;
         }
 
