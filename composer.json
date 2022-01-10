@@ -17,6 +17,7 @@
         "livewire/livewire": "^2.7",
         "santigarcor/laratrust": "^6.3",
         "vinkla/hashids": "^9.1",
+        "vyuldashev/xml-to-array": "^1.0",
         "zerospam/laravel-gettext": "^8.0"
     },
     "require-dev": {

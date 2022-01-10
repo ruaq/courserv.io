@@ -16,6 +16,27 @@ class PermissionSeeder extends Seeder
     public function run()
     {
         Permission::create([
+            'name' => 'course.create',
+            'display_name' => 'Create Course',
+            'description' => 'create a new course',
+            'group' => 'course',
+        ]);
+
+        Permission::create([
+            'name' => 'course.update',
+            'display_name' => 'Edit Course',
+            'description' => 'create edit a course',
+            'group' => 'course',
+        ]);
+
+        Permission::create([
+            'name' => 'course.view',
+            'display_name' => 'View Course',
+            'description' => 'see all courses',
+            'group' => 'course',
+        ]);
+
+        Permission::create([
             'name' => 'team.create',
             'display_name' => 'Create Teams',
             'description' => 'create new teams',
