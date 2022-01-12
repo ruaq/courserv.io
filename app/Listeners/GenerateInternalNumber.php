@@ -38,7 +38,7 @@ class GenerateInternalNumber implements ShouldQueue
 
         while ($wait) {
             sleep(1);
-            if (!Cache::has('generating-internal-course-number')) {
+            if (! Cache::has('generating-internal-course-number')) {
                 $wait = false;
             }
         }

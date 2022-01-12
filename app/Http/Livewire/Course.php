@@ -195,7 +195,7 @@ class Course extends Component
         $this->editing->save();
         $this->showEditModal = false;
 
-        if (!$this->editing->internal_number) { // new course
+        if (! $this->editing->internal_number) { // new course
             $this->editing->internal_number = 'queued';
             $this->editing->save();
             event(new CourseCreated($this->editing));
