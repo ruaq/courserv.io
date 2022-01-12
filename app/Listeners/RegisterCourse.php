@@ -2,7 +2,7 @@
 
 namespace App\Listeners;
 
-use App\Events\CourseCreated;
+use App\Events\CourseRegisterRequired;
 use App\Services\QsehService;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
@@ -24,10 +24,10 @@ class RegisterCourse implements ShouldQueue
     /**
      * Handle the event.
      *
-     * @param CourseCreated $event
+     * @param CourseRegisterRequired $event
      * @return void
      */
-    public function handle(CourseCreated $event)
+    public function handle(CourseRegisterRequired $event)
     {
         if ($event->course->registration_number != 'queued' && $event->course->registration_number != 'failed') {
             $this->delete();

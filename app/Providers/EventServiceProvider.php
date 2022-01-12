@@ -4,10 +4,12 @@ namespace App\Providers;
 
 use App\Events\CourseCancelled;
 use App\Events\CourseCreated;
+use App\Events\CourseRegisterRequired;
 use App\Events\CourseUpdated;
 use App\Events\UserCreated;
 use App\Events\UserForgotPassword;
 use App\Listeners\CancelCourse;
+use App\Listeners\GenerateInternalNumber;
 use App\Listeners\RegisterCourse;
 use App\Listeners\SendPasswordResetEmail;
 use App\Listeners\SendWelcomeEmail;
@@ -37,6 +39,10 @@ class EventServiceProvider extends ServiceProvider
         ],
 
         CourseCreated::class => [
+            GenerateInternalNumber::class,
+        ],
+
+        CourseRegisterRequired::class => [
             RegisterCourse::class,
         ],
 

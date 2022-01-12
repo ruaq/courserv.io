@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Events\CourseCancelled;
 use App\Events\CourseCreated;
+use App\Events\CourseRegisterRequired;
 use App\Events\CourseUpdated;
 use App\Models\Course as CourseModel;
 use App\Models\CourseType as CourseTypeModel;
@@ -181,7 +182,7 @@ class Course extends Component
 
         if (config('app.qsehCodeNumber') && config('app.qsehPassword')) {
             if ($this->registerCourse) {
-                event(new CourseCreated($this->editing));
+                event(new CourseRegisterRequired($this->editing));
                 $this->editing->registration_number = 'queued';
             }
 
@@ -193,6 +194,12 @@ class Course extends Component
 
         $this->editing->save();
         $this->showEditModal = false;
+
+        if (!$this->editing->internal_number) { // new course
+            $this->editing->internal_number = 'queued';
+            $this->editing->save();
+            event(new CourseCreated($this->editing));
+        }
     }
 
     /**
