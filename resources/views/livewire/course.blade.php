@@ -1,71 +1,122 @@
 <div>
-    <div class="flex flex-col">
-        <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-            <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-                    <table class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-gray-50">
-                        <tr>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                {{ _i('seminar location') }}
-                            </th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                {{ _i('street') }}
-                            </th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                {{ _i('location') }}
-                            </th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                {{ _i('start') }}
-                            </th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                {{ _i('course type') }}
-                            </th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                {{ _i('course number') }}
-                            </th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                {{ _i('team') }}
-                            </th>
-                            <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 tracking-wider">
-                                @can('create', \App\Models\Course::class)<x-button.link wire:click="create">{{ _i('Add Course') }}</x-button.link>@endcan
-                            </th>
-                        </tr>
-                        </thead>
-                        <tbody class="bg-white divide-y divide-gray-200">
-                        @foreach($courses as $course)
-                            <tr class="{{ $course->cancelled ? 'line-through' : '' }}">
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                    {{ $course->seminar_location }}
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                    {{ $course->street }}
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                    {{ $course->zipcode }} {{ $course->location }}
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                    {{ $course->start->format('d.m.Y H:i') }}
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                    {{ $course->type->name }}
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                    {{ $course->registration_number }}
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                    {{ $course->team->display_name }}
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                    @can('update', $course)
-                                        <x-button.link wire:click="edit({{ $course->id }})">{{ _i('edit') }}</x-button.link>
-                                    @endcan
-                                </td>
-                            </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
+
+    <div class="py-4 space-y-4">
+        <div class="flex justify-between">
+            <div class="w-2/4 flex space-x-4">
+                <x-input.text wire:model="filters.search" placeholder="{{ _i('Search...') }}" />
+
+                <x-button.link wire:click="toggleShowFilters">@if ($showFilters) Hide @endif Advanced Search...</x-button.link>
+            </div>
+
+            <div class="space-x-2 flex items-center">
+                <x-input.group borderless paddingless for="perPage" label="Per Page">
+                    <x-input.select wire:model="perPage" id="perPage">
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                    </x-input.select>
+                </x-input.group>
+
+                @can('create', \App\Models\Course::class)
+                    <x-button.primary wire:click="create"><x-icon.plus /> {{ _i('Add Course') }}</x-button.primary>
+                @endcan
+            </div>
+        </div>
+
+        <!-- Advanced Search -->
+        <div>
+            @if ($showFilters)
+                <div class="bg-cool-gray-200 p-4 rounded shadow-inner flex relative">
+                    <div class="w-1/2 pr-2 space-y-4">
+                        <x-input.group inline for="filter-courseType" label="{{ _i('course type') }}">
+                            <x-input.select wire:model="filters.courseType" id="filter-courseType">
+                                <option value="" disabled>{{ _i('select course type...') }}</option>
+                                @foreach($courseTypes as $category => $courseType)
+                                    <optgroup label="{{ $category }}">
+                                        @foreach($courseType as $ct)
+                                            <option value="{{ $ct['id'] }}">{{ $ct['name'] }}</option>
+                                        @endforeach
+                                    </optgroup>
+                                @endforeach
+                            </x-input.select>
+                        </x-input.group>
+
+                        <x-input.group inline for="filter-team" label="{{ _i('team') }}">
+                            <x-input.select wire:model="filters.team" id="filter-team">
+                                <option value="" disabled>{{ _i('select team...') }}</option>
+                                    @foreach($teams as $team)
+                                        <option value="{{ $team['id'] }}">{{ $team['display_name'] }}</option>
+                                    @endforeach
+                            </x-input.select>
+                        </x-input.group>
+
+                        <x-input.group inline for="filter-showCancelled" label="{{ _i('cancelled courses') }}">
+                            <x-input.select wire:model="filters.showCancelled" id="filter-showCancelled">
+                                <option value="">{{ _i('don\'t show cancelled courses') }}</option>
+                                <option value="true">{{ _i('show cancelled courses') }}</option>
+                            </x-input.select>
+                        </x-input.group>
+                    </div>
+
+                    <div class="w-1/2 pl-2 space-y-4">
+                        <x-input.group inline for="filter-date-min" label="{{ _i('minimum date') }}">
+                            <x-input.date wire:model="filters.date-min" id="filter-date-min" :options="$search_options"/>
+                        </x-input.group>
+
+                        <x-input.group inline for="filter-date-max" label="{{ _i('maximum date') }}">
+                            <x-input.date wire:model="filters.date-max" id="filter-date-max" :options="$search_options"/>
+                        </x-input.group>
+
+                        <x-button.link wire:click="resetFilters" class="absolute right-0 bottom-0 p-4">{{ _i('reset filters') }}</x-button.link>
+                    </div>
                 </div>
+            @endif
+        </div>
+
+        <div class="flex-col space-y-4">
+            <x-table>
+                <x-slot name="head">
+                    <x-table.heading sortable multi-column wire:click="sortBy('seminar_location')" :direction="$sorts['seminar_location'] ?? null">{{ _i('seminar location') }}</x-table.heading>
+                    <x-table.heading sortable multi-column wire:click="sortBy('street')" :direction="$sorts['street'] ?? null">{{ _i('street') }}</x-table.heading>
+                    <x-table.heading sortable multi-column wire:click="sortBy('location')" :direction="$sorts['location'] ?? null">{{ _i('location') }}</x-table.heading>
+                    <x-table.heading sortable multi-column wire:click="sortBy('start')" :direction="$sorts['start'] ?? null">{{ _i('start') }}</x-table.heading>
+                    <x-table.heading sortable multi-column wire:click="sortBy('course_type_id')" :direction="$sorts['course_type_id'] ?? null">{{ _i('course type') }}</x-table.heading>
+                    <x-table.heading sortable multi-column wire:click="sortBy('internal_number')" :direction="$sorts['internal_number'] ?? null">{{ _i('internal') }}</x-table.heading>
+                    @if(config('app.qsehCodeNumber'))
+                        <x-table.heading sortable multi-column wire:click="sortBy('registration_number')" :direction="$sorts['registration_number'] ?? null">{{ _i('qseh') }}</x-table.heading>
+                    @endif
+                    <x-table.heading sortable multi-column wire:click="sortBy('team_id')" :direction="$sorts['team_id'] ?? null">{{ _i('team') }}</x-table.heading>
+                    <x-table.heading></x-table.heading>
+                </x-slot>
+
+                <x-slot name="body">
+                    @foreach($courses as $course)
+                        <x-table.row class="{{ $course->cancelled ? 'line-through' : '' }}">
+                            <x-table.cell>{{ $course->seminar_location }}</x-table.cell>
+                            <x-table.cell>{{ $course->street }}</x-table.cell>
+                            <x-table.cell>{{ $course->zipcode }} {{ $course->location }}</x-table.cell>
+                            <x-table.cell>{{ $course->start->format('d.m.Y H:i') }}</x-table.cell>
+                            <x-table.cell>{{ $course->type->name }}</x-table.cell>
+                            <div {{ ($course->internal_number == 'queued') ? "wire:poll.visible.5s" : '' }}>
+                                <x-table.cell>{{ $course->internal_number }}</x-table.cell>
+                            </div>
+                            @if(config('app.qsehCodeNumber'))
+                                <div {{ ($course->registration_number == 'queued') ? "wire:poll.visible.5s" : '' }}>
+                                    <x-table.cell>{{ $course->registration_number }}</x-table.cell>
+                                </div>
+                            @endif
+                            <x-table.cell>{{ $course->team->display_name }}</x-table.cell>
+                            <x-table.cell>
+                                @can('update', $course)
+                                    <x-button.link wire:click="edit({{ $course->id }})">{{ _i('edit') }}</x-button.link>
+                                @endcan
+                            </x-table.cell>
+                        </x-table.row>
+                    @endforeach
+                </x-slot>
+            </x-table>
+            <div>
+                {{ $courses->links() }}
             </div>
         </div>
     </div>
@@ -125,7 +176,7 @@
                                                 </span>
                                             </span>
                                         </button>
-                                        <span class="ml-3" id="annual-billing-label" @click="registerCourse = !registerCourse; $refs.switch.focus()">
+                                        <span class="ml-3" id="register-course-label" @click="registerCourse = !registerCourse; $refs.switch.focus()">
                                             <span class="text-sm font-medium text-gray-900">{{ _i('register automatically at QSEH') }}</span>
                                         </span>
                                     </div>
@@ -154,7 +205,7 @@
 
                     <div>
                         <div class="col-span-6 sm:col-span-3">
-                            <label for="start" class="block text-sm text-gray-700 font-semibold">start</label>
+                            <label for="start" class="block text-sm text-gray-700 font-semibold">{{ _i('course start') }}</label>
 
                             <x-input.date id="start" wire:model="editing.start" :options="$options"/>
 
@@ -163,7 +214,7 @@
 
                     <div>
                         <div class="col-span-6 sm:col-span-3">
-                            <label for="end" class="block text-sm text-gray-700 font-semibold">end</label>
+                            <label for="end" class="block text-sm text-gray-700 font-semibold">{{ _i('course end') }}</label>
 
                             <x-input.date id="end" wire:model="editing.end" :options="$options"/>
 
@@ -265,7 +316,9 @@
             </x-slot>
 
             <x-slot name="footer">
-                <x-button.danger wire:click="$set('showCancelModal', true)">{{ _i('Cancel course') }}</x-button.danger>
+                @if($this->editing->id)
+                    <x-button.danger wire:click="$set('showCancelModal', true)">{{ _i('Cancel course') }}</x-button.danger>
+                @endif
                 <x-button.secondary wire:click="$set('showEditModal', false)">{{ _i('Cancel') }}</x-button.secondary>
                 <x-button.primary type="submit">Save</x-button.primary>
             </x-slot>

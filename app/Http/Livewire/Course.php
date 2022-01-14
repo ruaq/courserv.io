@@ -6,18 +6,30 @@ use App\Events\CourseCancelled;
 use App\Events\CourseCreated;
 use App\Events\CourseRegisterRequired;
 use App\Events\CourseUpdated;
+use App\Http\Livewire\DataTable\WithCachedRows;
+use App\Http\Livewire\DataTable\WithPerPagePagination;
+use App\Http\Livewire\DataTable\WithSorting;
 use App\Models\Course as CourseModel;
 use App\Models\CourseType as CourseTypeModel;
 use App\Models\Team as TeamModel;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
+/**
+ * @property mixed $rows
+ * @property mixed $rowsQuery
+ */
 class Course extends Component
 {
+    use WithPerPagePagination, WithSorting, WithCachedRows;
+
     use AuthorizesRequests;
+
+    protected $queryString = ['sorts'];
 
     public array $courseTypeCategories;
     public bool $showEditModal = false;
@@ -26,9 +38,20 @@ class Course extends Component
     public bool $courseRegistered = false;
     public bool $showRegisterCourse = false;
     public CourseModel $editing;
-    public Collection $courses;
     public Collection $courseTypes;
-    public $teams;
+
+    public array $filters = [
+        'search' => '',
+        'courseType' => '',
+        'team' => '',
+        'amount-min' => null,
+        'amount-max' => null,
+        'date-min' => null,
+        'date-max' => null,
+        'showCancelled' => null,
+    ];
+
+    public bool $showFilters = false;
 
     public array $options = [
         'minDate' => 'today',
@@ -38,6 +61,15 @@ class Course extends Component
         'enableTime' => true,
         'time_24hr' => true,
         'altFormat' => 'j. F Y H:i',
+        'altInput' => true,
+        'locale' => 'de',
+    ];
+
+    public array $search_options = [
+        'dateFormat' => 'Y-m-d',
+        'weekNumbers' => true,
+        'enableTime' => false,
+        'altFormat' => 'j. F Y',
         'altInput' => true,
         'locale' => 'de',
     ];
@@ -66,6 +98,10 @@ class Course extends Component
         ];
     }
 
+    public function updatedFilters() { $this->resetPage(); }
+    public function updatedPerPage() { $this->resetPage(); }
+    public function resetFilters() { $this->reset('filters'); }
+
     public function mount()
     {
         if (! Auth::check()) {
@@ -83,6 +119,13 @@ class Course extends Component
     public function updatedEditingEnd()
     {
         $this->checkCourseLength();
+    }
+
+    public function toggleShowFilters()
+    {
+        $this->useCachedRows();
+
+        $this->showFilters = ! $this->showFilters;
     }
 
     public function updatedEditingCourseTypeId()
@@ -172,6 +215,7 @@ class Course extends Component
 
         $this->showEditModal = false;
         $this->showCancelModal = false;
+        $this->resetPage();
     }
 
     public function save()
@@ -179,18 +223,6 @@ class Course extends Component
         $this->authorize('save', $this->editing);
 
         $this->validate();
-
-        if (config('app.qsehCodeNumber') && config('app.qsehPassword')) {
-            if ($this->registerCourse) {
-                event(new CourseRegisterRequired($this->editing));
-                $this->editing->registration_number = 'queued';
-            }
-
-            // it's a QSEH course and already registered
-            if ($this->editing->registration_number && $this->editing->registration_number != 'queued' && $this->editing->registration_number != 'failed' && $this->editing->type->wsdl_id) {
-                event(new CourseUpdated($this->editing));
-            }
-        }
 
         $this->editing->save();
         $this->showEditModal = false;
@@ -200,6 +232,78 @@ class Course extends Component
             $this->editing->save();
             event(new CourseCreated($this->editing));
         }
+
+        if (config('app.qsehCodeNumber') && config('app.qsehPassword')) {
+            if ($this->registerCourse) {
+                $this->editing->registration_number = 'queued';
+                $this->editing->save();
+                event(new CourseRegisterRequired($this->editing));
+            }
+
+            // it's a QSEH course and already registered
+            if (
+                $this->editing->registration_number &&
+                $this->editing->registration_number != 'queued' &&
+                $this->editing->registration_number != 'failed' &&
+                $this->editing->type->wsdl_id
+            ) {
+                event(new CourseUpdated($this->editing));
+            }
+        }
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRowsQueryProperty(): mixed
+    {
+        // TODO - show courses if no permission to see all courses..
+//        if (!Auth::user()->isAbleTo('course.view')) {
+//            $user_teams = Auth::user()->teams()->pluck('id');
+//
+////            $this->teams = Auth::user()->teams;
+//
+//            // get all authorized teams
+//            $auth_teams = [];
+//            foreach ($user_teams as $team) {
+//                if (Auth::user()->isAbleTo('course.*', $team)) {
+//                    $auth_teams[] = $team;
+//                }
+//            }
+//
+//            $this->courses = CourseModel::whereIn('team_id', $auth_teams)
+//                ->with('type')
+//                ->with('team')
+//                ->get();
+//        }
+
+        $query = CourseModel::query()
+            ->when($this->filters['courseType'], fn($query, $courseType) => $query->where('course_type_id', $courseType))
+            ->when($this->filters['team'], fn($query, $team) => $query->where('team_id', $team))
+            ->when($this->filters['amount-min'], fn($query, $amount) => $query->where('amount', '>=', $amount))
+            ->when($this->filters['amount-max'], fn($query, $amount) => $query->where('amount', '<=', $amount))
+            ->when($this->filters['date-min'], fn($query, $date) => $query->where('start', '>=', Carbon::parse($date)))
+            ->when($this->filters['date-max'], fn($query, $date) => $query->where('start', '<=', Carbon::parse($date)))
+            ->when(!$this->filters['showCancelled'], fn($query, $date) => $query->where('cancelled', '=', null))
+            ->when($this->filters['showCancelled'], fn($query, $date) => $query->where('cancelled', '<>', null))
+            ->when($this->filters['search'], fn($query, $search) => $query
+                ->where('seminar_location', 'like', '%'.$search.'%')
+                ->orWhere('street', 'like', '%'.$search.'%')
+                ->orWhere('seminar_location', 'like', '%'.$search.'%')
+                ->orWhere('internal_number', 'like', '%'.$search.'%')
+                ->orWhere('registration_number', 'like', '%'.$search.'%')
+            )
+            ->with('type')
+            ->with('team');
+
+        return $this->applySorting($query);
+    }
+
+    public function getRowsProperty(): mixed
+    {
+        return $this->cache(function () {
+            return $this->applyPagination($this->rowsQuery);
+        });
     }
 
     /**
@@ -209,29 +313,15 @@ class Course extends Component
     {
         $this->authorize('viewAny', CourseModel::class);
 
-        if (Auth::user()->isAbleTo('course.view')) {
-            $this->courses = CourseModel::all();
-            $this->teams = TeamModel::all();
-        } else {
-            $user_teams = Auth::user()->teams()->pluck('id');
-
-            $this->teams = Auth::user()->teams;
-
-            // get all authorized teams
-            $auth_teams = [];
-            foreach ($user_teams as $team) {
-                if (Auth::user()->isAbleTo('course.*', $team)) {
-                    $auth_teams[] = $team;
-                }
-            }
-
-            $this->courses = CourseModel::whereIn('team_id', $auth_teams)
-                ->with('type')
-                ->with('team')
-                ->get();
+        // if no date is manually set, set it to today
+        if ($this->filters['date-min'] === null) {
+            $this->filters['date-min'] = today()->format('Y-m-d');
         }
 
-        return view('livewire.course')
+        return view('livewire.course', [
+            'courses' => $this->rows,
+            'teams' => TeamModel::all(),
+        ])
             ->layout('layouts.app', [
                 'metaTitle' => _i('Courses'),
                 'active' => 'courses',
