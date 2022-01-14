@@ -25,7 +25,9 @@ use Livewire\Component;
  */
 class Course extends Component
 {
-    use WithPerPagePagination, WithSorting, WithCachedRows;
+    use WithPerPagePagination;
+    use WithSorting;
+    use WithCachedRows;
 
     use AuthorizesRequests;
 
@@ -98,9 +100,20 @@ class Course extends Component
         ];
     }
 
-    public function updatedFilters() { $this->resetPage(); }
-    public function updatedPerPage() { $this->resetPage(); }
-    public function resetFilters() { $this->reset('filters'); }
+    public function updatedFilters()
+    {
+        $this->resetPage();
+    }
+
+    public function updatedPerPage()
+    {
+        $this->resetPage();
+    }
+
+    public function resetFilters()
+    {
+        $this->reset('filters');
+    }
 
     public function mount()
     {
@@ -261,7 +274,7 @@ class Course extends Component
 //        if (!Auth::user()->isAbleTo('course.view')) {
 //            $user_teams = Auth::user()->teams()->pluck('id');
 //
-////            $this->teams = Auth::user()->teams;
+        ////            $this->teams = Auth::user()->teams;
 //
 //            // get all authorized teams
 //            $auth_teams = [];
@@ -278,15 +291,17 @@ class Course extends Component
 //        }
 
         $query = CourseModel::query()
-            ->when($this->filters['courseType'], fn($query, $courseType) => $query->where('course_type_id', $courseType))
-            ->when($this->filters['team'], fn($query, $team) => $query->where('team_id', $team))
-            ->when($this->filters['amount-min'], fn($query, $amount) => $query->where('amount', '>=', $amount))
-            ->when($this->filters['amount-max'], fn($query, $amount) => $query->where('amount', '<=', $amount))
-            ->when($this->filters['date-min'], fn($query, $date) => $query->where('start', '>=', Carbon::parse($date)))
-            ->when($this->filters['date-max'], fn($query, $date) => $query->where('start', '<=', Carbon::parse($date)))
-            ->when(!$this->filters['showCancelled'], fn($query, $date) => $query->where('cancelled', '=', null))
-            ->when($this->filters['showCancelled'], fn($query, $date) => $query->where('cancelled', '<>', null))
-            ->when($this->filters['search'], fn($query, $search) => $query
+            ->when($this->filters['courseType'], fn ($query, $courseType) => $query->where('course_type_id', $courseType))
+            ->when($this->filters['team'], fn ($query, $team) => $query->where('team_id', $team))
+            ->when($this->filters['amount-min'], fn ($query, $amount) => $query->where('amount', '>=', $amount))
+            ->when($this->filters['amount-max'], fn ($query, $amount) => $query->where('amount', '<=', $amount))
+            ->when($this->filters['date-min'], fn ($query, $date) => $query->where('start', '>=', Carbon::parse($date)))
+            ->when($this->filters['date-max'], fn ($query, $date) => $query->where('start', '<=', Carbon::parse($date)))
+            ->when(! $this->filters['showCancelled'], fn ($query, $date) => $query->where('cancelled', '=', null))
+            ->when($this->filters['showCancelled'], fn ($query, $date) => $query->where('cancelled', '<>', null))
+            ->when(
+                $this->filters['search'],
+                fn ($query, $search) => $query
                 ->where('seminar_location', 'like', '%'.$search.'%')
                 ->orWhere('street', 'like', '%'.$search.'%')
                 ->orWhere('seminar_location', 'like', '%'.$search.'%')
