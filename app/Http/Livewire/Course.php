@@ -144,6 +144,8 @@ class Course extends Component
 
     public function updatedEditingCourseTypeId()
     {
+        unset($this->editing->type); // force reload to prevent cache (prevents a bug if the course is already saved)
+
         if ($this->editing->course_type_id) {
             $this->editing->seats = $this->editing->type->seats;
 
@@ -197,6 +199,7 @@ class Course extends Component
         $this->authorize('update', $course);
 
         $this->registerCourse = false;
+        $this->showRegisterCourse = false;
 
         if ($this->editing->isNot($course)) {
             $this->editing = $course;
