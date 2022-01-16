@@ -22,6 +22,7 @@ use Livewire\Component;
 /**
  * @property mixed $rows
  * @property mixed $rowsQuery
+ * @property mixed $teamsRows
  */
 class Course extends Component
 {
@@ -270,27 +271,11 @@ class Course extends Component
      */
     public function getRowsQueryProperty(): mixed
     {
-        // TODO - show courses if no permission to see all courses..
-//        if (!Auth::user()->isAbleTo('course.view')) {
-//            $user_teams = Auth::user()->teams()->pluck('id');
-//
-        ////            $this->teams = Auth::user()->teams;
-//
-//            // get all authorized teams
-//            $auth_teams = [];
-//            foreach ($user_teams as $team) {
-//                if (Auth::user()->isAbleTo('course.*', $team)) {
-//                    $auth_teams[] = $team;
-//                }
-//            }
-//
-//            $this->courses = CourseModel::whereIn('team_id', $auth_teams)
-//                ->with('type')
-//                ->with('team')
-//                ->get();
-//        }
-
         $query = CourseModel::query()
+            ->when(!Auth::user()->isAbleTo('team.*'), // can't see all teams
+                fn ($query, $user_teams) => $query
+                    ->whereIn('team_id', Auth::user()->teams()->pluck('id'))
+            )
             ->when($this->filters['courseType'], fn ($query, $courseType) => $query->where('course_type_id', $courseType))
             ->when($this->filters['team'], fn ($query, $team) => $query->where('team_id', $team))
             ->when($this->filters['amount-min'], fn ($query, $amount) => $query->where('amount', '>=', $amount))
@@ -322,6 +307,19 @@ class Course extends Component
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Collection|array
+     */
+    public function getTeamsRowsProperty(): \Illuminate\Database\Eloquent\Collection|array
+    {
+        if (Auth::user()->isAbleTo('team.*')) {
+            return TeamModel::all();
+        }
+
+        return Auth::user()->teams;
+
+    }
+
+    /**
      * @throws AuthorizationException
      */
     public function render()
@@ -335,7 +333,7 @@ class Course extends Component
 
         return view('livewire.course', [
             'courses' => $this->rows,
-            'teams' => TeamModel::all(),
+            'teams' => $this->teamsRows,
         ])
             ->layout('layouts.app', [
                 'metaTitle' => _i('Courses'),
