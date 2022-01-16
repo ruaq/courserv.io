@@ -272,7 +272,8 @@ class Course extends Component
     public function getRowsQueryProperty(): mixed
     {
         $query = CourseModel::query()
-            ->when(!Auth::user()->isAbleTo('team.*'), // can't see all teams
+            ->when(
+                ! Auth::user()->isAbleTo('team.*'), // can't see all teams
                 fn ($query, $user_teams) => $query
                     ->whereIn('team_id', Auth::user()->teams()->pluck('id'))
             )
@@ -316,7 +317,6 @@ class Course extends Component
         }
 
         return Auth::user()->teams;
-
     }
 
     /**
