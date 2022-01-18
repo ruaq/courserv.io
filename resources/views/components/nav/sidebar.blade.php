@@ -1,15 +1,8 @@
 @props([
     'active' => '',
-    'href' => '#',
-    'fa' => 'bug'
+    'href' => '#'
 ])
-{{-- Current: "bg-gray-100 text-gray-900", Default: "text-gray-600 hover:bg-gray-50 hover:text-gray-900" --}}
-<a href="{{ $href }}" class="{{ $active ? 'bg-gray-100 text-gray-900' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900' }} group flex items-center px-2 py-2 text-base font-medium rounded-md" {{ $attributes }}>
-    {{--
-      Heroicon name: outline/home
 
-      Current: "text-gray-500", Default: "text-gray-400 group-hover:text-gray-500"
-    --}}
-    <i class="fas fa-{{ $fa }} {{ $active ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500' }} mr-4 shrink-0 w-6"></i>
+<a href="{{ $href }}" @click="open = false" class="{{ $active ? 'bg-indigo-50 border-indigo-500 text-indigo-700' : 'border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700' }} block pl-3 pr-4 py-2 border-l-4 text-base font-medium">
     {{ $slot }}
 </a>
