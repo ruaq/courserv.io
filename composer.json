@@ -4,6 +4,12 @@
     "description": "The Laravel Framework.",
     "keywords": ["framework", "laravel"],
     "license": "MIT",
+    "repositories": [
+        {
+            "type": "git",
+            "url": "https://github.com/prevplan/laravel-gettext"
+        }
+    ],
     "require": {
         "php": "^8.0",
         "codezero/laravel-localized-routes": "^2.6",
@@ -18,7 +24,7 @@
         "santigarcor/laratrust": "^6.3",
         "vinkla/hashids": "^9.1",
         "vyuldashev/xml-to-array": "^1.0",
-        "zerospam/laravel-gettext": "^8.0"
+        "zerospam/laravel-gettext": "dev-patch-1"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.10",
