@@ -14,4 +14,4 @@ import 'flatpickr'
 const flatpickr = require("flatpickr");
 
 import 'flatpickr/dist/l10n/de.js'
-const Russian = require("flatpickr/dist/l10n/de.js").default.de;
+const German = require("flatpickr/dist/l10n/de.js").default.de;

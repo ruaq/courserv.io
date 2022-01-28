@@ -18,10 +18,10 @@ class CreateCourseTypesTable extends Migration
             $table->unsignedTinyInteger('wsdl_id')->nullable();
             $table->string('name');
             $table->string('category');
-            $table->string('units', 10)->default(0);
-            $table->string('units_per_day', 10)->default(0);
-            $table->string('breaks', 10)->default(0);
-            $table->string('seats', 10)->default(0);
+            $table->unsignedMediumInteger('units')->default(0);
+            $table->unsignedTinyInteger('units_per_day')->default(0);
+            $table->unsignedSmallInteger('breaks')->default(0);
+            $table->unsignedSmallInteger('seats')->default(0);
             $table->timestamps();
         });
     }

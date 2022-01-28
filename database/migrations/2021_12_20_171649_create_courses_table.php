@@ -26,8 +26,7 @@ class CreateCoursesTable extends Migration
             $table->dateTime('start');
             $table->dateTime('end');
             $table->dateTime('cancelled')->nullable();
-            $table->string('seats', 10);
-            $table->unsignedBigInteger('running')->nullable();
+            $table->unsignedSmallInteger('seats');
             $table->timestamps();
 
             $table->foreign('course_type_id')->references('id')->on('course_types')->onDelete('cascade');

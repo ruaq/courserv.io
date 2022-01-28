@@ -204,21 +204,51 @@
                     </div>
 
                     <div>
-                        <div class="col-span-6 sm:col-span-3">
-                            <label for="start" class="block text-sm text-gray-700 font-semibold">{{ _i('course start') }}</label>
+                        <div class="flex flex-row">
+                            <div class="col-span-3 sm:col-span-3">
+                                <label for="start" class="block text-sm text-gray-700 font-semibold">{{ _i('course date') }}</label>
 
-                            <x-input.date id="start" wire:model="editing.start" :options="$options"/>
+                                <x-input.date id="start" wire:model="date_range" :options="$start_options"/>
+
+                            </div>
+                            <div>
+                                <label for="start_time" class="block text-sm text-gray-700 font-semibold">Start</label>
+
+                                <x-input.date id="start_time" wire:model="time_start" :options="$start_time_options"/>
+                            </div>
+                            <div>
+                                <label for="end_time" class="block text-sm text-gray-700 font-semibold">Ende</label>
+                                <x-input.date id="end_time" wire:model="time_end" :options="$end_time_options"/>
+                            </div>
 
                         </div>
                     </div>
 
                     <div>
-                        <div class="col-span-6 sm:col-span-3">
-                            <label for="end" class="block text-sm text-gray-700 font-semibold">{{ _i('course end') }}</label>
+                    @if($courseDays)
+                        <hr>
+                        @foreach($courseDays as $courseDay)
+                            <div>
+                                <div class="flex flex-row">
+                                    <div>
+                                        <label for="{{ $loop->index }}" class="block text-sm text-gray-700 font-semibold">{{ $loop->iteration }}. Tag</label>
 
-                            <x-input.date id="end" wire:model="editing.end" :options="$options"/>
+                                        <x-input.date id="{{ $loop->index }}" wire:model="courseDays.{{ $loop->index }}.date" :options="$day_options"/>
+                                    </div>
+                                    <div>
+                                        <label for="{{ $loop->index }}" class="block text-sm text-gray-700 font-semibold">Start</label>
 
-                        </div>
+                                        <x-input.date id="{{ $loop->index }}" wire:model="courseDays.{{ $loop->index }}.startTime" :options="$start_time_options"/>
+                                    </div>
+                                    <div>
+                                        <label for="{{ $loop->index }}" class="block text-sm text-gray-700 font-semibold">Ende</label>
+                                        <x-input.date id="{{ $loop->index }}" wire:model="courseDays.{{ $loop->index }}.endTime" :options="$end_time_options"/>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                        <hr>
+                    @endif
                     </div>
 
                     <div>

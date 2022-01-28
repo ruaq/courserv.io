@@ -18,8 +18,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $street
  * @property string $zipcode
  * @property string $location
- * @property \Illuminate\Support\Carbon $start
- * @property \Illuminate\Support\Carbon $end
+ * @property \Carbon\Carbon $start
+ * @property \Carbon\Carbon $end
  * @property int $responsible
  * @property string $seats
  * @property int $bookable
@@ -53,14 +53,16 @@ use Illuminate\Database\Eloquent\Model;
  * @mixin \Eloquent
  * @property string|null $cancelled
  * @method static \Illuminate\Database\Eloquent\Builder|Course whereCancelled($value)
+ * @property-read \App\Models\CourseDay|null $days
+ * @property-read int|null $days_count
  */
 class Course extends Model
 {
     use HasFactory;
 
     protected $casts = [
-        'start' => 'datetime:Y-m-d H:i',
-        'end' => 'datetime:Y-m-d H:i',
+        'start' => 'datetime:d.m.Y H:i',
+        'end' => 'datetime:d.m.Y H:i',
     ];
 
     public function type()
@@ -71,5 +73,10 @@ class Course extends Model
     public function team()
     {
         return $this->belongsTo(Team::class, 'team_id');
+    }
+
+    public function days()
+    {
+        return $this->hasMany(CourseDay::class, 'course_id');
     }
 }
