@@ -100,7 +100,6 @@ class Course extends Component
     public array $start_time_options;
     public array $end_time_options;
 
-
     protected function rules(): array
     {
         return [
@@ -168,7 +167,7 @@ class Course extends Component
     {
         $range = explode(' ', $this->date_range);
 
-        $this->editing->start = Carbon::createFromFormat('d.m.y H:i',$range[0] . ' ' . $this->time_start);
+        $this->editing->start = Carbon::createFromFormat('d.m.y H:i', $range[0] . ' ' . $this->time_start);
         $this->editing->end = Carbon::createFromFormat('d.m.y H:i', $range[array_key_last($range)] . ' ' . $this->time_end);
 
         $this->checkCourseLength();
@@ -204,7 +203,7 @@ class Course extends Component
         $split = explode('.', $field);
 
         // We want the courseDays
-        if ($split[0] === 'courseDays' ) {
+        if ($split[0] === 'courseDays') {
 
             // changed date?
             if ($split[2] === 'date') {
@@ -264,7 +263,7 @@ class Course extends Component
 
 
             // is there still a date on the first day?
-            if (!isset($this->courseDays[0]) || $this->courseDays[0]['date'] != $this->editing->start->format('d.m.Y')) {
+            if (! isset($this->courseDays[0]) || $this->courseDays[0]['date'] != $this->editing->start->format('d.m.Y')) {
 
                 // no? so, create it again, at the start of our array...
                 array_unshift($this->courseDays, [
@@ -286,7 +285,6 @@ class Course extends Component
                     'order' => $this->editing->end->format('Y/m/d'),
                 ];
             }
-
         }
     }
 
@@ -296,7 +294,7 @@ class Course extends Component
             $this->editing->start = Carbon::createFromFormat('d.m.Y H:i', $this->editing->start->format('d.m.Y') . ' ' . $this->time_start);
             $this->setStartTimeOptions([
                 'defaultHour' => $this->editing->start->format('H'),
-                'defaultMinute' => $this->editing->start->format('i')
+                'defaultMinute' => $this->editing->start->format('i'),
             ]);
             $this->checkCourseLength();
         }
@@ -305,10 +303,10 @@ class Course extends Component
     public function updatedTimeEnd()
     {
         if (isset($this->editing->end)) {
-            $this->editing->end = Carbon::createFromFormat('d.m.Y H:i',$this->editing->end->format('d.m.Y') . ' ' . $this->time_end);
+            $this->editing->end = Carbon::createFromFormat('d.m.Y H:i', $this->editing->end->format('d.m.Y') . ' ' . $this->time_end);
             $this->setEndTimeOptions([
                 'defaultHour' => $this->editing->end->format('H'),
-                'defaultMinute' => $this->editing->end->format('i')
+                'defaultMinute' => $this->editing->end->format('i'),
             ]);
             $this->checkCourseLength();
         }
@@ -346,16 +344,15 @@ class Course extends Component
             $this->time_end = $this->editing->end->format('H:i');
             $this->setEndTimeOptions([
                 'defaultHour' => $this->editing->end->format('H'),
-                'defaultMinute' => $this->editing->end->format('i')
+                'defaultMinute' => $this->editing->end->format('i'),
             ]);
-
         }
 
         // longer then one day?
-        if(isset($this->editing->start) && ! $this->editing->start->isSameDay($this->editing->end)) {
+        if (isset($this->editing->start) && ! $this->editing->start->isSameDay($this->editing->end)) {
 
             // if only first & last day or less is set, set / update it
-            if(count($this->courseDays) <= 2) {
+            if (count($this->courseDays) <= 2) {
                 $this->courseDays[0]['date'] = $this->editing->start->format('d.m.Y');
                 $this->courseDays[0]['startTime'] = $this->editing->start->format('H:i');
                 $this->courseDays[0]['endTime'] = $this->editing->end->format('H:i');
@@ -365,7 +362,7 @@ class Course extends Component
                 $this->courseDays[1]['startTime'] = $this->editing->start->format('H:i');
                 $this->courseDays[1]['endTime'] = $this->editing->end->format('H:i');
                 $this->courseDays[1]['order'] = $this->editing->end->format('Y/m/d');
-           }
+            }
         } else {
             $this->courseDays = [];
         }
@@ -422,7 +419,6 @@ class Course extends Component
                     'order' => Carbon::createFromFormat('Y-m-d', $courseDay['date'])->format('Y/m/d'),
                 ];
             }
-
         }
 
         if (isset($this->editing->type->wsdl_id)) {
@@ -631,12 +627,12 @@ class Course extends Component
         $this->start_time_options = $this->time_options;
         $this->setStartTimeOptions([
             'defaultHour' => 9,
-            'defaultMinute' => 0
+            'defaultMinute' => 0,
         ]);
         $this->end_time_options = $this->time_options;
         $this->setEndTimeOptions([
             'defaultHour' => 16,
-            'defaultMinute' => 30
+            'defaultMinute' => 30,
         ]);
 
         $this->end_options = [
