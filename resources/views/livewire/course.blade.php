@@ -225,30 +225,30 @@
                     </div>
 
                     <div>
-                    @if($courseDays)
-                        <hr>
-                        @foreach($courseDays as $courseDay)
-                            <div>
-                                <div class="flex flex-row">
-                                    <div>
-                                        <label for="{{ $loop->index }}" class="block text-sm text-gray-700 font-semibold">{{ $loop->iteration }}. Tag</label>
+                        @if(count($courseDays) >= 2)
+                            <hr>
+                            @foreach($courseDays as $courseDay)
+                                <div>
+                                    <div class="flex flex-row">
+                                        <div>
+                                            <label for="{{ $loop->index }}" class="block text-sm text-gray-700 font-semibold">{{ $loop->iteration }}. Tag</label>
 
-                                        <x-input.date id="{{ $loop->index }}" wire:model="courseDays.{{ $loop->index }}.date" :options="$day_options"/>
-                                    </div>
-                                    <div>
-                                        <label for="{{ $loop->index }}" class="block text-sm text-gray-700 font-semibold">Start</label>
+                                            <x-input.date id="{{ $loop->index }}" wire:model="courseDays.{{ $loop->index }}.date" :options="$day_options"/>
+                                        </div>
+                                        <div>
+                                            <label for="{{ $loop->index }}" class="block text-sm text-gray-700 font-semibold">Start</label>
 
-                                        <x-input.date id="{{ $loop->index }}" wire:model="courseDays.{{ $loop->index }}.startTime" :options="$start_time_options"/>
-                                    </div>
-                                    <div>
-                                        <label for="{{ $loop->index }}" class="block text-sm text-gray-700 font-semibold">Ende</label>
-                                        <x-input.date id="{{ $loop->index }}" wire:model="courseDays.{{ $loop->index }}.endTime" :options="$end_time_options"/>
+                                            <x-input.date id="{{ $loop->index }}" wire:model="courseDays.{{ $loop->index }}.startTime" :options="$start_time_options"/>
+                                        </div>
+                                        <div>
+                                            <label for="{{ $loop->index }}" class="block text-sm text-gray-700 font-semibold">Ende</label>
+                                            <x-input.date id="{{ $loop->index }}" wire:model="courseDays.{{ $loop->index }}.endTime" :options="$end_time_options"/>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        @endforeach
-                        <hr>
-                    @endif
+                            @endforeach
+                            <hr>
+                        @endif
                     </div>
 
                     <div>

@@ -463,35 +463,39 @@ class Course extends Component
 
         $this->editing->save();
 
-        if ($this->courseDays) {
-            $courseDays = [];
-            $date = [];
-            foreach ($this->courseDays as $courseDay) {
-                $courseDays[] = [
-                    'course_id' => $this->editing->id,
-                    'date' => Carbon::createFromFormat('d.m.Y', $courseDay['date']),
-                    'startPlan' => $courseDay['startTime'],
-                    'endPlan' => $courseDay['endTime'],
-                ];
-                $date[] = Carbon::createFromFormat('d.m.Y', $courseDay['date'])->format('Y-m-d');
-            }
+        // start to set the courseDays
+        $courseDays = [];
+        $date = [];
 
-            // create / update the actual course days
-            CourseDay::upsert(
-                $courseDays,
-                ['course_id', 'date'],
-                ['startPlan', 'endPlan']
-            );
-
-            // and delete old course days
-            CourseDay::where('course_id', $this->editing->id)
-                ->whereNotIn('date', $date)
-                ->delete();
-        } else {
-            // if no course days, delete if there are some in database
-            CourseDay::where('course_id', $this->editing->id)
-                ->delete();
+        if (! $this->courseDays) { // it's a one-day course
+            $this->courseDays[] = [
+                'date' => $this->editing->start->format('d.m.Y'),
+                'startTime' => $this->editing->start->format('H:i'),
+                'endTime' => $this->editing->end->format('H:i'),
+            ];
         }
+
+        foreach ($this->courseDays as $courseDay) {
+            $courseDays[] = [
+                'course_id' => $this->editing->id,
+                'date' => Carbon::createFromFormat('d.m.Y', $courseDay['date']),
+                'startPlan' => $courseDay['startTime'],
+                'endPlan' => $courseDay['endTime'],
+            ];
+            $date[] = Carbon::createFromFormat('d.m.Y', $courseDay['date'])->format('Y-m-d');
+        }
+
+        // create / update the actual course days
+        CourseDay::upsert(
+            $courseDays,
+            ['course_id', 'date'],
+            ['startPlan', 'endPlan']
+        );
+
+        // and delete old course days
+        CourseDay::where('course_id', $this->editing->id)
+            ->whereNotIn('date', $date)
+            ->delete();
 
         $this->showEditModal = false;
 
