@@ -13,6 +13,7 @@ use App\Models\Course as CourseModel;
 use App\Models\CourseDay;
 use App\Models\CourseType as CourseTypeModel;
 use App\Models\Team as TeamModel;
+use App\Models\TrainerDay;
 use Carbon\Carbon;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -100,6 +101,8 @@ class Course extends Component
     public array $start_time_options;
     public array $end_time_options;
 
+    public array $trainer;
+
     protected function rules(): array
     {
         return [
@@ -116,6 +119,7 @@ class Course extends Component
             'date_range' => 'sometimes',
             'time_start' => 'sometimes',
             'time_end' => 'sometimes',
+            'trainer' => 'sometimes',
         ];
     }
 
@@ -285,7 +289,42 @@ class Course extends Component
                     'order' => $this->editing->end->format('Y/m/d'),
                 ];
             }
+
+            foreach ($this->courseDays as $index => $foo) {
+                if (! isset($this->trainer[$index])) {
+                    $this->trainer[$index] = [0];
+                }
+            }
         }
+    }
+
+    public function updatedEditingTeamId()
+    {
+        unset($this->editing->team); // force reload to prevent cache (prevents a bug if the course is already saved)
+
+        // reset all trainer
+        $this->trainer = [];
+        $this->trainer['general'] = [0];
+
+        foreach ($this->courseDays as $index => $foo) {
+            if (! isset($this->trainer[$index])) {
+                $this->trainer[$index] = [0];
+            }
+        }
+    }
+
+    public function updatedTrainer()
+    {
+        foreach ($this->trainer as $item => $value) {
+            $array = array_filter($value); // remove empty values
+            $array = array_values($array); // order new
+            $this->trainer[$item] = $array;
+        }
+    }
+
+    public function addTrainer($x)
+    {
+        $this->trainer[$x][] = [];
     }
 
     public function updatedTimeStart()
@@ -362,6 +401,9 @@ class Course extends Component
                 $this->courseDays[1]['startTime'] = $this->editing->start->format('H:i');
                 $this->courseDays[1]['endTime'] = $this->editing->end->format('H:i');
                 $this->courseDays[1]['order'] = $this->editing->end->format('Y/m/d');
+
+                $this->trainer[0] = [];
+                $this->trainer[1] = [];
             }
         } else {
             $this->courseDays = [];
@@ -411,6 +453,9 @@ class Course extends Component
 
             // if there are courseDays, bring them to the site.
             $this->courseDays = [];
+            $this->trainer = [];
+            $i = 0;
+
             foreach ($this->editing->days->toArray() as $courseDay) {
                 $this->courseDays[] = [
                     'date' => Carbon::createFromFormat('Y-m-d', $courseDay['date'])->format('d.m.Y'),
@@ -418,6 +463,50 @@ class Course extends Component
                     'endTime' => Carbon::createFromFormat('H:i:s', $courseDay['endPlan'])->format('H:i'),
                     'order' => Carbon::createFromFormat('Y-m-d', $courseDay['date'])->format('Y/m/d'),
                 ];
+
+                // add the trainer
+                foreach($this->editing->trainer->where('date', $courseDay['date']) as $trainer) {
+                    if (! $trainer->user_id) {
+                        if ($trainer->bookable) {
+                            for ($x = 1; $x <= $trainer->count; $x++) {
+                                $this->trainer[$i][] = 'trainer';
+                            }
+                        } else {
+                            for ($x = 1; $x <= $trainer->count; $x++) {
+                                $this->trainer[$i][] = 'later';
+                            }
+                        }
+                    } else {
+                        $this->trainer[$i][] = $trainer->user_id;
+                    }
+                }
+
+                // and an empty one
+                if (! isset($this->trainer[$i])) {
+                    $this->trainer[$i][] = [];
+                }
+                $i++;
+            }
+
+            // and also the trainer for the whole course
+            foreach($this->editing->trainer->where('date', $this->editing->start->subDay()->format('Y-m-d')) as $trainer) {
+                if (! $trainer->user_id) {
+                    if ($trainer->bookable) {
+                        for ($x = 1; $x <= $trainer->count; $x++) {
+                            $this->trainer['general'][] = 'trainer';
+                        }
+                    } else {
+                        for ($x = 1; $x <= $trainer->count; $x++) {
+                            $this->trainer['general'][] = 'later';
+                        }
+                    }
+                } else {
+                    $this->trainer['general'][] = $trainer->user_id;
+                }
+            }
+
+            if (! isset($this->trainer['general'])) {
+                $this->trainer['general'][] = [];
             }
         }
 
@@ -463,35 +552,111 @@ class Course extends Component
 
         $this->editing->save();
 
-        if ($this->courseDays) {
-            $courseDays = [];
-            $date = [];
-            foreach ($this->courseDays as $courseDay) {
-                $courseDays[] = [
-                    'course_id' => $this->editing->id,
-                    'date' => Carbon::createFromFormat('d.m.Y', $courseDay['date']),
-                    'startPlan' => $courseDay['startTime'],
-                    'endPlan' => $courseDay['endTime'],
-                ];
-                $date[] = Carbon::createFromFormat('d.m.Y', $courseDay['date'])->format('Y-m-d');
+        // start to set the courseDays
+        $courseDays = [];
+        $date = [];
+
+        if (! $this->courseDays) { // it's a one-day course
+            $this->courseDays[] = [
+                'date' => $this->editing->start->format('d.m.Y'),
+                'startTime' => $this->editing->start->format('H:i'),
+                'endTime' => $this->editing->end->format('H:i'),
+            ];
+        }
+
+        foreach ($this->courseDays as $courseDay) {
+            $courseDays[] = [
+                'course_id' => $this->editing->id,
+                'date' => Carbon::createFromFormat('d.m.Y', $courseDay['date']),
+                'startPlan' => $courseDay['startTime'],
+                'endPlan' => $courseDay['endTime'],
+            ];
+            $date[] = Carbon::createFromFormat('d.m.Y', $courseDay['date'])->format('Y-m-d');
+        }
+
+        // create / update the actual course days
+        CourseDay::upsert(
+            $courseDays,
+            ['course_id', 'date'],
+            ['startPlan', 'endPlan']
+        );
+
+        // and delete old course days
+        CourseDay::where('course_id', $this->editing->id)
+            ->whereNotIn('date', $date)
+            ->delete();
+
+        $trainerDays = [];
+
+        // save the trainer for the days TODO is this the best way?
+        foreach ($this->trainer as $item => $value) {
+            if ($item != 'general') {
+                $date = Carbon::createFromFormat('d.m.Y', $this->courseDays[$item]['date']);
+            } else {
+                $date = $this->editing->start->subDay()->format('Y-m-d'); // set day before start as date, if set for all days TODO better ideas?
             }
 
-            // create / update the actual course days
-            CourseDay::upsert(
-                $courseDays,
-                ['course_id', 'date'],
-                ['startPlan', 'endPlan']
-            );
+            $trainer = 0;
+            $later = 0;
 
-            // and delete old course days
-            CourseDay::where('course_id', $this->editing->id)
-                ->whereNotIn('date', $date)
-                ->delete();
-        } else {
-            // if no course days, delete if there are some in database
-            CourseDay::where('course_id', $this->editing->id)
-                ->delete();
+            foreach ($value as $item => $value) {
+                if (is_numeric($value) && $value) { // it's a trainer / user_id
+                    $trainerDays[] = [
+                        'course_id' => $this->editing->id,
+                        'user_id' => $value,
+                        'date' => $date,
+                        'bookable' => 0,
+                        'count' => 0,
+                        'confirmed' => 1,
+                    ];
+                } elseif (! is_numeric($value) && $value) { // it's another option
+                    if ($value === 'trainer') {
+                        $trainer = $trainer +1;
+                    }
+
+                    if ($value === 'later') {
+                        $later = $later +1;
+                    }
+                }
+            }
+
+            if ($trainer > 0) { // count trainer choose
+                $trainerDays[] = [
+                    'course_id' => $this->editing->id,
+                    'user_id' => 0,
+                    'date' => $date,
+                    'bookable' => 1,
+                    'count' => $trainer,
+                    'confirmed' => 0,
+                ];
+            }
+
+            if ($later > 0) { // count 'select later'
+                $trainerDays[] = [
+                    'course_id' => $this->editing->id,
+                    'user_id' => 0,
+                    'date' => $date,
+                    'bookable' => 0,
+                    'count' => $later,
+                    'confirmed' => 0,
+                ];
+            }
         }
+
+        // create / update the trainer
+        TrainerDay::upsert(
+            $trainerDays,
+            ['user_id', 'course_id', 'date', 'bookable'],
+            ['count', 'confirmed']
+        );
+
+        // TODO better way to clean up?
+        $actual_entries = TrainerDay::whereCourseId($this->editing->id)->orderBy('updated_at', 'desc')->pluck('updated_at');
+
+        // and delete old entries
+        TrainerDay::where('course_id', $this->editing->id)
+            ->whereNotIn('updated_at', [$actual_entries->first()])
+            ->delete();
 
         $this->showEditModal = false;
 
@@ -550,7 +715,9 @@ class Course extends Component
             )
             ->with('type')
             ->with('team')
-            ->with('days');
+            ->with('days')
+            ->with('trainer')
+        ;
 
         return $this->applySorting($query);
     }
@@ -604,6 +771,9 @@ class Course extends Component
         $this->registerCourse = false;
         $this->courseRegistered = false;
         $this->showRegisterCourse = false;
+
+        $this->trainer = [];
+        $this->trainer['general'][] = [];
 
         $this->courseDays = [];
         $this->date_range = '';

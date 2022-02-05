@@ -55,6 +55,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Course whereCancelled($value)
  * @property-read \App\Models\CourseDay|null $days
  * @property-read int|null $days_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\TrainerDay[] $trainer
+ * @property-read int|null $trainer_count
  */
 class Course extends Model
 {
@@ -78,5 +80,10 @@ class Course extends Model
     public function days()
     {
         return $this->hasMany(CourseDay::class, 'course_id');
+    }
+
+    public function trainer()
+    {
+        return $this->hasMany(TrainerDay::class, 'course_id');
     }
 }

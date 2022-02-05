@@ -224,31 +224,72 @@
                         </div>
                     </div>
 
-                    <div>
-                    @if($courseDays)
-                        <hr>
-                        @foreach($courseDays as $courseDay)
-                            <div>
-                                <div class="flex flex-row">
-                                    <div>
-                                        <label for="{{ $loop->index }}" class="block text-sm text-gray-700 font-semibold">{{ $loop->iteration }}. Tag</label>
-
-                                        <x-input.date id="{{ $loop->index }}" wire:model="courseDays.{{ $loop->index }}.date" :options="$day_options"/>
-                                    </div>
-                                    <div>
-                                        <label for="{{ $loop->index }}" class="block text-sm text-gray-700 font-semibold">Start</label>
-
-                                        <x-input.date id="{{ $loop->index }}" wire:model="courseDays.{{ $loop->index }}.startTime" :options="$start_time_options"/>
-                                    </div>
-                                    <div>
-                                        <label for="{{ $loop->index }}" class="block text-sm text-gray-700 font-semibold">Ende</label>
-                                        <x-input.date id="{{ $loop->index }}" wire:model="courseDays.{{ $loop->index }}.endTime" :options="$end_time_options"/>
-                                    </div>
+                    @if($editing->team)
+                        <div>
+                            @foreach($trainer['general'] as $train)
+                                <div>
+                                    <label for="trainer-general-{{ $loop->index }}" class="block text-sm font-medium text-gray-700">{{ $loop->count > 1 ? $loop->iteration . '. ' : '' }}{{ _i('trainer') }}</label>
+                                    <select id="trainer-general-{{ $loop->index }}" wire:model.lazy="trainer.general.{{ $loop->index }}" name="team" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                                        <option value="">{{ _i('select / remove a trainer') }}</option>
+                                        <option value="later">{{ _i('select later') }}</option>
+                                        <option value="trainer">{{ _i('trainer can choose') }}</option>
+                                        @foreach($editing->team->users as $user)
+                                            <option value="{{ $user['id'] }}">{{ $user['name'] }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
+                            @endforeach
+                            <div>
+                                <x-button.link wire:click="addTrainer('general')" class="mt-2 text-xs text-gray-500">{{ _i('add a new trainer') }}</x-button.link>
                             </div>
-                        @endforeach
-                        <hr>
+                        </div>
                     @endif
+
+                    <div>
+                        @if(count($courseDays) >= 2)
+                            <hr>
+                            @foreach($courseDays as $courseDay)
+                                <div>
+                                    <div class="flex flex-row">
+                                        <div>
+                                            <label for="{{ $loop->index }}" class="block text-sm text-gray-700 font-semibold">{{ $loop->iteration }}. Tag</label>
+
+                                            <x-input.date id="{{ $loop->index }}" wire:model="courseDays.{{ $loop->index }}.date" :options="$day_options"/>
+                                        </div>
+                                        <div>
+                                            <label for="{{ $loop->index }}" class="block text-sm text-gray-700 font-semibold">Start</label>
+
+                                            <x-input.date id="{{ $loop->index }}" wire:model="courseDays.{{ $loop->index }}.startTime" :options="$start_time_options"/>
+                                        </div>
+                                        <div>
+                                            <label for="{{ $loop->index }}" class="block text-sm text-gray-700 font-semibold">Ende</label>
+                                            <x-input.date id="{{ $loop->index }}" wire:model="courseDays.{{ $loop->index }}.endTime" :options="$end_time_options"/>
+                                        </div>
+                                    </div>
+                                    @if($editing->team)
+                                        <div>
+                                            @foreach($trainer[$loop->index] as $t)
+                                                <div>
+                                                    <label for="day-{{ $loop->parent->index }}-trainer-{{ $loop->index }}" class="block text-sm font-medium text-gray-700">{{ $loop->count > 1 ? $loop->iteration . '. ' : '' }}{{ _i('trainer') }}</label>
+                                                    <select id="day-{{ $loop->parent->index }}-trainer-{{ $loop->index }}" wire:model.lazy="trainer.{{ $loop->parent->index }}.{{ $loop->index }}" name="team" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                                                        <option value="">{{ _i('select / remove a trainer') }}</option>
+                                                        <option value="later">{{ _i('select later') }}</option>
+                                                        <option value="trainer">{{ _i('trainer can choose') }}</option>
+                                                        @foreach($editing->team->users as $user)
+                                                            <option value="{{ $user['id'] }}">{{ $user['name'] }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            @endforeach
+                                                <div>
+                                                    <x-button.link wire:click="addTrainer({{ $loop->index }})" class="mt-2 text-xs text-gray-500">{{ _i('add a new trainer') }}</x-button.link>
+                                                </div>
+                                        </div>
+                                    @endif
+                                </div>
+                                <hr class="mt-2">
+                            @endforeach
+                        @endif
                     </div>
 
                     <div>
