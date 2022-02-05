@@ -465,7 +465,7 @@ class Course extends Component
                 ];
 
                 // add the trainer
-                foreach($this->editing->trainer->where('date', $courseDay['date']) as $trainer) {
+                foreach ($this->editing->trainer->where('date', $courseDay['date']) as $trainer) {
                     if (! $trainer->user_id) {
                         if ($trainer->bookable) {
                             for ($x = 1; $x <= $trainer->count; $x++) {
@@ -489,7 +489,7 @@ class Course extends Component
             }
 
             // and also the trainer for the whole course
-            foreach($this->editing->trainer->where('date', $this->editing->start->subDay()->format('Y-m-d')) as $trainer) {
+            foreach ($this->editing->trainer->where('date', $this->editing->start->subDay()->format('Y-m-d')) as $trainer) {
                 if (! $trainer->user_id) {
                     if ($trainer->bookable) {
                         for ($x = 1; $x <= $trainer->count; $x++) {
@@ -611,11 +611,11 @@ class Course extends Component
                     ];
                 } elseif (! is_numeric($value) && $value) { // it's another option
                     if ($value === 'trainer') {
-                        $trainer = $trainer +1;
+                        $trainer = $trainer + 1;
                     }
 
                     if ($value === 'later') {
-                        $later = $later +1;
+                        $later = $later + 1;
                     }
                 }
             }
