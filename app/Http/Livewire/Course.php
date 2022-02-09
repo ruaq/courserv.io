@@ -660,7 +660,7 @@ class Course extends Component
         );
 
         // TODO better way to clean up?
-        $actual_entries = TrainerDay::whereCourseId($this->editing->id)->orderBy('updated_at', 'desc')->pluck('updated_at');
+        $actual_entries = TrainerDay::whereCourseId($this->editing->id)->orderByDesc('updated_at')->pluck('updated_at');
 
         // and delete old entries
         TrainerDay::where('course_id', $this->editing->id)
