@@ -1,6 +1,5 @@
 <?php
 
-
 return [
 
     /**
@@ -29,7 +28,7 @@ return [
      */
     'supported-locales' => [
         'en',
-        'de'
+        'de',
     ],
 
     /**
@@ -103,18 +102,18 @@ return [
 
         // 'frontend' domain
         'frontend' => [
-			'controllers',
-			'views/frontend',
-		],
+            'controllers',
+            'views/frontend',
+        ],
 
         // 'backend' domain
-		'backend' => [
-			'views/backend',
-		],
+        'backend' => [
+            'views/backend',
+        ],
 
         // 'messages' domain (matches default domain)
-		'storage/views',
-	],
+        'storage/views',
+    ],
     */
 
     /**

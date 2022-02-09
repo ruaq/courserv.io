@@ -20,7 +20,6 @@ beforeEach(function () {
     actingAs($this->user);
 });
 
-
 it('needs permission to create a new Course type', function () {
     $this->assertFalse($this->user->can('create', CourseType::class));
 

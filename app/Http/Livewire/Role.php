@@ -14,16 +14,20 @@ class Role extends Component
     use AuthorizesRequests;
 
     public bool $showEditModal = false;
+
     public Collection $roles;
+
     public Collection $permissions;
+
     public RoleModel $editing;
+
     public array $permIds = [];
 
     protected function rules(): array
     {
         return [
-            'editing.name' => 'required|unique:roles,name,' . optional($this->editing)->id,
-            'editing.display_name' => 'required|unique:roles,display_name,' . optional($this->editing)->id,
+            'editing.name' => 'required|unique:roles,name,'.optional($this->editing)->id,
+            'editing.display_name' => 'required|unique:roles,display_name,'.optional($this->editing)->id,
             'editing.description' => 'nullable',
         ];
     }
@@ -58,7 +62,7 @@ class Role extends Component
 
             $this->permIds = [];
             foreach ($this->editing->permissions->pluck('id') as $perm) {
-                $this->permIds[] = (string)$perm;
+                $this->permIds[] = (string) $perm;
             }
         }
         $this->showEditModal = true;

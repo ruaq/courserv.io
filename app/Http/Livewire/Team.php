@@ -14,14 +14,16 @@ class Team extends Component
     use AuthorizesRequests;
 
     public bool $showEditModal = false;
+
     public Collection $teams;
+
     public TeamModel $editing;
 
     protected function rules(): array
     {
         return [
-            'editing.name' => 'required|unique:teams,name,' . optional($this->editing)->id,
-            'editing.display_name' => 'required|unique:teams,display_name,' . optional($this->editing)->id,
+            'editing.name' => 'required|unique:teams,name,'.optional($this->editing)->id,
+            'editing.display_name' => 'required|unique:teams,display_name,'.optional($this->editing)->id,
             'editing.description' => 'nullable',
         ];
     }

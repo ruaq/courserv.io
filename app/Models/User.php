@@ -62,7 +62,6 @@ use Vinkla\Hashids\Facades\Hashids;
  * @property string|null $reset_valid_until
  * @method static \Illuminate\Database\Eloquent\Builder|User whereResetValidUntil($value)
  */
-
 class User extends Authenticatable implements MustVerifyEmail
 {
     use LaratrustUserTrait;
