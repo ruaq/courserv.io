@@ -27,11 +27,12 @@ class User extends Component
 
     public array $roleIds = [];
 
+    // removed spoof from email validation (update issue) TODO check later
     protected function rules(): array
     {
         return [
             'editing.name' => 'required',
-            'editing.email' => 'required|email:rfc,spoof|unique:users,email,'.$this->editing->id,
+            'editing.email' => 'required|email:rfc|unique:users,email,'.$this->editing->id,
             'editing.active' => 'bool|nullable',
         ];
     }
