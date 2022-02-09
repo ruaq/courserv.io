@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::localized(function () {
     Route::group(
         [
-            'middleware' => ['\App\Http\Middleware\Localization'],
+            'middleware' => [\App\Http\Middleware\Localization::class],
         ], function () {
             Route::get('/', function () {
                 return view('welcome');
