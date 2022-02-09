@@ -82,7 +82,7 @@
                     <x-table.heading sortable multi-column wire:click="sortBy('start')" :direction="$sorts['start'] ?? null">{{ _i('start') }}</x-table.heading>
                     <x-table.heading sortable multi-column wire:click="sortBy('course_type_id')" :direction="$sorts['course_type_id'] ?? null">{{ _i('course type') }}</x-table.heading>
                     <x-table.heading sortable multi-column wire:click="sortBy('internal_number')" :direction="$sorts['internal_number'] ?? null">{{ _i('internal') }}</x-table.heading>
-                    @if(config('app.qsehCodeNumber'))
+                    @if(config('qseh.codeNumber'))
                         <x-table.heading sortable multi-column wire:click="sortBy('registration_number')" :direction="$sorts['registration_number'] ?? null">{{ _i('qseh') }}</x-table.heading>
                     @endif
                     <x-table.heading sortable multi-column wire:click="sortBy('team_id')" :direction="$sorts['team_id'] ?? null">{{ _i('team') }}</x-table.heading>
@@ -100,7 +100,7 @@
                             <div {{ ($course->internal_number == 'queued') ? "wire:poll.visible.5s" : '' }}>
                                 <x-table.cell>{{ $course->internal_number }}</x-table.cell>
                             </div>
-                            @if(config('app.qsehCodeNumber'))
+                            @if(config('qseh.codeNumber'))
                                 <div {{ ($course->registration_number == 'queued') ? "wire:poll.visible.5s" : '' }}>
                                     <x-table.cell>{{ $course->registration_number }}</x-table.cell>
                                 </div>
@@ -159,7 +159,7 @@
                     <div>
                         @if($showRegisterCourse)
                             <div x-data="{ registerCourse: @entangle('registerCourse').defer }" class="space-y-3">
-                                @if(!$courseRegistered && config('app.qsehPassword'))
+                                @if(!$courseRegistered && config('qseh.password'))
                                     <div class="flex items-center">
                                         <button type="button" class="relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 bg-gray-200" role="switch" aria-checked="false" x-ref="switch" :aria-checked="registerCourse.toString()" @click="registerCourse = !registerCourse" x-state:on="Enabled" x-state:off="Not Enabled" :class="{ 'bg-indigo-600': registerCourse, 'bg-gray-200': !(registerCourse) }">
                                             <span class="sr-only">{{ _i('register automatically at QSEH') }}</span>

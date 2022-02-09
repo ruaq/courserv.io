@@ -6,7 +6,7 @@
             </div>
 
             <div class="flex justify-center">
-                <div class="flex justify-center frc-captcha" data-sitekey="{{ config('services.fcaptcha.sitekey') }}" data-callback="captchaSolved" data-lang="{{ app()->getLocale() }}"></div>
+                <div class="flex justify-center frc-captcha" data-sitekey="{{ config('fcaptcha.sitekey') }}" data-callback="captchaSolved" data-lang="{{ app()->getLocale() }}"></div>
             </div>
         @endunless
     </div>
@@ -18,7 +18,7 @@
     </script>
 
     {{-- remove captcha, if no friendly captcha key is present--}}
-    @if(!config('services.fcaptcha.sitekey') || !config('services.fcaptcha.secret'))
+    @if(!config('fcaptcha.sitekey') || !config('fcaptcha.secret'))
         <div x-init="$wire.emit('removeCaptcha')"></div>
     @endif
 </div>

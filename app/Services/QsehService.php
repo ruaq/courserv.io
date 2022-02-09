@@ -36,7 +36,7 @@ class QsehService
      */
     public function connect(Course $course, string $action = 'new'): Collection
     {
-        if (! config('app.qsehCodeNumber') || ! config('app.qsehPassword')) { // no service without credentials
+        if (! config('qseh.codeNumber') || ! config('qseh.password')) { // no service without credentials
             exit();
         }
 
@@ -161,8 +161,8 @@ class QsehService
                                 <!--Optional:-->
                                 <xsd:lehrId>'.$number.'</xsd:lehrId>
                             </lehrgang>
-                            <Benutzer>'.config('app.qsehCodeNumber').'</Benutzer>
-                            <Kennwort>'.config('app.qsehPassword').'</Kennwort>
+                            <Benutzer>'.config('qseh.codeNumber').'</Benutzer>
+                            <Kennwort>'.config('qseh.password').'</Kennwort>
                             <Aktion>'.$action.'</Aktion>
                         </LehrgangsUebermittlung>
                     </ehaf:ehaf3RequestHandler>

@@ -19,7 +19,7 @@ class Fcaptcha extends Component
 
     public function removeCaptcha()
     {
-        if (config('services.fcaptcha.secret') && config('services.fcaptcha.sitekey')) {
+        if (config('fcaptcha.secret') && config('fcaptcha.sitekey')) {
             return;
         }
 
@@ -32,8 +32,8 @@ class Fcaptcha extends Component
     {
         $response = Http::post('https://api.friendlycaptcha.com/api/v1/siteverify', [
             'solution' => $solution,
-            'secret' => config('services.fcaptcha.secret'),
-            'sitekey' => config('services.fcaptcha.sitekey'),
+            'secret' => config('fcaptcha.secret'),
+            'sitekey' => config('fcaptcha.sitekey'),
         ]);
 
         if (! $response->json('success')) {

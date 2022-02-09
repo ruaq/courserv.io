@@ -534,7 +534,7 @@ class Course extends Component
     {
         $this->authorize('save', $this->editing);
 
-        if (config('app.qsehCodeNumber') && config('app.qsehPassword')) {
+        if (config('qseh.codeNumber') && config('qseh.password')) {
             // it's a QSEH course and already registered
             if ($this->editing->registration_number && $this->editing->registration_number != 'queued' && $this->editing->registration_number != 'failed' && $this->editing->type->wsdl_id) {
                 event(new CourseCancelled($this->editing));
@@ -675,7 +675,7 @@ class Course extends Component
             event(new CourseCreated($this->editing));
         }
 
-        if (config('app.qsehCodeNumber') && config('app.qsehPassword')) {
+        if (config('qseh.codeNumber') && config('qseh.password')) {
             if ($this->registerCourse) {
                 $this->editing->registration_number = 'queued';
                 $this->editing->save();

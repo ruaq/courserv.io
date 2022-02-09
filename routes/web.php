@@ -14,7 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// TODO better way to combine it?
 Route::localized(function () {
     Route::middleware(\App\Http\Middleware\Localization::class)->group(function () {
         Route::view('/', 'welcome');
