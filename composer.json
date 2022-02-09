@@ -14,10 +14,6 @@
         },
         {
             "type": "git",
-            "url": "https://github.com/laravel-shift/helo-laravel.git"
-        },
-        {
-            "type": "git",
             "url": "https://github.com/prevplan/laratrust.git"
         }
     ],
@@ -39,7 +35,6 @@
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.12",
-        "beyondcode/helo-laravel": "dev-l9-compatibility",
         "fakerphp/faker": "^1.9.1",
         "laravel/sail": "^1.13",
         "mockery/mockery": "^1.4.4",
