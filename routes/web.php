@@ -17,34 +17,34 @@ use Illuminate\Support\Facades\Route;
 // TODO better way to combine it?
 Route::localized(function () {
     Route::middleware(\App\Http\Middleware\Localization::class)->group(function () {
-            Route::view('/', 'welcome');
+        Route::view('/', 'welcome');
 
-            Route::get('login', \App\Http\Livewire\Auth\Login::class)
+        Route::get('login', \App\Http\Livewire\Auth\Login::class)
             ->middleware('guest')
             ->name('login');
 
-            Route::get('home', \App\Http\Livewire\Home::class)
+        Route::get('home', \App\Http\Livewire\Home::class)
             ->name('home');
 
-            Route::get('teams', \App\Http\Livewire\Team::class)
+        Route::get('teams', \App\Http\Livewire\Team::class)
             ->name('teams');
 
-            Route::get('user', \App\Http\Livewire\User::class)
+        Route::get('user', \App\Http\Livewire\User::class)
             ->name('user');
 
-            Route::get('coursetype', \App\Http\Livewire\CourseType::class)
+        Route::get('coursetype', \App\Http\Livewire\CourseType::class)
             ->name('coursetype');
 
-            Route::get('course', \App\Http\Livewire\Course::class)
+        Route::get('course', \App\Http\Livewire\Course::class)
             ->name('course');
 
-            Route::get('roles', \App\Http\Livewire\Role::class)
+        Route::get('roles', \App\Http\Livewire\Role::class)
             ->name('roles');
 
-            Route::get('password/reset/{hashedId}', \App\Http\Livewire\PasswordReset::class)
+        Route::get('password/reset/{hashedId}', \App\Http\Livewire\PasswordReset::class)
             ->middleware('signed')
             ->name('password.reset');
-        });
+    });
 });
 
 Route::get('/email/verify', function () {
