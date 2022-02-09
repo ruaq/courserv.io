@@ -26,8 +26,8 @@ class Role extends Component
     protected function rules(): array
     {
         return [
-            'editing.name' => 'required|unique:roles,name,'.$this->editing?->id,
-            'editing.display_name' => 'required|unique:roles,display_name,'.$this->editing?->id,
+            'editing.name' => 'required|unique:roles,name,'.$this->editing->id,
+            'editing.display_name' => 'required|unique:roles,display_name,'.$this->editing->id,
             'editing.description' => 'nullable',
         ];
     }
