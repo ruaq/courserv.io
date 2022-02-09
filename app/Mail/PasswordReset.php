@@ -12,6 +12,7 @@ class PasswordReset extends Mailable
     use SerializesModels;
 
     public $link;
+
     public $minutes;
 
     /**

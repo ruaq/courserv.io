@@ -14,18 +14,24 @@ class User extends Component
     use AuthorizesRequests;
 
     public bool $showEditModal = false;
+
     public Collection $users;
+
     public UserModel $editing;
+
     public Collection $teams;
+
     public Collection $roles;
+
     public array $teamIds = [];
+
     public array $roleIds = [];
 
     protected function rules(): array
     {
         return [
             'editing.name' => 'required',
-            'editing.email' => 'required|email:rfc,spoof|unique:users,email,' . optional($this->editing)->id,
+            'editing.email' => 'required|email:rfc,spoof|unique:users,email,'.optional($this->editing)->id,
             'editing.active' => 'bool|nullable',
         ];
     }
@@ -43,7 +49,7 @@ class User extends Component
 
     public function create()
     {
-        $this->authorize('create', User::class);
+        $this->authorize('create', self::class);
 
         if ($this->editing->getKey()) {
             $this->editing = $this->makeBlankUser();
@@ -63,12 +69,12 @@ class User extends Component
 
             $this->teamIds = [];
             foreach ($this->editing->teams->pluck('id') as $team) {
-                $this->teamIds[] = (string)$team;
+                $this->teamIds[] = (string) $team;
             }
 
             $this->roleIds = [];
             foreach ($this->editing->roles->pluck('id') as $role) {
-                $this->roleIds[] = (string)$role;
+                $this->roleIds[] = (string) $role;
             }
         }
         $this->showEditModal = true;
@@ -110,7 +116,7 @@ class User extends Component
 
     public function render()
     {
-        $this->authorize('viewAny', User::class);
+        $this->authorize('viewAny', self::class);
 
         if (Auth::user()->isAbleTo('user.view')) {
             $this->users = UserModel::all();

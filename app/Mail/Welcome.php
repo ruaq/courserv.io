@@ -12,6 +12,7 @@ class Welcome extends Mailable
     use SerializesModels;
 
     public $link;
+
     public $minutes;
 
     /**

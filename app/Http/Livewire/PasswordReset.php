@@ -13,9 +13,13 @@ use Vinkla\Hashids\Facades\Hashids;
 class PasswordReset extends Component
 {
     public string $password = '';
+
     public string $password_confirmation = '';
+
     public string $hashedId;
+
     public User $user;
+
     public Request $request;
 
     protected $rules = [

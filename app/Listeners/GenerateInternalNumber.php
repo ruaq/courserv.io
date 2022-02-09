@@ -55,7 +55,7 @@ class GenerateInternalNumber implements ShouldQueue
 
         $new_number = $last_number[1] + 1;
 
-        $event->course->internal_number = $event->course->start->format('Y') . '-' . $new_number;
+        $event->course->internal_number = $event->course->start->format('Y').'-'.$new_number;
 
         Cache::forget('generating-internal-course-number');
 

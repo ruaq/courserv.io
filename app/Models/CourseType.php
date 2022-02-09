@@ -58,18 +58,18 @@ class CourseType extends Model
         5 => 'BS Fortbildung',
         6 => 'EH Lehrkräfteausbildung',
         7 => 'EH Lehrkräftefortbildung',
-//        9 => 'EH Bildungseinrichtungen Fortbildung',
+        //        9 => 'EH Bildungseinrichtungen Fortbildung',
     ];
 
     public const WSDL_DATA = [
-        0 => ['units' => '0', 'units_per_day' => '0', 'breaks' => '0', 'seats' => '0',],
-        1 => ['units' => 9, 'units_per_day' => 9, 'breaks' => 45, 'seats' => 20,],
-        2 => ['units' => 9, 'units_per_day' => 9, 'breaks' => 45, 'seats' => 20,],
-        3 => ['units' => 63, 'units_per_day' => 9, 'breaks' => 45, 'seats' => 20,],
-        4 => ['units' => 32, 'units_per_day' => 9, 'breaks' => 45, 'seats' => 20,],
-        5 => ['units' => 16, 'units_per_day' => 9, 'breaks' => 45, 'seats' => 20,],
-        6 => ['units' => 56, 'units_per_day' => 9, 'breaks' => 45, 'seats' => 20,],
-        7 => ['units' => 16, 'units_per_day' => 9, 'breaks' => 45, 'seats' => 20,],
-        8 => ['units' => 9, 'units_per_day' => 9, 'breaks' => 45, 'seats' => 20,],
+        0 => ['units' => '0', 'units_per_day' => '0', 'breaks' => '0', 'seats' => '0'],
+        1 => ['units' => 9, 'units_per_day' => 9, 'breaks' => 45, 'seats' => 20],
+        2 => ['units' => 9, 'units_per_day' => 9, 'breaks' => 45, 'seats' => 20],
+        3 => ['units' => 63, 'units_per_day' => 9, 'breaks' => 45, 'seats' => 20],
+        4 => ['units' => 32, 'units_per_day' => 9, 'breaks' => 45, 'seats' => 20],
+        5 => ['units' => 16, 'units_per_day' => 9, 'breaks' => 45, 'seats' => 20],
+        6 => ['units' => 56, 'units_per_day' => 9, 'breaks' => 45, 'seats' => 20],
+        7 => ['units' => 16, 'units_per_day' => 9, 'breaks' => 45, 'seats' => 20],
+        8 => ['units' => 9, 'units_per_day' => 9, 'breaks' => 45, 'seats' => 20],
     ];
 }
