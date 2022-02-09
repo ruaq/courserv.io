@@ -16,13 +16,8 @@ use Illuminate\Support\Facades\Route;
 
 // TODO better way to combine it?
 Route::localized(function () {
-    Route::group(
-        [
-            'middleware' => [\App\Http\Middleware\Localization::class],
-        ], function () {
-            Route::get('/', function () {
-                return view('welcome');
-            });
+    Route::middleware(\App\Http\Middleware\Localization::class)->group(function () {
+            Route::view('/', 'welcome');
 
             Route::get('login', \App\Http\Livewire\Auth\Login::class)
             ->middleware('guest')
