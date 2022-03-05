@@ -378,13 +378,13 @@ class Course extends Component
         }
 
         if ($this->editing->type->units_per_day) {
-            $unit_length = $this->editing->type->units_per_day * 45;
+            $unit_length = (int)$this->editing->type->units_per_day * 45;
         } else {
             $unit_length = 9 * 45;
         }
 
         $breaks = $this->editing->type->breaks;
-        $length = $unit_length + $breaks;
+        $length = (int)$unit_length + (int)$breaks;
 
         // no end before start date, please
         if (isset($this->editing->start) && ! isset($this->editing->end) || $this->editing->end->subMinutes($length)->lt($this->editing->start)) {
