@@ -2,11 +2,11 @@
     <div>
         @unless($solved)
             <div>
-                @error('validation') <div class="flex justify-center mt-1 text-red-500 text-sm">{{ $message }}</div> @enderror
+                @error('validation') <div class="mt-1 flex justify-center text-sm text-red-500">{{ $message }}</div> @enderror
             </div>
 
             <div class="flex justify-center">
-                <div class="flex justify-center frc-captcha" data-sitekey="{{ config('fcaptcha.sitekey') }}" data-callback="captchaSolved" data-lang="{{ app()->getLocale() }}"></div>
+                <div class="frc-captcha flex justify-center" data-sitekey="{{ config('fcaptcha.sitekey') }}" data-callback="captchaSolved" data-lang="{{ app()->getLocale() }}"></div>
             </div>
         @endunless
     </div>

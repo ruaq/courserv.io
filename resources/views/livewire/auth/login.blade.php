@@ -1,6 +1,6 @@
 <div>
-    <div class="min-h-screen bg-gray-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-md w-full space-y-8">
+    <div class="flex min-h-screen items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+        <div class="w-full max-w-md space-y-8">
             <div>
                 <img class="mx-auto h-12 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
                      alt="Workflow">
@@ -16,34 +16,34 @@
             </div>
             <form wire:submit.prevent="login" class="mt-8 space-y-6">
                 <input type="hidden" name="remember" value="true">
-                <div class="rounded-md shadow-sm -space-y-px">
+                <div class="-space-y-px rounded-md shadow-sm">
                     <div>
                         <label for="email-address" class="sr-only">{{ _i('Email address') }}</label>
                         <input wire:model.lazy="email" id="email-address" type="email" autocomplete="email" required
-                               class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-400 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm @error('email') border-red-500 text-red-900 placeholder-red-300 focus:border-red-500 focus:ring-red @enderror"
+                               class="@error('email') focus:ring-red @enderror relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 border-red-500 px-3 py-2 text-gray-900 text-red-900 placeholder-gray-400 placeholder-red-300 focus:z-10 focus:border-indigo-500 focus:border-red-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                                placeholder="{{ _i('Email address') }}">
                     </div>
 
                     @error('email')
-                    <div class="flex justify-center mt-1 text-red-500 text-sm">{{ $message }}</div> @enderror
+                    <div class="mt-1 flex justify-center text-sm text-red-500">{{ $message }}</div> @enderror
 
                     <div>
                         <label for="password" class="sr-only">{{ _i('Password') }}</label>
                         <input wire:model.lazy="password" id="password" type="password" autocomplete="current-password"
                                required
-                               class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-400 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm @error('password') border-red-500 text-red-900 placeholder-red-300 focus:border-red-500 focus:ring-red @enderror"
+                               class="@error('password') focus:ring-red @enderror relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 border-red-500 px-3 py-2 text-gray-900 text-red-900 placeholder-gray-400 placeholder-red-300 focus:z-10 focus:border-indigo-500 focus:border-red-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                                placeholder="{{ _i('Password') }}">
                     </div>
 
                     @error('password')
-                    <div class="flex justify-center mt-1 text-red-500 text-sm">{{ $message }}</div> @enderror
+                    <div class="mt-1 flex justify-center text-sm text-red-500">{{ $message }}</div> @enderror
 
                 </div>
 
                 <div class="flex items-center justify-between">
                     <div class="flex items-center">
                         <input wire:model="remember" id="remember-me" type="checkbox"
-                               class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
+                               class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
                         <label for="remember-me" class="ml-2 block text-sm text-gray-900">
                             {{ _i('Remember me') }}
                         </label>
@@ -60,14 +60,14 @@
                 </div>
 
                 @error('captcha')
-                <div class="flex justify-center mt-1 text-red-500 text-sm">{{ $message }}</div> @enderror
+                <div class="mt-1 flex justify-center text-sm text-red-500">{{ $message }}</div> @enderror
 
                 <livewire:fcaptcha/>
 
                 <div>
                     <button type="submit" wire:loading.attr="disabled"
-                            class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                        <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+                            class="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3">
                             <!-- Heroicon name: solid/lock-closed -->
                             <svg class="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg"
                                  viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -89,10 +89,10 @@
                 <div class="space-y-3">
                     <div>
                         <label for="email" class="block text-sm font-medium text-gray-700">{{ _i('e-mail address') }}</label>
-                        <div class="mt-1 relative rounded-md shadow-sm">
-                            <input type="text" wire:model.lazy="email" name="email" id="email" class="block w-full pr-10 sm:text-sm rounded-md focus:ring-indigo-500 focus:border-indigo-500 block border-gray-300 @error('email') border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 @enderror " placeholder="{{ _i('e-mail address') }}" @error('email') aria-invalid="true" aria-describedby="email-error" @enderror>
+                        <div class="relative mt-1 rounded-md shadow-sm">
+                            <input type="text" wire:model.lazy="email" name="email" id="email" class="@error('email') @enderror block w-full rounded-md border-gray-300 border-red-300 pr-10 text-red-900 placeholder-red-300 focus:border-indigo-500 focus:border-red-500 focus:outline-none focus:ring-indigo-500 focus:ring-red-500 sm:text-sm" placeholder="{{ _i('e-mail address') }}" @error('email') aria-invalid="true" aria-describedby="email-error" @enderror>
                             @error('email')
-                                <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
                                     <!-- Heroicon name: solid/exclamation-circle -->
                                     <svg class="h-5 w-5 text-red-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                         <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />

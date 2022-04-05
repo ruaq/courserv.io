@@ -1,6 +1,6 @@
 <div>
-    <div class="min-h-screen bg-gray-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-md w-full space-y-8">
+    <div class="flex min-h-screen items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+        <div class="w-full max-w-md space-y-8">
             <div>
                 <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
                     {{ _i('Reset password') }}
@@ -8,12 +8,12 @@
             </div>
             <form wire:submit.prevent="resetPassword" class="mt-8 space-y-6">
                 <input type="hidden" name="remember" value="true">
-                <div class="rounded-md shadow-sm -space-y-px">
+                <div class="-space-y-px rounded-md shadow-sm">
                     <div>
                         <label for="password" class="sr-only">{{ _i('Password') }}</label>
                         <input wire:model.lazy="password" id="password" type="password" autocomplete="new-password"
                                required
-                               class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-400 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm @error('password') border-red-500 text-red-900 placeholder-red-300 focus:border-red-500 focus:ring-red @enderror"
+                               class="@error('password') focus:ring-red @enderror relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 border-red-500 px-3 py-2 text-gray-900 text-red-900 placeholder-gray-400 placeholder-red-300 focus:z-10 focus:border-indigo-500 focus:border-red-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                                placeholder="{{ _i('Password') }}">
                     </div>
 
@@ -21,20 +21,20 @@
                         <label for="password" class="sr-only">{{ _i('Password repeat') }}</label>
                         <input wire:model.lazy="password_confirmation" id="password_confirmation" type="password" autocomplete="password-repeat"
                                required
-                               class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-400 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm @error('password') border-red-500 text-red-900 placeholder-red-300 focus:border-red-500 focus:ring-red @enderror"
+                               class="@error('password') focus:ring-red @enderror relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 border-red-500 px-3 py-2 text-gray-900 text-red-900 placeholder-gray-400 placeholder-red-300 focus:z-10 focus:border-indigo-500 focus:border-red-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                                placeholder="{{ _i('Password repeat') }}">
                     </div>
 
                     @error('password')
-                    <div class="flex justify-center mt-1 text-red-500 text-sm">{{ $message }}</div>
+                    <div class="mt-1 flex justify-center text-sm text-red-500">{{ $message }}</div>
                     @enderror
 
                 </div>
 
                 <div>
                     <button type="submit" wire:loading.attr="disabled"
-                            class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                        <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+                            class="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3">
                             <!-- Heroicon name: solid/lock-closed -->
                             <svg class="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg"
                                  viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
