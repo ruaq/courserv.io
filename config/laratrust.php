@@ -46,7 +46,7 @@ return [
         | NOTE: Currently the database check does not use cache.
         |
         */
-        'enabled' => env('LARATRUST_ENABLE_CACHE', true),
+        'enabled' => env('LARATRUST_ENABLE_CACHE', env('APP_ENV') === 'production'),
 
         /*
         |--------------------------------------------------------------------------
@@ -184,7 +184,7 @@ return [
              */
             'abort' => [
                 'code' => 403,
-                'message' => 'User does not have any of the necessary access rights.',
+                'message' => 'User does not have any of the necessary access rights.'
             ],
 
             /**
@@ -197,10 +197,10 @@ return [
                 'url' => '/home',
                 'message' => [
                     'key' => 'error',
-                    'content' => '',
-                ],
-            ],
-        ],
+                    'content' => ''
+                ]
+            ]
+        ]
     ],
 
     'teams' => [
@@ -313,6 +313,16 @@ return [
 
         /*
         |--------------------------------------------------------------------------
+        | Enable permissions creation
+        |--------------------------------------------------------------------------
+        |
+        | Enable/Disable the possibility to create permissions from the panel.
+        |
+        */
+        'create_permissions' => false,
+
+        /*
+        |--------------------------------------------------------------------------
         | Add restriction to roles in the panel
         |--------------------------------------------------------------------------
         |
@@ -330,5 +340,5 @@ return [
             // The user won't be able to delete the role.
             'not_deletable' => [],
         ],
-    ],
+    ]
 ];
