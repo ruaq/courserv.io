@@ -24,6 +24,10 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|TrainerDay whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|TrainerDay whereUserId($value)
  * @mixin \Eloquent
+ * @property int $bookable
+ * @property int $count
+ * @method static \Illuminate\Database\Eloquent\Builder|TrainerDay whereBookable($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TrainerDay whereCount($value)
  */
 class TrainerDay extends Model
 {

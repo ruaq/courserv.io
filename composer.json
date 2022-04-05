@@ -11,10 +11,6 @@
         {
             "type": "git",
             "url": "https://github.com/prevplan/laravel-gettext"
-        },
-        {
-            "type": "git",
-            "url": "https://github.com/prevplan/laratrust.git"
         }
     ],
     "require": {
@@ -28,7 +24,7 @@
         "laravel/sanctum": "^2.14",
         "laravel/tinker": "^2.7",
         "livewire/livewire": "^2.7",
-        "santigarcor/laratrust": "dev-master",
+        "santigarcor/laratrust": "^7.0",
         "vinkla/hashids": "^10.0",
         "vyuldashev/xml-to-array": "^1.0",
         "zerospam/laravel-gettext": "dev-patch-1"
