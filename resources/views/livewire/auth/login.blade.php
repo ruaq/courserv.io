@@ -20,23 +20,21 @@
                     <div>
                         <label for="email-address" class="sr-only">{{ _i('Email address') }}</label>
                         <input wire:model.lazy="email" id="email-address" type="email" autocomplete="email" required
-                               class="@error('email') focus:ring-red @enderror relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 border-red-500 px-3 py-2 text-gray-900 text-red-900 placeholder-gray-400 placeholder-red-300 focus:z-10 focus:border-indigo-500 focus:border-red-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                               class="@error('email') border-red-500 text-red-900 placeholder-red-300 focus:border-red-500 focus:ring-red @enderror relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-400 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                                placeholder="{{ _i('Email address') }}">
                     </div>
-
-                    @error('email')
-                    <div class="mt-1 flex justify-center text-sm text-red-500">{{ $message }}</div> @enderror
 
                     <div>
                         <label for="password" class="sr-only">{{ _i('Password') }}</label>
                         <input wire:model.lazy="password" id="password" type="password" autocomplete="current-password"
                                required
-                               class="@error('password') focus:ring-red @enderror relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 border-red-500 px-3 py-2 text-gray-900 text-red-900 placeholder-gray-400 placeholder-red-300 focus:z-10 focus:border-indigo-500 focus:border-red-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                               class="@error('email') border-red-500 text-red-900 placeholder-red-300 focus:border-red-500 focus:ring-red @enderror relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-400 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                                placeholder="{{ _i('Password') }}">
                     </div>
 
-                    @error('password')
-                    <div class="mt-1 flex justify-center text-sm text-red-500">{{ $message }}</div> @enderror
+                    @error('email')
+                        <div class="mt-1 flex justify-center text-center text-sm text-red-500">{{ $message }}</div>
+                    @enderror
 
                 </div>
 
@@ -90,7 +88,7 @@
                     <div>
                         <label for="email" class="block text-sm font-medium text-gray-700">{{ _i('e-mail address') }}</label>
                         <div class="relative mt-1 rounded-md shadow-sm">
-                            <input type="text" wire:model.lazy="email" name="email" id="email" class="@error('email') @enderror block w-full rounded-md border-gray-300 border-red-300 pr-10 text-red-900 placeholder-red-300 focus:border-indigo-500 focus:border-red-500 focus:outline-none focus:ring-indigo-500 focus:ring-red-500 sm:text-sm" placeholder="{{ _i('e-mail address') }}" @error('email') aria-invalid="true" aria-describedby="email-error" @enderror>
+                            <input type="text" wire:model.lazy="email" name="email" id="email" class="@error('email') border-red-300 text-red-900 placeholder-red-300 focus:border-red-500 focus:outline-none focus:ring-red-500 @enderror block w-full rounded-md border-gray-300 pr-10 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="{{ _i('e-mail address') }}" @error('email') aria-invalid="true" aria-describedby="email-error" @enderror>
                             @error('email')
                                 <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
                                     <!-- Heroicon name: solid/exclamation-circle -->

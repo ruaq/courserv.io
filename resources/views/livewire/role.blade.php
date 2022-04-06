@@ -54,7 +54,7 @@
                     <div>
                         <label for="name" class="block text-sm font-medium text-gray-700">{{ _i('role name') }}</label>
                         <div class="relative mt-1 rounded-md shadow-sm">
-                            <input type="text" wire:model.lazy="editing.name" name="{{ _i('role name') }}" id="name" class="@error('editing.name') @enderror block w-full rounded-md border-gray-300 border-red-300 pr-10 lowercase text-red-900 placeholder-red-300 focus:border-indigo-500 focus:border-red-500 focus:outline-none focus:ring-indigo-500 focus:ring-red-500 sm:text-sm" placeholder="{{ _i('role name') }}" @error('editing.name') aria-invalid="true" aria-describedby="name-error" @enderror>
+                            <input type="text" wire:model.lazy="editing.name" name="{{ _i('role name') }}" id="name" class="@error('editing.name') border-red-300 text-red-900 placeholder-red-300 focus:border-red-500 focus:outline-none focus:ring-red-500 @enderror block w-full rounded-md border-gray-300 pr-10 lowercase focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="{{ _i('role name') }}" @error('editing.name') aria-invalid="true" aria-describedby="name-error" @enderror>
                             @error('editing.name')
                             <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
                                 <!-- Heroicon name: solid/exclamation-circle -->
@@ -74,7 +74,7 @@
                     <div>
                         <label for="display_name" class="block text-sm font-medium text-gray-700">{{ _i('Display role Name') }}</label>
                         <div class="relative mt-1 rounded-md shadow-sm">
-                            <input type="text" wire:model.lazy="editing.display_name" name="display_name" id="display_name" class="@error('editing.display_name') @enderror block w-full rounded-md border-gray-300 border-red-300 pr-10 text-red-900 placeholder-red-300 focus:border-indigo-500 focus:border-red-500 focus:outline-none focus:ring-indigo-500 focus:ring-red-500 sm:text-sm" placeholder="{{ _i('Display role Name') }}" @error('editing.display_name') aria-invalid="true" aria-describedby="display_name-error" @enderror>
+                            <input type="text" wire:model.lazy="editing.display_name" name="display_name" id="display_name" class="@error('editing.display_name') border-red-300 text-red-900 placeholder-red-300 focus:border-red-500 focus:outline-none focus:ring-red-500 @enderror block w-full rounded-md border-gray-300 pr-10 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="{{ _i('Display role Name') }}" @error('editing.display_name') aria-invalid="true" aria-describedby="display_name-error" @enderror>
                             @error('editing.display_name')
                                 <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
                                     <!-- Heroicon name: solid/exclamation-circle -->
@@ -94,7 +94,7 @@
                     <div>
                         <label for="description" class="block text-sm font-medium text-gray-700">{{ _i('Description') }}</label>
                         <div class="relative mt-1 rounded-md shadow-sm">
-                            <textarea wire:model.lazy="editing.description" name="description" id="description" class="@error('editing.description') @enderror block w-full rounded-md border-gray-300 border-red-300 pr-10 text-red-900 placeholder-red-300 focus:border-indigo-500 focus:border-red-500 focus:outline-none focus:ring-indigo-500 focus:ring-red-500 sm:text-sm" placeholder="{{ _i('Description') }}" @error('editing.description') aria-invalid="true" aria-describedby="description-error" @enderror></textarea>
+                            <textarea wire:model.lazy="editing.description" name="description" id="description" class="@error('editing.description') border-red-300 text-red-900 placeholder-red-300 focus:ring-red-500 @enderror block w-full rounded-md border-gray-300 pr-10 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="{{ _i('Description') }}" @error('editing.description') aria-invalid="true" aria-describedby="description-error" @enderror></textarea>
                             @error('editing.description')
                                 <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
                                     <!-- Heroicon name: solid/exclamation-circle -->

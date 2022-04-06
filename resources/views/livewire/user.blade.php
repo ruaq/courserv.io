@@ -77,7 +77,7 @@
                     <div>
                         <label for="name" class="block text-sm font-medium text-gray-700">{{ _i('name') }}</label>
                         <div class="relative mt-1 rounded-md shadow-sm">
-                            <input type="text" wire:model.lazy="editing.name" name="{{ _i('name') }}" id="name" class="@error('editing.name') @enderror block w-full rounded-md border-gray-300 border-red-300 pr-10 text-red-900 placeholder-red-300 focus:border-indigo-500 focus:border-red-500 focus:outline-none focus:ring-indigo-500 focus:ring-red-500 sm:text-sm" placeholder="{{ _i('name') }}" @error('editing.name') aria-invalid="true" aria-describedby="name-error" @enderror>
+                            <input type="text" wire:model.lazy="editing.name" name="{{ _i('name') }}" id="name" class="@error('editing.name') border-red-300 text-red-900 placeholder-red-300 focus:ring-red-500 @enderror block w-full rounded-md border-gray-300 pr-10 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="{{ _i('name') }}" @error('editing.name') aria-invalid="true" aria-describedby="name-error" @enderror>
                             @error('editing.name')
                                 <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
                                     <!-- Heroicon name: solid/exclamation-circle -->
@@ -95,7 +95,7 @@
                     <div>
                         <label for="email" class="block text-sm font-medium text-gray-700">{{ _i('e-mail address') }}</label>
                         <div class="relative mt-1 rounded-md shadow-sm">
-                            <input type="text" wire:model.lazy="editing.email" name="email" id="email" class="@error('editing.email') @enderror block w-full rounded-md border-gray-300 border-red-300 pr-10 text-red-900 placeholder-red-300 focus:border-indigo-500 focus:border-red-500 focus:outline-none focus:ring-indigo-500 focus:ring-red-500 sm:text-sm" placeholder="{{ _i('e-mail address') }}" @error('editing.email') aria-invalid="true" aria-describedby="email-error" @enderror>
+                            <input type="text" wire:model.lazy="editing.email" name="email" id="email" class="@error('editing.email') border-red-300 text-red-900 placeholder-red-300 focus:border-red-500  focus:outline-none focus:ring-red-500 @enderror block w-full rounded-md border-gray-300 pr-10 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="{{ _i('e-mail address') }}" @error('editing.email') aria-invalid="true" aria-describedby="email-error" @enderror>
                             @error('editing.email')
                                 <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
                                     <!-- Heroicon name: solid/exclamation-circle -->

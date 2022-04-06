@@ -71,7 +71,7 @@
                     <div>
                         <label for="name" class="block text-sm font-medium text-gray-700">{{ _i('Course type name') }}</label>
                         <div class="relative mt-1 rounded-md shadow-sm">
-                            <input type="text" wire:model.lazy="editing.name" name="{{ _i('Course type name') }}" id="name" class="@error('editing.name') @enderror block w-full rounded-md border-gray-300 border-red-300 pr-10 text-red-900 placeholder-red-300 focus:border-indigo-500 focus:border-red-500 focus:outline-none focus:ring-indigo-500 focus:ring-red-500 sm:text-sm" placeholder="{{ _i('Course type name') }}" @error('editing.name') aria-invalid="true" aria-describedby="name-error" @enderror>
+                            <input type="text" wire:model.lazy="editing.name" name="{{ _i('Course type name') }}" id="name" class="@error('editing.name') border-red-300 placeholder-red-300 text-red-900 focus:border-red-500 focus:outline-none focus:ring-red-500 @enderror block w-full rounded-md border-gray-300 pr-10 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="{{ _i('Course type name') }}" @error('editing.name') aria-invalid="true" aria-describedby="name-error" @enderror>
                             @error('editing.name')
                                 <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
                                     <!-- Heroicon name: solid/exclamation-circle -->
@@ -121,7 +121,7 @@
                         <div>
                             <label for="new_category" class="block text-sm font-medium text-gray-700">{{ _i('new category') }}</label>
                             <div class="relative mt-1 rounded-md shadow-sm">
-                                <input type="text" wire:model.lazy="new_category" name="new_category" id="new_category" class="@error('new_category') @enderror block w-full rounded-md border-gray-300 border-red-300 pr-10 text-red-900 placeholder-red-300 focus:border-indigo-500 focus:border-red-500 focus:outline-none focus:ring-indigo-500 focus:ring-red-500 sm:text-sm" placeholder="{{ _i('new category') }}" @error('new_category') aria-invalid="true" aria-describedby="new_category-error" @enderror>
+                                <input type="text" wire:model.lazy="new_category" name="new_category" id="new_category" class="@error('new_category') border-red-300 text-red-900 placeholder-red-300 focus:border-red-500 focus:outline-none focus:ring-red-500 @enderror block w-full rounded-md border-gray-300 pr-10 focus:border-indigo-500  focus:ring-indigo-500 sm:text-sm" placeholder="{{ _i('new category') }}" @error('new_category') aria-invalid="true" aria-describedby="new_category-error" @enderror>
                                 @error('new_category')
                                     <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
                                         <!-- Heroicon name: solid/exclamation-circle -->
@@ -142,7 +142,7 @@
                     <div>
                         <label for="units" class="block text-sm font-medium text-gray-700">{{ _i('units') }}</label>
                         <div class="relative mt-1 rounded-md shadow-sm">
-                            <input type="text" wire:model.lazy="editing.units" name="{{ _i('units') }}" id="units" class="@error('editing.units') @enderror block w-full rounded-md border-gray-300 border-red-300 pr-10 text-red-900 placeholder-red-300 focus:border-indigo-500 focus:border-red-500 focus:outline-none focus:ring-indigo-500 focus:ring-red-500 sm:text-sm" placeholder="{{ _i('units') }}" @error('editing.units') aria-invalid="true" aria-describedby="units-error" @enderror>
+                            <input type="text" wire:model.lazy="editing.units" name="{{ _i('units') }}" id="units" class="@error('editing.units') border-red-300 text-red-900 placeholder-red-300 focus:border-red-500 focus:outline-none focus:ring-red-500 @enderror block w-full rounded-md border-gray-300 pr-10 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="{{ _i('units') }}" @error('editing.units') aria-invalid="true" aria-describedby="units-error" @enderror>
                             @error('editing.units')
                                 <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
                                     <!-- Heroicon name: solid/exclamation-circle -->
@@ -162,7 +162,7 @@
                     <div>
                         <label for="units_per_day" class="block text-sm font-medium text-gray-700">{{ _i('units per day') }}</label>
                         <div class="relative mt-1 rounded-md shadow-sm">
-                            <input type="text" wire:model.lazy="editing.units_per_day" name="{{ _i('units per day') }}" id="units_per_day" class="@error('editing.units_per_day') @enderror block w-full rounded-md border-gray-300 border-red-300 pr-10 text-red-900 placeholder-red-300 focus:border-indigo-500 focus:border-red-500 focus:outline-none focus:ring-indigo-500 focus:ring-red-500 sm:text-sm" placeholder="{{ _i('units per day') }}" @error('editing.units_per_day') aria-invalid="true" aria-describedby="units_per_day-error" @enderror>
+                            <input type="text" wire:model.lazy="editing.units_per_day" name="{{ _i('units per day') }}" id="units_per_day" class="@error('editing.units_per_day') border-red-300 text-red-900 placeholder-red-300 focus:border-red-500 focus:outline-none focus:ring-red-500 @enderror block w-full rounded-md border-gray-300 pr-10 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="{{ _i('units per day') }}" @error('editing.units_per_day') aria-invalid="true" aria-describedby="units_per_day-error" @enderror>
                             @error('editing.units_per_day')
                                 <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
                                     <!-- Heroicon name: solid/exclamation-circle -->
@@ -182,7 +182,7 @@
                     <div>
                         <label for="breaks" class="block text-sm font-medium text-gray-700">{{ _i('breaks') }}</label>
                         <div class="relative mt-1 rounded-md shadow-sm">
-                            <input type="text" wire:model.lazy="editing.breaks" name="{{ _i('breaks') }}" id="breaks" class="@error('breaks') @enderror block w-full rounded-md border-gray-300 border-red-300 pr-10 text-red-900 placeholder-red-300 focus:border-indigo-500 focus:border-red-500 focus:outline-none focus:ring-indigo-500 focus:ring-red-500 sm:text-sm" placeholder="{{ _i('breaks') }}" @error('breaks') aria-invalid="true" aria-describedby="breaks-error" @enderror>
+                            <input type="text" wire:model.lazy="editing.breaks" name="{{ _i('breaks') }}" id="breaks" class="@error('breaks') border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:border-red-500 focus:ring-red-500 @enderror block w-full rounded-md border-gray-300 pr-10 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="{{ _i('breaks') }}" @error('breaks') aria-invalid="true" aria-describedby="breaks-error" @enderror>
                             @error('editing.breaks')
                                 <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
                                     <!-- Heroicon name: solid/exclamation-circle -->
@@ -202,7 +202,7 @@
                     <div>
                         <label for="seats" class="block text-sm font-medium text-gray-700">{{ _i('seats') }}</label>
                         <div class="relative mt-1 rounded-md shadow-sm">
-                            <input type="text" wire:model.lazy="editing.seats" name="{{ _i('seats') }}" id="seats" class="@error('seats') @enderror block w-full rounded-md border-gray-300 border-red-300 pr-10 text-red-900 placeholder-red-300 focus:border-indigo-500 focus:border-red-500 focus:outline-none focus:ring-indigo-500 focus:ring-red-500 sm:text-sm" placeholder="{{ _i('seats') }}" @error('seats') aria-invalid="true" aria-describedby="seats-error" @enderror>
+                            <input type="text" wire:model.lazy="editing.seats" name="{{ _i('seats') }}" id="seats" class="@error('seats') border-red-300 text-red-900 placeholder-red-300 focus:border-red-500 focus:outline-none focus:ring-red-500 @enderror block w-full rounded-md border-gray-300  pr-10 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="{{ _i('seats') }}" @error('seats') aria-invalid="true" aria-describedby="seats-error" @enderror>
                             @error('editing.seats')
                             <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
                                 <!-- Heroicon name: solid/exclamation-circle -->
