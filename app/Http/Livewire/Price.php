@@ -72,7 +72,7 @@ class Price extends Component
             $this->editing->amount_gross = $this->calcGross($this->editing->amount_net, $this->editing->tax_rate);
         }
 
-        if (!$this->editing->amount_net || $this->editing->amount_net < 0) {
+        if (! $this->editing->amount_net || $this->editing->amount_net < 0) {
             $this->editing->amount_net = '0.00';
             $this->editing->amount_gross = '0.00';
         }
@@ -85,7 +85,7 @@ class Price extends Component
             $this->editing->amount_net = $this->calcNet($this->editing->amount_gross, $this->editing->tax_rate);
         }
 
-        if (!$this->editing->amount_gross || $this->editing->amount_gross < 0) {
+        if (! $this->editing->amount_gross || $this->editing->amount_gross < 0) {
             $this->editing->amount_net = '0.00';
             $this->editing->amount_gross = '0.00';
         }
@@ -97,7 +97,7 @@ class Price extends Component
 
         if ($this->editing->getKey()) {
             $this->editing = $this->makeBlankModel();
- //           $this->permIds = [];
+            //           $this->permIds = [];
         }
         $this->showEditModal = true;
     }
@@ -204,25 +204,29 @@ class Price extends Component
     {
         $this->sign = '€'; // reset sign
         $this->payment = [];
+
         return new PriceModel();
     }
 
     protected function formatAmount($amount): string
     {
         /** @var float $amount */
-        $amount = str_replace(',', '.',$amount); // make it a float
+        $amount = str_replace(',', '.', $amount); // make it a float
+
         return number_format($amount, 2, '.', ''); // format it nice / compatible
     }
 
     protected function calcGross($net, $taxRate): string
     {
         $tax = $net * $taxRate / 100;
+
         return number_format($net + $tax, 2, '.', '');
     }
 
     protected function calcNet($gross, $taxRate): string
     {
         $tax = $taxRate / 100 + 1;
+
         return number_format($gross / $tax, 2, '.', '');
     }
 }
