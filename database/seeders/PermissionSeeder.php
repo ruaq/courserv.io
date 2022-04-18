@@ -93,6 +93,20 @@ class PermissionSeeder extends Seeder
         ]);
 
         Permission::create([
+            'name' => 'price.create',
+            'display_name' => 'Create price',
+            'description' => 'can create a new price',
+            'group' => 'price',
+        ]);
+
+        Permission::create([
+            'name' => 'price.update',
+            'display_name' => 'Update price',
+            'description' => 'can update a price',
+            'group' => 'price',
+        ]);
+
+        Permission::create([
             'name' => 'role.create',
             'display_name' => 'Create Roles',
             'description' => 'can create a new role',

@@ -27,6 +27,8 @@ use Laratrust\Models\LaratrustTeam;
  * @method static \Illuminate\Database\Eloquent\Builder|Team whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Team whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Price[] $prices
+ * @property-read int|null $prices_count
  */
 class Team extends LaratrustTeam
 {
@@ -37,5 +39,10 @@ class Team extends LaratrustTeam
     public function users(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(User::class);
+    }
+
+    public function prices(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(Price::class);
     }
 }

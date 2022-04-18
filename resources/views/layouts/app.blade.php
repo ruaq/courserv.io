@@ -55,6 +55,10 @@ Heroicon name: outline/x" x-state:on="Menu open" x-state:off="Menu closed" class
                             @can('viewAny', \App\Models\Role::class)
                                 <x-nav.role-static :active="$active" />
                             @endcan
+
+                            @can('viewAny', \App\Models\Price::class)
+                                <x-nav.price-static :active="$active" />
+                            @endcan
                         </div>
                     </div>
                     <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
@@ -124,6 +128,10 @@ Heroicon name: outline/x" x-state:on="Menu open" x-state:off="Menu closed" class
 
                     @can('viewAny', \App\Models\Role::class)
                         <x-nav.role :active="$active" />
+                    @endcan
+
+                    @can('viewAny', \App\Models\Price::class)
+                        <x-nav.price :active="$active" />
                     @endcan
                 </div>
             </div>
