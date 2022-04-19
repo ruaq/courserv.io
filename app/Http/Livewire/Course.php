@@ -21,7 +21,6 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
-use NumberFormatter;
 
 /**
  * @property mixed $rows

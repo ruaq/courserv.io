@@ -9,7 +9,8 @@
 if (! function_exists('formatCurrency')) {
     function formatCurrency($amount, $currency)
     {
-        $fmt = new NumberFormatter( app()->getLocale(), NumberFormatter::CURRENCY );
+        $fmt = new NumberFormatter(app()->getLocale(), NumberFormatter::CURRENCY);
+
         return $fmt->formatCurrency($amount, $currency);
     }
 }
