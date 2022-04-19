@@ -31,6 +31,7 @@ class CourseType extends Component
             'editing.category' => 'required',
             'new_category' => 'unique:course_types,category',
             'editing.wsdl_id' => 'numeric|nullable',
+            'editing.slug' => 'required|unique:course_types,slug,'.$this->editing->id,
             'editing.units' => 'required|numeric|nullable',
             'editing.units_per_day' => 'required|numeric|nullable',
             'editing.breaks' => 'required|numeric|nullable',
