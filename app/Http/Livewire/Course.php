@@ -12,6 +12,7 @@ use App\Http\Livewire\DataTable\WithSorting;
 use App\Models\Course as CourseModel;
 use App\Models\CourseDay;
 use App\Models\CourseType as CourseTypeModel;
+use App\Models\Price as PriceModel;
 use App\Models\Team as TeamModel;
 use App\Models\TrainerDay;
 use Carbon\Carbon;
@@ -20,6 +21,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use NumberFormatter;
 
 /**
  * @property mixed $rows
@@ -55,6 +57,8 @@ class Course extends Component
 
     public Collection $courseTypes;
 
+    public Collection $prices;
+
     public string $date_range;
 
     public string $time_start;
@@ -62,6 +66,8 @@ class Course extends Component
     public string $time_end;
 
     public array $courseDays = [];
+
+    public array $priceIds = [];
 
     public array $filters = [
         'search' => '',
@@ -126,6 +132,7 @@ class Course extends Component
             'editing.location' => 'required',
             'editing.seats' => 'required',
             'editing.registration_number' => 'sometimes',
+            'editing.public_bookable' => 'sometimes',
             'date_range' => 'sometimes',
             'time_start' => 'sometimes',
             'time_end' => 'sometimes',
@@ -443,6 +450,11 @@ class Course extends Component
         if ($this->editing->isNot($course)) {
             $this->editing = $course;
 
+            $this->priceIds = [];
+            foreach ($this->editing->prices()->pluck('id') as $price) {
+                $this->priceIds[] = (string) $price;
+            }
+
             $this->date_range = $this->editing->start->format('d.m.y').' '._i('to').' '.$this->editing->end->format('d.m.y');
 
             $this->resetFlatpickr();
@@ -549,6 +561,9 @@ class Course extends Component
         $this->resetPage();
     }
 
+    /**
+     * @throws AuthorizationException
+     */
     public function save()
     {
         $this->authorize('save', $this->editing);
@@ -560,6 +575,8 @@ class Course extends Component
         $this->editing->end = Carbon::parse($this->editing->end->format('Y-m-d H:i:s'));
 
         $this->editing->save();
+
+        $this->editing->prices()->sync($this->priceIds);
 
         // start to set the courseDays
         $courseDays = [];
@@ -771,9 +788,13 @@ class Course extends Component
             ]);
     }
 
+    /**
+     * @return CourseModel
+     */
     protected function makeBlankCourse(): CourseModel
     {
         $this->courseTypes = CourseTypeModel::all()->groupBy('category')->toBase();
+        $this->prices = PriceModel::whereActive(1)->get();
 
         $this->resetFlatpickr();
         $this->registerCourse = false;
@@ -785,11 +806,12 @@ class Course extends Component
 
         $this->courseDays = [];
         $this->date_range = '';
+        $this->priceIds = [];
 
         return new CourseModel();
     }
 
-    protected function resetFlatpickr()
+    protected function resetFlatpickr(): void
     {
         $this->start_options = [
             'minDate' => 'today',

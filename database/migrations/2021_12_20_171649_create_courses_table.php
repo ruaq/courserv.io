@@ -26,6 +26,7 @@ return new class extends Migration {
             $table->dateTime('end');
             $table->dateTime('cancelled')->nullable();
             $table->unsignedSmallInteger('seats');
+            $table->boolean('public_bookable')->default(0);
             $table->timestamps();
 
             $table->foreign('course_type_id')->references('id')->on('course_types')->onDelete('cascade');

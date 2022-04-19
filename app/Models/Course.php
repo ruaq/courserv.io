@@ -57,6 +57,10 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read int|null $days_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\TrainerDay[] $trainer
  * @property-read int|null $trainer_count
+ * @property int $public_bookable
+ * @method static \Illuminate\Database\Eloquent\Builder|Course wherePublicBookable($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Price[] $prices
+ * @property-read int|null $prices_count
  */
 class Course extends Model
 {
@@ -75,6 +79,11 @@ class Course extends Model
     public function team()
     {
         return $this->belongsTo(Team::class, 'team_id');
+    }
+
+    public function prices()
+    {
+        return $this->belongsToMany(Price::class);
     }
 
     public function days()

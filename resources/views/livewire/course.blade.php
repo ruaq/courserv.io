@@ -203,6 +203,46 @@
                         @endif
                     </div>
 
+                    <div x-data="{ publicBookable: @entangle('editing.public_bookable').defer }" class="space-y-3">
+                        <div class="flex items-center">
+                            <button type="button" class="relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 bg-gray-200" role="switch" aria-checked="false" x-ref="switch" :aria-checked="publicBookable" @click="publicBookable = !publicBookable" x-state:on="Enabled" x-state:off="Not Enabled" :class="{ 'bg-indigo-600': publicBookable, 'bg-gray-200': !(publicBookable) }">
+                                <span class="sr-only">{{ _i('public bookable') }}</span>
+                                <span class="pointer-events-none relative inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200 translate-x-0" x-state:on="Enabled" x-state:off="Not Enabled" :class="{ 'translate-x-5': publicBookable, 'translate-x-0': !(publicBookable) }">
+                                    <span class="absolute inset-0 h-full w-full flex items-center justify-center transition-opacity opacity-100 ease-in duration-200" aria-hidden="true" x-state:on="Enabled" x-state:off="Not Enabled" :class="{ 'opacity-0 ease-out duration-100': publicBookable, 'opacity-100 ease-in duration-200': !(publicBookable) }">
+                                        <svg class="h-3 w-3 text-gray-400" fill="none" viewBox="0 0 12 12">
+                                          <path d="M4 8l2-2m0 0l2-2M6 6L4 4m2 2l2 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        </svg>
+                                    </span>
+                                    <span class="absolute inset-0 h-full w-full flex items-center justify-center transition-opacity opacity-0 ease-out duration-100" aria-hidden="true" x-state:on="Enabled" x-state:off="Not Enabled" :class="{ 'opacity-100 ease-in duration-200': publicBookable, 'opacity-0 ease-out duration-100': !(publicBookable) }">
+                                        <svg class="h-3 w-3 text-indigo-600" fill="currentColor" viewBox="0 0 12 12">
+                                          <path d="M3.707 5.293a1 1 0 00-1.414 1.414l1.414-1.414zM5 8l-.707.707a1 1 0 001.414 0L5 8zm4.707-3.293a1 1 0 00-1.414-1.414l1.414 1.414zm-7.414 2l2 2 1.414-1.414-2-2-1.414 1.414zm3.414 2l4-4-1.414-1.414-4 4 1.414 1.414z"></path>
+                                        </svg>
+                                    </span>
+                                </span>
+                            </button>
+                            <span class="ml-3" id="public-bookable-label" @click="publicBookable = !publicBookable; $refs.switch.focus()">
+                                <span class="text-sm font-medium text-gray-900">{{ _i('public bookable') }}</span>
+                            </span>
+                        </div>
+
+                        <div x-show="publicBookable">
+                            <fieldset class="space-y-5">
+                                <legend class="sr-only">{{ _i('Prices') }}</legend>
+                                @foreach($prices as $price)
+                                    <div class="relative flex items-start">
+                                        <div class="flex items-center h-5">
+                                            <input wire:model="priceIds" value="{{ $price->id }}" id="{{ $price->title }}-{{ $price->id }}" aria-describedby="{{ $price->title }}-{{ $price->id }}-description" name="{{ $price->title }}-{{ $price->id }}" type="checkbox" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded">
+                                        </div>
+                                        <div class="ml-3 text-sm">
+                                            <label for="{{ $price->title }}-{{ $price->id }}" class="font-medium text-gray-700">{{ $price->title }}</label>
+                                            <p id="{{ $price->title }}-{{ $price->id }}-description" class="text-gray-500">{{ formatCurrency($price->amount_gross, $price->currency) }} <-> @foreach(unserialize($price->payment) as $payment => $p){{ __('payments.' . $payment . '.title') }}{{ (! $loop->last) ? ', ' : '' }}@endforeach</p>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </fieldset>
+                        </div>
+                    </div>
+
                     <div>
                         <div class="flex flex-row">
                             <div class="col-span-3 sm:col-span-3">
