@@ -59,10 +59,10 @@ class BookingOverview extends Component
 
     public function render()
     {
-        $perimeter_locations = $this->perimeterSearch($this->lat,$this->lon, 50); // all locations in the perimeter
+        $perimeter_locations = $this->perimeterSearch($this->lat, $this->lon, 50); // all locations in the perimeter
 
         // all locations in the perimeter with bookable courses
-        $possible_locations = Course::where('public_bookable',1)
+        $possible_locations = Course::where('public_bookable', 1)
             ->where('start', '>', Carbon::now())
             ->whereIn('location', $perimeter_locations->pluck('location'))
             ->get();
@@ -70,7 +70,7 @@ class BookingOverview extends Component
         // remove the locations without course from the perimeter result
         $i = 0;
         foreach ($perimeter_locations as $perimeter) {
-            if (!in_array($perimeter['location'], $possible_locations->pluck('location')->toArray())) {
+            if (! in_array($perimeter['location'], $possible_locations->pluck('location')->toArray())) {
                 unset($perimeter_locations[$i]);
             }
             $i++;
@@ -102,13 +102,13 @@ class BookingOverview extends Component
             }
         }
 
-        $courses = Course::where('public_bookable',1)
+        $courses = Course::where('public_bookable', 1)
             ->where('start', '>', Carbon::now())
-            ->where('cancelled', '=',NULL)
+            ->where('cancelled', '=', null)
             ->whereIn('location', $this->searchLocations)
             ->with('prices')
             ->with('type')
-            ->withCount(['participants' => fn($query) => $query->where('cancelled', 0)])
+            ->withCount(['participants' => fn ($query) => $query->where('cancelled', 0)])
             ->get();
 
         return view('livewire.booking-overview', [

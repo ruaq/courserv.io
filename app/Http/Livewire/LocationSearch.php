@@ -29,18 +29,17 @@ class LocationSearch extends Component
         $locations = Location::search(trim($this->term))->groupBy('location', 'state')->limit(5)->get();
 
         return view('livewire.location-search', [
-            'locations' => $locations
+            'locations' => $locations,
         ])
             ->layout('layouts.booking');
     }
 
     public function located($lat, $lon)
     {
-        return redirect()->to(route('booking.coordinates', [$this->slug, round($lat, 2), round($lon,2)]));
+        return redirect()->to(route('booking.coordinates', [$this->slug, round($lat, 2), round($lon, 2)]));
     }
 
     public function error($error)
     {
-
     }
 }

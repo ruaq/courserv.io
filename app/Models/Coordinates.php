@@ -41,5 +41,4 @@ class Coordinates extends Model
         'zipcode',
         'location',
     ];
-
 }

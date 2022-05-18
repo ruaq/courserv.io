@@ -39,7 +39,6 @@ class Booking extends Component
 
     public function mount() // needed to make $this->course available automatically
     {
-
     }
 
     public function addParticipant()
@@ -115,7 +114,6 @@ class Booking extends Component
                 'price' => '0',
                 'price_id' => $price_id,
             ]);
-
         } else { // contact person != participant(s)
             // create contact person
             $contactPerson = ContactPerson::create([
@@ -156,15 +154,15 @@ class Booking extends Component
     public function render()
     {
         $course_data = Course::where('id', '=', Hashids::decode($this->course))
-            ->where('cancelled', '=', NULL)
+            ->where('cancelled', '=', null)
             ->where('public_bookable', '=', 1)
             ->whereRelation('prices', 'id', '=', Hashids::decode($this->price))
             ->with('type')
-            ->with(['prices' => fn($query) => $query->where('id', '=', Hashids::decode($this->price))])
+            ->with(['prices' => fn ($query) => $query->where('id', '=', Hashids::decode($this->price))])
                 ->whereHas('prices', function (Builder $query) {
                     $query->where('id', '=', Hashids::decode($this->price));
                 })
-            ->withCount(['participants' => fn($query) => $query->where('cancelled', 0)])
+            ->withCount(['participants' => fn ($query) => $query->where('cancelled', 0)])
             ->get();
 
         return view('livewire.booking', [
