@@ -14,3 +14,12 @@ if (! function_exists('formatCurrency')) {
         return $fmt->formatCurrency($amount, $currency);
     }
 }
+
+if (! function_exists('percentage')) {
+    function percentage($total, $part): int
+    {
+        $rest = $total - $part;
+
+        return $rest / $total * 100;
+    }
+}

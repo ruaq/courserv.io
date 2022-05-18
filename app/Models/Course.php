@@ -61,6 +61,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Course wherePublicBookable($value)
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Price[] $prices
  * @property-read int|null $prices_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Participant[] $participants
+ * @property-read int|null $participants_count
  */
 class Course extends Model
 {
@@ -71,28 +73,48 @@ class Course extends Model
         'end' => 'datetime:d.m.Y H:i',
     ];
 
-    public function type()
+    public function type(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(CourseType::class, 'course_type_id');
     }
 
-    public function team()
+    public function team(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Team::class, 'team_id');
     }
 
-    public function prices()
+    public function prices(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Price::class);
     }
 
-    public function days()
+    public function participants(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Participant::class);
+    }
+
+    public function days(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(CourseDay::class, 'course_id');
     }
 
-    public function trainer()
+    public function trainer(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(TrainerDay::class, 'course_id');
     }
+
+//    static public function getFreeSeats(Course $course): int
+//    {
+//        $participants = Participant::whereCourseId( $course->id)->where('cancelled', '=', 0)->count();
+//
+//        return intval($course->seats) - $participants;
+//    }
+//
+//    static public function getFreePercent(Course $course): int
+//    {
+//        $participants = Participant::whereCourseId( $course->id)->where('cancelled', '=', 0)->count();
+//        $freeSeats = intval($course->seats) - $participants;
+//
+//        return $freeSeats / intval($course->seats) * 100;
+//    }
 }

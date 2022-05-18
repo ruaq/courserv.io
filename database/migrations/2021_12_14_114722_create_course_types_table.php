@@ -18,6 +18,7 @@ return new class extends Migration {
             $table->string('name');
             $table->string('category');
             $table->string('slug');
+            $table->string('iframe_url')->nullable();
             $table->unsignedMediumInteger('units')->default(0);
             $table->unsignedTinyInteger('units_per_day')->default(0);
             $table->unsignedSmallInteger('breaks')->default(0);

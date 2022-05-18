@@ -32,6 +32,7 @@ class CourseType extends Component
             'new_category' => 'unique:course_types,category',
             'editing.wsdl_id' => 'numeric|nullable',
             'editing.slug' => 'required|unique:course_types,slug,'.$this->editing->id,
+            'editing.iframe_url' => 'sometimes|url',
             'editing.units' => 'required|numeric|nullable',
             'editing.units_per_day' => 'required|numeric|nullable',
             'editing.breaks' => 'required|numeric|nullable',
@@ -86,6 +87,7 @@ class CourseType extends Component
 
         if ($this->editing->getKey()) {
             $this->editing = $this->makeBlankCourseType();
+            $this->editing['iframe_url'] = '';
         }
 
         $this->showEditModal = true;

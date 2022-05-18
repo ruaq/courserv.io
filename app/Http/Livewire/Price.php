@@ -102,9 +102,6 @@ class Price extends Component
         $this->showEditModal = true;
     }
 
-    /**
-     * @return mixed
-     */
     public function getRowsQueryProperty(): mixed
     {
         $query = PriceModel::query()
@@ -113,27 +110,6 @@ class Price extends Component
                 fn ($query, $user_teams) => $query
                     ->whereIn('team_id', Auth::user()->teams()->pluck('id'))
             );
-//            ->when($this->filters['courseType'], fn ($query, $courseType) => $query->where('course_type_id', $courseType))
-//            ->when($this->filters['team'], fn ($query, $team) => $query->where('team_id', $team))
-//            ->when($this->filters['amount-min'], fn ($query, $amount) => $query->where('amount', '>=', $amount))
-//            ->when($this->filters['amount-max'], fn ($query, $amount) => $query->where('amount', '<=', $amount))
-//            ->when($this->filters['date-min'], fn ($query, $date) => $query->where('start', '>=', Carbon::parse($date)))
-//            ->when($this->filters['date-max'], fn ($query, $date) => $query->where('start', '<=', Carbon::parse($date)))
-//            ->when(! $this->filters['showCancelled'], fn ($query, $date) => $query->where('cancelled', '=', null))
-//            ->when($this->filters['showCancelled'], fn ($query, $date) => $query->where('cancelled', '<>', null))
-//            ->when(
-//                $this->filters['search'],
-//                fn ($query, $search) => $query
-//                    ->where('seminar_location', 'like', '%'.$search.'%')
-//                    ->orWhere('street', 'like', '%'.$search.'%')
-//                    ->orWhere('seminar_location', 'like', '%'.$search.'%')
-//                    ->orWhere('internal_number', 'like', '%'.$search.'%')
-//                    ->orWhere('registration_number', 'like', '%'.$search.'%')
-//            )
-//            ->with('type')
-//            ->with('team')
-//            ->with('days')
-//            ->with('trainer');
 
         return $this->applySorting($query);
     }
@@ -161,7 +137,7 @@ class Price extends Component
      */
     public function save()
     {
-        $this->editing->payment = serialize($this->payment);
+        $this->editing->payment = serialize(array_filter($this->payment));
 
         if (! $this->editing->currency) { // no currency selected
             $this->editing->currency = 'EUR'; // set default

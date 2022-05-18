@@ -2,9 +2,9 @@
 
 return [
     'cash.title' => 'cash payment',
-    'cash.description' => 'Pay in <strong>cash</strong> on course day',
+    'cash.description' => 'Pay in cash on course day',
     'card.title' => 'card payment',
-    'card.description' => 'Pay with <strong>card</strong> on course day.',
+    'card.description' => 'Pay with card on course day.',
     'invoice.title' => 'invoice payment',
     'invoice.description' => 'Invoice Payment',
     'prepay.title' => 'prepay payment',
@@ -12,5 +12,5 @@ return [
     'accountingForm.title' => 'accounting form',
     'accountingForm.description' => 'Invoicing via employers\' liability insurance association / accident insurance fund',
     'paypal.title' => 'PayPal',
-    'paypal.description' => 'Pay with <strong>PayPal</strong>',
+    'paypal.description' => 'Pay with PayPal',
 ];

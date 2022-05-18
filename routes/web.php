@@ -46,8 +46,22 @@ Route::localized(function () {
         Route::get('password/reset/{hashedId}', \App\Http\Livewire\PasswordReset::class)
             ->middleware('signed')
             ->name('password.reset');
+
+        Route::get('course/{slug}', \App\Http\Livewire\LocationSearch::class);
+
+        Route::get('course/{slug}/{location}', \App\Http\Livewire\BookingOverview::class)
+            ->name('booking.overview');
+
+        Route::get('course/{slug}/{location}/{location2}', \App\Http\Livewire\BookingOverview::class)
+            ->name('booking.coordinates');
+
+        Route::get('booking/{course}/{price}', \App\Http\Livewire\Booking::class)
+            ->name('booking');
     });
 });
+
+Route::get('coordinates', [App\Http\Controllers\CoordinatesController::class, 'import']);
+Route::get('locations', [App\Http\Controllers\CoordinatesController::class, 'locations']);
 
 Route::get('/email/verify', function () {
     return view('auth.verify-email'); // TODO correct message if still not confirmed email

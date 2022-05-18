@@ -140,9 +140,9 @@
                     @endif
 
                     <div>
-                        <label for="units" class="block text-sm font-medium text-gray-700">{{ _i('slug') }}</label>
+                        <label for="slug" class="block text-sm font-medium text-gray-700">{{ _i('slug') }}</label>
                         <div class="mt-1 relative rounded-md shadow-sm">
-                            <input type="text" wire:model.lazy="editing.slug" name="{{ _i('slug') }}" id="slug" class="block w-full pr-10 sm:text-sm rounded-md focus:ring-indigo-500 focus:border-indigo-500 block border-gray-300 @error('editing.slug') border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 @enderror " placeholder="{{ _i('slug') }}" @error('editing.slug') aria-invalid="true" aria-describedby="slug-error" @enderror>
+                            <input type="text" wire:model.lazy="editing.slug" name="slug" id="slug" class="block w-full pr-10 sm:text-sm rounded-md focus:ring-indigo-500 focus:border-indigo-500 block border-gray-300 @error('editing.slug') border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 @enderror " placeholder="{{ _i('slug') }}" @error('editing.slug') aria-invalid="true" aria-describedby="slug-error" @enderror>
                             @error('editing.slug')
                             <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
                                 <!-- Heroicon name: solid/exclamation-circle -->
@@ -156,6 +156,26 @@
                             <p class="mt-2 text-sm text-red-600" id="slug-error">{{ $errors->first('editing.slug') }}</p>
                         @else
                             <p class="mt-2 text-xs text-gray-500" id="slug-description">{{ _i('the course slug') }}</p>
+                        @enderror
+                    </div>
+
+                    <div>
+                        <label for="iframe_url" class="block text-sm font-medium text-gray-700">{{ _i('iframe redirect url') }}</label>
+                        <div class="mt-1 relative rounded-md shadow-sm">
+                            <input type="text" wire:model.lazy="editing.iframe_url" name="iframe_url" id="iframe_url" class="block w-full pr-10 sm:text-sm rounded-md focus:ring-indigo-500 focus:border-indigo-500 block border-gray-300 @error('editing.iframe_url') border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 @enderror " placeholder="{{ _i('http://your-site.com/slug/dates') }}" @error('editing.iframe_url') aria-invalid="true" aria-describedby="iframe_url-error" @enderror>
+                            @error('editing.iframe_url')
+                                <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                                    <!-- Heroicon name: solid/exclamation-circle -->
+                                    <svg class="h-5 w-5 text-red-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                                    </svg>
+                                </div>
+                            @enderror
+                        </div>
+                        @error('editing.iframe_url')
+                            <p class="mt-2 text-sm text-red-600" id="iframe_url-error">{{ $errors->first('editing.iframe_url') }}</p>
+                        @else
+                            <p class="mt-2 text-xs text-gray-500" id="iframe_url-description">{{ _i('the url to which it\'s redirect, if the location search for this slug isn\'t loaded in a iframe (optional)') }}</p>
                         @enderror
                     </div>
 
