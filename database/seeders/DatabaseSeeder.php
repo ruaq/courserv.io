@@ -15,8 +15,9 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             PermissionSeeder::class,
-            UserSeeder::class,
-            TeamSeeder::class,
+            // deactivated user and team seed. reactive for example use
+//            UserSeeder::class,
+//            TeamSeeder::class,
         ]);
         // \App\Models\User::factory(10)->create();
     }
