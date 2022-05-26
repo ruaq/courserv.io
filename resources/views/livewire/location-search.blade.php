@@ -5,7 +5,7 @@
             <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">{{ _i('our course dates at a glance') }}</p>
             <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">{{ _i('Find your course near you here') }}</p>
         </div>
-        <form method="get">
+        <form onsubmit="return false;">
             <input class="border-solid border border-gray-300 p-2 w-full rounded md:w-2/3 lg:w-1/3"
                    type="text" placeholder="{{ _i('Search for your desired course location ...') }}" wire:model.debounce.500ms="term"/>
         </form>
