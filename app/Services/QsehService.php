@@ -4,9 +4,9 @@ namespace App\Services;
 
 use App\Models\Course;
 use Carbon\Carbon;
-use Http;
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Http;
 use Vyuldashev\XmlToArray\XmlToArray;
 
 class QsehService

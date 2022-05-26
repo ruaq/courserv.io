@@ -24,7 +24,7 @@ use Laratrust\Models\LaratrustPermission;
  * @method static \Illuminate\Database\Eloquent\Builder|Permission whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Permission whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Permission whereUpdatedAt($value)
- * @mixin \Eloquent
+
  * @property string|null $group
  * @method static \Illuminate\Database\Eloquent\Builder|Permission whereGroup($value)
  */

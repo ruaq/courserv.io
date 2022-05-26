@@ -31,7 +31,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|CourseDay whereUnitsPlan($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CourseDay whereUnitsReal($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CourseDay whereUpdatedAt($value)
- * @mixin \Eloquent
+
  * @property string $date
  * @method static \Illuminate\Database\Eloquent\Builder|CourseDay whereDate($value)
  */

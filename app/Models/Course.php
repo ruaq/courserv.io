@@ -50,7 +50,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Course whereTeamId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Course whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Course whereZipcode($value)
- * @mixin \Eloquent
+
  * @property string|null $cancelled
  * @method static \Illuminate\Database\Eloquent\Builder|Course whereCancelled($value)
  * @property-read \App\Models\CourseDay|null $days

@@ -33,7 +33,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|ContactPerson whereStreet($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ContactPerson whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ContactPerson whereZipcode($value)
- * @mixin \Eloquent
+
  */
 class ContactPerson extends Model
 {

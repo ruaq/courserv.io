@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Coordinates newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Coordinates newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Coordinates query()
- * @mixin \Eloquent
+
  * @property string $country_code
  * @property string $zipcode
  * @property string $location

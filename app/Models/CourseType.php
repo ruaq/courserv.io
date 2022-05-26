@@ -33,7 +33,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|CourseType whereUnitsPerDay($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CourseType whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CourseType whereWsdlId($value)
- * @mixin \Eloquent
+
  * @property string $category
  * @method static \Database\Factories\CourseTypeFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|CourseType whereCategory($value)

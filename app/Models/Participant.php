@@ -57,7 +57,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Participant whereTransactionId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Participant whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Participant whereZipcode($value)
- * @mixin \Eloquent
+
  */
 class Participant extends Model
 {

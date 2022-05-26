@@ -18,7 +18,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Price whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Price whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Price whereUpdatedAt($value)
- * @mixin \Eloquent
+
  * @property int|null $team_id
  * @property string $title
  * @property string|null $description
