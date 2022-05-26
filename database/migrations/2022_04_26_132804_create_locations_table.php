@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('locations', function (Blueprint $table) {
 //            $table->string('country_code', 2);
             $table->string('zipcode', 5);
-            $table->text('location');
-            $table->text('state');
+            $table->string('location', 255);
+            $table->string('state', 255);
 //            $table->text('lat');
 //            $table->text('lon');
 //            $table->timestamps();
