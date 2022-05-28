@@ -8,6 +8,10 @@
 
     @livewireStyles
     <script src="{{ asset('js/app.js') }}" defer></script>
+
+    @if(config('umami.url') && config('umami.id'))
+        <script async defer data-website-id="{{ config('umami.id') }}" src="{{ config('umami.url') }}"></script>
+    @endif
 </head>
 <body class="h-full">
 
