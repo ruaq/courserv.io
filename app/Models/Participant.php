@@ -75,7 +75,10 @@ class Participant extends Model
         'location',
         'phone',
         'email',
-        'price',
+        'price_net',
+        'price_gross',
+        'currency',
+        'payment',
         'price_id',
     ];
 }

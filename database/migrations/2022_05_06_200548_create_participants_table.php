@@ -30,7 +30,10 @@ return new class extends Migration
             $table->boolean('rating')->default(0);
             $table->string('payee')->nullable();
             $table->boolean('participated')->default(0);
-            $table->decimal('price', 8, 2)->default(0);
+            $table->decimal('price_net', 8, 2)->default(0);
+            $table->decimal('price_gross', 8, 2)->default(0);
+            $table->string('currency', 10);
+            $table->tinyText('payment');
             $table->unsignedBigInteger('price_id');
             $table->boolean('payed')->default(0);
             $table->string('transaction_id')->nullable()->unique();

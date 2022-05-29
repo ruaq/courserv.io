@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\ContactPerson;
 use App\Models\Course;
 use App\Models\Participant;
+use App\Models\Price;
 use Carbon\Carbon;
 use Illuminate\Contracts\Database\Query\Builder;
 use Livewire\Component;
@@ -93,6 +94,9 @@ class Booking extends Component
 
         $this->validate();
 
+        // get the amount and currency
+        $amount = Price::whereId($price_id)->first();
+
         if ( // check if the contact person is the participant
             $this->samePerson &&
             count($this->participants) === 1 &&
@@ -111,7 +115,10 @@ class Booking extends Component
                 'location' => $this->contactPerson['location'],
                 'phone' => $this->contactPerson['phone'],
                 'email' => $this->contactPerson['email'],
-                'price' => '0',
+                'price_net' => $amount->amount_net,
+                'price_gross' => $amount->amount_gross,
+                'currency' => $amount->currency,
+                'payment' => $this->payment,
                 'price_id' => $price_id,
             ]);
         } else { // contact person != participant(s)
@@ -136,6 +143,11 @@ class Booking extends Component
                 $participant['date_of_birth'] = Carbon::parse($participant['date_of_birth'])->isoFormat('YYYY-MM-DD');
                 $participant['email'] = $participant['email'] ?? '';
                 $participant['phone'] = $participant['phone'] ?? '';
+                $participant['price_net'] = $amount->amount_net;
+                $participant['price_gross'] = $amount->amount_gross;
+                $participant['currency'] = $amount->currency;
+                $participant['payment'] = $this->payment;
+                $participant['price_id'] = $price_id;
                 $participant['created_at'] = Carbon::now();
                 $participant['updated_at'] = Carbon::now();
                 $participants[] = $participant;
