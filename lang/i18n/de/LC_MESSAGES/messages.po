@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: courserv.io\n"
-"POT-Creation-Date: 2022-05-17 19:42+0200\n"
-"PO-Revision-Date: 2022-05-17 19:46+0200\n"
+"POT-Creation-Date: 2022-06-01 15:08+0200\n"
+"PO-Revision-Date: 2022-06-01 15:09+0200\n"
 "Last-Translator: Holger Schmermbeck <hosch@mailbox.org>\n"
 "Language-Team: Holger Schmermbeck <hosch@mailbox.org>\n"
 "Language: de\n"
@@ -108,6 +108,7 @@ msgid "description"
 msgstr "Beschreibung"
 
 #: ../storage/framework/messages/0db792b9872d7d19fd13948cc3ff084eada2a8e9.php.php:190
+#: ../storage/framework/messages/dca2e1b6a5160f09a3650fdf85d714f6fb6d748b.php.php:20
 msgid "price"
 msgstr "Preis"
 
@@ -151,6 +152,8 @@ msgstr "Preis (brutto)"
 #: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:787
 #: ../storage/framework/messages/49daf884bf1be731e5eb446e599d2b84f3aa0ee0.php.php:552
 #: ../storage/framework/messages/49daf884bf1be731e5eb446e599d2b84f3aa0ee0.php.php:553
+#: ../storage/framework/messages/dca2e1b6a5160f09a3650fdf85d714f6fb6d748b.php.php:24
+#: ../storage/framework/messages/dca2e1b6a5160f09a3650fdf85d714f6fb6d748b.php.php:25
 msgid "payments."
 msgstr ""
 
@@ -160,16 +163,16 @@ msgstr ""
 msgid "Cancel"
 msgstr "Abbrechen"
 
-#: ../storage/framework/messages/11f4bd005efe0d13d42bf681d94eb9c76538f47a.php.php:173
-#: Http/Livewire/Booking.php:173
+#: ../storage/framework/messages/11f4bd005efe0d13d42bf681d94eb9c76538f47a.php.php:186
+#: Http/Livewire/Booking.php:186
 msgid "Book course"
 msgstr "Kurs buchen"
 
 #: ../storage/framework/messages/206a6fa5fb1ac0e02e1a7b401961378bb8b7a2f3.php.php:10
 #: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:779
-#: ../storage/framework/messages/b9fcd6ad020e2587c586d8d1f16891a0cfc407a7.php.php:198
+#: ../storage/framework/messages/b9fcd6ad020e2587c586d8d1f16891a0cfc407a7.php.php:174
 #: ../storage/framework/messages/e9d4ab08b277000d2fa39b4c12fab730404b7d1f.php.php:10
-#: Http/Livewire/Price.php:198
+#: Http/Livewire/Price.php:174
 msgid "Prices"
 msgstr "Preise"
 
@@ -562,6 +565,7 @@ msgid "Summary of the data about your booking"
 msgstr "Zusammenfassung der Daten zu Ihrer Buchung"
 
 #: ../storage/framework/messages/49daf884bf1be731e5eb446e599d2b84f3aa0ee0.php.php:521
+#: ../storage/framework/messages/dca2e1b6a5160f09a3650fdf85d714f6fb6d748b.php.php:10
 msgid "Course details"
 msgstr "Kursdetails"
 
@@ -625,15 +629,13 @@ msgstr ""
 #: ../storage/framework/messages/49daf884bf1be731e5eb446e599d2b84f3aa0ee0.php.php:600
 #, php-format
 msgid ""
-"I request and expressly agree that you start the service I have ordered "
-"before the withdrawal period has expired. I know that my <a href=\"%s\" "
-"target=\"_blank\">right of revocation</a> expires once the contract has been "
-"fully fulfilled."
+"I agree that you start the execution of the contract before the expiry of "
+"the revocation period of 14 days and in this respect I waive the <a href=\"%s"
+"\" target=\"_blank\">right of revocation</a> to which I am entitled."
 msgstr ""
-"Ich verlange und bin ausdrücklich damit einverstanden, dass Sie mit der von "
-"mir bestellten Dienstleistung vor Ablauf der Widerrufsfrist beginnen. Mir "
-"ist bekannt, dass mein <a href=\"%s\" target=\"_blank\">Widerrufsrecht</a> "
-"erlischt, wenn der Vertrag vollständig erfüllt ist."
+"Ich stimme zu, dass Sie vor Ablauf der Widerrufsfrist von 14 Tagen mit der "
+"Ausführung des Vertrages beginnen und verzichte insoweit auf das mir "
+"zustehende <a href=\"%s\" target=\"_blank\">Widerrufsrecht</a>."
 
 #: ../storage/framework/messages/49daf884bf1be731e5eb446e599d2b84f3aa0ee0.php.php:604
 #, php-format
@@ -728,45 +730,45 @@ msgstr "Suchen Sie nach Ihrem gewünschten Kursort ..."
 msgid "Searching for location ... Please wait ..."
 msgstr "Suche nach Ort ... Bitte warten ..."
 
-#: ../storage/framework/messages/8aca09ec4e2e9790a45abe6bf1054739e0a7e434.php.php:21
+#: ../storage/framework/messages/8aca09ec4e2e9790a45abe6bf1054739e0a7e434.php.php:17
 msgid "Enter a zipcode or a location to search for courses."
 msgstr ""
 "Geben Sie eine Postleitzahl oder einen Ort ein, um nach Kursen zu suchen."
 
-#: ../storage/framework/messages/8aca09ec4e2e9790a45abe6bf1054739e0a7e434.php.php:27
+#: ../storage/framework/messages/8aca09ec4e2e9790a45abe6bf1054739e0a7e434.php.php:23
 msgid "No suitable location was found."
 msgstr "Es wurde kein passender Ort gefunden."
 
-#: ../storage/framework/messages/8aca09ec4e2e9790a45abe6bf1054739e0a7e434.php.php:31
+#: ../storage/framework/messages/8aca09ec4e2e9790a45abe6bf1054739e0a7e434.php.php:27
 msgid "Select your desired location"
 msgstr "Wählen Sie den gewünschten Standort"
 
-#: ../storage/framework/messages/8aca09ec4e2e9790a45abe6bf1054739e0a7e434.php.php:41
+#: ../storage/framework/messages/8aca09ec4e2e9790a45abe6bf1054739e0a7e434.php.php:37
 msgid "Click here to find a course near your current location."
 msgstr ""
 "Klicken Sie hier, um einen Kurs in der Nähe Ihres aktuellen Standorts zu "
 "finden."
 
-#: ../storage/framework/messages/8aca09ec4e2e9790a45abe6bf1054739e0a7e434.php.php:75
+#: ../storage/framework/messages/8aca09ec4e2e9790a45abe6bf1054739e0a7e434.php.php:71
 msgid "Geolocation is not supported by this browser."
 msgstr ""
 "Standortbestimmung (GeoLocation) wird von diesem Browser nicht unterstützt."
 
-#: ../storage/framework/messages/8aca09ec4e2e9790a45abe6bf1054739e0a7e434.php.php:89
+#: ../storage/framework/messages/8aca09ec4e2e9790a45abe6bf1054739e0a7e434.php.php:85
 msgid "User denied the request for Geolocation."
 msgstr ""
 "Der Benutzer hat die Anforderung für die Standortbestimmung (GeoLocation) "
 "abgelehnt."
 
-#: ../storage/framework/messages/8aca09ec4e2e9790a45abe6bf1054739e0a7e434.php.php:92
+#: ../storage/framework/messages/8aca09ec4e2e9790a45abe6bf1054739e0a7e434.php.php:88
 msgid "Location information is unavailable."
 msgstr "Standortinformationen sind nicht verfügbar."
 
-#: ../storage/framework/messages/8aca09ec4e2e9790a45abe6bf1054739e0a7e434.php.php:95
+#: ../storage/framework/messages/8aca09ec4e2e9790a45abe6bf1054739e0a7e434.php.php:91
 msgid "The request to get user location timed out."
 msgstr "Die Anfrage zum Abrufen des Benutzerstandorts wurde abgebrochen."
 
-#: ../storage/framework/messages/8aca09ec4e2e9790a45abe6bf1054739e0a7e434.php.php:98
+#: ../storage/framework/messages/8aca09ec4e2e9790a45abe6bf1054739e0a7e434.php.php:94
 msgid "An unknown error occurred."
 msgstr "Ein unbekannter Fehler ist aufgetreten."
 
@@ -1048,9 +1050,9 @@ msgid "Password repeat"
 msgstr "Passwort Wiederholung"
 
 #: ../storage/framework/messages/ca0373c3fd6d191e527a8b5e5edc4a81e85b7ddb.php.php:10
-#: ../storage/framework/messages/e46dc23876b90b03cd4f5447b0abccfeb45f40db.php.php:121
+#: ../storage/framework/messages/e46dc23876b90b03cd4f5447b0abccfeb45f40db.php.php:122
 #: ../storage/framework/messages/eca8c191d5a0416ebd64284ba3dc703b70e23c68.php.php:10
-#: Http/Livewire/CourseType.php:121
+#: Http/Livewire/CourseType.php:122
 msgid "Course types"
 msgstr "Kursarten"
 
@@ -1090,6 +1092,49 @@ msgstr "Eine Beschreibung für diese Rolle (optional)"
 msgid "Permissions"
 msgstr "Berechtigungen"
 
+#: ../storage/framework/messages/dca2e1b6a5160f09a3650fdf85d714f6fb6d748b.php.php:2
+msgid "Booking confirmation"
+msgstr "Buchungsbestätigung"
+
+#: ../storage/framework/messages/dca2e1b6a5160f09a3650fdf85d714f6fb6d748b.php.php:5
+#, php-format
+msgid "Hello %s"
+msgstr "Hallo %s"
+
+#: ../storage/framework/messages/dca2e1b6a5160f09a3650fdf85d714f6fb6d748b.php.php:7
+#, php-format
+msgid ""
+"Your booking for our course *%s* was successful. Below you will receive more "
+"information about your booking."
+msgstr ""
+"Ihre Buchung für unseren Kurs *%s* war erfolgreich. Nachfolgend erhalten Sie "
+"weitere Informationen zu Ihrer Buchung."
+
+#: ../storage/framework/messages/dca2e1b6a5160f09a3650fdf85d714f6fb6d748b.php.php:30
+msgid ""
+"You have expressly stated the following prior to the conclusion of the "
+"contract:"
+msgstr "Sie haben vor dem Vertragsabschluss ausdrücklich Folgendes erklärt:"
+
+#: ../storage/framework/messages/dca2e1b6a5160f09a3650fdf85d714f6fb6d748b.php.php:31
+#, php-format
+msgid ""
+"I agree that you start the execution of the contract before the expiry of "
+"the revocation period of 14 days and in this respect I waive the [right of "
+"revocation](%s) to which I am entitled."
+msgstr ""
+"Ich stimme zu, dass Sie vor Ablauf der Widerrufsfrist von 14 Tagen mit der "
+"Ausführung des Vertrages beginnen und verzichte insoweit auf das mir "
+"zustehende [Widerrufsrecht](%s)."
+
+#: ../storage/framework/messages/dca2e1b6a5160f09a3650fdf85d714f6fb6d748b.php.php:34
+msgid "If you have any questions, just reply to this email."
+msgstr "Wenn Sie Fragen haben, antworten Sie einfach auf diese E-Mail."
+
+#: ../storage/framework/messages/dca2e1b6a5160f09a3650fdf85d714f6fb6d748b.php.php:41
+msgid "Kind Regards,"
+msgstr "Mit freundlichen Grüßen"
+
 #: ../storage/framework/messages/df4309fe90ece0cee5f7c32904eef46d1569179d.php.php:4
 msgid ""
 "We got your request to reset your password. Click the Button to reset it."
@@ -1117,6 +1162,18 @@ msgstr "Impressum"
 #: ../storage/framework/messages/fef96d4da00e7a16d5cb96ffbab3099df7723769.php.php:27
 msgid "privacy"
 msgstr "Datenschutz"
+
+#, php-format
+#~ msgid ""
+#~ "I request and expressly agree that you start the service I have ordered "
+#~ "before the withdrawal period has expired. I know that my <a href=\"%s\" "
+#~ "target=\"_blank\">right of revocation</a> expires once the contract has "
+#~ "been fully fulfilled."
+#~ msgstr ""
+#~ "Ich verlange und bin ausdrücklich damit einverstanden, dass Sie mit der "
+#~ "von mir bestellten Dienstleistung vor Ablauf der Widerrufsfrist beginnen. "
+#~ "Mir ist bekannt, dass mein <a href=\"%s\" target=\"_blank"
+#~ "\">Widerrufsrecht</a> erlischt, wenn der Vertrag vollständig erfüllt ist."
 
 #~ msgid "course start"
 #~ msgstr "Kursbeginn"

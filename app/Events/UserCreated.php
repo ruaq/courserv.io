@@ -11,7 +11,7 @@ class UserCreated
     use Dispatchable;
     use SerializesModels;
 
-    public $user;
+    public User $user;
 
     /**
      * Create a new event instance.

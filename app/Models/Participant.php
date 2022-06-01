@@ -81,4 +81,9 @@ class Participant extends Model
         'payment',
         'price_id',
     ];
+
+    public function course(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Course::class);
+    }
 }

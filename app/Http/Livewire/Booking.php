@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Events\CourseBooked;
 use App\Models\ContactPerson;
 use App\Models\Course;
 use App\Models\Participant;
@@ -121,6 +122,8 @@ class Booking extends Component
                 'payment' => $this->payment,
                 'price_id' => $price_id,
             ]);
+
+            event(new CourseBooked($participant));
         } else { // contact person != participant(s)
             // create contact person
             $contactPerson = ContactPerson::create([

@@ -361,7 +361,7 @@
                                         </div>
                                         @if($course_data->start < \Carbon\Carbon::now()->addDays(14))
                                             <div class="ml-3 text-sm">
-                                                <label for="revocation" class="font-medium text-gray-700">{!! _i('I request and expressly agree that you start the service I have ordered before the withdrawal period has expired. I know that my <a href="%s" target="_blank">right of revocation</a> expires once the contract has been fully fulfilled.', config('booking.revocation')) !!}</label>
+                                                <label for="revocation" class="font-medium text-gray-700">{!! _i('I agree that you start the execution of the contract before the expiry of the revocation period of 14 days and in this respect I waive the <a href="%s" target="_blank">right of revocation</a> to which I am entitled.', config('booking.revocation')) !!}</label>
                                             </div>
                                         @else
                                             <div class="ml-3 text-sm">
