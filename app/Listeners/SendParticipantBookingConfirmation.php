@@ -36,6 +36,5 @@ class SendParticipantBookingConfirmation implements ShouldQueue
         Mail::to($event->participant->email)
             ->locale($event->locale)
             ->send(new ParticipantBookingConfirmation($event->participant, $event->participant->course));
-        dd($event->participant->course->type);
     }
 }
