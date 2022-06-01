@@ -12,14 +12,16 @@ class CourseBooked
     use SerializesModels;
 
     public Participant $participant;
+    public string $locale;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(Participant $participant)
+    public function __construct(Participant $participant, $locale)
     {
         $this->participant = $participant;
+        $this->locale = $locale;
     }
 }

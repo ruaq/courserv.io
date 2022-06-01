@@ -7,6 +7,7 @@ use App\Mail\ParticipantBookingConfirmation;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Mail;
+use Xinax\LaravelGettext\Facades\LaravelGettext;
 
 class SendParticipantBookingConfirmation implements ShouldQueue
 {
@@ -30,7 +31,10 @@ class SendParticipantBookingConfirmation implements ShouldQueue
      */
     public function handle(CourseBooked $event)
     {
+        LaravelGettext::setLocale($event->locale);
+
         Mail::to($event->participant->email)
+            ->locale($event->locale)
             ->send(new ParticipantBookingConfirmation($event->participant, $event->participant->course));
         dd($event->participant->course->type);
     }

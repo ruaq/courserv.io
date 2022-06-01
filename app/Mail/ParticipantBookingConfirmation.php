@@ -34,6 +34,7 @@ class ParticipantBookingConfirmation extends Mailable
      */
     public function build()
     {
-        return $this->markdown('mail.participant-booking-confirmation');
+        return $this->subject(_i('Booking confirmation') . ' ' . $this->course->type->name)
+            ->markdown('mail.participant-booking-confirmation');
     }
 }

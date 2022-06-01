@@ -123,7 +123,7 @@ class Booking extends Component
                 'price_id' => $price_id,
             ]);
 
-            event(new CourseBooked($participant));
+            event(new CourseBooked($participant, app()->getLocale()));
         } else { // contact person != participant(s)
             // create contact person
             $contactPerson = ContactPerson::create([
