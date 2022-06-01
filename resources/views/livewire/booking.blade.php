@@ -378,7 +378,7 @@
 
             <div class="pt-5">
                 <div class="flex justify-end">
-                    <x-button.primary class="uppercase px-6 py-3" type="submit">{{ _i('book with obligation to pay') }}</x-button.primary>
+                    <x-button.primary class="uppercase px-6 py-3 umami--click--booking-button" type="submit">{{ _i('book with obligation to pay') }}</x-button.primary>
                 </div>
             </div>
         </div>
