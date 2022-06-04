@@ -5,7 +5,7 @@ namespace App\Http\Livewire;
 use App\Events\CourseCancelled;
 use App\Events\CourseCreated;
 use App\Events\CourseRegisterRequired;
-use App\Events\CourseUpdated;
+use App\Events\QsehCourseUpdated;
 use App\Http\Livewire\DataTable\WithCachedRows;
 use App\Http\Livewire\DataTable\WithPerPagePagination;
 use App\Http\Livewire\DataTable\WithSorting;
@@ -705,7 +705,7 @@ class Course extends Component
                 $this->editing->registration_number != 'failed' &&
                 $this->editing->type->wsdl_id
             ) {
-                event(new CourseUpdated($this->editing));
+                event(new QsehCourseUpdated($this->editing));
             }
         }
     }

@@ -2,12 +2,12 @@
 
 namespace App\Listeners;
 
-use App\Events\CourseUpdated;
+use App\Events\QsehCourseUpdated;
 use App\Services\QsehService;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
-class UpdateCourse implements ShouldQueue
+class UpdateQsehCourse implements ShouldQueue
 {
     use InteractsWithQueue;
 
@@ -24,10 +24,10 @@ class UpdateCourse implements ShouldQueue
     /**
      * Handle the event.
      *
-     * @param CourseUpdated $event
+     * @param QsehCourseUpdated $event
      * @return void
      */
-    public function handle(CourseUpdated $event)
+    public function handle(QsehCourseUpdated $event)
     {
         if (! $event->course->registration_number || $event->course->registration_number == 'queued' || $event->course->registration_number == 'failed') {
             $this->delete();

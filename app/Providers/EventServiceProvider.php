@@ -6,7 +6,7 @@ use App\Events\CourseBooked;
 use App\Events\CourseCancelled;
 use App\Events\CourseCreated;
 use App\Events\CourseRegisterRequired;
-use App\Events\CourseUpdated;
+use App\Events\QsehCourseUpdated;
 use App\Events\UserCreated;
 use App\Events\UserForgotPassword;
 use App\Listeners\CancelCourse;
@@ -15,7 +15,7 @@ use App\Listeners\RegisterCourse;
 use App\Listeners\SendParticipantBookingConfirmation;
 use App\Listeners\SendPasswordResetEmail;
 use App\Listeners\SendWelcomeEmail;
-use App\Listeners\UpdateCourse;
+use App\Listeners\UpdateQsehCourse;
 use App\Models\User;
 use App\Observers\UserObserver;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -48,8 +48,8 @@ class EventServiceProvider extends ServiceProvider
             RegisterCourse::class,
         ],
 
-        CourseUpdated::class => [
-            UpdateCourse::class,
+        QsehCourseUpdated::class => [
+            UpdateQsehCourse::class,
         ],
 
         CourseCancelled::class => [
