@@ -25,6 +25,7 @@
         "laravel/tinker": "^2.7",
         "livewire/livewire": "^2.7",
         "santigarcor/laratrust": "^7.0",
+        "spatie/laravel-sitemap": "^6.1",
         "vinkla/hashids": "^10.0",
         "vyuldashev/xml-to-array": "^1.0",
         "zerospam/laravel-gettext": "dev-patch-1"

@@ -60,6 +60,16 @@ Route::localized(function () {
     });
 });
 
+if (config('services.indexnow.key')) {
+    Route::get('{key}.txt', function (Request $request, $key) {
+        if ($key === config('services.indexnow.key')) {
+            return config('services.indexnow.key');
+        }
+
+        abort(404);
+    });
+}
+
 Route::get('coordinates', [App\Http\Controllers\CoordinatesController::class, 'import']);
 Route::get('locations', [App\Http\Controllers\CoordinatesController::class, 'locations']);
 

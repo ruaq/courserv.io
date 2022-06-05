@@ -57,7 +57,15 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Participant whereTransactionId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Participant whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Participant whereZipcode($value)
-
+ * @property string $price_net
+ * @property string $price_gross
+ * @property string $currency
+ * @property string $payment
+ * @property-read \App\Models\Course $course
+ * @method static \Illuminate\Database\Eloquent\Builder|Participant whereCurrency($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Participant wherePayment($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Participant wherePriceGross($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Participant wherePriceNet($value)
  */
 class Participant extends Model
 {

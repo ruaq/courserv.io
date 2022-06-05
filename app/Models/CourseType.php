@@ -33,10 +33,11 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|CourseType whereUnitsPerDay($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CourseType whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CourseType whereWsdlId($value)
-
  * @property string $category
  * @method static \Database\Factories\CourseTypeFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|CourseType whereCategory($value)
+ * @property string|null $iframe_url
+ * @method static \Illuminate\Database\Eloquent\Builder|CourseType whereIframeUrl($value)
  */
 class CourseType extends Model
 {
