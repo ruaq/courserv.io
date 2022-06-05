@@ -14,11 +14,11 @@ jobs:
       matrix:
         os: [ubuntu-latest]
         php: [8.0,8.1]
-        laravel: [8.*]
+        laravel: [9.*]
         stability: [prefer-lowest, prefer-stable]
         include:
-          - laravel: 8.*
-            testbench: ^6.6
+          - laravel: 9.*
+            testbench: 7.*
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
 
@@ -38,10 +38,12 @@ jobs:
           uses: actions/cache@v2
           with:
             path: vendor
-            key: composer-${{ hashFiles('composer.lock') }}
+            key: dependencies-laravel-${{ matrix.laravel }}-php-${{ matrix.php }}-composer-${{ hashFiles('composer.json') }}
 
-      -   name: Run composer install
-          run: composer install -n --prefer-dist
+      - name: Install dependencies
+          run: |
+            composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
+            composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction --no-suggest
 
       -   name: Prepare Laravel Application
           run: |
