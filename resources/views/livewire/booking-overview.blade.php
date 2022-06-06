@@ -65,46 +65,46 @@
                             </div>
                         </a>
                     </li>
-                    <script type="application/ld+json">
-                    {
-                      "@context": "https://schema.org",
-                      "@type": "Event",
-                      "name": "{{ $courseType }}",
+{{--                    <script type="application/ld+json">--}}
+{{--                    {--}}
+{{--                      "@context": "https://schema.org",--}}
+{{--                      "@type": "Event",--}}
+{{--                      "name": "{{ $courseType }}",--}}
 {{--                      "description": "Noch die Beschreibung zu diesem tollen Kurs...",--}}
-                      "startDate": "{{ \Carbon\Carbon::parse($course->start)->isoFormat('YYYY-MM-DDTHH:mm') }}",
-                      "endDate": "{{ \Carbon\Carbon::parse($course->end)->isoFormat('YYYY-MM-DDTHH:mm') }}",
-                      "eventStatus": "https://schema.org/EventScheduled",
-                      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-                      "location": {
-                        "@type": "Place",
-                        "name": "{{ $course->seminar_location }}",
-                        "address": {
-                          "@type": "PostalAddress",
-                          "streetAddress": "{{ $course->street }}",
-                          "addressLocality": "{{ $course->location }}",
-                          "postalCode": "{{ $course->zipcode }}",
-                          "addressCountry": "DE"
-                        }
-                      },
+{{--                      "startDate": "{{ \Carbon\Carbon::parse($course->start)->isoFormat('YYYY-MM-DDTHH:mm') }}",--}}
+{{--                      "endDate": "{{ \Carbon\Carbon::parse($course->end)->isoFormat('YYYY-MM-DDTHH:mm') }}",--}}
+{{--                      "eventStatus": "https://schema.org/EventScheduled",--}}
+{{--                      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",--}}
+{{--                      "location": {--}}
+{{--                        "@type": "Place",--}}
+{{--                        "name": "{{ $course->seminar_location }}",--}}
+{{--                        "address": {--}}
+{{--                          "@type": "PostalAddress",--}}
+{{--                          "streetAddress": "{{ $course->street }}",--}}
+{{--                          "addressLocality": "{{ $course->location }}",--}}
+{{--                          "postalCode": "{{ $course->zipcode }}",--}}
+{{--                          "addressCountry": "DE"--}}
+{{--                        }--}}
+{{--                      },--}}
 {{--                      "performer": {--}}
 {{--                        "@type": "Person",--}}
 {{--                        "name": "Ausbildername"--}}
 {{--                      },--}}
-                      "offers": [
-                          @foreach($course->prices as $price)
-                            {
-                                "@type": "Offer",
-                                "name": "{{ $price->title }}",
-                                "price": "{{ $price->amount_gross }}",
-                                "priceCurrency": "{{ $price->currency }}",
-                                "validFrom": "{{ \Carbon\Carbon::parse($course->created_at)->isoFormat('YYYY-MM-DD') }}",
-                                "url": "{{ route('booking', ['course' => Hashids::encode($course->id), 'price' => Hashids::encode($price->id)]) }}",
-                                "availability": "{{ ($course->seats - $course->participants_count) > 0 ? 'https://schema.org/InStock' : 'https://schema.org/SoldOut' }}"
-                            }{{ (!$loop->last) ? ',' : '' }}
-                          @endforeach
-                        ]
-                    }
-                    </script>
+{{--                      "offers": [--}}
+{{--                          @foreach($course->prices as $price)--}}
+{{--                            {--}}
+{{--                                "@type": "Offer",--}}
+{{--                                "name": "{{ $price->title }}",--}}
+{{--                                "price": "{{ $price->amount_gross }}",--}}
+{{--                                "priceCurrency": "{{ $price->currency }}",--}}
+{{--                                "validFrom": "{{ \Carbon\Carbon::parse($course->created_at)->isoFormat('YYYY-MM-DD') }}",--}}
+{{--                                "url": "{{ route('booking', ['course' => Hashids::encode($course->id), 'price' => Hashids::encode($price->id)]) }}",--}}
+{{--                                "availability": "{{ ($course->seats - $course->participants_count) > 0 ? 'https://schema.org/InStock' : 'https://schema.org/SoldOut' }}"--}}
+{{--                            }{{ (!$loop->last) ? ',' : '' }}--}}
+{{--                          @endforeach--}}
+{{--                        ]--}}
+{{--                    }--}}
+{{--                    </script>--}}
                 @endforeach
             </ul>
         </div>
