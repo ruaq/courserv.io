@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: courserv.io\n"
-"POT-Creation-Date: 2022-06-01 15:08+0200\n"
-"PO-Revision-Date: 2022-06-01 15:09+0200\n"
+"POT-Creation-Date: 2022-06-10 20:43+0200\n"
+"PO-Revision-Date: 2022-06-10 20:45+0200\n"
 "Last-Translator: Holger Schmermbeck <hosch@mailbox.org>\n"
 "Language-Team: Holger Schmermbeck <hosch@mailbox.org>\n"
 "Language: de\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.1\n"
 "X-Poedit-KeywordsList: _;__;_i;_s;gettext;_n:1,2;ngettext:1,2;dgettext:2\n"
 "X-Poedit-Basepath: ../../../../app\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -21,8 +21,8 @@ msgstr ""
 
 #: ../storage/framework/messages/01f4d21089366a8e092e39781bbeacfbf34652c6.php.php:10
 #: ../storage/framework/messages/229627715f3b412d7b994fbaaa747b622fe037c4.php.php:10
-#: ../storage/framework/messages/a517e3b699764ebd7d97f751403deeb9575cb377.php.php:785
-#: Http/Livewire/Course.php:785
+#: ../storage/framework/messages/a517e3b699764ebd7d97f751403deeb9575cb377.php.php:793
+#: Http/Livewire/Course.php:793
 msgid "Courses"
 msgstr "Kurse"
 
@@ -163,8 +163,8 @@ msgstr ""
 msgid "Cancel"
 msgstr "Abbrechen"
 
-#: ../storage/framework/messages/11f4bd005efe0d13d42bf681d94eb9c76538f47a.php.php:186
-#: Http/Livewire/Booking.php:186
+#: ../storage/framework/messages/11f4bd005efe0d13d42bf681d94eb9c76538f47a.php.php:193
+#: Http/Livewire/Booking.php:193
 msgid "Book course"
 msgstr "Kurs buchen"
 
@@ -423,8 +423,8 @@ msgid "Showing"
 msgstr "Zeige"
 
 #: ../storage/framework/messages/3170fc0b06a208e47f1de939d8dcefc0b2eb52e1.php.php:36
-#: ../storage/framework/messages/a517e3b699764ebd7d97f751403deeb9575cb377.php.php:457
-#: Http/Livewire/Course.php:457
+#: ../storage/framework/messages/a517e3b699764ebd7d97f751403deeb9575cb377.php.php:458
+#: Http/Livewire/Course.php:458
 msgid "to"
 msgstr "bis"
 
@@ -442,19 +442,19 @@ msgstr "Weiter zur Seite :page"
 
 #: ../storage/framework/messages/49daf884bf1be731e5eb446e599d2b84f3aa0ee0.php.php:13
 msgid "contact person"
-msgstr "Ansprechpartner:in"
+msgstr "Ansprechpartner*in"
 
 #: ../storage/framework/messages/49daf884bf1be731e5eb446e599d2b84f3aa0ee0.php.php:14
 msgid "Information about you as the contact person for this booking."
-msgstr "Informationen über Sie als Ansprechpartner:in für diese Buchung."
+msgstr "Informationen über Sie als Ansprechpartner*in für diese Buchung."
 
 #: ../storage/framework/messages/49daf884bf1be731e5eb446e599d2b84f3aa0ee0.php.php:23
 msgid "The contact person is also the participant"
-msgstr "Ansprechpartner:in ist auch Teilnehmerin:in"
+msgstr "Ansprechpartner*in ist auch Teilnehmerin*in"
 
 #: ../storage/framework/messages/49daf884bf1be731e5eb446e599d2b84f3aa0ee0.php.php:28
 msgid "Participant is another person"
-msgstr "Teilnehmer:in ist eine andere Person"
+msgstr "Teilnehmer*in ist eine andere Person"
 
 #: ../storage/framework/messages/49daf884bf1be731e5eb446e599d2b84f3aa0ee0.php.php:36
 msgid "company"
@@ -526,11 +526,11 @@ msgstr "Telefonnummer ist erforderlich."
 
 #: ../storage/framework/messages/49daf884bf1be731e5eb446e599d2b84f3aa0ee0.php.php:320
 msgid "participants"
-msgstr "Teilnehmer:innen"
+msgstr "Teilnehmer*innen"
 
 #: ../storage/framework/messages/49daf884bf1be731e5eb446e599d2b84f3aa0ee0.php.php:321
 msgid "Information about the participants"
-msgstr "Informationen über die Teilnehmer:innen"
+msgstr "Informationen über die Teilnehmer*innen"
 
 #: ../storage/framework/messages/49daf884bf1be731e5eb446e599d2b84f3aa0ee0.php.php:361
 msgid "First name is required."
@@ -550,11 +550,11 @@ msgstr "Die Angabe des Geburtsdatums ist erforderlich."
 
 #: ../storage/framework/messages/49daf884bf1be731e5eb446e599d2b84f3aa0ee0.php.php:466
 msgid "remove participant"
-msgstr "Teilnehmer:in entfernen"
+msgstr "Teilnehmer*in entfernen"
 
 #: ../storage/framework/messages/49daf884bf1be731e5eb446e599d2b84f3aa0ee0.php.php:500
 msgid "add another participant"
-msgstr "eine weitere Teilnehmer:in hinzufügen"
+msgstr "eine weitere Teilnehmer*in hinzufügen"
 
 #: ../storage/framework/messages/49daf884bf1be731e5eb446e599d2b84f3aa0ee0.php.php:515
 msgid "Booking overview"
@@ -1116,7 +1116,7 @@ msgid ""
 "contract:"
 msgstr "Sie haben vor dem Vertragsabschluss ausdrücklich Folgendes erklärt:"
 
-#: ../storage/framework/messages/dca2e1b6a5160f09a3650fdf85d714f6fb6d748b.php.php:31
+#: ../storage/framework/messages/dca2e1b6a5160f09a3650fdf85d714f6fb6d748b.php.php:30
 #, php-format
 msgid ""
 "I agree that you start the execution of the contract before the expiry of "
@@ -1127,11 +1127,11 @@ msgstr ""
 "Ausführung des Vertrages beginnen und verzichte insoweit auf das mir "
 "zustehende [Widerrufsrecht](%s)."
 
-#: ../storage/framework/messages/dca2e1b6a5160f09a3650fdf85d714f6fb6d748b.php.php:34
+#: ../storage/framework/messages/dca2e1b6a5160f09a3650fdf85d714f6fb6d748b.php.php:33
 msgid "If you have any questions, just reply to this email."
 msgstr "Wenn Sie Fragen haben, antworten Sie einfach auf diese E-Mail."
 
-#: ../storage/framework/messages/dca2e1b6a5160f09a3650fdf85d714f6fb6d748b.php.php:41
+#: ../storage/framework/messages/dca2e1b6a5160f09a3650fdf85d714f6fb6d748b.php.php:40
 msgid "Kind Regards,"
 msgstr "Mit freundlichen Grüßen"
 
