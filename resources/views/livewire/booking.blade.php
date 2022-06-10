@@ -489,4 +489,48 @@
         @endif
     </div>
 
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Event",
+      "name": "{{ $course_data->type->name }} - {{ $course_data->prices[0]->title }}",
+      "description": "{{ $course_data->prices[0]->description }}",
+      "startDate": "{{ \Carbon\Carbon::parse($course_data->start)->isoFormat('YYYY-MM-DDTHH:mm') }}",
+      "endDate": "{{ \Carbon\Carbon::parse($course_data->end)->isoFormat('YYYY-MM-DDTHH:mm') }}",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "location": {
+        "@type": "Place",
+        "name": "{{ $course_data->seminar_location }}",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "{{ $course_data->street }}",
+          "addressLocality": "{{ $course_data->location }}",
+          "postalCode": "{{ $course_data->zipcode }}",
+          "addressCountry": "DE"
+        }
+      },
+{{--      "organizer": {--}}
+{{--		"@type": "Organization",--}}
+{{--		"name": "courserv.io",--}}
+{{--		"url": "https://courserv.io"--}}
+{{--	},--}}
+      "performer": {
+        "@type": "Person",
+        "name": "TBA"
+      },
+      "offers": [
+            {
+                "@type": "Offer",
+                "name": "{{ $course_data->type->name }} - {{ $course_data->prices[0]->title }}",
+                "price": "{{ $course_data->prices[0]->amount_gross }}",
+                "priceCurrency": "{{ $course_data->prices[0]->currency }}",
+                "validFrom": "{{ \Carbon\Carbon::parse($course_data->created_at)->isoFormat('YYYY-MM-DD') }}",
+                "url": "{{ route('booking', ['course' => Hashids::encode($course_data->id), 'price' => Hashids::encode($course_data->prices[0]->id)]) }}",
+                "availability": "{{ ($course_data->seats - $course_data->participants_count) - count($participants) > 0 ? 'https://schema.org/InStock' : 'https://schema.org/SoldOut' }}"
+            }
+        ]
+    }
+    </script>
+
 </div>
