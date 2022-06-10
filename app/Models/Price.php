@@ -18,7 +18,6 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Price whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Price whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Price whereUpdatedAt($value)
-
  * @property int|null $team_id
  * @property string $title
  * @property string|null $description
@@ -40,6 +39,9 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Price whereTaxRate($value)
  * @property string $payment
  * @method static \Illuminate\Database\Eloquent\Builder|Price wherePayment($value)
+ * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Course[] $courses
+ * @property-read int|null $courses_count
  */
 class Price extends Model
 {
@@ -64,5 +66,10 @@ class Price extends Model
     public function team()
     {
         return $this->belongsTo(Team::class);
+    }
+
+    public function courses(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Course::class);
     }
 }

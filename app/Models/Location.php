@@ -17,7 +17,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Location whereLocation($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Location whereState($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Location whereZipcode($value)
-
+ * @mixin \Eloquent
  */
 class Location extends Model
 {

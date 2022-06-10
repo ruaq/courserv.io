@@ -50,7 +50,6 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Course whereTeamId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Course whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Course whereZipcode($value)
-
  * @property string|null $cancelled
  * @method static \Illuminate\Database\Eloquent\Builder|Course whereCancelled($value)
  * @property-read \App\Models\CourseDay|null $days
@@ -63,6 +62,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read int|null $prices_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Participant[] $participants
  * @property-read int|null $participants_count
+ * @mixin \Eloquent
  */
 class Course extends Model
 {

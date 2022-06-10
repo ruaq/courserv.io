@@ -57,10 +57,10 @@ use Vinkla\Hashids\Facades\Hashids;
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRoleIs($role = '', $team = null, $boolean = 'and')
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
-
  * @property-read string $status_color
  * @property string|null $reset_valid_until
  * @method static \Illuminate\Database\Eloquent\Builder|User whereResetValidUntil($value)
+ * @mixin \Eloquent
  */
 class User extends Authenticatable implements MustVerifyEmail
 {

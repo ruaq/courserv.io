@@ -66,6 +66,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Participant wherePayment($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Participant wherePriceGross($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Participant wherePriceNet($value)
+ * @mixin \Eloquent
  */
 class Participant extends Model
 {

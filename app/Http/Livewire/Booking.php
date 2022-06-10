@@ -178,10 +178,17 @@ class Booking extends Component
                     $query->where('id', '=', Hashids::decode($this->price));
                 })
             ->withCount(['participants' => fn ($query) => $query->where('cancelled', 0)])
-            ->get();
+            ->first();
+
+        $prices = $course_data->relationsToArray()['prices'][0];
+
+        // (pre)select payment method, if it's only one
+        if (count(unserialize($prices['payment'])) === 1) {
+            $this->payment = array_key_first(unserialize($prices['payment']));
+        }
 
         return view('livewire.booking', [
-            'course_data' => $course_data[0],
+            'course_data' => $course_data,
         ])
             ->layout('layouts.booking', ['metaTitle' => _i('Book course')]);
     }

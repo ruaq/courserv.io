@@ -38,6 +38,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|CourseType whereCategory($value)
  * @property string|null $iframe_url
  * @method static \Illuminate\Database\Eloquent\Builder|CourseType whereIframeUrl($value)
+ * @mixin \Eloquent
  */
 class CourseType extends Model
 {

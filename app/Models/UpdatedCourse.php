@@ -19,6 +19,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|UpdatedCourse whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|UpdatedCourse whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|UpdatedCourse whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 class UpdatedCourse extends Model
 {

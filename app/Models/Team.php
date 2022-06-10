@@ -26,9 +26,9 @@ use Laratrust\Models\LaratrustTeam;
  * @method static \Illuminate\Database\Eloquent\Builder|Team whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Team whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Team whereUpdatedAt($value)
-
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Price[] $prices
  * @property-read int|null $prices_count
+ * @mixin \Eloquent
  */
 class Team extends LaratrustTeam
 {
