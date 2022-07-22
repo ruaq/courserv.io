@@ -4,6 +4,7 @@ use App\Models\Course;
 use App\Models\Team;
 use App\Models\User;
 use Database\Seeders\PermissionSeeder;
+
 use function Pest\Laravel\actingAs;
 
 beforeEach(function () {

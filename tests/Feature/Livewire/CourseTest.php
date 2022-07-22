@@ -5,6 +5,7 @@ use App\Models\Team;
 use App\Models\User;
 use Database\Seeders\PermissionSeeder;
 use Livewire\Livewire;
+
 use function Pest\Laravel\actingAs;
 
 beforeEach(function () {

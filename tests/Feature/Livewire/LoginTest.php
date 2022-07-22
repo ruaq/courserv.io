@@ -3,6 +3,7 @@
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Livewire;
+
 use function Pest\Laravel\actingAs;
 
 beforeEach(function () {
