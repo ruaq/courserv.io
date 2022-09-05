@@ -79,7 +79,6 @@ class BookingOverview extends Component
         $this->searchLocations = array_filter($this->searchLocations);
 
         if (empty($this->searchLocations) && $perimeter_locations->isNotEmpty()) { // no course location selected
-
             $found = false;
             foreach ($perimeter_locations as $location) {
                 if ($location->distance <= 15) { // select courses < 15 km

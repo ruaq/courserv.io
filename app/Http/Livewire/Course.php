@@ -225,10 +225,8 @@ class Course extends Component
 
         // We want the courseDays
         if ($split[0] === 'courseDays') {
-
             // changed date?
             if ($split[2] === 'date') {
-
                 // if date is empty, before the start or after the end
                 if (
                     $newValue == '' ||
@@ -284,7 +282,6 @@ class Course extends Component
 
             // is there still a date on the first day?
             if (! isset($this->courseDays[0]) || $this->courseDays[0]['date'] != $this->editing->start->format('d.m.Y')) {
-
                 // no? so, create it again, at the start of our array...
                 array_unshift($this->courseDays, [
                     'date' => $this->editing->start->format('d.m.Y'),
@@ -296,7 +293,6 @@ class Course extends Component
 
             // is there still a date on the last day?
             if ($this->courseDays[array_key_last($this->courseDays)]['date'] != $this->editing->end->format('d.m.Y')) {
-
                 // no? so, create it again...
                 $this->courseDays[] = [
                     'date' => $this->editing->end->format('d.m.Y'),
@@ -405,7 +401,6 @@ class Course extends Component
 
         // longer then one day?
         if (isset($this->editing->start) && ! $this->editing->start->isSameDay($this->editing->end)) {
-
             // if only first & last day or less is set, set / update it
             if (count($this->courseDays) <= 2) {
                 $this->courseDays[0]['date'] = $this->editing->start->format('d.m.Y');
