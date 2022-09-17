@@ -6654,24 +6654,24 @@
         },
         {
             "name": "vyuldashev/xml-to-array",
-            "version": "v1.0.1",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/vyuldashev/xml-to-array.git",
-                "reference": "ae1713b167093716b8e8d56bfb318befac4a8c4b"
+                "reference": "28542261014674a3e9615da335dba43c9dcf304b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vyuldashev/xml-to-array/zipball/ae1713b167093716b8e8d56bfb318befac4a8c4b",
-                "reference": "ae1713b167093716b8e8d56bfb318befac4a8c4b",
+                "url": "https://api.github.com/repos/vyuldashev/xml-to-array/zipball/28542261014674a3e9615da335dba43c9dcf304b",
+                "reference": "28542261014674a3e9615da335dba43c9dcf304b",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.1"
+                "php": "^7.1|^8.0"
             },
             "require-dev": {
                 "larapack/dd": "^1.1",
-                "phpunit/phpunit": "^6.4",
+                "phpunit/phpunit": "^7.5|^9.5",
                 "spatie/array-to-xml": "^2.7"
             },
             "type": "library",
@@ -6693,9 +6693,9 @@
             "description": "Convert xml to an array",
             "support": {
                 "issues": "https://github.com/vyuldashev/xml-to-array/issues",
-                "source": "https://github.com/vyuldashev/xml-to-array/tree/master"
+                "source": "https://github.com/vyuldashev/xml-to-array/tree/v1.1.0"
             },
-            "time": "2018-04-22T15:20:09+00:00"
+            "time": "2022-08-23T23:18:27+00:00"
         },
         {
             "name": "webmozart/assert",
