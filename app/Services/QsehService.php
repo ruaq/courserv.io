@@ -71,11 +71,13 @@ class QsehService
 //    ]
 
         // 01.08.2023 liegt zu weit in der Zukunft. Es ist nur +1 Jahr zugelassen.
-        // "01.08.2023 liegt zu weit in der Zukunft. Es ist nur +1 Jahr zugelassen., Für die Lehrgangsart: '3' haben Sie zu dem Zeitpunkt 01.08.2023 keine Berechtigung."
-        // Das Startdatum eines Lehrgangs ist nicht änderbar 30.12.2021 != 01.08.2022 wenn der Kurs in der Vergangenheit liegt
+        // "01.08.2023 liegt zu weit in der Zukunft. Es ist nur +1 Jahr zugelassen.,
+        // Für die Lehrgangsart: '3' haben Sie zu dem Zeitpunkt 01.08.2023 keine Berechtigung."
+        // Das Startdatum eines Lehrgangs ist nicht änderbar
+        // 30.12.2021 != 01.08.2022 wenn der Kurs in der Vergangenheit liegt
         // Der Lehrgang mit der ID: "88385/2021" ist schon Storniert, somit kann er nicht mehr gespeichert werden
 
-        $time = $course->start->format('H:i').' Uhr - '.$course->end->format('H:i').' Uhr';
+        $time = $course->start->format('H:i') . ' Uhr - ' . $course->end->format('H:i') . ' Uhr';
 
         $this->generate(
             $action,
@@ -106,8 +108,16 @@ class QsehService
         $result = XmlToArray::convert($response);
 
         return collect([
-            'response' => $result['soapenv:Envelope']['soapenv:Body']['ns2:ehaf3RequestHandlerResponse']['return']['ns1:beschreibung'],
-            'success' => $result['soapenv:Envelope']['soapenv:Body']['ns2:ehaf3RequestHandlerResponse']['return']['ns1:code'],
+            'response' => $result['soapenv:Envelope']
+            ['soapenv:Body']
+            ['ns2:ehaf3RequestHandlerResponse']
+            ['return']
+            ['ns1:beschreibung'],
+            'success' => $result['soapenv:Envelope']
+            ['soapenv:Body']
+            ['ns2:ehaf3RequestHandlerResponse']
+            ['return']
+            ['ns1:code'],
         ]);
     }
 
@@ -131,8 +141,18 @@ class QsehService
 //        return empty($errors);
 //    }
 
-    private function generate($action, $course_type, $start, $time, $seminar_location, $street, $zipcode, $location, $number = '', $comment = '')
-    {
+    private function generate(
+        $action,
+        $course_type,
+        $start,
+        $time,
+        $seminar_location,
+        $street,
+        $zipcode,
+        $location,
+        $number = '',
+        $comment = ''
+    ) {
         // SOAP sucks... Let's fake the request
 
         $xml_request = '<?xml version="1.0" encoding="UTF-8"?>
@@ -147,23 +167,23 @@ class QsehService
                             <xsd:empfaengerID>ehaf</xsd:empfaengerID>
                             <xsd:sendungsID>1</xsd:sendungsID>
                             <xsd:serviceID>1</xsd:serviceID>
-                            <xsd:zeitstempel>'.Carbon::now()->format('Y-m-d\TH:i:s').'</xsd:zeitstempel>
+                            <xsd:zeitstempel>' . Carbon::now()->format('Y-m-d\TH:i:s') . '</xsd:zeitstempel>
                             <lehrgang>
-                                <xsd:lehrgangsArt>'.$course_type.'</xsd:lehrgangsArt>
-                                <xsd:startDatum>'.Carbon::parse($start)->format('Y-m-d\TH:i:s').'</xsd:startDatum>
-                                <xsd:zeitlicherVerlauf>'.$time.'</xsd:zeitlicherVerlauf>
-                                <xsd:adresseFirma>'.str_replace('&', 'u.', $seminar_location).'</xsd:adresseFirma>
-                                <xsd:adresseOrt>'.$location.'</xsd:adresseOrt>
-                                <xsd:adressePlz>'.$zipcode.'</xsd:adressePlz>
-                                <xsd:adresseStrasse>'.$street.'</xsd:adresseStrasse>
+                                <xsd:lehrgangsArt>' . $course_type . '</xsd:lehrgangsArt>
+                                <xsd:startDatum>' . Carbon::parse($start)->format('Y-m-d\TH:i:s') . '</xsd:startDatum>
+                                <xsd:zeitlicherVerlauf>' . $time . '</xsd:zeitlicherVerlauf>
+                                <xsd:adresseFirma>' . str_replace('&', 'u.', $seminar_location) . '</xsd:adresseFirma>
+                                <xsd:adresseOrt>' . $location . '</xsd:adresseOrt>
+                                <xsd:adressePlz>' . $zipcode . '</xsd:adressePlz>
+                                <xsd:adresseStrasse>' . $street . '</xsd:adresseStrasse>
                                 <!--Optional:-->
-                                <xsd:vermerk>'.$comment.'</xsd:vermerk>
+                                <xsd:vermerk>' . $comment . '</xsd:vermerk>
                                 <!--Optional:-->
-                                <xsd:lehrId>'.$number.'</xsd:lehrId>
+                                <xsd:lehrId>' . $number . '</xsd:lehrId>
                             </lehrgang>
-                            <Benutzer>'.config('qseh.codeNumber').'</Benutzer>
-                            <Kennwort>'.config('qseh.password').'</Kennwort>
-                            <Aktion>'.$action.'</Aktion>
+                            <Benutzer>' . config('qseh.codeNumber') . '</Benutzer>
+                            <Kennwort>' . config('qseh.password') . '</Kennwort>
+                            <Aktion>' . $action . '</Aktion>
                         </LehrgangsUebermittlung>
                     </ehaf:ehaf3RequestHandler>
                 </soapenv:Body>

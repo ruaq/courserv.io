@@ -29,7 +29,11 @@ if (! function_exists('canonical_url')) {
     {
         if (! \Illuminate\Support\Str::startsWith($current = url()->current(), config('app.url'))) {
             // replace domain if it's not the configured one
-            $current = preg_replace('/^(?:https?:\/\/)?(?:[^@\/\n]+@)?(?:www\.)?([^:\/\n]+)/', config('app.url'), $current);
+            $current = preg_replace(
+                '/^(?:https?:\/\/)?(?:[^@\/\n]+@)?(?:www\.)?([^:\/\n]+)/',
+                config('app.url'),
+                $current
+            );
         }
 
         return LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), $current);

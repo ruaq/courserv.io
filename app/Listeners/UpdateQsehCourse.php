@@ -29,7 +29,11 @@ class UpdateQsehCourse implements ShouldQueue
      */
     public function handle(QsehCourseUpdated $event)
     {
-        if (! $event->course->registration_number || $event->course->registration_number == 'queued' || $event->course->registration_number == 'failed') {
+        if (
+            ! $event->course->registration_number
+            || $event->course->registration_number == 'queued'
+            || $event->course->registration_number == 'failed'
+        ) {
             $this->delete();
 
             return;

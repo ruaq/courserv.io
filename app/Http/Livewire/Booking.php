@@ -98,7 +98,8 @@ class Booking extends Component
         // get the amount and currency
         $amount = Price::whereId($price_id)->first();
 
-        if ( // check if the contact person is the participant
+        if (
+            // check if the contact person is the participant
             $this->samePerson &&
             count($this->participants) === 1 &&
             $this->participants[0]['lastname'] == $this->contactPerson['lastname'] &&

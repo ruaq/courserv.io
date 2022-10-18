@@ -45,7 +45,13 @@ class GenerateInternalNumber implements ShouldQueue
 
         Cache::put('generating-internal-course-number', true, 5);
 
-        $number = Course::whereYear('start', $event->course->start->format('Y'))->whereNotIn('internal_number', ['queued'])->latest('internal_number')->first();
+        $number = Course::whereYear(
+            'start',
+            $event->course->start->format('Y')
+        )->whereNotIn(
+            'internal_number',
+            ['queued']
+        )->latest('internal_number')->first();
 
         if ($number) {
             $last_number = explode('-', $number->internal_number);
@@ -55,7 +61,7 @@ class GenerateInternalNumber implements ShouldQueue
 
         $new_number = $last_number[1] + 1;
 
-        $event->course->internal_number = $event->course->start->format('Y').'-'.$new_number;
+        $event->course->internal_number = $event->course->start->format('Y') . '-' . $new_number;
 
         Cache::forget('generating-internal-course-number');
 

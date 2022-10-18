@@ -65,7 +65,12 @@ class Login extends Component
         try {
             $this->rateLimit(3, 120);
         } catch (TooManyRequestsException $exception) {
-            $this->addError('captcha', _n('Too many login attempts. Please try again in a second.', 'Too many login attempts. Please try again in %s seconds.', $exception->secondsUntilAvailable, $exception->secondsUntilAvailable));
+            $this->addError('captcha', _n(
+                'Too many login attempts. Please try again in a second.',
+                'Too many login attempts. Please try again in %s seconds.',
+                $exception->secondsUntilAvailable,
+                $exception->secondsUntilAvailable
+            ));
 
             return;
         }

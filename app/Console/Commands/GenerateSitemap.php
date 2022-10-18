@@ -71,14 +71,35 @@ class GenerateSitemap extends Command
         foreach ($courses as $course) {
             // run for locations
             foreach (LaravelLocalization::getSupportedLanguagesKeys() as $languagesKey) {
-                $url_location = Url::create(LaravelLocalization::getLocalizedURL($languagesKey, route('booking.overview', ['slug' => $course->type->slug, 'location' => $course->location]), [], true));
+                $url_location = Url::create(LaravelLocalization::getLocalizedURL(
+                    $languagesKey,
+                    route('booking.overview', ['slug' => $course->type->slug, 'location' => $course->location]),
+                    [],
+                    true
+                ));
                 $url_location->setLastModificationDate(Carbon::parse($course->updated_at));
 
                 foreach (LaravelLocalization::getSupportedLanguagesKeys() as $languagesKey) {
-                    $url_location->addAlternate(LaravelLocalization::getLocalizedURL($languagesKey, route('booking.overview', ['slug' => $course->type->slug, 'location' => $course->location]), [], true), $languagesKey);
+                    $url_location->addAlternate(LaravelLocalization::getLocalizedURL(
+                        $languagesKey,
+                        route('booking.overview', ['slug' => $course->type->slug, 'location' => $course->location]),
+                        [],
+                        true
+                    ), $languagesKey);
                 }
 
-                $url_location->addAlternate(preg_replace('/\/'.LaravelLocalization::getDefaultLocale().'/', '', LaravelLocalization::getLocalizedURL(LaravelLocalization::getDefaultLocale(), route('booking.overview', ['slug' => $course->type->slug, 'location' => $course->location])), 1), 'x-default');
+                $url_location->addAlternate(
+                    preg_replace(
+                        '/\/' . LaravelLocalization::getDefaultLocale() . '/',
+                        '',
+                        LaravelLocalization::getLocalizedURL(
+                            LaravelLocalization::getDefaultLocale(),
+                            route('booking.overview', ['slug' => $course->type->slug, 'location' => $course->location])
+                        ),
+                        1
+                    ),
+                    'x-default'
+                );
 
                 $sitemap_locations->add($url_location);
             }
@@ -86,16 +107,46 @@ class GenerateSitemap extends Command
             // run for every course and price
             foreach ($course->prices as $price) {
                 foreach (LaravelLocalization::getSupportedLanguagesKeys() as $languagesKey) {
-                    $url_course = Url::create(LaravelLocalization::getLocalizedURL($languagesKey, route('booking', ['course' => Hashids::encode($course->id), 'price' => Hashids::encode($price->id)]), [], true));
+                    $url_course = Url::create(LaravelLocalization::getLocalizedURL(
+                        $languagesKey,
+                        route(
+                            'booking',
+                            ['course' => Hashids::encode($course->id),
+                                'price' => Hashids::encode($price->id)
+                            ]
+                        ),
+                        [],
+                        true
+                    ));
 
                     $url_course->setLastModificationDate(Carbon::parse($course->updated_at));
                     $url_course->setPriority(0.5);
 
                     foreach (LaravelLocalization::getSupportedLanguagesKeys() as $languagesKey) {
-                        $url_course->addAlternate(LaravelLocalization::getLocalizedURL($languagesKey, route('booking', ['course' => Hashids::encode($course->id), 'price' => Hashids::encode($price->id)]), [], true), $languagesKey);
+                        $url_course->addAlternate(LaravelLocalization::getLocalizedURL(
+                            $languagesKey,
+                            route('booking', ['course' => Hashids::encode($course->id),
+                            'price' => Hashids::encode($price->id)]),
+                            [],
+                            true
+                        ), $languagesKey);
                     }
 
-                    $url_course->addAlternate(preg_replace('/\/'.LaravelLocalization::getDefaultLocale().'/', '', LaravelLocalization::getLocalizedURL(LaravelLocalization::getDefaultLocale(), route('booking', ['course' => Hashids::encode($course->id), 'price' => Hashids::encode($price->id)])), 1), 'x-default');
+                    $url_course->addAlternate(preg_replace(
+                        '/\/' . LaravelLocalization::getDefaultLocale() . '/',
+                        '',
+                        LaravelLocalization::getLocalizedURL(
+                            LaravelLocalization::getDefaultLocale(),
+                            route(
+                                'booking',
+                                [
+                                    'course' => Hashids::encode($course->id),
+                                    'price' => Hashids::encode($price->id)
+                                ]
+                            )
+                        ),
+                        1
+                    ), 'x-default');
 
                     $sitemap_courses->add($url_course);
                 }
@@ -118,7 +169,18 @@ class GenerateSitemap extends Command
             // run for every course and price
             foreach ($course->prices as $price) {
                 foreach (LaravelLocalization::getSupportedLanguagesKeys() as $languagesKey) {
-                    $url_past_course = Url::create(LaravelLocalization::getLocalizedURL($languagesKey, route('booking', ['course' => Hashids::encode($course->id), 'price' => Hashids::encode($price->id)]), [], true));
+                    $url_past_course = Url::create(LaravelLocalization::getLocalizedURL(
+                        $languagesKey,
+                        route(
+                            'booking',
+                            [
+                                'course' => Hashids::encode($course->id),
+                                'price' => Hashids::encode($price->id)
+                            ]
+                        ),
+                        [],
+                        true
+                    ));
 
                     if ($course->updated_at < $course->start) {
                         $url_past_course->setLastModificationDate(Carbon::parse($course->start));
@@ -128,10 +190,35 @@ class GenerateSitemap extends Command
                     $url_past_course->setPriority(0.5);
 
                     foreach (LaravelLocalization::getSupportedLanguagesKeys() as $languagesKey) {
-                        $url_past_course->addAlternate(LaravelLocalization::getLocalizedURL($languagesKey, route('booking', ['course' => Hashids::encode($course->id), 'price' => Hashids::encode($price->id)]), [], true), $languagesKey);
+                        $url_past_course->addAlternate(LaravelLocalization::getLocalizedURL(
+                            $languagesKey,
+                            route(
+                                'booking',
+                                [
+                                    'course' => Hashids::encode($course->id),
+                                    'price' => Hashids::encode($price->id)
+                                ]
+                            ),
+                            [],
+                            true
+                        ), $languagesKey);
                     }
 
-                    $url_past_course->addAlternate(preg_replace('/\/'.LaravelLocalization::getDefaultLocale().'/', '', LaravelLocalization::getLocalizedURL(LaravelLocalization::getDefaultLocale(), route('booking', ['course' => Hashids::encode($course->id), 'price' => Hashids::encode($price->id)])), 1), 'x-default');
+                    $url_past_course->addAlternate(preg_replace(
+                        '/\/' . LaravelLocalization::getDefaultLocale() . '/',
+                        '',
+                        LaravelLocalization::getLocalizedURL(
+                            LaravelLocalization::getDefaultLocale(),
+                            route(
+                                'booking',
+                                [
+                                    'course' => Hashids::encode($course->id),
+                                    'price' => Hashids::encode($price->id)
+                                ]
+                            )
+                        ),
+                        1
+                    ), 'x-default');
 
                     $sitemap_past_courses->add($url_past_course);
                 }
@@ -162,8 +249,30 @@ class GenerateSitemap extends Command
             foreach ($yesterday_courses as $course) {
                 foreach ($course->prices as $price) {
                     foreach (LaravelLocalization::getSupportedLanguagesKeys() as $languagesKey) {
-                        $indexnow_urls[] = LaravelLocalization::getLocalizedURL($languagesKey, route('booking.overview', ['slug' => $course->type->slug, 'location' => $course->location]), [], true);
-                        $indexnow_urls[] = LaravelLocalization::getLocalizedURL($languagesKey, route('booking', ['course' => Hashids::encode($course->id), 'price' => Hashids::encode($price->id)]), [], true);
+                        $indexnow_urls[] = LaravelLocalization::getLocalizedURL(
+                            $languagesKey,
+                            route(
+                                'booking.overview',
+                                [
+                                    'slug' => $course->type->slug,
+                                    'location' => $course->location
+                                ]
+                            ),
+                            [],
+                            true
+                        );
+                        $indexnow_urls[] = LaravelLocalization::getLocalizedURL(
+                            $languagesKey,
+                            route(
+                                'booking',
+                                [
+                                    'course' => Hashids::encode($course->id),
+                                    'price' => Hashids::encode($price->id)
+                                ]
+                            ),
+                            [],
+                            true
+                        );
                     }
                 }
             }

@@ -188,8 +188,14 @@ class Course extends Component
     {
         $range = explode(' ', $this->date_range);
 
-        $this->editing->start = Carbon::createFromFormat('d.m.y H:i', $range[0].' '.$this->time_start);
-        $this->editing->end = Carbon::createFromFormat('d.m.y H:i', $range[array_key_last($range)].' '.$this->time_end);
+        $this->editing->start = Carbon::createFromFormat(
+            'd.m.y H:i',
+            $range[0] . ' ' . $this->time_start
+        );
+        $this->editing->end = Carbon::createFromFormat(
+            'd.m.y H:i',
+            $range[array_key_last($range)] . ' ' . $this->time_end
+        );
 
         $this->checkCourseLength();
         $this->setDayOptions();
@@ -236,14 +242,18 @@ class Course extends Component
                     unset($this->courseDays[$split[1]]); // delete it....
                 } else {
                     // update order value
-                    $this->courseDays[$split[1]]['order'] = Carbon::createFromFormat('d.m.Y', $newValue)->format('Y/m/d');
+                    $this->courseDays[$split[1]]['order'] = Carbon::createFromFormat(
+                        'd.m.Y',
+                        $newValue
+                    )
+                        ->format('Y/m/d');
                 }
             }
 
             // start time of the first day
             if ($split[1] == 0 && $split[2] === 'startTime') {
                 // prevent that's not before the start time
-                $firstDay = Carbon::createFromFormat('d.m.Y H:i', $this->courseDays[0]['date'].' '.$newValue);
+                $firstDay = Carbon::createFromFormat('d.m.Y H:i', $this->courseDays[0]['date'] . ' ' . $newValue);
                 if ($firstDay->lt($this->editing->start)) {
                     $this->courseDays[0]['startTime'] = $this->editing->start->format('H:i');
                 }
@@ -251,24 +261,51 @@ class Course extends Component
 
             if ($split[2] === 'startTime') {
                 // correct if the startTime is after or equal the endTime
-                if (Carbon::createFromFormat('H:i', $this->courseDays[$split[1]]['startTime'])->gte(Carbon::createFromFormat('H:i', $this->courseDays[$split[1]]['endTime']))) {
-                    $this->courseDays[$split[1]]['startTime'] = Carbon::createFromFormat('H:i', $this->courseDays[$split[1]]['endTime'])->subMinutes(45)->format('H:i');
+                if (
+                    Carbon::createFromFormat(
+                        'H:i',
+                        $this->courseDays[$split[1]]['startTime']
+                    )
+                    ->gte(Carbon::createFromFormat('H:i', $this->courseDays[$split[1]]['endTime']))
+                ) {
+                    $this->courseDays[$split[1]]['startTime'] = Carbon::createFromFormat(
+                        'H:i',
+                        $this->courseDays[$split[1]]['endTime']
+                    )
+                        ->subMinutes(45)->format('H:i');
                 }
             }
 
             // end time of the last day
             if ($split[1] == array_key_last($this->courseDays) && $split[2] === 'endTime') {
                 // prevent that's not after the end time
-                $lastDay = Carbon::createFromFormat('d.m.Y H:i', $this->courseDays[array_key_last($this->courseDays)]['date'].' '.$newValue);
+                $lastDay = Carbon::createFromFormat(
+                    'd.m.Y H:i',
+                    $this->courseDays[array_key_last($this->courseDays)]['date'] . ' ' . $newValue
+                );
                 if ($lastDay->gt($this->editing->end)) {
-                    $this->courseDays[array_key_last($this->courseDays)]['endTime'] = $this->editing->end->format('H:i');
+                    $this->courseDays[
+                        array_key_last($this->courseDays)]['endTime'] = $this->editing->end->format('H:i');
                 }
             }
 
             if ($split[2] === 'endTime') {
                 // correct if the endTime is before or equal the startTime
-                if (Carbon::createFromFormat('H:i', $this->courseDays[$split[1]]['endTime'])->lte(Carbon::createFromFormat('H:i', $this->courseDays[$split[1]]['startTime']))) {
-                    $this->courseDays[$split[1]]['endTime'] = Carbon::createFromFormat('H:i', $this->courseDays[$split[1]]['startTime'])->addMinutes(45)->format('H:i');
+                if (
+                    Carbon::createFromFormat(
+                        'H:i',
+                        $this->courseDays[$split[1]]['endTime']
+                    )
+                    ->lte(Carbon::createFromFormat(
+                        'H:i',
+                        $this->courseDays[$split[1]]['startTime']
+                    ))
+                ) {
+                    $this->courseDays[$split[1]]['endTime'] = Carbon::createFromFormat(
+                        'H:i',
+                        $this->courseDays[$split[1]]['startTime']
+                    )
+                        ->addMinutes(45)->format('H:i');
                 }
             }
 
@@ -281,7 +318,10 @@ class Course extends Component
             array_multisort($keys, SORT_ASC, $this->courseDays);
 
             // is there still a date on the first day?
-            if (! isset($this->courseDays[0]) || $this->courseDays[0]['date'] != $this->editing->start->format('d.m.Y')) {
+            if (
+                ! isset($this->courseDays[0])
+                || $this->courseDays[0]['date'] != $this->editing->start->format('d.m.Y')
+            ) {
                 // no? so, create it again, at the start of our array...
                 array_unshift($this->courseDays, [
                     'date' => $this->editing->start->format('d.m.Y'),
@@ -342,7 +382,10 @@ class Course extends Component
     public function updatedTimeStart()
     {
         if (isset($this->editing->start)) {
-            $this->editing->start = Carbon::createFromFormat('d.m.Y H:i', $this->editing->start->format('d.m.Y').' '.$this->time_start);
+            $this->editing->start = Carbon::createFromFormat(
+                'd.m.Y H:i',
+                $this->editing->start->format('d.m.Y') . ' ' . $this->time_start
+            );
             $this->setStartTimeOptions([
                 'defaultHour' => $this->editing->start->format('H'),
                 'defaultMinute' => $this->editing->start->format('i'),
@@ -354,7 +397,10 @@ class Course extends Component
     public function updatedTimeEnd()
     {
         if (isset($this->editing->end)) {
-            $this->editing->end = Carbon::createFromFormat('d.m.Y H:i', $this->editing->end->format('d.m.Y').' '.$this->time_end);
+            $this->editing->end = Carbon::createFromFormat(
+                'd.m.Y H:i',
+                $this->editing->end->format('d.m.Y') . ' ' . $this->time_end
+            );
             $this->setEndTimeOptions([
                 'defaultHour' => $this->editing->end->format('H'),
                 'defaultMinute' => $this->editing->end->format('i'),
@@ -390,7 +436,10 @@ class Course extends Component
         $length = (int)$unit_length + (int)$breaks;
 
         // no end before start date, please
-        if (isset($this->editing->start) && ! isset($this->editing->end) || $this->editing->end->subMinutes($length)->lt($this->editing->start)) {
+        if (
+            isset($this->editing->start) && ! isset($this->editing->end)
+            || $this->editing->end->subMinutes($length)->lt($this->editing->start)
+        ) {
             $this->editing->end = $this->editing->start->addMinutes($length);
             $this->time_end = $this->editing->end->format('H:i');
             $this->setEndTimeOptions([
@@ -423,7 +472,12 @@ class Course extends Component
 
     public function participant($course)
     {
-        return $this->redirect(route('participant.course', ['course' => Hashids::encode($course)]));
+        return $this->redirect(
+            route(
+                'participant.course',
+                ['course' => Hashids::encode($course)]
+            )
+        );
     }
 
     public function create()
@@ -455,7 +509,8 @@ class Course extends Component
                 $this->priceIds[] = (string) $price;
             }
 
-            $this->date_range = $this->editing->start->format('d.m.y').' '._i('to').' '.$this->editing->end->format('d.m.y');
+            $this->date_range = $this->editing->start
+                    ->format('d.m.y') . ' ' . _i('to') . ' ' . $this->editing->end->format('d.m.y');
 
             $this->resetFlatpickr();
             $this->setDayOptions();
@@ -510,7 +565,12 @@ class Course extends Component
             }
 
             // and also the trainer for the whole course
-            foreach ($this->editing->trainer->where('date', $this->editing->start->subDay()->format('Y-m-d')) as $trainer) {
+            foreach (
+                $this->editing->trainer->where(
+                    'date',
+                    $this->editing->start->subDay()->format('Y-m-d')
+                ) as $trainer
+            ) {
                 if (! $trainer->user_id) {
                     if ($trainer->bookable) {
                         for ($x = 1; $x <= $trainer->count; $x++) {
@@ -548,7 +608,12 @@ class Course extends Component
 
         if (config('qseh.codeNumber') && config('qseh.password')) {
             // it's a QSEH course and already registered
-            if ($this->editing->registration_number && $this->editing->registration_number != 'queued' && $this->editing->registration_number != 'failed' && $this->editing->type->wsdl_id) {
+            if (
+                $this->editing->registration_number
+                && $this->editing->registration_number != 'queued'
+                && $this->editing->registration_number != 'failed'
+                && $this->editing->type->wsdl_id
+            ) {
                 event(new CourseCancelled($this->editing));
             }
         }
@@ -619,7 +684,8 @@ class Course extends Component
             if ($item != 'general') {
                 $date = Carbon::createFromFormat('d.m.Y', $this->courseDays[$item]['date']);
             } else {
-                $date = $this->editing->start->subDay()->format('Y-m-d'); // set day before start as date, if set for all days TODO better ideas?
+                // set day before start as date, if set for all days TODO better ideas?
+                $date = $this->editing->start->subDay()->format('Y-m-d');
             }
 
             $trainer = 0;
@@ -722,22 +788,46 @@ class Course extends Component
                 fn ($query, $user_teams) => $query
                     ->whereIn('team_id', Auth::user()->teams()->pluck('id'))
             )
-            ->when($this->filters['courseType'], fn ($query, $courseType) => $query->where('course_type_id', $courseType))
-            ->when($this->filters['team'], fn ($query, $team) => $query->where('team_id', $team))
-            ->when($this->filters['amount-min'], fn ($query, $amount) => $query->where('amount', '>=', $amount))
-            ->when($this->filters['amount-max'], fn ($query, $amount) => $query->where('amount', '<=', $amount))
-            ->when($this->filters['date-min'], fn ($query, $date) => $query->where('start', '>=', Carbon::parse($date)))
-            ->when($this->filters['date-max'], fn ($query, $date) => $query->where('start', '<=', Carbon::parse($date)))
-            ->when(! $this->filters['showCancelled'], fn ($query, $date) => $query->where('cancelled', '=', null))
-            ->when($this->filters['showCancelled'], fn ($query, $date) => $query->where('cancelled', '<>', null))
+            ->when(
+                $this->filters['courseType'],
+                fn ($query, $courseType) => $query->where('course_type_id', $courseType)
+            )
+            ->when(
+                $this->filters['team'],
+                fn ($query, $team) => $query->where('team_id', $team)
+            )
+            ->when(
+                $this->filters['amount-min'],
+                fn ($query, $amount) => $query->where('amount', '>=', $amount)
+            )
+            ->when(
+                $this->filters['amount-max'],
+                fn ($query, $amount) => $query->where('amount', '<=', $amount)
+            )
+            ->when(
+                $this->filters['date-min'],
+                fn ($query, $date) => $query->where('start', '>=', Carbon::parse($date))
+            )
+            ->when(
+                $this->filters['date-max'],
+                fn ($query, $date) => $query->where('start', '<=', Carbon::parse($date))
+            )
+            ->when(
+                ! $this->filters['showCancelled'],
+                fn ($query, $date) => $query->where('cancelled', '=', null)
+            )
+            ->when(
+                $this->filters['showCancelled'],
+                fn ($query, $date) => $query->where('cancelled', '<>', null)
+            )
             ->when(
                 $this->filters['search'],
                 fn ($query, $search) => $query
-                ->where('seminar_location', 'like', '%'.$search.'%')
-                ->orWhere('street', 'like', '%'.$search.'%')
-                ->orWhere('seminar_location', 'like', '%'.$search.'%')
-                ->orWhere('internal_number', 'like', '%'.$search.'%')
-                ->orWhere('registration_number', 'like', '%'.$search.'%')
+                ->where('seminar_location', 'like', '%' . $search . '%')
+                ->orWhere('street', 'like', '%' . $search . '%')
+                ->orWhere('seminar_location', 'like', '%' . $search . '%')
+                ->orWhere('internal_number', 'like', '%' . $search . '%')
+                ->orWhere('registration_number', 'like', '%' . $search . '%')
             )
             ->with('type')
             ->with('team')

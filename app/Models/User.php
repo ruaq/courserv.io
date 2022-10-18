@@ -24,7 +24,6 @@ use Vinkla\Hashids\Facades\Hashids;
  * @property int $active
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property-read int|null $notifications_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Permission[] $permissions
  * @property-read int|null $permissions_count

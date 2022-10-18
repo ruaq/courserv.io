@@ -32,7 +32,7 @@ class User extends Component
     {
         return [
             'editing.name' => 'required',
-            'editing.email' => 'required|email:rfc|unique:users,email,'.$this->editing->id,
+            'editing.email' => 'required|email:rfc|unique:users,email,' . $this->editing->id,
             'editing.active' => 'bool|nullable',
         ];
     }

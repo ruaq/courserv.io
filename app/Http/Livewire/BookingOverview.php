@@ -97,7 +97,10 @@ class BookingOverview extends Component
             }
 
             if (! $found) { // no course < 25 km
-                $this->searchLocations[$perimeter_locations->first()->location] = $perimeter_locations->first()->location; // select the first result
+                // select the first result
+                $this->searchLocations[$perimeter_locations->first()->location] =
+                    $perimeter_locations->first()->location
+                ;
             }
         }
 
@@ -115,7 +118,9 @@ class BookingOverview extends Component
             'courses' => $courses,
         ])
             ->layout('layouts.booking', [
-                'metaTitle' => $this->courseType . ' ' . (is_numeric($this->location) ? _i('near you') : _i('in %s and surroundings', $this->location)),
+                'metaTitle' => $this->courseType . ' ' . (is_numeric($this->location)
+                        ? _i('near you')
+                        : _i('in %s and surroundings', $this->location)),
                 'index' => true,
             ]);
     }

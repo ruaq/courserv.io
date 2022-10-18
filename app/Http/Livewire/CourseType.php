@@ -27,11 +27,11 @@ class CourseType extends Component
     protected function rules(): array
     {
         return [
-            'editing.name' => 'required|unique:course_types,name,'.$this->editing->id,
+            'editing.name' => 'required|unique:course_types,name,' . $this->editing->id,
             'editing.category' => 'required',
             'new_category' => 'unique:course_types,category',
             'editing.wsdl_id' => 'numeric|nullable',
-            'editing.slug' => 'required|unique:course_types,slug,'.$this->editing->id,
+            'editing.slug' => 'required|unique:course_types,slug,' . $this->editing->id,
             'editing.iframe_url' => 'sometimes|url',
             'editing.units' => 'required|numeric|nullable',
             'editing.units_per_day' => 'required|numeric|nullable',
