@@ -51,7 +51,7 @@ class GenerateInternalNumber implements ShouldQueue
         )->whereNotIn(
             'internal_number',
             ['queued']
-        )->latest('internal_number')->first();
+        )->orderByDesc('id')->first();
 
         if ($number) {
             $last_number = explode('-', $number->internal_number);
