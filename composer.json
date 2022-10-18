@@ -33,6 +33,7 @@
     "require-dev": {
         "barryvdh/laravel-ide-helper": "2.12.3",
         "fakerphp/faker": "1.20.0",
+        "friendsofphp/php-cs-fixer": "^3.12",
         "laravel/sail": "1.16.2",
         "mockery/mockery": "1.5.1",
         "nunomaduro/collision": "6.3.1",
