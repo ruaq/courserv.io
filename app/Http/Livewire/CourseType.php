@@ -87,8 +87,8 @@ class CourseType extends Component
 
         if ($this->editing->getKey()) {
             $this->editing = $this->makeBlankCourseType();
-            $this->editing['iframe_url'] = '';
         }
+        $this->editing['iframe_url'] = '';
 
         $this->showEditModal = true;
     }
@@ -130,5 +130,12 @@ class CourseType extends Component
         $this->courseTypeCategories = array_unique($categories);
 
         return new CourseTypeModel();
+    }
+
+    protected function prepareForValidation($attributes): array
+    {
+        $attributes['editing']['iframe_url'] = str_replace(' ', '', $attributes['editing']['iframe_url']);
+
+        return $attributes;
     }
 }
