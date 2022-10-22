@@ -6,6 +6,7 @@ use App\Models\CourseType as CourseTypeModel;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use Livewire\Component;
 
 class CourseType extends Component
@@ -103,6 +104,13 @@ class CourseType extends Component
         $this->showEditModal = true;
     }
 
+    public function updatedEditingName()
+    {
+        if (empty($this->editing->slug)) {
+            $this->editing->slug = Str::slug($this->editing->name, '-');
+        }
+    }
+
     public function save()
     {
         $this->authorize('viewAny', CourseTypeModel::class);
@@ -134,6 +142,7 @@ class CourseType extends Component
 
     protected function prepareForValidation($attributes): array
     {
+        $attributes['editing']['slug'] = Str::slug($this->editing->slug, '-');
         $attributes['editing']['iframe_url'] = str_replace(' ', '', $attributes['editing']['iframe_url']);
 
         return $attributes;
