@@ -25,7 +25,7 @@
         "livewire/livewire": "2.10.7",
         "mcamara/laravel-localization": "1.7.0",
         "santigarcor/laratrust": "7.1.0",
-        "spatie/laravel-sitemap": "6.2.2",
+        "spatie/laravel-sitemap": "6.2.3",
         "vinkla/hashids": "10.0.1",
         "vyuldashev/xml-to-array": "1.1.0",
         "zerospam/laravel-gettext": "dev-patch-1"
