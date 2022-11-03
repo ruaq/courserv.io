@@ -18,7 +18,7 @@
         "danharrin/livewire-rate-limiting": "1.0.0",
         "fruitcake/laravel-cors": "3.0.0",
         "guzzlehttp/guzzle": "7.5.0",
-        "itsgoingd/clockwork": "5.1.10",
+        "itsgoingd/clockwork": "5.1.11",
         "laravel/framework": "9.38.0",
         "laravel/sanctum": "3.0.1",
         "laravel/tinker": "2.7.2",
