@@ -24,3 +24,6 @@ yarn-error.log
 /public/sitemap_courses.xml
 /public/sitemap_locations.xml
 /public/sitemap_past_courses.xml
+/deploy.php
+/deploy.yaml
+/deploy
