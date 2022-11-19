@@ -39,10 +39,20 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $iframe_url
  * @method static \Illuminate\Database\Eloquent\Builder|CourseType whereIframeUrl($value)
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\CertTemplate[] $certTemplates
+ * @property-read int|null $cert_templates_count
+ * @property int|null $cert_template_id
+ * @property-read \App\Models\CertTemplate|null $certTemplate
+ * @method static \Illuminate\Database\Eloquent\Builder|CourseType whereCertTemplateId($value)
  */
 class CourseType extends Model
 {
     use HasFactory;
+
+    public function certTemplate(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(CertTemplate::class);
+    }
 
     protected $attributes = [
         'units' => 9,

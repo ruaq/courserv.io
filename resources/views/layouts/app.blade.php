@@ -44,24 +44,28 @@ Heroicon name: outline/x" x-state:on="Menu open" x-state:off="Menu closed" class
                                 <x-nav.participant-static :active="$active" />
                             @endcan
 
-                            @can('viewAny', \App\Models\Team::class)
-                                <x-nav.teams-static :active="$active" />
+                            @can('viewAny', \App\Models\CourseType::class)
+                                <x-nav.coursetype-static :active="$active" />
+                            @endcan
+
+                            @can('viewAny', \App\Models\Price::class)
+                                <x-nav.price-static :active="$active" />
+                            @endcan
+
+                            @can('viewAny', \App\Models\CertTemplate::class)
+                                <x-nav.certTemplate-static :active="$active" />
                             @endcan
 
                             @can('viewAny', \App\Models\User::class)
                                 <x-nav.user-static :active="$active" />
                             @endcan
 
-                            @can('viewAny', \App\Models\CourseType::class)
-                                <x-nav.coursetype-static :active="$active" />
+                            @can('viewAny', \App\Models\Team::class)
+                                <x-nav.teams-static :active="$active" />
                             @endcan
 
                             @can('viewAny', \App\Models\Role::class)
                                 <x-nav.role-static :active="$active" />
-                            @endcan
-
-                            @can('viewAny', \App\Models\Price::class)
-                                <x-nav.price-static :active="$active" />
                             @endcan
                         </div>
                     </div>
@@ -122,24 +126,28 @@ Heroicon name: outline/x" x-state:on="Menu open" x-state:off="Menu closed" class
                         <x-nav.participant :active="$active" />
                     @endcan
 
-                    @can('viewAny', \App\Models\Team::class)
-                        <x-nav.teams :active="$active" />
+                    @can('viewAny', \App\Models\CourseType::class)
+                        <x-nav.coursetype :active="$active" />
+                    @endcan
+
+                    @can('viewAny', \App\Models\Price::class)
+                        <x-nav.price :active="$active" />
+                    @endcan
+
+                    @can('viewAny', \App\Models\CertTemplate::class)
+                        <x-nav.certTemplate :active="$active" />
                     @endcan
 
                     @can('viewAny', \App\Models\User::class)
                         <x-nav.user :active="$active" />
                     @endcan
 
-                    @can('viewAny', \App\Models\CourseType::class)
-                        <x-nav.coursetype :active="$active" />
+                    @can('viewAny', \App\Models\Team::class)
+                        <x-nav.teams :active="$active" />
                     @endcan
 
                     @can('viewAny', \App\Models\Role::class)
                         <x-nav.role :active="$active" />
-                    @endcan
-
-                    @can('viewAny', \App\Models\Price::class)
-                        <x-nav.price :active="$active" />
                     @endcan
                 </div>
             </div>

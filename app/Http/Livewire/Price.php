@@ -5,9 +5,11 @@ namespace App\Http\Livewire;
 use App\Http\Livewire\DataTable\WithCachedRows;
 use App\Http\Livewire\DataTable\WithPerPagePagination;
 use App\Http\Livewire\DataTable\WithSorting;
+use App\Models\CertTemplate;
 use App\Models\Price as PriceModel;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -28,6 +30,7 @@ class Price extends Component
     public bool $showEditModal = false;
     public string $sign = '€';
     public array $payment = [];
+    public Collection $certTemplates;
 
     public PriceModel $editing;
 
@@ -40,6 +43,7 @@ class Price extends Component
             'editing.amount_net' => 'required',
             'editing.amount_gross' => 'required',
             'editing.currency' => 'required',
+            'editing.cert_template_id' => 'sometimes',
             'payment' => 'required',
         ];
     }
@@ -91,6 +95,13 @@ class Price extends Component
         }
     }
 
+    public function updatedEditingCertTemplateId($value)
+    {
+        if (empty($value)) {
+            $this->editing['cert_template_id'] = null;
+        }
+    }
+
     public function create()
     {
         $this->authorize('create', PriceModel::class);
@@ -137,6 +148,8 @@ class Price extends Component
      */
     public function save()
     {
+        $this->authorize('save', $this->editing);
+
         $this->editing->payment = serialize(array_filter($this->payment));
 
         if (! $this->editing->currency) { // no currency selected
@@ -151,8 +164,6 @@ class Price extends Component
             $this->editing->amount_net = '0.00';
             $this->editing->amount_gross = '0.00';
         }
-
-        $this->authorize('save', $this->editing);
 
         $this->validate();
 
@@ -180,6 +191,7 @@ class Price extends Component
     {
         $this->sign = '€'; // reset sign
         $this->payment = [];
+        $this->certTemplates = CertTemplate::all();
 
         return new PriceModel();
     }

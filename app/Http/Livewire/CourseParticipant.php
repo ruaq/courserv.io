@@ -2,12 +2,16 @@
 
 namespace App\Http\Livewire;
 
+use App\Events\CertificateRequested;
 use App\Models\Course;
+use App\Models\CourseType;
 use App\Models\Participant;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Vinkla\Hashids\Facades\Hashids;
 
@@ -17,9 +21,15 @@ class CourseParticipant extends Component
 
     public bool $can_update = false;
     public bool $can_view = false;
+    public bool $showCertModal = false;
+    public bool $showDownloadModal = false;
     public string $course;
     public array $select;
+    public Course $course_data;
+    public $course_types;
     public Participant $editing;
+    public Collection $participants;
+    public $certTemplate;
 
     protected function rules(): array
     {
@@ -38,6 +48,7 @@ class CourseParticipant extends Component
 
         $this->select = [];
         $this->editing = $this->makeBlankParticipant();
+        $this->certTemplate = false;
     }
 
     public function participate(Participant $participant)
@@ -64,20 +75,65 @@ class CourseParticipant extends Component
         $this->editing->save();
     }
 
+    public function getCert()
+    {
+        if ($this->select) { // get selected participants
+            $participants = $this->select;
+        } else { // or all, if nothing selected
+            $participants = $this->participants->pluck('id')->toArray();
+        }
+
+        // If file is already exists, delete
+        $file = 'certTmp/' . Hashids::encode(auth()->id()) . '-' . $this->course . '.pdf';
+        if (Storage::exists($file)) {
+            Storage::delete($file);
+        }
+
+        event(
+            new CertificateRequested(
+                auth()->user(),
+                Hashids::decode($this->course),
+                $this->certTemplate,
+                $participants
+            )
+        );
+
+        $this->showCertModal = false;
+        $this->showDownloadModal = true;
+    }
+
+    public function checkDownload()
+    {
+        $file = 'certTmp/' . Hashids::encode(auth()->id()) . '-' . $this->course . '.pdf';
+        if (Storage::exists($file)) {
+            $this->showDownloadModal = false;
+
+            return Storage::download($file, 'cert-' . $this->course . '.pdf', ['Content-Type: application/pdf']);
+        }
+    }
+
     public function render()
     {
         $this->auth();
 
-        $participants = Participant::whereCourseId(Hashids::decode($this->course))->get();
+        $this->participants = Participant::whereCourseId(Hashids::decode($this->course))->orderBy('company')->get();
+
+        $this->course_data = Course::whereId(Hashids::decode($this->course))->first();
+
+        // get the available cert templates for the course type - deprecated
+//        $this->course_types = CourseType::whereId($this->course_data->course_type_id)
+//            ->with('certTemplates')
+//            ->first();
+
+//        dd($this->course_types->certTemplates);
 
         return view('livewire.course-participant', [
-            'participants' => $participants,
+            'companies' => $this->participants->groupBy('company'),
         ])
             ->layout('layouts.app', [
                 'metaTitle' => _i('participants'),
                 'active' => 'participants',
             ]);
-        ;
     }
 
     protected function makeBlankParticipant(): Participant

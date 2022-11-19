@@ -42,6 +42,9 @@ use Illuminate\Database\Eloquent\Model;
  * @mixin \Eloquent
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Course[] $courses
  * @property-read int|null $courses_count
+ * @property int|null $cert_template_id
+ * @property-read \App\Models\CertTemplate|null $certTemplate
+ * @method static \Illuminate\Database\Eloquent\Builder|Price whereCertTemplateId($value)
  */
 class Price extends Model
 {
@@ -63,7 +66,7 @@ class Price extends Model
         '19' => '19 %',
     ];
 
-    public function team()
+    public function team(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Team::class);
     }
@@ -71,5 +74,10 @@ class Price extends Model
     public function courses(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Course::class);
+    }
+
+    public function certTemplate(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(CertTemplate::class);
     }
 }

@@ -25,6 +25,9 @@
                                 {{ _i('seats') }}
                             </th>
                             <th scope="col" class="px-6 py-3 text-right text-xs font-medium tracking-wider text-gray-500">
+
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-right text-xs font-medium tracking-wider text-gray-500">
                                 @can('create', \App\Models\CourseType::class)<x-button.link wire:click="create">{{ _i('Add Course type') }}</x-button.link>@endcan
                             </th>
                         </tr>
@@ -49,6 +52,9 @@
                                 </td>
                                 <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-500">
                                     {{ $courseType->seats }} {{ _i('seats') }}
+                                </td>
+                                <td class="whitespace-nowrap px-6 py-4 text-right text-sm font-medium">
+                                    TETST
                                 </td>
                                 <td class="whitespace-nowrap px-6 py-4 text-right text-sm font-medium">
                                     @can('update', $courseType)
@@ -114,6 +120,19 @@
                         </select>
                         @error('editing.category')
                             <p class="mt-2 text-sm text-red-600" id="category-error">{{ $errors->first('editing.category') }}</p>
+                        @enderror
+                    </div>
+
+                    <div>
+                        <label for="certTemplate" class="block text-sm font-medium text-gray-700">{{ _i('Certification Template') }}</label>
+                        <select id="certTemplate" wire:model.lazy="editing.cert_template_id" name="certTemplate" class="mt-1 block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                            <option value="">{{ _i('No Certification Template') }}</option>
+                            @foreach($certTemplates as $certTemplate)
+                                <option value="{{ $certTemplate->id }}">{{ $certTemplate->title }}</option>
+                            @endforeach
+                        </select>
+                        @error('editing.cert_template_id')
+                            <p class="mt-2 text-sm text-red-600" id="certTemplate-error">{{ $errors->first('editing.cert_template_id') }}</p>
                         @enderror
                     </div>
 

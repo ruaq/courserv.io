@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\CertTemplate;
 use App\Models\CourseType as CourseTypeModel;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Collection;
@@ -21,6 +22,7 @@ class CourseType extends Component
 
     public string $new_category = '';
 
+    public Collection $certTemplates;
     public Collection $courseTypes;
 
     public CourseTypeModel $editing;
@@ -32,6 +34,7 @@ class CourseType extends Component
             'editing.category' => 'required',
             'new_category' => 'unique:course_types,category',
             'editing.wsdl_id' => 'numeric|nullable',
+            'editing.cert_template_id' => 'sometimes',
             'editing.slug' => 'required|unique:course_types,slug,' . $this->editing->id,
             'editing.iframe_url' => 'sometimes|url',
             'editing.units' => 'required|numeric|nullable',
@@ -111,6 +114,13 @@ class CourseType extends Component
         }
     }
 
+    public function updatedEditingCertTemplateId($value)
+    {
+        if (empty($value)) {
+            $this->editing['cert_template_id'] = null;
+        }
+    }
+
     public function save()
     {
         $this->authorize('viewAny', CourseTypeModel::class);
@@ -136,6 +146,7 @@ class CourseType extends Component
     {
         $categories = CourseTypeModel::all()->sortBy('category')->pluck('category')->toArray();
         $this->courseTypeCategories = array_unique($categories);
+        $this->certTemplates = CertTemplate::all();
 
         return new CourseTypeModel();
     }

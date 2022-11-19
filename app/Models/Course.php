@@ -63,6 +63,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Participant[] $participants
  * @property-read int|null $participants_count
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\CertTemplate[] $certTemplates
+ * @property-read int|null $cert_templates_count
  */
 class Course extends Model
 {

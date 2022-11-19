@@ -1,11 +1,11 @@
 <div>
     <div class="space-y-4 py-4">
-{{--        <div class="flex justify-between">--}}
-{{--            <div class="flex w-2/4 space-x-4">--}}
+        <div class="flex justify-between">
+            <div class="flex w-2/4 space-x-4">
 {{--                <x-input.text wire:model="filters.search" placeholder="{{ _i('Search...') }}" />--}}
 
-{{--                <x-button.link wire:click="toggleShowFilters">@if ($showFilters) Hide @endif Advanced Search...</x-button.link>--}}
-{{--            </div>--}}
+                <x-button.link wire:click="$set('showCertModal', true)">{{ _i('Create certificates') }}</x-button.link>
+            </div>
 
 {{--            <div class="flex items-center space-x-2">--}}
 {{--                <x-input.group borderless paddingless for="perPage" label="Per Page">--}}
@@ -20,7 +20,7 @@
 {{--                    <x-button.primary wire:click="create"><x-icon.plus /> {{ _i('Add Course') }}</x-button.primary>--}}
 {{--                @endcan--}}
 {{--            </div>--}}
-{{--        </div>--}}
+        </div>
 
         <!-- Advanced Search -->
 {{--        <div>--}}
@@ -90,83 +90,164 @@
                 </x-slot>
 
                 <x-slot name="body">
-                    @foreach($participants as $participant)
-                        <x-table.row class="{{ $participant->cancelled ? 'line-through' : '' }}">
-                            <x-table.cell><x-input.checkbox wire:model="select" value="{{ $participant->id }}" /></x-table.cell>
-                            <x-table.cell>{{ $participant->lastname }}</x-table.cell>
-                            <x-table.cell>{{ $participant->firstname }}</x-table.cell>
-                            <x-table.cell>
-                                @can('viewAny', $participant)
-                                    {{ \Carbon\Carbon::parse($participant->date_of_birth)->isoFormat('DD.MM.YYYY') }}
-                                @else
-                                    <span class="blur-sm">XX.XX.XXXX</span>
-                                @endcan
-                            </x-table.cell>
-                            <x-table.cell>
-                                @can('viewAny', $participant)
-                                    {{ $participant->street }}
-                                @else
-                                    <span class="blur">{{ substr(sha1(time()), 0, strlen($participant->street)) }}</span>
-                                @endcan
-                            </x-table.cell>
-                            <x-table.cell>
-                                @can('viewAny', $participant)
-                                    {{ $participant->zipcode }} {{ $participant->location }}
-                                @else
-                                    <span class="blur">12345 {{ substr(sha1(time()), 0, strlen($participant->location)) }}</span>
-                                @endcan
-                            </x-table.cell>
-                            <x-table.cell>
-                                @can('viewAny', $participant)
-                                    {{ $participant->phone }}
-                                @else
-                                    <span class="blur">{{ substr(sha1(time()), 0, strlen($participant->phone)) }}</span>
-                                @endcan
-                            </x-table.cell>
-                            <x-table.cell>
-                                @can('viewAny', $participant)
-                                    {{ $participant->email }}
-                                @else
-                                    <span class="blur">{{ substr(sha1(time()), 0, strlen($participant->email)) }}</span>
-                                @endcan
-                            </x-table.cell>
-                            <x-table.cell>{{ \Carbon\Carbon::parse($participant->created_at)->isoFormat('DD.MM.YYYY') }}</x-table.cell>
-                            <x-table.cell>{{ $participant->currency }} {{ $participant->price_gross }}</x-table.cell>
-                            <x-table.cell>
-                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ $participant->participated ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
-                                    @if($can_update)
-                                        <x-button.badge wire:click="participate({{ $participant->id }})">{{ $participant->participated ? _i('participated') : _i('not participated') }}</x-button.badge>
+                    @foreach($companies as $company)
+                        <tr class="border-t border-gray-200">
+                            <th colspan="5" scope="colgroup" class="bg-gray-50 px-4 py-2 text-left text-sm font-semibold text-gray-900 sm:px-6">{{ $company[0]['company'] ? $company[0]['company'] : _i('no company') }}</th>
+                        </tr>
+                        @foreach($company as $participant)
+                            <x-table.row class="{{ $participant->cancelled ? 'line-through' : '' }}">
+                                <x-table.cell><x-input.checkbox wire:model="select" value="{{ $participant->id }}" /></x-table.cell>
+                                <x-table.cell>{{ $participant->lastname }}</x-table.cell>
+                                <x-table.cell>{{ $participant->firstname }}</x-table.cell>
+                                <x-table.cell>
+                                    @can('viewAny', $participant)
+                                        {{ \Carbon\Carbon::parse($participant->date_of_birth)->isoFormat('DD.MM.YYYY') }}
                                     @else
-                                        <x-button.badge wire:click="participate({{ $participant->id }})" disabled>{{ $participant->participated ? _i('participated') : _i('not participated') }}</x-button.badge>
-                                    @endif
-                                </span>
-                            </x-table.cell>
-                            <x-table.cell>
-                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ $participant->payed ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
-                                    @if($can_update)
-                                        <x-button.badge wire:click="pay({{ $participant->id }})">{{ __('payments.' . $participant->payment . '.title') }}</x-button.badge>
+                                        <span class="blur-sm">XX.XX.XXXX</span>
+                                    @endcan
+                                </x-table.cell>
+                                <x-table.cell>
+                                    @can('viewAny', $participant)
+                                        {{ $participant->street }}
                                     @else
-                                        <x-button.badge wire:click="pay({{ $participant->id }})" disabled>{{ __('payments.' . $participant->payment . '.title') }}</x-button.badge>
-                                    @endif
-                                </span>
-                            </x-table.cell>
-{{--                            <x-table.cell>--}}
-{{--                                @can('update', $course)--}}
-{{--                                    <x-button.link wire:click="participant({{ $course->id }})">{{ _i('participants') }}</x-button.link>--}}
-{{--                                @endcan--}}
-{{--                            </x-table.cell>--}}
-{{--                            <x-table.cell>--}}
-{{--                                @can('update', $course)--}}
-{{--                                    <x-button.link wire:click="edit({{ $course->id }})">{{ _i('edit') }}</x-button.link>--}}
-{{--                                @endcan--}}
-{{--                            </x-table.cell>--}}
-                        </x-table.row>
+                                        <span class="blur">{{ substr(sha1(time()), 0, strlen($participant->street)) }}</span>
+                                    @endcan
+                                </x-table.cell>
+                                <x-table.cell>
+                                    @can('viewAny', $participant)
+                                        {{ $participant->zipcode }} {{ $participant->location }}
+                                    @else
+                                        <span class="blur">12345 {{ substr(sha1(time()), 0, strlen($participant->location)) }}</span>
+                                    @endcan
+                                </x-table.cell>
+                                <x-table.cell>
+                                    @can('viewAny', $participant)
+                                        {{ $participant->phone }}
+                                    @else
+                                        <span class="blur">{{ substr(sha1(time()), 0, strlen($participant->phone)) }}</span>
+                                    @endcan
+                                </x-table.cell>
+                                <x-table.cell>
+                                    @can('viewAny', $participant)
+                                        {{ $participant->email }}
+                                    @else
+                                        <span class="blur">{{ substr(sha1(time()), 0, strlen($participant->email)) }}</span>
+                                    @endcan
+                                </x-table.cell>
+                                <x-table.cell>{{ \Carbon\Carbon::parse($participant->created_at)->isoFormat('DD.MM.YYYY') }}</x-table.cell>
+                                <x-table.cell>{{ $participant->currency }} {{ $participant->price_gross }}</x-table.cell>
+                                <x-table.cell>
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ $participant->participated ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
+                                        @if($can_update)
+                                            <x-button.badge wire:click="participate({{ $participant->id }})">{{ $participant->participated ? _i('participated') : _i('not participated') }}</x-button.badge>
+                                        @else
+                                            <x-button.badge wire:click="participate({{ $participant->id }})" disabled>{{ $participant->participated ? _i('participated') : _i('not participated') }}</x-button.badge>
+                                        @endif
+                                    </span>
+                                </x-table.cell>
+                                <x-table.cell>
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ $participant->payed ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
+                                        @if($can_update)
+                                            <x-button.badge wire:click="pay({{ $participant->id }})">{{ __('payments.' . $participant->payment . '.title') }}</x-button.badge>
+                                        @else
+                                            <x-button.badge wire:click="pay({{ $participant->id }})" disabled>{{ __('payments.' . $participant->payment . '.title') }}</x-button.badge>
+                                        @endif
+                                    </span>
+                                </x-table.cell>
+    {{--                            <x-table.cell>--}}
+    {{--                                @can('update', $course)--}}
+    {{--                                    <x-button.link wire:click="participant({{ $course->id }})">{{ _i('participants') }}</x-button.link>--}}
+    {{--                                @endcan--}}
+    {{--                            </x-table.cell>--}}
+    {{--                            <x-table.cell>--}}
+    {{--                                @can('update', $course)--}}
+    {{--                                    <x-button.link wire:click="edit({{ $course->id }})">{{ _i('edit') }}</x-button.link>--}}
+    {{--                                @endcan--}}
+    {{--                            </x-table.cell>--}}
+                            </x-table.row>
+                        @endforeach
                     @endforeach
                 </x-slot>
             </x-table>
+
+{{--            <div wire:poll>--}}
+
+{{--                Current time: {{ now() }}--}}
+
+{{--            </div>--}}
 {{--            <div>--}}
 {{--                {{ $courses->links() }}--}}
 {{--            </div>--}}
         </div>
     </div>
+
+    <form wire:submit.prevent="getCert">
+        <x-modal.confirmation wire:model.defer="showCertModal">
+            <x-slot name="title">{{ _i('Create certificates') }}</x-slot>
+            <x-slot name="content">
+                <div wire:loading.remove>
+{{--                    <div>--}}
+{{--                        <label for="category" class="block text-sm font-medium text-gray-700">{{ _i('category') }}</label>--}}
+{{--                        <select id="certTemplate" wire:model.lazy="certTemplate" required name="certTemplate" class="mt-1 block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">--}}
+{{--                            <option value="">{{ _i('please select a certificate') }}</option>--}}
+{{--                            @foreach($course_types->certTemplates as $certTemplate)--}}
+{{--                                @if($course_data->registration_number || !$certTemplate->registration_required)--}}
+{{--                                    <option value="{{ $certTemplate->id }}">{{ $certTemplate->name }}</option>--}}
+{{--                                @endif--}}
+{{--                            @endforeach--}}
+{{--                        </select>--}}
+{{--                        @error('certTemplate')--}}
+{{--                            <p class="mt-2 text-sm text-red-600" id="certTemplate-error">{{ $errors->first('certTemplate') }}</p>--}}
+{{--                        @enderror--}}
+{{--                    </div>--}}
+
+{{--                    @if($certTemplate)--}}
+                        <p class="text-sm mt-5 text-gray-500">
+                            {{ _i('Are you sure you want to create the certificates?') }}
+                        </p>
+{{--                    @endif--}}
+                </div>
+
+                <div wire:loading wire:target="getCert">
+
+                    {{ _i('Create certificates ... Please wait ...') }}
+
+                </div>
+            </x-slot>
+
+            <x-slot name="footer">
+                <x-button.secondary wire:click="$set('showCertModal', false)">{{ _i('Cancel') }}</x-button.secondary>
+{{--                @if($certTemplate)--}}
+                    <x-button.danger type="submit">{{ _i('Create certificates') }}</x-button.danger>
+{{--                @endif--}}
+            </x-slot>
+        </x-modal.confirmation>
+    </form>
+
+    <x-modal.confirmation wire:model.defer="showDownloadModal">
+        <x-slot name="title">{{ _i('Certificates created') }}</x-slot>
+        <x-slot name="content">
+
+        <div>
+            <p class="text-sm text-gray-500">
+                @if($showDownloadModal)
+                    <div wire:poll="checkDownload">
+                        {{ _i('Certificates will now be downloaded.') }}
+                    </div>
+                @endif
+            </p>
+        </div>
+
+{{--            <div wire:loading wire:target="getCert">--}}
+
+{{--                Processing Payment...--}}
+
+{{--            </div>--}}
+        </x-slot>
+
+        <x-slot name="footer">
+{{--            <x-button.secondary wire:click="$set('showCertModal', false)">{{ _i('Cancel') }}</x-button.secondary>--}}
+{{--            <x-button.danger type="submit">{{ _i('Cancel course') }}</x-button.danger>--}}
+        </x-slot>
+    </x-modal.confirmation>
 </div>

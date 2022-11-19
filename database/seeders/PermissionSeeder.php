@@ -141,6 +141,20 @@ class PermissionSeeder extends Seeder
             'group' => 'role',
         ]);
 
+        Permission::create([
+            'name' => 'certTemplate.create',
+            'display_name' => 'Create Certificate Template',
+            'description' => 'create a new certificate template',
+            'group' => 'certTemplate',
+        ]);
+
+        Permission::create([
+            'name' => 'certTemplate.update',
+            'display_name' => 'Edit Certificate Template',
+            'description' => 'can edit a certificate template',
+            'group' => 'participants',
+        ]);
+
         // create an administrator role as standard
         $admin = Role::create([
             'name' => 'admin',

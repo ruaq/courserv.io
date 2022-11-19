@@ -193,6 +193,19 @@
                         </div>
                     </div>
 
+                    <div>
+                        <label for="certTemplate" class="block text-sm font-medium text-gray-700">{{ _i('Certification Template') }}</label>
+                        <select id="certTemplate" wire:model.lazy="editing.cert_template_id" name="certTemplate" class="mt-1 block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                            <option value="0">{{ _i('No Certification Template') }}</option>
+                            @foreach($certTemplates as $certTemplate)
+                                <option value="{{ $certTemplate->id }}">{{ $certTemplate->title }}</option>
+                            @endforeach
+                        </select>
+                        @error('editing.cert_template_id')
+                        <p class="mt-2 text-sm text-red-600" id="certTemplate-error">{{ $errors->first('editing.cert_template_id') }}</p>
+                        @enderror
+                    </div>
+
                     <fieldset class="space-y-5">
                         <legend class="sr-only">Notifications</legend>
                         @foreach(config('payment.methods') as $method)

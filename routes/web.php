@@ -18,7 +18,8 @@ Route::group(
     [
         'prefix' => LaravelLocalization::setLocale(),
         'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
-    ], function(){
+    ],
+    function () {
         Route::post('livewire/message/{name}', '\Livewire\Controllers\HttpConnectionHandler');
 
         Route::get('login', \App\Http\Livewire\Auth\Login::class)
@@ -52,6 +53,9 @@ Route::group(
         Route::get('prices', \App\Http\Livewire\Price::class)
             ->name('prices');
 
+        Route::get('cert-templates', \App\Http\Livewire\CertTemplate::class)
+            ->name('certTemplates');
+
         Route::get('password/reset/{hashedId}', \App\Http\Livewire\PasswordReset::class)
             ->middleware('signed')
             ->name('password.reset');
@@ -66,7 +70,8 @@ Route::group(
 
         Route::get('booking/{course}/{price}', \App\Http\Livewire\Booking::class)
             ->name('booking');
-});
+    }
+);
 
 if (config('services.indexnow.key')) {
     Route::get('{key}.txt', function (Request $request, $key) {
@@ -85,9 +90,14 @@ Route::get('/', function () {
 Route::get('coordinates', [App\Http\Controllers\CoordinatesController::class, 'import']);
 Route::get('locations', [App\Http\Controllers\CoordinatesController::class, 'locations']);
 
-Route::get('/email/verify', function () {
-    return view('auth.verify-email'); // TODO correct message if still not confirmed email
-})->middleware('auth')->name('verification.notice');
+Route::get(
+    '/email/verify',
+    function () {
+        return view('auth.verify-email'); // TODO correct message if still not confirmed email
+    }
+)
+    ->middleware('auth')
+    ->name('verification.notice');
 
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
