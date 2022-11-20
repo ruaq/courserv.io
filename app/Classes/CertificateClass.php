@@ -2,7 +2,6 @@
 
 namespace App\Classes;
 
-use App\Models\CertTemplate;
 use App\Models\Course;
 use App\Models\Participant;
 use App\Models\User;
@@ -21,6 +20,7 @@ class CertificateClass
     public string $path;
     private array $files = [];
     public string $certTemplate;
+    private string $trainer;
 
     public function __construct()
     {
@@ -45,6 +45,11 @@ class CertificateClass
     public function setFilename(string|int $filename): void
     {
         $this->filename = $filename;
+    }
+
+    public function setTrainer(string $trainer): void
+    {
+        $this->trainer = $trainer;
     }
 
     /**
@@ -76,6 +81,7 @@ class CertificateClass
         );
 
         $templateProcessor->setValues([
+            'trainer' => $this->trainer,
             'firstname' => $participant->firstname,
             'lastname' => $participant->lastname,
             'date_of_birth' => Carbon::parse($participant->date_of_birth)->isoFormat('DD.MM.YYYY'),

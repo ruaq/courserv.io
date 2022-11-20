@@ -7,6 +7,7 @@ use App\Events\CertificateRequested;
 use App\Models\Course;
 use App\Models\CourseType;
 use App\Models\Price;
+use App\Models\User;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use setasign\Fpdi\PdfParser\CrossReference\CrossReferenceException;
@@ -50,6 +51,7 @@ class GenerateCertificate implements ShouldQueue
                 ]
             )
             ->with('prices')
+            ->with('trainer')
             ->first();
 
         // if no participants found, abort
@@ -89,6 +91,13 @@ class GenerateCertificate implements ShouldQueue
         $cert = new CertificateClass();
         $cert->setCourse($course);
         $cert->setUser($event->user);
+
+        if ($course->trainer[0]) {
+            $trainer = User::whereId($course->trainer[0]->user_id)->first();
+            $cert->setTrainer($trainer->name);
+        } else {
+            $cert->setTrainer(''); // set blank if no trainer was selected
+        }
 
         foreach ($course->participants as $participant) {
             if (array_key_exists($participant->price_id, $templates)) {
