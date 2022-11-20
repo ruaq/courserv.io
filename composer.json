@@ -24,7 +24,7 @@
         "laravel/tinker": "2.7.3",
         "livewire/livewire": "2.10.7",
         "mcamara/laravel-localization": "1.7.0",
-        "phpoffice/phpword": "^0.18.3",
+        "phpoffice/phpword": "^1.0.0",
         "santigarcor/laratrust": "7.1.0",
         "setasign/fpdf": "^1.8",
         "setasign/fpdi-protection": "^2.0",
