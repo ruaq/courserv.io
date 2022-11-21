@@ -27,3 +27,4 @@ yarn-error.log
 /deploy.php
 /deploy.yaml
 /deploy
+.DS_Store
