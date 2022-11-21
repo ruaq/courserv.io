@@ -152,7 +152,7 @@
                     <div>
                         <label for="description" class="block text-sm font-medium text-gray-700">{{ _i('Template File') }}</label>
                         <div class="relative mt-1 rounded-md shadow-sm text-center">
-                            <input type="file" wire:model="newTemplate">
+                            <input type="file" wire:model="newTemplate" id="{{ $uploadId }}">
 {{--                            <textarea wire:model.lazy="editing.description" name="description" id="description" class="@error('editing.description') border-red-300 text-red-900 placeholder-red-300 focus:border-red-500 focus:outline-none focus:ring-red-500 @enderror block w-full rounded-md border-gray-300 pr-10 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="{{ _i('Description') }}" @error('editing.description') aria-invalid="true" aria-describedby="description-error" @enderror></textarea>--}}
                             @error('newTemplate')
                             <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">

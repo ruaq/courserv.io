@@ -8,6 +8,7 @@ use App\Http\Livewire\DataTable\WithSorting;
 use App\Models\CertTemplate as CertTemplateModel;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -23,6 +24,7 @@ class CertTemplate extends Component
 
     public bool $showEditModal = false;
     public $newTemplate;
+    public $uploadId;
 
     protected function rules(): array
     {
@@ -82,6 +84,7 @@ class CertTemplate extends Component
         $this->authorize('update', $template);
 
         if ($this->editing->isNot($template)) {
+            $this->makeBlankModel();
             $this->editing = $template;
         }
         $this->showEditModal = true;
@@ -94,7 +97,11 @@ class CertTemplate extends Component
         $this->validate();
 
         if ($this->newTemplate) {
+            if ($this->editing->filename) { // delete old template, if changed
+                Storage::disk('certTemplates')->delete($this->editing->filename);
+            }
             $this->editing->filename = $this->newTemplate->store('/', 'certTemplates');
+            $this->uploadId = time(); // reset upload ID
         }
 
         $this->editing->save();
@@ -120,6 +127,7 @@ class CertTemplate extends Component
     protected function makeBlankModel(): CertTemplateModel
     {
         unset($this->newTemplate);
+        $this->uploadId = time(); // set unique ID to clear upload field
 
         return new CertTemplateModel();
     }
