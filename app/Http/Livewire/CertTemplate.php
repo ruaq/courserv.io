@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Str;
+use ZipArchive;
 
 class CertTemplate extends Component
 {
@@ -66,6 +68,8 @@ class CertTemplate extends Component
 
     public function updatedNewTemplate()
     {
+        $this->correctDocxFile($this->newTemplate->path());
+
         $this->validateOnly('newTemplate');
     }
 
@@ -130,5 +134,73 @@ class CertTemplate extends Component
         $this->uploadId = time(); // set unique ID to clear upload field
 
         return new CertTemplateModel();
+    }
+
+    private function correctDocxFile($tempFile): void
+    {
+        if (mime_content_type($tempFile) != 'application/octet-stream') { // file isn't incorrect .docx file
+            return;
+        }
+
+        $str = Str::random();
+        $tmpDir = Storage::disk('tmp')->getConfig()['root'] . '/' . $str;
+
+        $zip = new ZipArchive();
+
+        if ($zip->open($this->newTemplate->path()) === true) {
+            $zip->extractTo($tmpDir);
+            $zip->close();
+        } else { // wasn't a zip / docx
+            Storage::disk('tmp')->deleteDirectory($str);
+            return;
+        }
+
+        $files = Storage::disk('tmp')->allFiles($str);
+        $fileArray = array();
+        $i = 3;
+
+        // sort files in the correct order
+        foreach ($files as $file) {
+            $f = str_replace($str . '/', '', $file);
+
+            if ($f == '[Content_Types].xml') {
+                $fileArray[0] = $f;
+                continue;
+            }
+
+            if ($f == '_rels/.rels') {
+                $fileArray[1] = $f;
+                continue;
+            }
+
+            if ($f == 'word/_rels/document.xml.rels') {
+                $fileArray[2] = $f;
+                continue;
+            }
+
+            $fileArray[$i] = $f;
+            $i++;
+        }
+
+        ksort($fileArray);
+
+        // replace the uploaded temp file
+        $outfile = $tempFile;
+
+        if (file_exists($outfile)) {
+            unlink($outfile);
+        }
+
+        // make a new file
+        chdir($tmpDir);
+        $o = new ZipArchive();
+        $o->open($outfile, ZipArchive::CREATE);
+        foreach ($fileArray as $key => $file) {
+            $o->addFile($file);
+        }
+
+        $o->close();
+
+        Storage::disk('tmp')->deleteDirectory($str);
     }
 }
