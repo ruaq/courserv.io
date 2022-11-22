@@ -682,7 +682,9 @@ class Course extends Component
         // save the trainer for the days TODO is this the best way?
         foreach ($this->trainer as $item => $value) {
             if ($item != 'general') {
-                $date = Carbon::createFromFormat('d.m.Y', $this->courseDays[$item]['date']);
+                if (isset($this->courseDays[$item]['date'])) {
+                    $date = Carbon::createFromFormat('d.m.Y', $this->courseDays[$item]['date']);
+                }
             } else {
                 // set day before start as date, if set for all days TODO better ideas?
                 $date = $this->editing->start->subDay()->format('Y-m-d');
