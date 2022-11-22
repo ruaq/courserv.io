@@ -152,11 +152,12 @@ class CertTemplate extends Component
             $zip->close();
         } else { // wasn't a zip / docx
             Storage::disk('tmp')->deleteDirectory($str);
+
             return;
         }
 
         $files = Storage::disk('tmp')->allFiles($str);
-        $fileArray = array();
+        $fileArray = [];
         $i = 3;
 
         // sort files in the correct order
@@ -165,16 +166,19 @@ class CertTemplate extends Component
 
             if ($f == '[Content_Types].xml') {
                 $fileArray[0] = $f;
+
                 continue;
             }
 
             if ($f == '_rels/.rels') {
                 $fileArray[1] = $f;
+
                 continue;
             }
 
             if ($f == 'word/_rels/document.xml.rels') {
                 $fileArray[2] = $f;
+
                 continue;
             }
 

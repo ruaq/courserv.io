@@ -112,7 +112,7 @@ class GenerateSitemap extends Command
                         route(
                             'booking',
                             ['course' => Hashids::encode($course->id),
-                                'price' => Hashids::encode($price->id)
+                                'price' => Hashids::encode($price->id),
                             ]
                         ),
                         [],
@@ -126,7 +126,7 @@ class GenerateSitemap extends Command
                         $url_course->addAlternate(LaravelLocalization::getLocalizedURL(
                             $languagesKey,
                             route('booking', ['course' => Hashids::encode($course->id),
-                            'price' => Hashids::encode($price->id)]),
+                            'price' => Hashids::encode($price->id), ]),
                             [],
                             true
                         ), $languagesKey);
@@ -141,7 +141,7 @@ class GenerateSitemap extends Command
                                 'booking',
                                 [
                                     'course' => Hashids::encode($course->id),
-                                    'price' => Hashids::encode($price->id)
+                                    'price' => Hashids::encode($price->id),
                                 ]
                             )
                         ),
@@ -175,7 +175,7 @@ class GenerateSitemap extends Command
                             'booking',
                             [
                                 'course' => Hashids::encode($course->id),
-                                'price' => Hashids::encode($price->id)
+                                'price' => Hashids::encode($price->id),
                             ]
                         ),
                         [],
@@ -196,7 +196,7 @@ class GenerateSitemap extends Command
                                 'booking',
                                 [
                                     'course' => Hashids::encode($course->id),
-                                    'price' => Hashids::encode($price->id)
+                                    'price' => Hashids::encode($price->id),
                                 ]
                             ),
                             [],
@@ -213,7 +213,7 @@ class GenerateSitemap extends Command
                                 'booking',
                                 [
                                     'course' => Hashids::encode($course->id),
-                                    'price' => Hashids::encode($price->id)
+                                    'price' => Hashids::encode($price->id),
                                 ]
                             )
                         ),
@@ -255,7 +255,7 @@ class GenerateSitemap extends Command
                                 'booking.overview',
                                 [
                                     'slug' => $course->type->slug,
-                                    'location' => $course->location
+                                    'location' => $course->location,
                                 ]
                             ),
                             [],
@@ -267,7 +267,7 @@ class GenerateSitemap extends Command
                                 'booking',
                                 [
                                     'course' => Hashids::encode($course->id),
-                                    'price' => Hashids::encode($price->id)
+                                    'price' => Hashids::encode($price->id),
                                 ]
                             ),
                             [],

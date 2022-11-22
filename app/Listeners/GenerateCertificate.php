@@ -103,7 +103,7 @@ class GenerateCertificate implements ShouldQueue
             if (array_key_exists($participant->price_id, $templates)) {
                 $templateFile = $templates[$participant->price_id]['filename'];
             } else {
-                if (!isset($templates[0])) { // skip if no course type template is set
+                if (! isset($templates[0])) { // skip if no course type template is set
                     continue;
                 }
 
