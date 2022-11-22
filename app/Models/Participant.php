@@ -75,6 +75,7 @@ class Participant extends Model
     protected $fillable = [
         'course_id',
         'contact_id',
+        'team_id',
         'lastname',
         'firstname',
         'date_of_birth',

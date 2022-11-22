@@ -1,5 +1,5 @@
 <div>
-    <form wire:submit.prevent="save({{ $course_data->id }}, {{ $course_data->prices[0]->id }})" class="space-y-8 divide-y divide-gray-200">
+    <form wire:submit.prevent="save({{ $course_data->id }}, {{ $course_data->prices[0]->id }}, {{ $course_data->team->id }})" class="space-y-8 divide-y divide-gray-200">
         <div class="space-y-8 divide-y divide-gray-200">
             <div>
                 <div>

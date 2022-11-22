@@ -89,7 +89,7 @@ class Booking extends Component
         $this->participants = array_values($this->participants);
     }
 
-    public function save($course_id, $price_id)
+    public function save($course_id, $price_id, $team_id)
     {
         $this->participants = array_filter($this->participants); // remove empty values
 
@@ -108,6 +108,7 @@ class Booking extends Component
             $participant = Participant::create([
                 'course_id' => $course_id,
                 'contact_id' => null,
+                'team_id' => $team_id,
                 'lastname' => $this->contactPerson['lastname'],
                 'firstname' => $this->contactPerson['firstname'],
                 'date_of_birth' => Carbon::parse($this->participants[0]['date_of_birth'])->isoFormat('YYYY-MM-DD'),
@@ -128,6 +129,7 @@ class Booking extends Component
         } else { // contact person != participant(s)
             // create contact person
             $contactPerson = ContactPerson::create([
+                'team_id' => $team_id,
                 'lastname' => $this->contactPerson['lastname'],
                 'firstname' => $this->contactPerson['firstname'],
                 'company' => $this->contactPerson['company'] ?? '',
@@ -144,6 +146,7 @@ class Booking extends Component
             foreach ($this->participants as $participant) {
                 $participant['course_id'] = $course_id;
                 $participant['contact_id'] = $contactPerson->id;
+                $participant['team_id'] = $team_id;
                 $participant['date_of_birth'] = Carbon::parse($participant['date_of_birth'])->isoFormat('YYYY-MM-DD');
                 $participant['email'] = $participant['email'] ?? '';
                 $participant['phone'] = $participant['phone'] ?? '';
