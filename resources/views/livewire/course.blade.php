@@ -280,7 +280,9 @@
                                         <option value="later">{{ _i('select later') }}</option>
                                         <option value="trainer">{{ _i('trainer can choose') }}</option>
                                         @foreach($editing->team->users as $user)
-                                            <option value="{{ $user['id'] }}">{{ $user['name'] }}</option>
+                                            @if($user->active)
+                                                <option value="{{ $user['id'] }}">{{ $user['name'] }}</option>
+                                            @endif
                                         @endforeach
                                     </select>
                                 </div>
@@ -322,7 +324,9 @@
                                                         <option value="later">{{ _i('select later') }}</option>
                                                         <option value="trainer">{{ _i('trainer can choose') }}</option>
                                                         @foreach($editing->team->users as $user)
-                                                            <option value="{{ $user['id'] }}">{{ $user['name'] }}</option>
+                                                            @if($user->active)
+                                                                <option value="{{ $user['id'] }}">{{ $user['name'] }}</option>
+                                                            @endif
                                                         @endforeach
                                                     </select>
                                                 </div>
