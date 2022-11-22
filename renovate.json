@@ -3,7 +3,12 @@
     "extends": [
         "config:base",
         "schedule:daily",
-        ":disableRateLimiting"
+        ":disableRateLimiting",
+        ":preserveSemverRanges",
+        ":dependencyDashboard",
+        ":rebaseStalePrs",
+        ":enableVulnerabilityAlertsWithLabel('security')",
+        "group:recommended"
     ],
     "timezone": "Europe/Berlin",
     "packageRules": [
@@ -17,6 +22,11 @@
         {
             "matchDepTypes": ["devDependencies"],
             "matchPackagePatterns": ["lint", "prettier"],
+            "automerge": true
+        },
+        {
+            "description": "Auto merge small changes as per https://docs.renovatebot.com/configuration-options/#automerge",
+            "matchUpdateTypes": ["patch", "pin", "digest", "lockFileMaintenance"],
             "automerge": true
         }
     ],
