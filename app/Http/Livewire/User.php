@@ -27,6 +27,8 @@ class User extends Component
 
     public array $roleIds = [];
 
+    public array $teamRoleIds = [];
+
     // removed spoof from email validation (update issue) TODO check later
     protected function rules(): array
     {
@@ -56,6 +58,7 @@ class User extends Component
             $this->editing = $this->makeBlankUser();
             $this->teamIds = [];
             $this->roleIds = [];
+            $this->teamRoleIds = [];
         }
 
         $this->showEditModal = true;
@@ -74,8 +77,13 @@ class User extends Component
             }
 
             $this->roleIds = [];
-            foreach ($this->editing->roles->pluck('id') as $role) {
-                $this->roleIds[] = (string) $role;
+            $this->teamRoleIds = [];
+            foreach ($this->editing->roles as $role) {
+                if (isset($role->pivot->team_id)) { // it's a team specific role
+                    $this->teamRoleIds[$role->pivot->team_id] = $role->id;
+                } else { // global role
+                    $this->roleIds[] = (string)$role->id;
+                }
             }
         }
         $this->showEditModal = true;
@@ -112,6 +120,15 @@ class User extends Component
 
         $this->editing->teams()->sync($this->teamIds);
         $this->editing->syncRoles($this->roleIds);
+
+        // sync the roles for the teams
+        foreach ($this->teamIds as $team) {
+            if (! isset($this->teamRoleIds[$team]) || $this->teamRoleIds[$team] == '') {
+                $this->teamRoleIds[$team] = [];
+            }
+            $this->editing->syncRoles((array)$this->teamRoleIds[$team], $team);
+        }
+
         $this->showEditModal = false;
     }
 

@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: courserv.io\n"
-"POT-Creation-Date: 2022-11-19 22:46+0100\n"
-"PO-Revision-Date: 2022-11-19 22:47+0100\n"
+"POT-Creation-Date: 2022-11-23 15:18+0100\n"
+"PO-Revision-Date: 2022-11-23 15:18+0100\n"
 "Last-Translator: Holger Schmermbeck <hosch@mailbox.org>\n"
 "Language-Team: Holger Schmermbeck <hosch@mailbox.org>\n"
 "Language: de\n"
@@ -21,8 +21,8 @@ msgstr ""
 
 #: ../storage/framework/messages/01f4d21089366a8e092e39781bbeacfbf34652c6.php.php:10
 #: ../storage/framework/messages/229627715f3b412d7b994fbaaa747b622fe037c4.php.php:10
-#: ../storage/framework/messages/a517e3b699764ebd7d97f751403deeb9575cb377.php.php:876
-#: Http/Livewire/Course.php:876
+#: ../storage/framework/messages/a517e3b699764ebd7d97f751403deeb9575cb377.php.php:878
+#: Http/Livewire/Course.php:878
 msgid "Courses"
 msgstr "Kurse"
 
@@ -179,15 +179,15 @@ msgid "payments."
 msgstr ""
 
 #: ../storage/framework/messages/0db792b9872d7d19fd13948cc3ff084eada2a8e9.php.php:517
-#: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:1298
-#: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:1354
+#: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:1302
+#: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:1358
 #: ../storage/framework/messages/ea15200ba9143250f6e16a1db50f6f8e68b11c1b.php.php:457
 #: ../storage/framework/messages/fbb65b28391548c473234a339fc79b21e1165f8c.php.php:659
 msgid "Cancel"
 msgstr "Abbrechen"
 
-#: ../storage/framework/messages/11f4bd005efe0d13d42bf681d94eb9c76538f47a.php.php:201
-#: Http/Livewire/Booking.php:201
+#: ../storage/framework/messages/11f4bd005efe0d13d42bf681d94eb9c76538f47a.php.php:204
+#: Http/Livewire/Booking.php:204
 msgid "Book course"
 msgstr "Kurs buchen"
 
@@ -200,9 +200,9 @@ msgid "Prices"
 msgstr "Preise"
 
 #: ../storage/framework/messages/2c47c2c7e947f07988e644516eef17f43a4ad599.php.php:10
-#: ../storage/framework/messages/4bf0e7ad645abafdf2739ae7f993a4fde8c29691.php.php:153
+#: ../storage/framework/messages/4bf0e7ad645abafdf2739ae7f993a4fde8c29691.php.php:170
 #: ../storage/framework/messages/aa09fdc53c2f131d4fae0937f45433a0ef6b8585.php.php:10
-#: Http/Livewire/User.php:153
+#: Http/Livewire/User.php:170
 msgid "User"
 msgstr "Benutzer"
 
@@ -260,24 +260,24 @@ msgid "reset filters"
 msgstr "Filter zurücksetzen"
 
 #: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:320
-#: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:1040
-#: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:1042
-#: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:1049
+#: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:1044
+#: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:1046
+#: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:1053
 msgid "seminar location"
 msgstr "Seminarort"
 
 #: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:334
-#: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:1088
-#: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:1090
-#: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:1097
+#: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:1092
+#: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:1094
+#: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:1101
 #: ../storage/framework/messages/fbb65b28391548c473234a339fc79b21e1165f8c.php.php:163
 msgid "street"
 msgstr "Straße"
 
 #: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:348
-#: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:1180
-#: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:1182
-#: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:1189
+#: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:1184
+#: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:1186
+#: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:1193
 #: ../storage/framework/messages/fbb65b28391548c473234a339fc79b21e1165f8c.php.php:177
 msgid "location"
 msgstr "Ort"
@@ -336,44 +336,44 @@ msgid "course date"
 msgstr "Kursdatum"
 
 #: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:907
-#: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:1004
+#: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:1006
 msgid "trainer"
 msgstr "Ausbilder"
 
 #: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:909
-#: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:1006
+#: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:1008
 msgid "select / remove a trainer"
 msgstr "Ausbilder auswählen / entfernen"
 
 #: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:910
-#: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:1007
+#: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:1009
 msgid "select later"
 msgstr "später auswählen"
 
 #: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:911
-#: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:1008
+#: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:1010
 msgid "trainer can choose"
 msgstr "Trainer können sich melden"
 
-#: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:927
-#: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:1024
+#: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:929
+#: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:1028
 msgid "add a new trainer"
 msgstr "einen neuen Ausbilder hinzufügen"
 
-#: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:1080
+#: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:1084
 msgid "the seminar location or company"
 msgstr "der Seminarort oder das Unternehmen"
 
-#: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:1134
-#: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:1136
-#: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:1143
+#: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:1138
+#: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:1140
+#: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:1147
 #: ../storage/framework/messages/49daf884bf1be731e5eb446e599d2b84f3aa0ee0.php.php:160
 msgid "zipcode"
 msgstr "Postleitzahl"
 
-#: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:1226
-#: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:1228
-#: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:1235
+#: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:1230
+#: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:1232
+#: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:1239
 #: ../storage/framework/messages/9fa62750430aa277bd8d3479ffc62feb714db77c.php.php:30
 #: ../storage/framework/messages/9fa62750430aa277bd8d3479ffc62feb714db77c.php.php:78
 #: ../storage/framework/messages/9fa62750430aa277bd8d3479ffc62feb714db77c.php.php:525
@@ -382,13 +382,13 @@ msgstr "Postleitzahl"
 msgid "seats"
 msgstr "Plätze"
 
-#: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:1283
-#: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:1337
-#: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:1368
+#: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:1287
+#: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:1341
+#: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:1372
 msgid "Cancel course"
 msgstr "Kurs stornieren"
 
-#: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:1340
+#: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:1344
 msgid ""
 "Are you sure you want to cancel this course? This action cannot be undone."
 msgstr ""
@@ -396,9 +396,9 @@ msgstr ""
 "nicht rückgängig gemacht werden."
 
 #: ../storage/framework/messages/2e6f155b2e0d8df916359976b30666c9b162f48f.php.php:10
-#: ../storage/framework/messages/64fa4154030c2dcefc8301af09d906dd1d0d85e1.php.php:121
+#: ../storage/framework/messages/64fa4154030c2dcefc8301af09d906dd1d0d85e1.php.php:126
 #: ../storage/framework/messages/80db1355068b30ac21ec1da19d561d9ba0e0c4cd.php.php:10
-#: Http/Livewire/CertTemplate.php:121
+#: Http/Livewire/CertTemplate.php:126
 msgid "Certification Templates"
 msgstr "Bescheinigungsvorlagen"
 
@@ -761,8 +761,8 @@ msgstr "in %s und Umgebung"
 
 #: ../storage/framework/messages/5398aa3eed4e1645745473078913123fb5095ce6.php.php:10
 #: ../storage/framework/messages/997b8850e277be961cf78993a62b2d94ab15727f.php.php:10
-#: ../storage/framework/messages/ad551370f2e460d6e9303d25d7e7333e0f3f6f2e.php.php:251
-#: ../storage/framework/messages/ad551370f2e460d6e9303d25d7e7333e0f3f6f2e.php.php:254
+#: ../storage/framework/messages/ad551370f2e460d6e9303d25d7e7333e0f3f6f2e.php.php:272
+#: ../storage/framework/messages/ad551370f2e460d6e9303d25d7e7333e0f3f6f2e.php.php:275
 #: ../storage/framework/messages/fdf1132cde865ff24b184bfd8c31522ccf0cc15c.php.php:90
 #: Http/Livewire/Role.php:90
 msgid "Roles"
@@ -1037,6 +1037,14 @@ msgstr "Benutzer editieren"
 #: ../storage/framework/messages/ad551370f2e460d6e9303d25d7e7333e0f3f6f2e.php.php:150
 msgid "name"
 msgstr "Name"
+
+#: ../storage/framework/messages/ad551370f2e460d6e9303d25d7e7333e0f3f6f2e.php.php:249
+msgid "role for this team"
+msgstr "Rolle für dieses Team"
+
+#: ../storage/framework/messages/ad551370f2e460d6e9303d25d7e7333e0f3f6f2e.php.php:251
+msgid "no role"
+msgstr "keine Rolle"
 
 #: ../storage/framework/messages/c4c0367aff484b90efef37a704e3aa3d3b4322c5.php.php:2
 msgid "Hello and Welcome"

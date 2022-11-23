@@ -13,7 +13,7 @@
                                 {{ _i('Teams') }}
                             </th>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
-                                Role
+                                {{ _i('Roles') }}
                             </th>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
                                 Status
@@ -45,7 +45,7 @@
                                         @foreach($user->teams as $team){{ $team->display_name }}{{ !$loop->last ? ', ' : '' }}@endforeach
                                     </td>
                                     <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-500">
-                                        @foreach($user->roles as $role){{ $role->display_name }}{{ !$loop->last ? ', ' : '' }}@endforeach
+                                        @foreach($user->roles as $role)@if(!$role->pivot->team_id){{ $role->display_name }}{{ !$loop->last ? ', ' : '' }}@endif @endforeach
                                     </td>
                                     <td class="whitespace-nowrap px-6 py-4">
                                         <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ $user->active ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
@@ -116,13 +116,27 @@
                                 <legend class="sr-only">{{ _i('Teams') }}</legend>
                                 <div class="divide-y divide-gray-200">
                                     @foreach($teams as $team)
-                                        <div class="relative flex items-start py-4">
-                                            <div class="min-w-0 flex-1 text-sm">
-                                                <label for="{{ $team->id }}" class="font-medium text-gray-700">{{ $team->display_name }}</label>
-                                                <p id="{{ $team->id }}-description" class="text-gray-500">{{ $team->description }}</p>
+                                        <div class="py-2">
+                                            <div class="relative flex items-start py-2">
+                                                <div class="min-w-0 flex-1 text-sm">
+                                                    <label for="{{ $team->id }}" class="font-medium text-gray-700">{{ $team->display_name }}</label>
+                                                    <p id="{{ $team->id }}-description" class="text-gray-500">{{ $team->description }}</p>
+                                                </div>
+                                                <div class="ml-3 flex h-5 items-center">
+                                                    <input wire:model="teamIds" value="{{ $team->id }}" id="{{ $team->id }}" aria-describedby="{{ $team->id }}-description" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                                </div>
                                             </div>
-                                            <div class="ml-3 flex h-5 items-center">
-                                                <input wire:model="teamIds" value="{{ $team->id }}" id="{{ $team->id }}" aria-describedby="{{ $team->id }}-description" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                            <div>
+                                                <label for="category" class="block text-sm font-medium text-gray-700">{{ _i('role for this team') }}</label>
+                                                <select id="category" wire:model.lazy="teamRoleIds.{{ $team->id }}" name="category" class="mt-1 block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                                                    <option value="">{{ _i('no role') }}</option>
+                                                    @foreach($roles as $role)
+                                                        <option value="{{ $role->id }}">{{ $role->display_name }}</option>
+                                                    @endforeach
+                                                </select>
+                                                @error('editing.category')
+                                                    <p class="mt-2 text-sm text-red-600" id="category-error">{{ $errors->first('editing.category') }}</p>
+                                                @enderror
                                             </div>
                                         </div>
                                     @endforeach
