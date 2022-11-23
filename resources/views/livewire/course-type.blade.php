@@ -25,9 +25,6 @@
                                 {{ _i('seats') }}
                             </th>
                             <th scope="col" class="px-6 py-3 text-right text-xs font-medium tracking-wider text-gray-500">
-
-                            </th>
-                            <th scope="col" class="px-6 py-3 text-right text-xs font-medium tracking-wider text-gray-500">
                                 @can('create', \App\Models\CourseType::class)<x-button.link wire:click="create">{{ _i('Add Course type') }}</x-button.link>@endcan
                             </th>
                         </tr>
@@ -52,9 +49,6 @@
                                 </td>
                                 <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-500">
                                     {{ $courseType->seats }} {{ _i('seats') }}
-                                </td>
-                                <td class="whitespace-nowrap px-6 py-4 text-right text-sm font-medium">
-                                    TETST
                                 </td>
                                 <td class="whitespace-nowrap px-6 py-4 text-right text-sm font-medium">
                                     @can('update', $courseType)
@@ -123,6 +117,28 @@
                         @enderror
                     </div>
 
+                    @if($showCategoryInput)
+                        <div>
+                            <label for="new_category" class="block text-sm font-medium text-gray-700">{{ _i('new category') }}</label>
+                            <div class="relative mt-1 rounded-md shadow-sm">
+                                <input type="text" wire:model.lazy="new_category" name="new_category" id="new_category" class="@error('new_category') border-red-300 text-red-900 placeholder-red-300 focus:border-red-500 focus:outline-none focus:ring-red-500 @enderror block w-full rounded-md border-gray-300 pr-10 focus:border-indigo-500  focus:ring-indigo-500 sm:text-sm" placeholder="{{ _i('new category') }}" @error('new_category') aria-invalid="true" aria-describedby="new_category-error" @enderror>
+                                @error('new_category')
+                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                                    <!-- Heroicon name: solid/exclamation-circle -->
+                                    <svg class="h-5 w-5 text-red-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                                    </svg>
+                                </div>
+                                @enderror
+                            </div>
+                            @error('new_category')
+                                <p class="mt-2 text-sm text-red-600" id="new_category-error">{{ $errors->first('new_category') }}</p>
+                            @else
+                                <p class="mt-2 text-xs text-gray-500" id="new_category-description">{{ _i('The new category name.') }}</p>
+                                @enderror
+                        </div>
+                    @endif
+
                     <div>
                         <label for="certTemplate" class="block text-sm font-medium text-gray-700">{{ _i('Certification Template') }}</label>
                         <select id="certTemplate" wire:model.lazy="editing.cert_template_id" name="certTemplate" class="mt-1 block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
@@ -135,28 +151,6 @@
                             <p class="mt-2 text-sm text-red-600" id="certTemplate-error">{{ $errors->first('editing.cert_template_id') }}</p>
                         @enderror
                     </div>
-
-                    @if($showCategoryInput)
-                        <div>
-                            <label for="new_category" class="block text-sm font-medium text-gray-700">{{ _i('new category') }}</label>
-                            <div class="relative mt-1 rounded-md shadow-sm">
-                                <input type="text" wire:model.lazy="new_category" name="new_category" id="new_category" class="@error('new_category') border-red-300 text-red-900 placeholder-red-300 focus:border-red-500 focus:outline-none focus:ring-red-500 @enderror block w-full rounded-md border-gray-300 pr-10 focus:border-indigo-500  focus:ring-indigo-500 sm:text-sm" placeholder="{{ _i('new category') }}" @error('new_category') aria-invalid="true" aria-describedby="new_category-error" @enderror>
-                                @error('new_category')
-                                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-                                        <!-- Heroicon name: solid/exclamation-circle -->
-                                        <svg class="h-5 w-5 text-red-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
-                                        </svg>
-                                    </div>
-                                @enderror
-                            </div>
-                            @error('new_category')
-                                <p class="mt-2 text-sm text-red-600" id="new_category-error">{{ $errors->first('new_category') }}</p>
-                            @else
-                                <p class="mt-2 text-xs text-gray-500" id="new_category-description">{{ _i('The new category name.') }}</p>
-                            @enderror
-                        </div>
-                    @endif
 
                     <div>
                         <label for="slug" class="block text-sm font-medium text-gray-700">{{ _i('slug') }}</label>
