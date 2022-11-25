@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id
  * @property int $course_id
  * @property int|null $contact_id
+ * @property int|null $team_id
  * @property string $lastname
  * @property string $firstname
  * @property string $date_of_birth
@@ -31,10 +32,12 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $price_id
  * @property int $payed
  * @property string|null $transaction_id
- * @property int $cancelled
+ * @property string|null $cancelled
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Course $course
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\TrainerDay[] $trainer
+ * @property-read int|null $trainer_count
  * @method static \Illuminate\Database\Eloquent\Builder|Participant newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Participant newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Participant query()
@@ -61,12 +64,11 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Participant wherePriceNet($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Participant whereRating($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Participant whereStreet($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Participant whereTeamId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Participant whereTransactionId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Participant whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Participant whereZipcode($value)
  * @mixin \Eloquent
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\TrainerDay[] $trainer
- * @property-read int|null $trainer_count
  */
 class Participant extends Model
 {

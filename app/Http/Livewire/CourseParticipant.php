@@ -23,11 +23,12 @@ class CourseParticipant extends Component
     public bool $can_view = false;
     public bool $showCertModal = false;
     public bool $showDownloadModal = false;
+    public bool $showCancelModal = false;
     public string $course;
     public array $select;
     public Course $course_data;
     public $course_types;
-    public Participant $editing;
+    public Participant $participant;
     public Collection $participants;
     public $certTemplate;
 
@@ -36,7 +37,8 @@ class CourseParticipant extends Component
         return [
 //            'editing.name' => 'required',
 //            'editing.email' => 'required|email:rfc|unique:users,email,'.$this->editing->id,
-            'editing.active' => 'bool|nullable',
+            'participant.payed' => 'bool|nullable',
+            'participant.participated' => 'bool|nullable',
         ];
     }
 
@@ -47,7 +49,7 @@ class CourseParticipant extends Component
         }
 
         $this->select = [];
-        $this->editing = $this->makeBlankParticipant();
+        $this->participant = $this->makeBlankParticipant();
         $this->certTemplate = false;
     }
 
@@ -55,24 +57,42 @@ class CourseParticipant extends Component
     {
         $this->auth('update', $participant);
 
-        $this->editing = $participant;
+        $this->participant = $participant;
 
-        $this->editing->participated ? $this->editing->participated = 0 : $this->editing->participated = 1;
+        $this->participant->participated ? $this->participant->participated = 0 : $this->participant->participated = 1;
 
         $this->validate();
-        $this->editing->save();
+        $this->participant->save();
     }
 
     public function pay(Participant $participant)
     {
         $this->auth('update', $participant);
 
-        $this->editing = $participant;
+        $this->participant = $participant;
 
-        $this->editing->payed ? $this->editing->payed = 0 : $this->editing->payed = 1;
+        $this->participant->payed ? $this->participant->payed = 0 : $this->participant->payed = 1;
 
         $this->validate();
-        $this->editing->save();
+        $this->participant->save();
+    }
+
+    public function showCancelModal(Participant $participant)
+    {
+        $this->auth('update', $participant);
+        $this->participant = $participant;
+        $this->showCancelModal = true;
+    }
+
+    public function cancel()
+    {
+        $this->auth('update', $this->participant);
+
+        $this->participant->cancelled = now();
+        $this->participant->save();
+        $this->participant = $this->makeBlankParticipant();
+
+        $this->showCancelModal = false;
     }
 
     public function getCert()

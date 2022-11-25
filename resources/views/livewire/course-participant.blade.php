@@ -87,6 +87,7 @@
                     <x-table.heading sortable multi-column>{{ _i('price') }}</x-table.heading>
                     <x-table.heading></x-table.heading>
                     <x-table.heading></x-table.heading>
+                    <x-table.heading></x-table.heading>
                 </x-slot>
 
                 <x-slot name="body">
@@ -138,7 +139,7 @@
                                 <x-table.cell>{{ $participant->currency }} {{ $participant->price_gross }}</x-table.cell>
                                 <x-table.cell>
                                     <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ $participant->participated ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
-                                        @if($can_update)
+                                        @if($can_update && !$participant->cancelled)
                                             <x-button.badge wire:click="participate({{ $participant->id }})">{{ $participant->participated ? _i('participated') : _i('not participated') }}</x-button.badge>
                                         @else
                                             <x-button.badge wire:click="participate({{ $participant->id }})" disabled>{{ $participant->participated ? _i('participated') : _i('not participated') }}</x-button.badge>
@@ -153,6 +154,13 @@
                                             <x-button.badge wire:click="pay({{ $participant->id }})" disabled>{{ __('payments.' . $participant->payment . '.title') }}</x-button.badge>
                                         @endif
                                     </span>
+                                </x-table.cell>
+                                <x-table.cell>
+                                    @if($can_update && !$participant->cancelled && (\Carbon\Carbon::parse($course_data->start)->format('Y-m-d H:i') > \Carbon\Carbon::parse(now())->format('Y-m-d H:i')) )
+                                        <i class="fa-solid fa-user-slash cursor-pointer" wire:click="showCancelModal({{ $participant->id }})"></i>
+                                    @else
+                                        <i class="fa-solid fa-user-slash cursor-not-allowed"></i>
+                                    @endif
                                 </x-table.cell>
     {{--                            <x-table.cell>--}}
     {{--                                @can('update', $course)--}}
@@ -250,4 +258,20 @@
 {{--            <x-button.danger type="submit">{{ _i('Cancel course') }}</x-button.danger>--}}
         </x-slot>
     </x-modal.confirmation>
+
+    <form wire:submit.prevent="cancel">
+        <x-modal.confirmation wire:model.defer="showCancelModal">
+            <x-slot name="title">{{ _i('Cancel booking') }}</x-slot>
+            <x-slot name="content">
+                <p class="text-sm text-gray-500">
+                    {{ _i('Are you sure you want to cancel this booking? This action cannot be undone.') }}
+                </p>
+            </x-slot>
+
+            <x-slot name="footer">
+                <x-button.secondary wire:click="$set('showCancelModal', false)">{{ _i('Cancel') }}</x-button.secondary>
+                <x-button.danger type="submit">{{ _i('Cancel booking') }}</x-button.danger>
+            </x-slot>
+        </x-modal.confirmation>
+    </form>
 </div>
