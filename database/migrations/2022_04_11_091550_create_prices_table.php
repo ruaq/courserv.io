@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('prices', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('team_id')->nullable();
+            $table->foreignId('cert_template_id')->nullable()->constrained('cert_templates')->nullOnDelete();
             $table->string('title');
             $table->string('description')->nullable();
             $table->decimal('amount_net', 8, 2)->default(0);

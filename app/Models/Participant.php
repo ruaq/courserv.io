@@ -21,7 +21,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $location
  * @property string|null $phone
  * @property string|null $email
- * @property string|null $email_reminder
+ * @property mixed|null $email_reminder
  * @property int $rating
  * @property string|null $payee
  * @property int $participated
@@ -32,7 +32,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $price_id
  * @property int $payed
  * @property string|null $transaction_id
- * @property string|null $cancelled
+ * @property mixed|null $cancelled
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Course $course

@@ -10,22 +10,28 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property int $id
  * @property int|null $wsdl_id
+ * @property int|null $cert_template_id
  * @property string $name
+ * @property string $category
  * @property string $slug
- * @property string $group
- * @property string|null $units
- * @property string|null $units_per_day
- * @property string|null $breaks
- * @property string|null $seats
+ * @property string|null $iframe_url
+ * @property int $units
+ * @property int $units_per_day
+ * @property int $breaks
+ * @property int $seats
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\CertTemplate|null $certTemplate
+ * @method static \Database\Factories\CourseTypeFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|CourseType newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|CourseType newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|CourseType query()
  * @method static \Illuminate\Database\Eloquent\Builder|CourseType whereBreaks($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CourseType whereCategory($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CourseType whereCertTemplateId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CourseType whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|CourseType whereGroup($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CourseType whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CourseType whereIframeUrl($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CourseType whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CourseType whereSeats($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CourseType whereSlug($value)
@@ -33,17 +39,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|CourseType whereUnitsPerDay($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CourseType whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CourseType whereWsdlId($value)
- * @property string $category
- * @method static \Database\Factories\CourseTypeFactory factory(...$parameters)
- * @method static \Illuminate\Database\Eloquent\Builder|CourseType whereCategory($value)
- * @property string|null $iframe_url
- * @method static \Illuminate\Database\Eloquent\Builder|CourseType whereIframeUrl($value)
  * @mixin \Eloquent
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\CertTemplate[] $certTemplates
- * @property-read int|null $cert_templates_count
- * @property int|null $cert_template_id
- * @property-read \App\Models\CertTemplate|null $certTemplate
- * @method static \Illuminate\Database\Eloquent\Builder|CourseType whereCertTemplateId($value)
  */
 class CourseType extends Model
 {

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('course_id');
             $table->foreignId('contact_id')->nullable()->constrained('contact_people')->nullOnDelete();
+            $table->foreignId('team_id')->nullable()->constrained('teams')->nullOnDelete();
             $table->string('lastname');
             $table->string('firstname');
             $table->date('date_of_birth');
@@ -26,7 +27,7 @@ return new class extends Migration
             $table->string('location')->nullable();
             $table->string('phone')->nullable();
             $table->string('email')->nullable();
-            $table->dateTime('email_reminder')->nullable();
+            $table->timestamp('email_reminder')->nullable();
             $table->boolean('rating')->default(0);
             $table->string('payee')->nullable();
             $table->boolean('participated')->default(0);
@@ -37,7 +38,7 @@ return new class extends Migration
             $table->unsignedBigInteger('price_id');
             $table->boolean('payed')->default(0);
             $table->string('transaction_id')->nullable()->unique();
-            $table->boolean('cancelled')->default(0);
+            $table->timestamp('cancelled')->nullable();
             $table->timestamps();
         });
     }

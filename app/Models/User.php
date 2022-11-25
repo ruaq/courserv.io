@@ -19,9 +19,10 @@ use Vinkla\Hashids\Facades\Hashids;
  * @property string $name
  * @property string $email
  * @property \Illuminate\Support\Carbon|null $email_verified_at
- * @property string $password
+ * @property string|null $password
  * @property string|null $remember_token
  * @property int $active
+ * @property \Illuminate\Support\Carbon|null $reset_valid_until
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read int|null $notifications_count
@@ -54,11 +55,9 @@ use Vinkla\Hashids\Facades\Hashids;
  * @method static \Illuminate\Database\Eloquent\Builder|User wherePassword($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User wherePermissionIs($permission = '', $boolean = 'and')
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereResetValidUntil($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRoleIs($role = '', $team = null, $boolean = 'and')
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
- * @property-read string $status_color
- * @property string|null $reset_valid_until
- * @method static \Illuminate\Database\Eloquent\Builder|User whereResetValidUntil($value)
  * @mixin \Eloquent
  */
 class User extends Authenticatable implements MustVerifyEmail

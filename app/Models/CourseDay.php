@@ -8,12 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * App\Models\CourseDay
  *
- * @property int $id
  * @property int $course_id
+ * @property string $date
  * @property string $startPlan
- * @property string $startReal
+ * @property string|null $startReal
  * @property string $endPlan
- * @property string $endReal
+ * @property string|null $endReal
  * @property int $unitsPlan
  * @property int $unitsReal
  * @property \Illuminate\Support\Carbon|null $created_at
@@ -23,16 +23,14 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|CourseDay query()
  * @method static \Illuminate\Database\Eloquent\Builder|CourseDay whereCourseId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CourseDay whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CourseDay whereDate($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CourseDay whereEndPlan($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CourseDay whereEndReal($value)
- * @method static \Illuminate\Database\Eloquent\Builder|CourseDay whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CourseDay whereStartPlan($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CourseDay whereStartReal($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CourseDay whereUnitsPlan($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CourseDay whereUnitsReal($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CourseDay whereUpdatedAt($value)
- * @property string $date
- * @method static \Illuminate\Database\Eloquent\Builder|CourseDay whereDate($value)
  * @mixin \Eloquent
  */
 class CourseDay extends Model

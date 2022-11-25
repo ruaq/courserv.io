@@ -15,6 +15,7 @@ return new class extends Migration {
         Schema::create('course_types', function (Blueprint $table) {
             $table->id();
             $table->unsignedTinyInteger('wsdl_id')->nullable();
+            $table->foreignId('cert_template_id')->nullable()->constrained('cert_templates')->nullOnDelete();
             $table->string('name');
             $table->string('category');
             $table->string('slug');

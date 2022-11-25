@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
  * App\Models\ContactPerson
  *
  * @property int $id
+ * @property int|null $team_id
  * @property string $lastname
  * @property string $firstname
  * @property string|null $company
@@ -31,6 +32,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|ContactPerson whereLocation($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ContactPerson wherePhone($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ContactPerson whereStreet($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactPerson whereTeamId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ContactPerson whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ContactPerson whereZipcode($value)
  * @mixin \Eloquent

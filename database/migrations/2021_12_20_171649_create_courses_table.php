@@ -22,9 +22,9 @@ return new class extends Migration {
             $table->text('street');
             $table->text('zipcode');
             $table->text('location');
-            $table->dateTime('start');
-            $table->dateTime('end');
-            $table->dateTime('cancelled')->nullable();
+            $table->timestamp('start');
+            $table->timestamp('end');
+            $table->timestamp('cancelled')->nullable();
             $table->unsignedSmallInteger('seats');
             $table->boolean('public_bookable')->nullable();
             $table->timestamps();

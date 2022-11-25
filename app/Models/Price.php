@@ -9,42 +9,40 @@ use Illuminate\Database\Eloquent\Model;
  * App\Models\Price
  *
  * @property int $id
+ * @property int|null $team_id
+ * @property int|null $cert_template_id
+ * @property string $title
+ * @property string|null $description
+ * @property string $amount_net
+ * @property string $amount_gross
+ * @property string $currency
+ * @property string $payment
+ * @property int|null $tax_rate
+ * @property int $active
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\CertTemplate|null $certTemplate
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Course[] $courses
+ * @property-read int|null $courses_count
+ * @property-read \App\Models\Team|null $team
  * @method static \Database\Factories\PriceFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|Price newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Price newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Price query()
- * @method static \Illuminate\Database\Eloquent\Builder|Price whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Price whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Price whereUpdatedAt($value)
- * @property int|null $team_id
- * @property string $title
- * @property string|null $description
- * @property string $amount
- * @property string $currency
- * @property int $active
- * @property-read \App\Models\Team|null $team
- * @property mixed|string $amount_gross
  * @method static \Illuminate\Database\Eloquent\Builder|Price whereActive($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Price whereAmount($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Price whereCurrency($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Price whereDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Price whereTeamId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Price whereTitle($value)
- * @property string $amount_net
- * @property int|null $tax_rate
  * @method static \Illuminate\Database\Eloquent\Builder|Price whereAmountGross($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Price whereAmountNet($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Price whereTaxRate($value)
- * @property string $payment
- * @method static \Illuminate\Database\Eloquent\Builder|Price wherePayment($value)
- * @mixin \Eloquent
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Course[] $courses
- * @property-read int|null $courses_count
- * @property int|null $cert_template_id
- * @property-read \App\Models\CertTemplate|null $certTemplate
  * @method static \Illuminate\Database\Eloquent\Builder|Price whereCertTemplateId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Price whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Price whereCurrency($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Price whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Price whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Price wherePayment($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Price whereTaxRate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Price whereTeamId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Price whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Price whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 class Price extends Model
 {

@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('contact_people', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('team_id')->nullable()->constrained('teams')->nullOnDelete();
             $table->string('lastname');
             $table->string('firstname');
             $table->string('company')->nullable();
