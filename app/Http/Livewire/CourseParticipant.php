@@ -88,6 +88,7 @@ class CourseParticipant extends Component
     {
         $this->auth('update', $this->participant);
 
+        $this->participant->participated = 0;
         $this->participant->cancelled = now();
         $this->participant->save();
         $this->participant = $this->makeBlankParticipant();

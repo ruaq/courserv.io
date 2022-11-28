@@ -148,6 +148,7 @@ class Booking extends Component
                 $participant['contact_id'] = $contactPerson->id;
                 $participant['team_id'] = $team_id;
                 $participant['date_of_birth'] = Carbon::parse($participant['date_of_birth'])->isoFormat('YYYY-MM-DD');
+                $participant['company'] = $this->contactPerson['company'] ?? '';
                 $participant['email'] = $participant['email'] ?? '';
                 $participant['phone'] = $participant['phone'] ?? '';
                 $participant['price_net'] = $amount->amount_net;
