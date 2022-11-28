@@ -94,6 +94,15 @@ class Participant extends Model
         'price_id',
     ];
 
+    public const paymentMethod = [
+        'cash' => 'fa-solid fa-money-bill-wave',
+        'card' => 'fa-solid fa-credit-card',
+        'invoice' => 'fa-solid fa-receipt',
+        'prepay' => 'fa-solid fa-landmark',
+        'accountingForm' => 'fa-solid fa-file-invoice',
+        'paypal' => 'fa-brands fa-paypal',
+    ];
+
     public function course(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Course::class);

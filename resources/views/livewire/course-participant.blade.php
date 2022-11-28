@@ -88,6 +88,7 @@
                     <x-table.heading></x-table.heading>
                     <x-table.heading></x-table.heading>
                     <x-table.heading></x-table.heading>
+                    <x-table.heading></x-table.heading>
                 </x-slot>
 
                 <x-slot name="body">
@@ -138,28 +139,40 @@
                                 <x-table.cell>{{ \Carbon\Carbon::parse($participant->created_at)->isoFormat('DD.MM.YYYY') }}</x-table.cell>
                                 <x-table.cell>{{ $participant->currency }} {{ $participant->price_gross }}</x-table.cell>
                                 <x-table.cell>
-                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ $participant->participated ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
+                                    <span class="inline-flex {{ $participant->participated ? 'text-green-800' : 'text-red-800' }}">
+{{--                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ $participant->participated ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">--}}
                                         @if($can_update && !$participant->cancelled)
-                                            <x-button.badge wire:click="participate({{ $participant->id }})">{{ $participant->participated ? _i('participated') : _i('not participated') }}</x-button.badge>
+                                            <x-button.link wire:click="participate({{ $participant->id }})">{!! $participant->participated ? '<i class="fa-solid fa-user-plus"></i>' : '<i class="fa-solid fa-user-xmark"></i>' !!}</x-button.link>
+{{--                                            <x-button.badge wire:click="participate({{ $participant->id }})">{{ $participant->participated ? _i('participated') : _i('not participated') }}</x-button.badge>--}}
                                         @else
-                                            <x-button.badge wire:click="participate({{ $participant->id }})" disabled>{{ $participant->participated ? _i('participated') : _i('not participated') }}</x-button.badge>
+                                            <x-button.link disabled>{!! $participant->participated ? '<i class="fa-solid fa-user-plus"></i>' : '<i class="fa-solid fa-user-xmark"></i>' !!}</x-button.link>
+{{--                                            <x-button.badge wire:click="participate({{ $participant->id }})" disabled>{{ $participant->participated ? _i('participated') : _i('not participated') }}</x-button.badge>--}}
                                         @endif
                                     </span>
                                 </x-table.cell>
                                 <x-table.cell>
-                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ $participant->payed ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
+                                    <span class="inline-flex {{ $participant->payed ? 'text-green-800' : 'text-red-800' }}">
                                         @if($can_update)
-                                            <x-button.badge wire:click="pay({{ $participant->id }})">{{ __('payments.' . $participant->payment . '.title') }}</x-button.badge>
+                                            <x-button.link wire:click="pay({{ $participant->id }})"><i class="{{ \App\Models\Participant::paymentMethod[$participant->payment] }}"></i></x-button.link>
+{{--                                            <x-button.badge wire:click="pay({{ $participant->id }})">{{ __('payments.' . $participant->payment . '.title') }}</x-button.badge>--}}
                                         @else
-                                            <x-button.badge wire:click="pay({{ $participant->id }})" disabled>{{ __('payments.' . $participant->payment . '.title') }}</x-button.badge>
+                                            <x-button.link disabled><i class="{{ \App\Models\Participant::paymentMethod[$participant->payment] }}"></i></x-button.link>
+{{--                                            <x-button.badge disabled>{{ __('payments.' . $participant->payment . '.title') }}</x-button.badge>--}}
                                         @endif
                                     </span>
+                                </x-table.cell>
+                                <x-table.cell>
+                                    @can('viewAny', $participant)
+                                        <x-button.link><i class="fa-solid fa-address-card"></i></x-button.link>
+                                    @else
+                                        <x-button.link disabled><i class="fa-solid fa-address-card"></i></x-button.link>
+                                    @endif
                                 </x-table.cell>
                                 <x-table.cell>
                                     @if($can_update && !$participant->cancelled && (\Carbon\Carbon::parse($course_data->start)->format('Y-m-d H:i') > \Carbon\Carbon::parse(now())->format('Y-m-d H:i')) )
-                                        <i class="fa-solid fa-user-slash cursor-pointer" wire:click="showCancelModal({{ $participant->id }})"></i>
+                                        <x-button.link wire:click="showCancelModal({{ $participant->id }})"><i class="fa-solid fa-user-slash"></i></x-button.link>
                                     @else
-                                        <i class="fa-solid fa-user-slash cursor-not-allowed"></i>
+                                        <x-button.link disabled><i class="fa-solid fa-user-slash"></i></x-button.link>
                                     @endif
                                 </x-table.cell>
     {{--                            <x-table.cell>--}}
