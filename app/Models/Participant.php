@@ -35,6 +35,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property mixed|null $cancelled
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\ContactPerson|null $contactPerson
  * @property-read \App\Models\Course $course
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\TrainerDay[] $trainer
  * @property-read int|null $trainer_count
@@ -94,7 +95,7 @@ class Participant extends Model
         'price_id',
     ];
 
-    public const paymentMethod = [
+    public const PAYMENTMETHOD = [
         'cash' => 'fa-solid fa-money-bill-wave',
         'card' => 'fa-solid fa-credit-card',
         'invoice' => 'fa-solid fa-receipt',
@@ -106,6 +107,11 @@ class Participant extends Model
     public function course(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Course::class);
+    }
+
+    public function contactPerson(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(ContactPerson::class, 'contact_id');
     }
 
     public function trainer(): \Illuminate\Database\Eloquent\Relations\HasMany

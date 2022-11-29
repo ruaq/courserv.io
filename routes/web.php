@@ -44,6 +44,9 @@ Route::group(
         Route::get('participant/{course}', \App\Http\Livewire\CourseParticipant::class)
             ->name('participant.course');
 
+        Route::get('participant/{participant}/details', \App\Http\Livewire\ParticipantDetails::class)
+            ->name('participant.details');
+
         Route::get('participant', \App\Http\Livewire\Participant::class)
             ->name('participant');
 

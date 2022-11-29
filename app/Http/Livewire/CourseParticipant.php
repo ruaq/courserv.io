@@ -96,6 +96,18 @@ class CourseParticipant extends Component
         $this->showCancelModal = false;
     }
 
+    public function showDetails(Participant $participant)
+    {
+        $this->authorize('viewAny', $participant);
+
+        return $this->redirect(
+            route(
+                'participant.details',
+                ['participant' => Hashids::encode($participant->id)]
+            )
+        );
+    }
+
     public function getCert()
     {
         if ($this->select) { // get selected participants

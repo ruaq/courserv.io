@@ -79,8 +79,8 @@
                     <x-table.heading sortable multi-column>{{ _i('lastname') }}</x-table.heading>
                     <x-table.heading sortable multi-column>{{ _i('firstname') }}</x-table.heading>
                     <x-table.heading sortable multi-column>{{ _i('date of birth') }}</x-table.heading>
-                    <x-table.heading sortable multi-column>{{ _i('street') }}</x-table.heading>
-                    <x-table.heading sortable multi-column>{{ _i('location') }}</x-table.heading>
+{{--                    <x-table.heading sortable multi-column>{{ _i('street') }}</x-table.heading>--}}
+{{--                    <x-table.heading sortable multi-column>{{ _i('location') }}</x-table.heading>--}}
                     <x-table.heading sortable multi-column>{{ _i('phone') }}</x-table.heading>
                     <x-table.heading sortable multi-column>{{ _i('email') }}</x-table.heading>
                     <x-table.heading sortable multi-column>{{ _i('booked on') }}</x-table.heading>
@@ -108,20 +108,20 @@
                                         <span class="blur-sm">XX.XX.XXXX</span>
                                     @endcan
                                 </x-table.cell>
-                                <x-table.cell>
-                                    @can('viewAny', $participant)
-                                        {{ $participant->street }}
-                                    @else
-                                        <span class="blur">{{ substr(sha1(time()), 0, strlen($participant->street)) }}</span>
-                                    @endcan
-                                </x-table.cell>
-                                <x-table.cell>
-                                    @can('viewAny', $participant)
-                                        {{ $participant->zipcode }} {{ $participant->location }}
-                                    @else
-                                        <span class="blur">12345 {{ substr(sha1(time()), 0, strlen($participant->location)) }}</span>
-                                    @endcan
-                                </x-table.cell>
+{{--                                <x-table.cell>--}}
+{{--                                    @can('viewAny', $participant)--}}
+{{--                                        {{ $participant->street }}--}}
+{{--                                    @else--}}
+{{--                                        <span class="blur">{{ substr(sha1(time()), 0, strlen($participant->street)) }}</span>--}}
+{{--                                    @endcan--}}
+{{--                                </x-table.cell>--}}
+{{--                                <x-table.cell>--}}
+{{--                                    @can('viewAny', $participant)--}}
+{{--                                        {{ $participant->zipcode }} {{ $participant->location }}--}}
+{{--                                    @else--}}
+{{--                                        <span class="blur">12345 {{ substr(sha1(time()), 0, strlen($participant->location)) }}</span>--}}
+{{--                                    @endcan--}}
+{{--                                </x-table.cell>--}}
                                 <x-table.cell>
                                     @can('viewAny', $participant)
                                         {{ $participant->phone }}
@@ -153,17 +153,17 @@
                                 <x-table.cell>
                                     <span class="inline-flex {{ $participant->payed ? 'text-green-800' : 'text-red-800' }}">
                                         @if($can_update)
-                                            <x-button.link wire:click="pay({{ $participant->id }})"><i class="{{ \App\Models\Participant::paymentMethod[$participant->payment] }}"></i></x-button.link>
+                                            <x-button.link wire:click="pay({{ $participant->id }})"><i class="{{ \App\Models\Participant::PAYMENTMETHOD[$participant->payment] }}"></i></x-button.link>
 {{--                                            <x-button.badge wire:click="pay({{ $participant->id }})">{{ __('payments.' . $participant->payment . '.title') }}</x-button.badge>--}}
                                         @else
-                                            <x-button.link disabled><i class="{{ \App\Models\Participant::paymentMethod[$participant->payment] }}"></i></x-button.link>
+                                            <x-button.link disabled><i class="{{ \App\Models\Participant::PAYMENTMETHOD[$participant->payment] }}"></i></x-button.link>
 {{--                                            <x-button.badge disabled>{{ __('payments.' . $participant->payment . '.title') }}</x-button.badge>--}}
                                         @endif
                                     </span>
                                 </x-table.cell>
                                 <x-table.cell>
                                     @can('viewAny', $participant)
-                                        <x-button.link><i class="fa-solid fa-address-card"></i></x-button.link>
+                                        <x-button.link wire:click="showDetails({{ $participant->id }})"><i class="fa-solid fa-address-card"></i></x-button.link>
                                     @else
                                         <x-button.link disabled><i class="fa-solid fa-address-card"></i></x-button.link>
                                     @endif
