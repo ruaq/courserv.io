@@ -877,6 +877,8 @@ class Course extends Component
             ->layout('layouts.app', [
                 'metaTitle' => _i('Courses'),
                 'active' => 'courses',
+                'breadcrumb_back' => ['link' => route('course'), 'text' => _i('Courses')],
+                'breadcrumbs' => [['link' => route('course'), 'text' => _i('Courses')]],
             ]);
     }
 

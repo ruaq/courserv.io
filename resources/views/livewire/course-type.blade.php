@@ -1,68 +1,142 @@
 <div>
-    <div class="flex flex-col">
-        <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-            <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-                <div class="overflow-hidden border-b border-gray-200 shadow sm:rounded-lg">
-                    <table class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-gray-50">
-                        <tr>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
-                                {{ _i('course type name') }}
-                            </th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
-                                {{ _i('category') }}
-                            </th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
-                                {{ _i('units') }}
-                            </th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
-                                {{ _i('units per day') }}
-                            </th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
-                                {{ _i('breaks') }}
-                            </th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
-                                {{ _i('seats') }}
-                            </th>
-                            <th scope="col" class="px-6 py-3 text-right text-xs font-medium tracking-wider text-gray-500">
-                                @can('create', \App\Models\CourseType::class)<x-button.link wire:click="create">{{ _i('Add Course type') }}</x-button.link>@endcan
-                            </th>
-                        </tr>
-                        </thead>
-                        <tbody class="divide-y divide-gray-200 bg-white">
-                        @foreach($courseTypes as $courseType)
-                            <tr>
-                                <td class="whitespace-nowrap px-6 py-4 text-sm font-medium text-gray-900">
-                                    {{ $courseType->name }}
-                                </td>
-                                <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-500">
-                                    {{ $courseType->category }}
-                                </td>
-                                <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-500">
-                                    {{ $courseType->units }} {{ _i('LU') }}
-                                </td>
-                                <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-500">
-                                    {{ $courseType->units_per_day }} {{ _i('LU / day') }}
-                                </td>
-                                <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-500">
-                                    {{ $courseType->breaks }} {{ _i('minutes') }}
-                                </td>
-                                <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-500">
-                                    {{ $courseType->seats }} {{ _i('seats') }}
-                                </td>
-                                <td class="whitespace-nowrap px-6 py-4 text-right text-sm font-medium">
-                                    @can('update', $courseType)
-                                        <x-button.link wire:click="edit({{ $courseType->id }})">{{ _i('edit') }}</x-button.link>
-                                    @endcan
-                                </td>
-                            </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
-                </div>
+{{--    <div class="flex flex-col">--}}
+{{--        <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">--}}
+{{--            <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">--}}
+{{--                <div class="overflow-hidden border-b border-gray-200 shadow sm:rounded-lg">--}}
+{{--                    <table class="min-w-full divide-y divide-gray-200">--}}
+{{--                        <thead class="bg-gray-50">--}}
+{{--                        <tr>--}}
+{{--                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">--}}
+{{--                                {{ _i('course type name') }}--}}
+{{--                            </th>--}}
+{{--                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">--}}
+{{--                                {{ _i('category') }}--}}
+{{--                            </th>--}}
+{{--                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">--}}
+{{--                                {{ _i('units') }}--}}
+{{--                            </th>--}}
+{{--                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">--}}
+{{--                                {{ _i('units per day') }}--}}
+{{--                            </th>--}}
+{{--                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">--}}
+{{--                                {{ _i('breaks') }}--}}
+{{--                            </th>--}}
+{{--                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">--}}
+{{--                                {{ _i('seats') }}--}}
+{{--                            </th>--}}
+{{--                            <th scope="col" class="px-6 py-3 text-right text-xs font-medium tracking-wider text-gray-500">--}}
+{{--                                @can('create', \App\Models\CourseType::class)<x-button.link wire:click="create">{{ _i('Add Course type') }}</x-button.link>@endcan--}}
+{{--                            </th>--}}
+{{--                        </tr>--}}
+{{--                        </thead>--}}
+{{--                        <tbody class="divide-y divide-gray-200 bg-white">--}}
+{{--                        @foreach($courseTypes as $courseType)--}}
+{{--                            <tr>--}}
+{{--                                <td class="whitespace-nowrap px-6 py-4 text-sm font-medium text-gray-900">--}}
+{{--                                    {{ $courseType->name }}--}}
+{{--                                </td>--}}
+{{--                                <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-500">--}}
+{{--                                    {{ $courseType->category }}--}}
+{{--                                </td>--}}
+{{--                                <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-500">--}}
+{{--                                    {{ $courseType->units }} {{ _i('LU') }}--}}
+{{--                                </td>--}}
+{{--                                <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-500">--}}
+{{--                                    {{ $courseType->units_per_day }} {{ _i('LU / day') }}--}}
+{{--                                </td>--}}
+{{--                                <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-500">--}}
+{{--                                    {{ $courseType->breaks }} {{ _i('minutes') }}--}}
+{{--                                </td>--}}
+{{--                                <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-500">--}}
+{{--                                    {{ $courseType->seats }} {{ _i('seats') }}--}}
+{{--                                </td>--}}
+{{--                                <td class="whitespace-nowrap px-6 py-4 text-right text-sm font-medium">--}}
+{{--                                    @can('update', $courseType)--}}
+{{--                                        <x-button.link wire:click="edit({{ $courseType->id }})">{{ _i('edit') }}</x-button.link>--}}
+{{--                                    @endcan--}}
+{{--                                </td>--}}
+{{--                            </tr>--}}
+{{--                        @endforeach--}}
+{{--                        </tbody>--}}
+{{--                    </table>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
+
+    <div class="px-4 sm:px-6 lg:px-8">
+        <div class="sm:flex sm:items-center">
+            <div class="sm:flex-auto">
+{{--                <h1 class="text-xl font-semibold text-gray-900">Users</h1>--}}
+{{--                <p class="mt-2 text-sm text-gray-700">A list of all the users in your account including their name, title, email and role.</p>--}}
+            </div>
+            <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
+                @can('create', \App\Models\CourseType::class)
+                    <button type="button" wire:click="create" class="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto">
+                        {{ _i('Add Course type') }}
+                    </button>
+                @endcan
             </div>
         </div>
+        <div class="-mx-4 mt-8 overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:-mx-6 md:mx-0 md:rounded-lg">
+            <table class="min-w-full divide-y divide-gray-300">
+                <thead class="bg-gray-50">
+                <tr>
+                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">{{ _i('course type name') }}</th>
+                    <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 md:table-cell">{{ _i('category') }}</th>
+                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">{{ _i('units') }}</th>
+                    <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 lg:table-cell">{{ _i('units per day') }}</th>
+                    <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 sm:table-cell">{{ _i('breaks') }}</th>
+                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">{{ _i('seats') }}</th>
+                    <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
+                        <span class="sr-only">Edit</span>
+                    </th>
+                </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-200 bg-white">
+                @foreach($courseTypes as $courseType)
+                <tr>
+                    <td class="w-full max-w-0 py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:w-auto sm:max-w-none sm:pl-6">
+                        {{ $courseType->name }}
+                        <dl class="font-normal md:hidden">
+                            <dt class="sr-only">Title</dt>
+                            <dd class="mt-1 truncate text-gray-500">{{ $courseType->category }}</dd>
+{{--                            <dt class="sr-only sm:hidden">Email</dt>--}}
+{{--                            <dd class="mt-1 truncate text-gray-500 sm:hidden">lindsay.walton@example.com</dd>--}}
+                        </dl>
+                    </td>
+                    <td class="hidden px-3 py-4 text-sm text-gray-500 md:table-cell">{{ $courseType->category }}</td>
+                    <td class="px-3 py-4 text-sm text-gray-500">
+                        {{ $courseType->units }} {{ _i('LU') }}
+                        <dl class="font-normal md:hidden">
+                            <dt class="sr-only">Title</dt>
+                            <dd class="mt-1 truncate text-gray-500">{{ $courseType->units_per_day }} {{ _i('LU / day') }}</dd>
+{{--                            <dt class="sr-only sm:hidden">Email</dt>--}}
+{{--                            <dd class="mt-1 truncate text-gray-500 sm:hidden">lindsay.walton@example.com</dd>--}}
+                        </dl>
+                    </td>
+                    <td class="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">{{ $courseType->units_per_day }} {{ _i('LU / day') }}</td>
+                    <td class="hidden px-3 py-4 text-sm text-gray-500 sm:table-cell">{{ $courseType->breaks }} {{ _i('minutes') }}</td>
+                    <td class="px-3 py-4 text-sm text-gray-500">{{ $courseType->seats }} {{ _i('seats') }}</td>
+                    <td class="py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                        @can('update', $courseType)
+{{--                            <x-button.link wire:click="edit({{ $courseType->id }})">{{ _i('edit') }}</x-button.link>--}}
+                            <x-button.link wire:click="edit({{ $courseType->id }})"><i class="fa-solid fa-pen-to-square"></i></x-button.link>
+                        @else
+                            <x-button.link disabled><i class="fa-solid fa-pen-to-square"></i></x-button.link>
+                        @endcan
+
+{{--                        <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit<span class="sr-only">, Lindsay Walton</span></a>--}}
+                    </td>
+                </tr>
+                @endforeach
+
+                <!-- More people... -->
+                </tbody>
+            </table>
+        </div>
     </div>
+
     <form wire:submit.prevent="save">
         <x-modal.dialog wire:model.defer="showEditModal">
             <x-slot name="title">{{ _i('edit course type') }}</x-slot>

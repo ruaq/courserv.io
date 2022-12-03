@@ -89,6 +89,8 @@ class Role extends Component
             ->layout('layouts.app', [
                 'metaTitle' => _i('Roles'),
                 'active' => 'roles',
+                'breadcrumb_back' => ['link' => route('roles'), 'text' => _i('Roles')],
+                'breadcrumbs' => [['link' => route('roles'), 'text' => _i('Roles')]],
             ]);
     }
 

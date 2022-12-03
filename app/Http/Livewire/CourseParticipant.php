@@ -166,6 +166,29 @@ class CourseParticipant extends Component
             ->layout('layouts.app', [
                 'metaTitle' => _i('participants'),
                 'active' => 'participants',
+                'breadcrumb_back' => [
+                    'link' => route('course'),
+                    'text' => _i('Courses'),
+                ],
+                'breadcrumbs' => [
+                    [
+                        'link' => route('course'),
+                        'text' => _i('Courses'),
+                    ],
+                    [
+                        'link' => route('course'),
+                        'text' => $this->course_data->internal_number,
+                    ],
+                    [
+                        'link' => route(
+                            'participant.course',
+                            [
+                                'course' => Hashids::encode($this->course_data->id),
+                            ]
+                        ),
+                        'text' => _i('participants'),
+                    ],
+                ],
             ]);
     }
 

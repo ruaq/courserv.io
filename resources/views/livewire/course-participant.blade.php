@@ -1,11 +1,11 @@
 <div>
-    <div class="space-y-4 py-4">
-        <div class="flex justify-between">
-            <div class="flex w-2/4 space-x-4">
+{{--    <div class="space-y-4 py-4">--}}
+{{--        <div class="flex justify-between">--}}
+{{--            <div class="flex w-2/4 space-x-4">--}}
 {{--                <x-input.text wire:model="filters.search" placeholder="{{ _i('Search...') }}" />--}}
 
-                <x-button.link wire:click="$set('showCertModal', true)">{{ _i('Create certificates') }}</x-button.link>
-            </div>
+{{--                <x-button.link wire:click="$set('showCertModal', true)">{{ _i('Create certificates') }}</x-button.link>--}}
+{{--            </div>--}}
 
 {{--            <div class="flex items-center space-x-2">--}}
 {{--                <x-input.group borderless paddingless for="perPage" label="Per Page">--}}
@@ -20,9 +20,9 @@
 {{--                    <x-button.primary wire:click="create"><x-icon.plus /> {{ _i('Add Course') }}</x-button.primary>--}}
 {{--                @endcan--}}
 {{--            </div>--}}
-        </div>
+{{--        </div>--}}
 
-        <!-- Advanced Search -->
+{{--        <!-- Advanced Search -->--}}
 {{--        <div>--}}
 {{--            @if ($showFilters)--}}
 {{--                <div class="bg-cool-gray-200 relative flex rounded p-4 shadow-inner">--}}
@@ -72,42 +72,42 @@
 {{--            @endif--}}
 {{--        </div>--}}
 
-        <div class="flex-col space-y-4">
-            <x-table>
-                <x-slot name="head">
-                    <x-table.heading></x-table.heading>
-                    <x-table.heading sortable multi-column>{{ _i('lastname') }}</x-table.heading>
-                    <x-table.heading sortable multi-column>{{ _i('firstname') }}</x-table.heading>
-                    <x-table.heading sortable multi-column>{{ _i('date of birth') }}</x-table.heading>
+{{--        <div class="flex-col space-y-4">--}}
+{{--            <x-table>--}}
+{{--                <x-slot name="head">--}}
+{{--                    <x-table.heading></x-table.heading>--}}
+{{--                    <x-table.heading sortable multi-column>{{ _i('lastname') }}</x-table.heading>--}}
+{{--                    <x-table.heading sortable multi-column>{{ _i('firstname') }}</x-table.heading>--}}
+{{--                    <x-table.heading sortable multi-column>{{ _i('date of birth') }}</x-table.heading>--}}
 {{--                    <x-table.heading sortable multi-column>{{ _i('street') }}</x-table.heading>--}}
 {{--                    <x-table.heading sortable multi-column>{{ _i('location') }}</x-table.heading>--}}
-                    <x-table.heading sortable multi-column>{{ _i('phone') }}</x-table.heading>
-                    <x-table.heading sortable multi-column>{{ _i('email') }}</x-table.heading>
-                    <x-table.heading sortable multi-column>{{ _i('booked on') }}</x-table.heading>
-                    <x-table.heading sortable multi-column>{{ _i('price') }}</x-table.heading>
-                    <x-table.heading></x-table.heading>
-                    <x-table.heading></x-table.heading>
-                    <x-table.heading></x-table.heading>
-                    <x-table.heading></x-table.heading>
-                </x-slot>
+{{--                    <x-table.heading sortable multi-column>{{ _i('phone') }}</x-table.heading>--}}
+{{--                    <x-table.heading sortable multi-column>{{ _i('email') }}</x-table.heading>--}}
+{{--                    <x-table.heading sortable multi-column>{{ _i('booked on') }}</x-table.heading>--}}
+{{--                    <x-table.heading sortable multi-column>{{ _i('price') }}</x-table.heading>--}}
+{{--                    <x-table.heading></x-table.heading>--}}
+{{--                    <x-table.heading></x-table.heading>--}}
+{{--                    <x-table.heading></x-table.heading>--}}
+{{--                    <x-table.heading></x-table.heading>--}}
+{{--                </x-slot>--}}
 
-                <x-slot name="body">
-                    @foreach($companies as $company)
-                        <tr class="border-t border-gray-200">
-                            <th colspan="5" scope="colgroup" class="bg-gray-50 px-4 py-2 text-left text-sm font-semibold text-gray-900 sm:px-6">{{ $company[0]['company'] ? $company[0]['company'] : _i('no company') }}</th>
-                        </tr>
-                        @foreach($company as $participant)
-                            <x-table.row class="{{ $participant->cancelled ? 'line-through' : '' }}">
-                                <x-table.cell><x-input.checkbox wire:model="select" value="{{ $participant->id }}" /></x-table.cell>
-                                <x-table.cell>{{ $participant->lastname }}</x-table.cell>
-                                <x-table.cell>{{ $participant->firstname }}</x-table.cell>
-                                <x-table.cell>
-                                    @can('viewAny', $participant)
-                                        {{ \Carbon\Carbon::parse($participant->date_of_birth)->isoFormat('DD.MM.YYYY') }}
-                                    @else
-                                        <span class="blur-sm">XX.XX.XXXX</span>
-                                    @endcan
-                                </x-table.cell>
+{{--                <x-slot name="body">--}}
+{{--                    @foreach($companies as $company)--}}
+{{--                        <tr class="border-t border-gray-200">--}}
+{{--                            <th colspan="5" scope="colgroup" class="bg-gray-50 px-4 py-2 text-left text-sm font-semibold text-gray-900 sm:px-6">{{ $company[0]['company'] ? $company[0]['company'] : _i('no company') }}</th>--}}
+{{--                        </tr>--}}
+{{--                        @foreach($company as $participant)--}}
+{{--                            <x-table.row class="{{ $participant->cancelled ? 'line-through' : '' }}">--}}
+{{--                                <x-table.cell><x-input.checkbox wire:model="select" value="{{ $participant->id }}" /></x-table.cell>--}}
+{{--                                <x-table.cell>{{ $participant->lastname }}</x-table.cell>--}}
+{{--                                <x-table.cell>{{ $participant->firstname }}</x-table.cell>--}}
+{{--                                <x-table.cell>--}}
+{{--                                    @can('viewAny', $participant)--}}
+{{--                                        {{ \Carbon\Carbon::parse($participant->date_of_birth)->isoFormat('DD.MM.YYYY') }}--}}
+{{--                                    @else--}}
+{{--                                        <span class="blur-sm">XX.XX.XXXX</span>--}}
+{{--                                    @endcan--}}
+{{--                                </x-table.cell>--}}
 {{--                                <x-table.cell>--}}
 {{--                                    @can('viewAny', $participant)--}}
 {{--                                        {{ $participant->street }}--}}
@@ -122,74 +122,74 @@
 {{--                                        <span class="blur">12345 {{ substr(sha1(time()), 0, strlen($participant->location)) }}</span>--}}
 {{--                                    @endcan--}}
 {{--                                </x-table.cell>--}}
-                                <x-table.cell>
-                                    @can('viewAny', $participant)
-                                        {{ $participant->phone }}
-                                    @else
-                                        <span class="blur">{{ substr(sha1(time()), 0, strlen($participant->phone)) }}</span>
-                                    @endcan
-                                </x-table.cell>
-                                <x-table.cell>
-                                    @can('viewAny', $participant)
-                                        {{ $participant->email }}
-                                    @else
-                                        <span class="blur">{{ substr(sha1(time()), 0, strlen($participant->email)) }}</span>
-                                    @endcan
-                                </x-table.cell>
-                                <x-table.cell>{{ \Carbon\Carbon::parse($participant->created_at)->isoFormat('DD.MM.YYYY') }}</x-table.cell>
-                                <x-table.cell>{{ $participant->currency }} {{ $participant->price_gross }}</x-table.cell>
-                                <x-table.cell>
-                                    <span class="inline-flex {{ $participant->participated ? 'text-green-800' : 'text-red-800' }}">
+{{--                                <x-table.cell>--}}
+{{--                                    @can('viewAny', $participant)--}}
+{{--                                        {{ $participant->phone }}--}}
+{{--                                    @else--}}
+{{--                                        <span class="blur">{{ substr(sha1(time()), 0, strlen($participant->phone)) }}</span>--}}
+{{--                                    @endcan--}}
+{{--                                </x-table.cell>--}}
+{{--                                <x-table.cell>--}}
+{{--                                    @can('viewAny', $participant)--}}
+{{--                                        {{ $participant->email }}--}}
+{{--                                    @else--}}
+{{--                                        <span class="blur">{{ substr(sha1(time()), 0, strlen($participant->email)) }}</span>--}}
+{{--                                    @endcan--}}
+{{--                                </x-table.cell>--}}
+{{--                                <x-table.cell>{{ \Carbon\Carbon::parse($participant->created_at)->isoFormat('DD.MM.YYYY') }}</x-table.cell>--}}
+{{--                                <x-table.cell>{{ $participant->currency }} {{ $participant->price_gross }}</x-table.cell>--}}
+{{--                                <x-table.cell>--}}
+{{--                                    <span class="inline-flex {{ $participant->participated ? 'text-green-800' : 'text-red-800' }}">--}}
 {{--                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ $participant->participated ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">--}}
-                                        @if($can_update && !$participant->cancelled)
-                                            <x-button.link wire:click="participate({{ $participant->id }})">{!! $participant->participated ? '<i class="fa-solid fa-user-plus"></i>' : '<i class="fa-solid fa-user-xmark"></i>' !!}</x-button.link>
+{{--                                        @if($can_update && !$participant->cancelled)--}}
+{{--                                            <x-button.link wire:click="participate({{ $participant->id }})">{!! $participant->participated ? '<i class="fa-solid fa-user-plus"></i>' : '<i class="fa-solid fa-user-xmark"></i>' !!}</x-button.link>--}}
 {{--                                            <x-button.badge wire:click="participate({{ $participant->id }})">{{ $participant->participated ? _i('participated') : _i('not participated') }}</x-button.badge>--}}
-                                        @else
-                                            <x-button.link disabled>{!! $participant->participated ? '<i class="fa-solid fa-user-plus"></i>' : '<i class="fa-solid fa-user-xmark"></i>' !!}</x-button.link>
+{{--                                        @else--}}
+{{--                                            <x-button.link disabled>{!! $participant->participated ? '<i class="fa-solid fa-user-plus"></i>' : '<i class="fa-solid fa-user-xmark"></i>' !!}</x-button.link>--}}
 {{--                                            <x-button.badge wire:click="participate({{ $participant->id }})" disabled>{{ $participant->participated ? _i('participated') : _i('not participated') }}</x-button.badge>--}}
-                                        @endif
-                                    </span>
-                                </x-table.cell>
-                                <x-table.cell>
-                                    <span class="inline-flex {{ $participant->payed ? 'text-green-800' : 'text-red-800' }}">
-                                        @if($can_update)
-                                            <x-button.link wire:click="pay({{ $participant->id }})"><i class="{{ \App\Models\Participant::PAYMENTMETHOD[$participant->payment] }}"></i></x-button.link>
+{{--                                        @endif--}}
+{{--                                    </span>--}}
+{{--                                </x-table.cell>--}}
+{{--                                <x-table.cell>--}}
+{{--                                    <span class="inline-flex {{ $participant->payed ? 'text-green-800' : 'text-red-800' }}">--}}
+{{--                                        @if($can_update)--}}
+{{--                                            <x-button.link wire:click="pay({{ $participant->id }})"><i class="{{ \App\Models\Participant::PAYMENTMETHOD[$participant->payment] }}"></i></x-button.link>--}}
 {{--                                            <x-button.badge wire:click="pay({{ $participant->id }})">{{ __('payments.' . $participant->payment . '.title') }}</x-button.badge>--}}
-                                        @else
-                                            <x-button.link disabled><i class="{{ \App\Models\Participant::PAYMENTMETHOD[$participant->payment] }}"></i></x-button.link>
+{{--                                        @else--}}
+{{--                                            <x-button.link disabled><i class="{{ \App\Models\Participant::PAYMENTMETHOD[$participant->payment] }}"></i></x-button.link>--}}
 {{--                                            <x-button.badge disabled>{{ __('payments.' . $participant->payment . '.title') }}</x-button.badge>--}}
-                                        @endif
-                                    </span>
-                                </x-table.cell>
-                                <x-table.cell>
-                                    @can('viewAny', $participant)
-                                        <x-button.link wire:click="showDetails({{ $participant->id }})"><i class="fa-solid fa-address-card"></i></x-button.link>
-                                    @else
-                                        <x-button.link disabled><i class="fa-solid fa-address-card"></i></x-button.link>
-                                    @endif
-                                </x-table.cell>
-                                <x-table.cell>
-                                    @if($can_update && !$participant->cancelled && (\Carbon\Carbon::parse($course_data->start)->format('Y-m-d H:i') > \Carbon\Carbon::parse(now())->format('Y-m-d H:i')) )
-                                        <x-button.link wire:click="showCancelModal({{ $participant->id }})"><i class="fa-solid fa-user-slash"></i></x-button.link>
-                                    @else
-                                        <x-button.link disabled><i class="fa-solid fa-user-slash"></i></x-button.link>
-                                    @endif
-                                </x-table.cell>
-    {{--                            <x-table.cell>--}}
-    {{--                                @can('update', $course)--}}
-    {{--                                    <x-button.link wire:click="participant({{ $course->id }})">{{ _i('participants') }}</x-button.link>--}}
-    {{--                                @endcan--}}
-    {{--                            </x-table.cell>--}}
-    {{--                            <x-table.cell>--}}
-    {{--                                @can('update', $course)--}}
-    {{--                                    <x-button.link wire:click="edit({{ $course->id }})">{{ _i('edit') }}</x-button.link>--}}
-    {{--                                @endcan--}}
-    {{--                            </x-table.cell>--}}
-                            </x-table.row>
-                        @endforeach
-                    @endforeach
-                </x-slot>
-            </x-table>
+{{--                                        @endif--}}
+{{--                                    </span>--}}
+{{--                                </x-table.cell>--}}
+{{--                                <x-table.cell>--}}
+{{--                                    @can('viewAny', $participant)--}}
+{{--                                        <x-button.link wire:click="showDetails({{ $participant->id }})"><i class="fa-solid fa-address-card"></i></x-button.link>--}}
+{{--                                    @else--}}
+{{--                                        <x-button.link disabled><i class="fa-solid fa-address-card"></i></x-button.link>--}}
+{{--                                    @endif--}}
+{{--                                </x-table.cell>--}}
+{{--                                <x-table.cell>--}}
+{{--                                    @if($can_update && !$participant->cancelled && (\Carbon\Carbon::parse($course_data->start)->format('Y-m-d H:i') > \Carbon\Carbon::parse(now())->format('Y-m-d H:i')) )--}}
+{{--                                        <x-button.link wire:click="showCancelModal({{ $participant->id }})"><i class="fa-solid fa-user-slash"></i></x-button.link>--}}
+{{--                                    @else--}}
+{{--                                        <x-button.link disabled><i class="fa-solid fa-user-slash"></i></x-button.link>--}}
+{{--                                    @endif--}}
+{{--                                </x-table.cell>--}}
+{{--    --}}{{--                            <x-table.cell>--}}
+{{--    --}}{{--                                @can('update', $course)--}}
+{{--    --}}{{--                                    <x-button.link wire:click="participant({{ $course->id }})">{{ _i('participants') }}</x-button.link>--}}
+{{--    --}}{{--                                @endcan--}}
+{{--    --}}{{--                            </x-table.cell>--}}
+{{--    --}}{{--                            <x-table.cell>--}}
+{{--    --}}{{--                                @can('update', $course)--}}
+{{--    --}}{{--                                    <x-button.link wire:click="edit({{ $course->id }})">{{ _i('edit') }}</x-button.link>--}}
+{{--    --}}{{--                                @endcan--}}
+{{--    --}}{{--                            </x-table.cell>--}}
+{{--                            </x-table.row>--}}
+{{--                        @endforeach--}}
+{{--                    @endforeach--}}
+{{--                </x-slot>--}}
+{{--            </x-table>--}}
 
 {{--            <div wire:poll>--}}
 
@@ -199,8 +199,129 @@
 {{--            <div>--}}
 {{--                {{ $courses->links() }}--}}
 {{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
+
+    <div class="px-4 sm:px-6 lg:px-8">
+        <div class="sm:flex sm:items-center">
+            <div class="sm:flex-auto">
+                <x-button.link wire:click="$set('showCertModal', true)" class="hidden mt-2 text-sm text-gray-700 sm:inline">{{ _i('Create certificates') }}</x-button.link>
+            </div>
+            <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
+                <button type="button" class="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto">Add user</button>
+            </div>
+        </div>
+        <div class="-mx-4 mt-8 overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:-mx-6 md:mx-0 md:rounded-lg">
+            <table class="min-w-full divide-y divide-gray-300">
+                <thead class="bg-gray-50">
+                <tr>
+                    <th scope="col" class="hidden sm:table-cell"></th>
+                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:hidden">{{ _i('name') }}</th>
+                    <th scope="col" class="hidden py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 sm:table-cell">{{ _i('lastname') }}</th>
+                    <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 sm:table-cell">{{ _i('firstname') }}</th>
+                    <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 lg:table-cell">{{ _i('date of birth') }}</th>
+                    <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 xl:table-cell">{{ _i('phone') }}</th>
+                    <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 xl:table-cell">{{ _i('email') }}</th>
+                    <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 xl:hidden lg:table-cell md:hidden">{{ _i('contact') }}</th>
+                    <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 md:table-cell">{{ _i('booked on') }}</th>
+                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">{{ _i('price') }}</th>
+                    <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
+{{--                        <span class="sr-only">Edit</span>--}}
+                    </th>
+                    <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
+{{--                        <span class="sr-only">Edit</span>--}}
+                    </th>
+                    <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
+{{--                        <span class="sr-only">Edit</span>--}}
+                    </th>
+                    <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
+{{--                        <span class="sr-only">Edit</span>--}}
+                    </th>
+                </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-200 bg-white">
+                @foreach($companies as $company)
+                    <tr class="border-t border-gray-200">
+                        <th colspan="12" scope="colgroup" class="bg-gray-50 px-4 py-2 text-left text-sm font-semibold text-gray-900 sm:px-6">{{ $company[0]['company'] ? $company[0]['company'] : _i('no company') }}</th>
+                    </tr>
+                    @foreach($company as $participant)
+                        <tr class="{{ $participant->cancelled ? 'line-through' : '' }}">
+                            <td class="hidden px-4 py-4 leading-5 sm:table-cell"><x-input.checkbox wire:model="select" value="{{ $participant->id }}" /></td>
+                            <td class="w-full max-w-0 py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:w-auto sm:max-w-none sm:pl-6">
+                                {{ $participant->lastname }}
+                                <dl class="sm:hidden">
+                                    <dd class="mt-1 truncate text-gray-500">{{ $participant->firstname }}</dd>
+                                </dl>
+                            </td>
+                            <td class="hidden px-3 py-4 text-sm text-gray-500 sm:table-cell">{{ $participant->firstname }}</td>
+                            <td class="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">{{ \Carbon\Carbon::parse($participant->date_of_birth)->isoFormat('DD.MM.YYYY') }}</td>
+                            <td class="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">
+                                @can('viewAny', $participant)
+                                    {{ $participant->phone }}
+                                @else
+                                    <span class="blur">{{ substr(sha1(time()), 0, strlen($participant->phone)) }}</span>
+                                @endcan
+                                <dl class="xl:hidden">
+                                    <dt class="sr-only">Title</dt>
+                                    <dd class="mt-1 truncate text-gray-500">
+                                        @can('viewAny', $participant)
+                                            {{ $participant->email }}
+                                        @else
+                                            <span class="blur">{{ substr(sha1(time()), 0, strlen($participant->email)) }}</span>
+                                        @endcan
+                                    </dd>
+                                </dl>
+                            </td>
+                            <td class="hidden px-3 py-4 text-sm text-gray-500 xl:table-cell">
+                                @can('viewAny', $participant)
+                                    {{ $participant->email }}
+                                @else
+                                    <span class="blur">{{ substr(sha1(time()), 0, strlen($participant->email)) }}</span>
+                                @endcan
+                            </td>
+                            <td class="hidden px-3 py-4 text-sm text-gray-500 md:table-cell">{{ \Carbon\Carbon::parse($participant->created_at)->isoFormat('DD.MM.YYYY') }}</td>
+                            <td class="px-3 py-4 text-sm text-gray-500">{{ $participant->currency }} {{ $participant->price_gross }}</td>
+                            <td class="py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                                <span class="inline-flex {{ $participant->participated ? 'text-green-800' : 'text-red-800' }}">
+                                    @if($can_update && !$participant->cancelled)
+                                        <x-button.link wire:click="participate({{ $participant->id }})">{!! $participant->participated ? '<i class="fa-solid fa-user-plus"></i>' : '<i class="fa-solid fa-user-xmark"></i>' !!}</x-button.link>
+                                    @else
+                                        <x-button.link disabled>{!! $participant->participated ? '<i class="fa-solid fa-user-plus"></i>' : '<i class="fa-solid fa-user-xmark"></i>' !!}</x-button.link>
+                                    @endif
+                                </span>
+                            </td>
+                            <td class="py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                                <span class="inline-flex {{ $participant->payed ? 'text-green-800' : 'text-red-800' }}">
+                                    @if($can_update)
+                                        <x-button.link wire:click="pay({{ $participant->id }})"><i class="{{ \App\Models\Participant::PAYMENTMETHOD[$participant->payment] }}"></i></x-button.link>
+                                    @else
+                                        <x-button.link disabled><i class="{{ \App\Models\Participant::PAYMENTMETHOD[$participant->payment] }}"></i></x-button.link>
+                                    @endif
+                                </span>
+                            </td>
+                            <td class="py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                                @can('viewAny', $participant)
+                                    <x-button.link wire:click="showDetails({{ $participant->id }})"><i class="fa-solid fa-address-card"></i></x-button.link>
+                                @else
+                                    <x-button.link disabled><i class="fa-solid fa-address-card"></i></x-button.link>
+                                @endif
+                            </td>
+                            <td class="py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                                @if($can_update && !$participant->cancelled && (\Carbon\Carbon::parse($course_data->start)->format('Y-m-d H:i') > \Carbon\Carbon::parse(now())->format('Y-m-d H:i')) )
+                                    <x-button.link wire:click="showCancelModal({{ $participant->id }})"><i class="fa-solid fa-user-slash"></i></x-button.link>
+                                @else
+                                    <x-button.link disabled><i class="fa-solid fa-user-slash"></i></x-button.link>
+                                @endif
+                            </td>
+                        </tr>
+                    @endforeach
+                @endforeach
+
+                </tbody>
+            </table>
         </div>
     </div>
+
 
     <form wire:submit.prevent="getCert">
         <x-modal.confirmation wire:model.defer="showCertModal">

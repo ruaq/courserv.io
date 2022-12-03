@@ -1,74 +1,76 @@
 <div>
-    <div class="flex flex-col">
-        <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-            <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-                <div class="overflow-hidden border-b border-gray-200 shadow sm:rounded-lg">
-                    <table class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-gray-50">
-                        <tr>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
-                                Name
-                            </th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
-                                {{ _i('Teams') }}
-                            </th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
-                                {{ _i('Roles') }}
-                            </th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
-                                Status
-                            </th>
-                            <th scope="col" class="px-6 py-3 text-right text-xs font-medium tracking-wider text-gray-500">
-                                @can('create', \App\Models\User::class)<x-button.link wire:click="create">{{ _i('Add User') }}</x-button.link>@endcan
-                            </th>
-                        </tr>
-                        </thead>
-                        <tbody class="divide-y divide-gray-200 bg-white">
-                            @foreach($users as $user)
-                                <tr>
-                                    <td class="whitespace-nowrap px-6 py-4">
-                                        <div class="flex items-center">
-                                            <div class="h-10 w-10 shrink-0">
-                                                <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60" alt="">
-                                            </div>
-                                            <div class="ml-4">
-                                                <div class="text-sm font-medium text-gray-900">
-                                                    {{ $user->name }}
-                                                </div>
-                                                <div class="text-sm text-gray-500">
-                                                    {{ $user->email }}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-500">
-                                        @foreach($user->teams as $team){{ $team->display_name }}{{ !$loop->last ? ', ' : '' }}@endforeach
-                                    </td>
-                                    <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-500">
-                                        @foreach($user->roles as $role)@if(!$role->pivot->team_id){{ $role->display_name }}{{ !$loop->last ? ', ' : '' }}@endif @endforeach
-                                    </td>
-                                    <td class="whitespace-nowrap px-6 py-4">
-                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ $user->active ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
-                                            @can('update', $user)
-                                                <x-button.badge wire:click="active({{ $user->id }})">{{ $user->active ? _i('active') : _i('inactive') }}</x-button.badge>
-                                            @else
-                                                <x-button.badge wire:click="active({{ $user->id }})" disabled>{{ $user->active ? _i('active') : _i('inactive') }}</x-button.badge>
-                                            @endcan
-                                        </span>
-                                    </td>
-                                    <td class="whitespace-nowrap px-6 py-4 text-right text-sm font-medium">
-                                        @can('update', $user)
-                                            <x-button.link wire:click="edit({{ $user->id }})">{{ _i('edit') }}</x-button.link>
-                                        @endcan
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
+    <div class="px-4 sm:px-6 lg:px-8">
+        <div class="sm:flex sm:items-center">
+            <div class="sm:flex-auto">
+
+            </div>
+            <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
+                @can('create', \App\Models\User::class)
+                    <button type="button" wire:click="create" class="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto">
+                        {{ _i('Add User') }}
+                    </button>
+                @endcan
             </div>
         </div>
+        <div class="-mx-4 mt-8 overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:-mx-6 md:mx-0 md:rounded-lg">
+            <table class="min-w-full divide-y divide-gray-300">
+                <thead class="bg-gray-50">
+                <tr>
+                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Name</th>
+                    <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 sm:table-cell">{{ _i('Teams') }}</th>
+                    <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 md:table-cell">{{ _i('Roles') }}</th>
+                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Status</th>
+                    <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
+                        <span class="sr-only">Edit</span>
+                    </th>
+                </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-200 bg-white">
+                @foreach($users as $user)
+                <tr>
+                    <td class="w-full max-w-0 py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:w-auto sm:max-w-none sm:pl-6">
+                        <div class="flex items-center">
+                            <div class="h-10 w-10 flex-shrink-0">
+                                <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                            </div>
+                            <div class="ml-4">
+                                <div class="font-medium text-gray-900">{{ $user->name }}</div>
+                                <div class="hidden text-gray-500 sm:table-cell">{{ $user->email }}</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="hidden px-3 py-4 text-sm text-gray-500 sm:table-cell">@foreach($user->teams as $team){{ $team->display_name }}{{ !$loop->last ? ', ' : '' }}@endforeach</td>
+                    <td class="hidden px-3 py-4 text-sm text-gray-500 md:table-cell">
+                        @foreach($user->roles as $role)
+                            @if(!$role->pivot->team_id)
+                                {{ $role->display_name }}{{ !$loop->last ? ', ' : '' }}
+                            @endif
+                        @endforeach
+                    </td>
+                    <td class="px-3 py-4 text-sm text-gray-500">
+                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ $user->active ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
+                            @can('update', $user)
+                                <x-button.badge wire:click="active({{ $user->id }})">{{ $user->active ? _i('active') : _i('inactive') }}</x-button.badge>
+                            @else
+                                <x-button.badge wire:click="active({{ $user->id }})" disabled>{{ $user->active ? _i('active') : _i('inactive') }}</x-button.badge>
+                            @endcan
+                        </span>
+                    </td>
+                    <td class="py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                        @can('update', $user)
+                            <x-button.link wire:click="edit({{ $user->id }})"><i class="fa-solid fa-pen-to-square"></i></x-button.link>
+                        @else
+                            <x-button.link disabled><i class="fa-solid fa-pen-to-square"></i></x-button.link>
+                        @endcan
+                    </td>
+                </tr>
+                @endforeach
+
+                </tbody>
+            </table>
+        </div>
     </div>
+
     <form wire:submit.prevent="save">
         <x-modal.dialog wire:model.defer="showEditModal">
             <x-slot name="title">{{ _i('edit user') }}</x-slot>

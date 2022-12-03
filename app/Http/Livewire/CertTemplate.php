@@ -125,6 +125,8 @@ class CertTemplate extends Component
             ->layout('layouts.app', [
                 'metaTitle' => _i('Certification Templates'),
                 'active' => 'certTemplates',
+                'breadcrumb_back' => ['link' => route('certTemplates'), 'text' => _i('Certification Templates')],
+                'breadcrumbs' => [['link' => route('certTemplates'), 'text' => _i('Certification Templates')]],
             ]);
     }
 

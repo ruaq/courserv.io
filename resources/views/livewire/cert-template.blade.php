@@ -1,105 +1,47 @@
 <div>
 
-    <div class="space-y-4 py-4">
-        <div class="flex justify-between">
-            <div class="flex w-2/4 space-x-4">
-{{--                <x-input.text wire:model="filters.search" placeholder="{{ _i('Search...') }}" />--}}
+    <div class="px-4 sm:px-6 lg:px-8">
+        <div class="sm:flex sm:items-center">
+            <div class="sm:flex-auto">
 
-                {{--                <x-button.link wire:click="toggleShowFilters">@if ($showFilters) Hide @endif Advanced Search...</x-button.link>--}}
             </div>
-
-            <div class="flex items-center space-x-2">
-{{--                <x-input.group borderless paddingless for="perPage" label="Per Page">--}}
-{{--                    <x-input.select wire:model="perPage" id="perPage">--}}
-{{--                        <option value="10">10</option>--}}
-{{--                        <option value="25">25</option>--}}
-{{--                        <option value="50">50</option>--}}
-{{--                    </x-input.select>--}}
-{{--                </x-input.group>--}}
-
+            <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
                 @can('create', \App\Models\Price::class)
-                    <x-button.primary wire:click="create"><x-icon.plus /> {{ _i('Add Certification Template') }}</x-button.primary>
+                    <button type="button" wire:click="create" class="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto">
+                        {{ _i('Add Certification Template') }}
+                    </button>
                 @endcan
             </div>
         </div>
-
-        <!-- Advanced Search -->
-        {{--        <div>--}}
-        {{--            @if ($showFilters)--}}
-        {{--                <div class="bg-cool-gray-200 relative flex rounded p-4 shadow-inner">--}}
-        {{--                    <div class="w-1/2 space-y-4 pr-2">--}}
-        {{--                        <x-input.group inline for="filter-courseType" label="{{ _i('course type') }}">--}}
-        {{--                            <x-input.select wire:model="filters.courseType" id="filter-courseType">--}}
-        {{--                                <option value="" disabled>{{ _i('select course type...') }}</option>--}}
-        {{--                                @foreach($courseTypes as $category => $courseType)--}}
-        {{--                                    <optgroup label="{{ $category }}">--}}
-        {{--                                        @foreach($courseType as $ct)--}}
-        {{--                                            <option value="{{ $ct['id'] }}">{{ $ct['name'] }}</option>--}}
-        {{--                                        @endforeach--}}
-        {{--                                    </optgroup>--}}
-        {{--                                @endforeach--}}
-        {{--                            </x-input.select>--}}
-        {{--                        </x-input.group>--}}
-
-        {{--                        <x-input.group inline for="filter-team" label="{{ _i('team') }}">--}}
-        {{--                            <x-input.select wire:model="filters.team" id="filter-team">--}}
-        {{--                                <option value="" disabled>{{ _i('select team...') }}</option>--}}
-        {{--                                @foreach($teams as $team)--}}
-        {{--                                    <option value="{{ $team['id'] }}">{{ $team['display_name'] }}</option>--}}
-        {{--                                @endforeach--}}
-        {{--                            </x-input.select>--}}
-        {{--                        </x-input.group>--}}
-
-        {{--                        <x-input.group inline for="filter-showCancelled" label="{{ _i('cancelled courses') }}">--}}
-        {{--                            <x-input.select wire:model="filters.showCancelled" id="filter-showCancelled">--}}
-        {{--                                <option value="">{{ _i('don\'t show cancelled courses') }}</option>--}}
-        {{--                                <option value="true">{{ _i('show cancelled courses') }}</option>--}}
-        {{--                            </x-input.select>--}}
-        {{--                        </x-input.group>--}}
-        {{--                    </div>--}}
-
-        {{--                    <div class="w-1/2 space-y-4 pl-2">--}}
-        {{--                        <x-input.group inline for="filter-date-min" label="{{ _i('minimum date') }}">--}}
-        {{--                            <x-input.date wire:model="filters.date-min" id="filter-date-min" :options="$search_options"/>--}}
-        {{--                        </x-input.group>--}}
-
-        {{--                        <x-input.group inline for="filter-date-max" label="{{ _i('maximum date') }}">--}}
-        {{--                            <x-input.date wire:model="filters.date-max" id="filter-date-max" :options="$search_options"/>--}}
-        {{--                        </x-input.group>--}}
-
-        {{--                        <x-button.link wire:click="resetFilters" class="absolute right-0 bottom-0 p-4">{{ _i('reset filters') }}</x-button.link>--}}
-        {{--                    </div>--}}
-        {{--                </div>--}}
-        {{--            @endif--}}
-        {{--        </div>--}}
-
-        <div class="flex-col space-y-4">
-            <x-table>
-                <x-slot name="head">
-                    <x-table.heading sortable multi-column wire:click="sortBy('title')" :direction="$sorts['title'] ?? null">{{ _i('title') }}</x-table.heading>
-                    <x-table.heading sortable multi-column wire:click="sortBy('description')" :direction="$sorts['description'] ?? null">{{ _i('description') }}</x-table.heading>
-{{--                    <x-table.heading sortable multi-column wire:click="sortBy('price')" :direction="$sorts['price'] ?? null">{{ _i('price') }}</x-table.heading>--}}
-                    <x-table.heading></x-table.heading>
-                </x-slot>
-
-                <x-slot name="body">
-                    @foreach($templates as $template)
-                        <x-table.row>
-                            <x-table.cell>{{ $template->title }}</x-table.cell>
-                            <x-table.cell>{{ $template->description }}</x-table.cell>
-{{--                            <x-table.cell>{{ $price->amount_net }} {{ $price->amount_net != $price->amount_gross ? '/ ' . $price->amount_gross : '' }} {{ $price->currency }}</x-table.cell>--}}
-                            <x-table.cell>
-                                @can('update', $template)
-                                    <x-button.link wire:click="edit({{ $template->id }})">{{ _i('edit') }}</x-button.link>
-                                @endcan
-                            </x-table.cell>
-                        </x-table.row>
-                    @endforeach
-                </x-slot>
-            </x-table>
-{{--            <div>--}}
-{{--                {{ $templates->links() }}--}}
-{{--            </div>--}}
+        <div class="-mx-4 mt-8 overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:-mx-6 md:mx-0 md:rounded-lg">
+            <table class="min-w-full divide-y divide-gray-300">
+                <thead class="bg-gray-50">
+                <tr>
+                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">{{ _i('title') }}</th>
+                    <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 sm:table-cell">{{ _i('description') }}</th>
+                    <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
+                        <span class="sr-only">Edit</span>
+                    </th>
+                </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-200 bg-white">
+                @foreach($templates as $template)
+                <tr>
+                    <td class="w-full max-w-0 py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:w-auto sm:max-w-none sm:pl-6">
+                        {{ $template->title }}
+                    </td>
+                    <td class="hidden px-3 py-4 text-sm text-gray-500 sm:table-cell">{{ $template->description }}</td>
+                    <td class="py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                        @can('update', $template)
+                            <x-button.link wire:click="edit({{ $template->id }})"><i class="fa-solid fa-pen-to-square"></i></x-button.link>
+                        @else
+                            <x-button.link disabled><i class="fa-solid fa-pen-to-square"></i></x-button.link>
+                        @endcan
+                    </td>
+                </tr>
+                @endforeach
+                </tbody>
+            </table>
         </div>
     </div>
 

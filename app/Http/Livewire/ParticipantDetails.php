@@ -45,6 +45,43 @@ class ParticipantDetails extends Component
             ->layout('layouts.app', [
                 'metaTitle' => _i('participants'),
                 'active' => 'participants',
+                'breadcrumb_back' => [
+                    'link' => route(
+                        'participant.course',
+                        [
+                            'course' => Hashids::encode($participant->course->id),
+                        ]
+                    ),
+                    'text' => _i('participants'),
+                ],
+                'breadcrumbs' => [
+                    [
+                        'link' => route('course'),
+                        'text' => _i('Courses'),
+                    ],
+                    [
+                        'link' => route('course'),
+                        'text' => $participant->course->internal_number,
+                    ],
+                    [
+                        'link' => route(
+                            'participant.course',
+                            [
+                                'course' => Hashids::encode($participant->course->id),
+                            ]
+                        ),
+                        'text' => _i('participants'),
+                    ],
+                    [
+                        'link' => route(
+                            'participant.details',
+                            [
+                                'participant' => Hashids::encode($participant->id),
+                            ]
+                        ),
+                        'text' => $participant->firstname . ' ' . $participant->lastname,
+                    ],
+                ],
             ]);
     }
 }

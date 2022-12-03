@@ -1,129 +1,229 @@
 <div>
 
-    <div class="space-y-4 py-4">
-        <div class="flex justify-between">
-            <div class="flex w-2/4 space-x-4">
-                <x-input.text wire:model="filters.search" placeholder="{{ _i('Search...') }}" />
+{{--    <div class="space-y-4 py-4">--}}
+{{--        <div class="flex justify-between">--}}
+{{--            <div class="flex w-2/4 space-x-4">--}}
+{{--                <x-input.text wire:model="filters.search" placeholder="{{ _i('Search...') }}" />--}}
 
-                <x-button.link wire:click="toggleShowFilters">@if ($showFilters) Hide @endif Advanced Search...</x-button.link>
+{{--                <x-button.link wire:click="toggleShowFilters">@if ($showFilters) Hide @endif Advanced Search...</x-button.link>--}}
+{{--            </div>--}}
+
+{{--            <div class="flex items-center space-x-2">--}}
+{{--                <x-input.group borderless paddingless for="perPage" label="Per Page">--}}
+{{--                    <x-input.select wire:model="perPage" id="perPage">--}}
+{{--                        <option value="10">10</option>--}}
+{{--                        <option value="25">25</option>--}}
+{{--                        <option value="50">50</option>--}}
+{{--                    </x-input.select>--}}
+{{--                </x-input.group>--}}
+
+{{--                @can('create', \App\Models\Course::class)--}}
+{{--                    <x-button.primary wire:click="create"><x-icon.plus /> {{ _i('Add Course') }}</x-button.primary>--}}
+{{--                @endcan--}}
+{{--            </div>--}}
+{{--        </div>--}}
+
+{{--        <!-- Advanced Search -->--}}
+{{--        <div>--}}
+{{--            @if ($showFilters)--}}
+{{--                <div class="bg-cool-gray-200 relative flex rounded p-4 shadow-inner">--}}
+{{--                    <div class="w-1/2 space-y-4 pr-2">--}}
+{{--                        <x-input.group inline for="filter-courseType" label="{{ _i('course type') }}">--}}
+{{--                            <x-input.select wire:model="filters.courseType" id="filter-courseType">--}}
+{{--                                <option value="" disabled>{{ _i('select course type...') }}</option>--}}
+{{--                                @foreach($courseTypes as $category => $courseType)--}}
+{{--                                    <optgroup label="{{ $category }}">--}}
+{{--                                        @foreach($courseType as $ct)--}}
+{{--                                            <option value="{{ $ct['id'] }}">{{ $ct['name'] }}</option>--}}
+{{--                                        @endforeach--}}
+{{--                                    </optgroup>--}}
+{{--                                @endforeach--}}
+{{--                            </x-input.select>--}}
+{{--                        </x-input.group>--}}
+
+{{--                        <x-input.group inline for="filter-team" label="{{ _i('team') }}">--}}
+{{--                            <x-input.select wire:model="filters.team" id="filter-team">--}}
+{{--                                <option value="" disabled>{{ _i('select team...') }}</option>--}}
+{{--                                    @foreach($teams as $team)--}}
+{{--                                        <option value="{{ $team['id'] }}">{{ $team['display_name'] }}</option>--}}
+{{--                                    @endforeach--}}
+{{--                            </x-input.select>--}}
+{{--                        </x-input.group>--}}
+
+{{--                        <x-input.group inline for="filter-showCancelled" label="{{ _i('cancelled courses') }}">--}}
+{{--                            <x-input.select wire:model="filters.showCancelled" id="filter-showCancelled">--}}
+{{--                                <option value="">{{ _i('don\'t show cancelled courses') }}</option>--}}
+{{--                                <option value="true">{{ _i('show cancelled courses') }}</option>--}}
+{{--                            </x-input.select>--}}
+{{--                        </x-input.group>--}}
+{{--                    </div>--}}
+
+{{--                    <div class="w-1/2 space-y-4 pl-2">--}}
+{{--                        <x-input.group inline for="filter-date-min" label="{{ _i('minimum date') }}">--}}
+{{--                            <x-input.date wire:model="filters.date-min" id="filter-date-min" :options="$search_options"/>--}}
+{{--                        </x-input.group>--}}
+
+{{--                        <x-input.group inline for="filter-date-max" label="{{ _i('maximum date') }}">--}}
+{{--                            <x-input.date wire:model="filters.date-max" id="filter-date-max" :options="$search_options"/>--}}
+{{--                        </x-input.group>--}}
+
+{{--                        <x-button.link wire:click="resetFilters" class="absolute right-0 bottom-0 p-4">{{ _i('reset filters') }}</x-button.link>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            @endif--}}
+{{--        </div>--}}
+
+{{--        <div class="flex-col space-y-4">--}}
+{{--            <x-table>--}}
+{{--                <x-slot name="head">--}}
+{{--                    <x-table.heading sortable multi-column wire:click="sortBy('seminar_location')" :direction="$sorts['seminar_location'] ?? null">{{ _i('seminar location') }}</x-table.heading>--}}
+{{--                    <x-table.heading sortable multi-column wire:click="sortBy('street')" :direction="$sorts['street'] ?? null">{{ _i('street') }}</x-table.heading>--}}
+{{--                    <x-table.heading sortable multi-column wire:click="sortBy('location')" :direction="$sorts['location'] ?? null">{{ _i('location') }}</x-table.heading>--}}
+{{--                    <x-table.heading sortable multi-column wire:click="sortBy('start')" :direction="$sorts['start'] ?? null">{{ _i('start') }}</x-table.heading>--}}
+{{--                    <x-table.heading sortable multi-column wire:click="sortBy('course_type_id')" :direction="$sorts['course_type_id'] ?? null">{{ _i('course type') }}</x-table.heading>--}}
+{{--                    <x-table.heading sortable multi-column wire:click="sortBy('internal_number')" :direction="$sorts['internal_number'] ?? null">{{ _i('internal') }}</x-table.heading>--}}
+{{--                    @if(config('qseh.codeNumber'))--}}
+{{--                        <x-table.heading sortable multi-column wire:click="sortBy('registration_number')" :direction="$sorts['registration_number'] ?? null">{{ _i('qseh') }}</x-table.heading>--}}
+{{--                    @endif--}}
+{{--                    <x-table.heading sortable multi-column wire:click="sortBy('team_id')" :direction="$sorts['team_id'] ?? null">{{ _i('team') }}</x-table.heading>--}}
+{{--                    <x-table.heading></x-table.heading>--}}
+{{--                    <x-table.heading></x-table.heading>--}}
+{{--                </x-slot>--}}
+
+{{--                <x-slot name="body">--}}
+{{--                    @foreach($courses as $course)--}}
+{{--                        <x-table.row class="{{ $course->cancelled ? 'line-through' : '' }}">--}}
+{{--                            <x-table.cell>{{ $course->seminar_location }}</x-table.cell>--}}
+{{--                            <x-table.cell>{{ $course->street }}</x-table.cell>--}}
+{{--                            <x-table.cell>{{ $course->zipcode }} {{ $course->location }}</x-table.cell>--}}
+{{--                            <x-table.cell>{{ $course->start->format('d.m.Y H:i') }}</x-table.cell>--}}
+{{--                            <x-table.cell>{{ $course->type->name }}</x-table.cell>--}}
+{{--                            <div {{ ($course->internal_number == 'queued') ? "wire:poll.visible.5s" : '' }}>--}}
+{{--                                <x-table.cell>{{ $course->internal_number }}</x-table.cell>--}}
+{{--                            </div>--}}
+{{--                            @if(config('qseh.codeNumber'))--}}
+{{--                                <div {{ ($course->registration_number == 'queued') ? "wire:poll.visible.5s" : '' }}>--}}
+{{--                                    <x-table.cell>{{ $course->registration_number }}</x-table.cell>--}}
+{{--                                </div>--}}
+{{--                            @endif--}}
+{{--                            <x-table.cell>{{ $course->team->display_name }}</x-table.cell>--}}
+{{--                            <x-table.cell>--}}
+{{--                                @can('update', $course)--}}
+{{--                                    <x-button.link wire:click="participant({{ $course->id }})">{{ _i('participants') }}</x-button.link>--}}
+{{--                                @endcan--}}
+{{--                            </x-table.cell>--}}
+{{--                            <x-table.cell>--}}
+{{--                                @can('update', $course)--}}
+{{--                                    <x-button.link wire:click="edit({{ $course->id }})">{{ _i('edit') }}</x-button.link>--}}
+{{--                                @endcan--}}
+{{--                            </x-table.cell>--}}
+{{--                        </x-table.row>--}}
+{{--                    @endforeach--}}
+{{--                </x-slot>--}}
+{{--            </x-table>--}}
+{{--            <div>--}}
+{{--                {{ $courses->links() }}--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
+
+    <div class="px-4 sm:px-6 lg:px-8">
+        <div class="sm:flex sm:items-center">
+            <div class="sm:flex-auto">
+{{--                <h1 class="text-xl font-semibold text-gray-900">Users</h1>--}}
+{{--                <p class="mt-2 text-sm text-gray-700">A list of all the users in your account including their name, title, email and role.</p>--}}
             </div>
-
-            <div class="flex items-center space-x-2">
-                <x-input.group borderless paddingless for="perPage" label="Per Page">
-                    <x-input.select wire:model="perPage" id="perPage">
-                        <option value="10">10</option>
-                        <option value="25">25</option>
-                        <option value="50">50</option>
-                    </x-input.select>
-                </x-input.group>
-
+            <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
                 @can('create', \App\Models\Course::class)
-                    <x-button.primary wire:click="create"><x-icon.plus /> {{ _i('Add Course') }}</x-button.primary>
+                    <button wire:click="create" type="button" class="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto">{{ _i('Add Course') }}</button>
                 @endcan
             </div>
         </div>
-
-        <!-- Advanced Search -->
-        <div>
-            @if ($showFilters)
-                <div class="bg-cool-gray-200 relative flex rounded p-4 shadow-inner">
-                    <div class="w-1/2 space-y-4 pr-2">
-                        <x-input.group inline for="filter-courseType" label="{{ _i('course type') }}">
-                            <x-input.select wire:model="filters.courseType" id="filter-courseType">
-                                <option value="" disabled>{{ _i('select course type...') }}</option>
-                                @foreach($courseTypes as $category => $courseType)
-                                    <optgroup label="{{ $category }}">
-                                        @foreach($courseType as $ct)
-                                            <option value="{{ $ct['id'] }}">{{ $ct['name'] }}</option>
-                                        @endforeach
-                                    </optgroup>
-                                @endforeach
-                            </x-input.select>
-                        </x-input.group>
-
-                        <x-input.group inline for="filter-team" label="{{ _i('team') }}">
-                            <x-input.select wire:model="filters.team" id="filter-team">
-                                <option value="" disabled>{{ _i('select team...') }}</option>
-                                    @foreach($teams as $team)
-                                        <option value="{{ $team['id'] }}">{{ $team['display_name'] }}</option>
-                                    @endforeach
-                            </x-input.select>
-                        </x-input.group>
-
-                        <x-input.group inline for="filter-showCancelled" label="{{ _i('cancelled courses') }}">
-                            <x-input.select wire:model="filters.showCancelled" id="filter-showCancelled">
-                                <option value="">{{ _i('don\'t show cancelled courses') }}</option>
-                                <option value="true">{{ _i('show cancelled courses') }}</option>
-                            </x-input.select>
-                        </x-input.group>
-                    </div>
-
-                    <div class="w-1/2 space-y-4 pl-2">
-                        <x-input.group inline for="filter-date-min" label="{{ _i('minimum date') }}">
-                            <x-input.date wire:model="filters.date-min" id="filter-date-min" :options="$search_options"/>
-                        </x-input.group>
-
-                        <x-input.group inline for="filter-date-max" label="{{ _i('maximum date') }}">
-                            <x-input.date wire:model="filters.date-max" id="filter-date-max" :options="$search_options"/>
-                        </x-input.group>
-
-                        <x-button.link wire:click="resetFilters" class="absolute right-0 bottom-0 p-4">{{ _i('reset filters') }}</x-button.link>
-                    </div>
-                </div>
-            @endif
-        </div>
-
-        <div class="flex-col space-y-4">
-            <x-table>
-                <x-slot name="head">
-                    <x-table.heading sortable multi-column wire:click="sortBy('seminar_location')" :direction="$sorts['seminar_location'] ?? null">{{ _i('seminar location') }}</x-table.heading>
-                    <x-table.heading sortable multi-column wire:click="sortBy('street')" :direction="$sorts['street'] ?? null">{{ _i('street') }}</x-table.heading>
-                    <x-table.heading sortable multi-column wire:click="sortBy('location')" :direction="$sorts['location'] ?? null">{{ _i('location') }}</x-table.heading>
-                    <x-table.heading sortable multi-column wire:click="sortBy('start')" :direction="$sorts['start'] ?? null">{{ _i('start') }}</x-table.heading>
-                    <x-table.heading sortable multi-column wire:click="sortBy('course_type_id')" :direction="$sorts['course_type_id'] ?? null">{{ _i('course type') }}</x-table.heading>
-                    <x-table.heading sortable multi-column wire:click="sortBy('internal_number')" :direction="$sorts['internal_number'] ?? null">{{ _i('internal') }}</x-table.heading>
+        <div class="-mx-4 mt-8 overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:-mx-6 md:mx-0 md:rounded-lg">
+            <table class="min-w-full divide-y divide-gray-300">
+                <thead class="bg-gray-50">
+                <tr>
+                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">{{ _i('seminar location') }}</th>
+                    <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 xl:table-cell">{{ _i('street') }}</th>
+                    <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 sm:table-cell">{{ _i('location') }}</th>
+                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">{{ _i('start') }}</th>
+                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">{{ _i('course type') }}</th>
+                    <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 lg:table-cell">{{ _i('internal') }}</th>
+                    <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 lg:hidden md:table-cell sm:hidden">{{ _i('number') }}</th>
                     @if(config('qseh.codeNumber'))
-                        <x-table.heading sortable multi-column wire:click="sortBy('registration_number')" :direction="$sorts['registration_number'] ?? null">{{ _i('qseh') }}</x-table.heading>
+                        <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 lg:table-cell">{{ _i('qseh') }}</th>
                     @endif
-                    <x-table.heading sortable multi-column wire:click="sortBy('team_id')" :direction="$sorts['team_id'] ?? null">{{ _i('team') }}</x-table.heading>
-                    <x-table.heading></x-table.heading>
-                    <x-table.heading></x-table.heading>
-                </x-slot>
-
-                <x-slot name="body">
-                    @foreach($courses as $course)
-                        <x-table.row class="{{ $course->cancelled ? 'line-through' : '' }}">
-                            <x-table.cell>{{ $course->seminar_location }}</x-table.cell>
-                            <x-table.cell>{{ $course->street }}</x-table.cell>
-                            <x-table.cell>{{ $course->zipcode }} {{ $course->location }}</x-table.cell>
-                            <x-table.cell>{{ $course->start->format('d.m.Y H:i') }}</x-table.cell>
-                            <x-table.cell>{{ $course->type->name }}</x-table.cell>
-                            <div {{ ($course->internal_number == 'queued') ? "wire:poll.visible.5s" : '' }}>
-                                <x-table.cell>{{ $course->internal_number }}</x-table.cell>
+                    <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 lg:table-cell">{{ _i('team') }}</th>
+                    <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
+{{--                        <span class="sr-only">Edit</span>--}}
+                    </th>
+                    <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
+{{--                        <span class="sr-only">Edit</span>--}}
+                    </th>
+                </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-200 bg-white">
+                @foreach($courses as $course)
+                    <tr class="{{ $course->cancelled ? 'line-through' : '' }}">
+                        <td class="w-full max-w-0 py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:w-auto sm:max-w-none sm:pl-6">
+                            {{ $course->seminar_location }}
+                            <dl class="font-normal lg:hidden">
+    {{--                            <dt class="sr-only">Title</dt>--}}
+    {{--                            <dd class="mt-1 truncate text-gray-700">XXX-end Developer</dd>--}}
+{{--                                <dt class="sr-only sm:hidden">Email</dt>--}}
+                                <dd class="mt-1 truncate text-gray-500 sm:hidden">{{ $course->location }}</dd>
+                            </dl>
+                        </td>
+                        <td class="hidden px-3 py-4 text-sm text-gray-500 xl:table-cell">{{ $course->street }}</td>
+                        <td class="hidden px-3 py-4 text-sm text-gray-500 sm:table-cell">
+                            <dl class="xl:hidden">
+{{--                                <dt class="sr-only">Title</dt>--}}
+                                <dd class="mt-1 truncate text-gray-500">{{ $course->street }}</dd>
+    {{--                            <dt class="sr-only sm:hidden">Email</dt>--}}
+    {{--                            <dd class="mt-1 truncate text-gray-500 sm:hidden">lindsay.walton@example.com</dd>--}}
+                            </dl>
+                            {{ $course->zipcode }} {{ $course->location }}
+                        </td>
+                        <td class="px-3 py-4 text-sm text-gray-500">{{ $course->start->format('d.m.Y H:i') }}</td>
+                        <td class="px-3 py-4 text-sm text-gray-500">{{ $course->type->name }}</td>
+                        <div {{ ($course->internal_number == 'queued') ? "wire:poll.visible.5s" : '' }}>
+                            <td class="hidden px-3 py-4 text-sm text-gray-500 md:table-cell">
+                                {{ $course->internal_number }}
+                                <dl class="lg:hidden">
+{{--                                    <dt class="sr-only">Title</dt>--}}
+                                    <dd class="mt-1 truncate text-gray-500">{{ $course->registration_number }}</dd>
+                                    {{--                            <dt class="sr-only sm:hidden">Email</dt>--}}
+                                    {{--                            <dd class="mt-1 truncate text-gray-500 sm:hidden">lindsay.walton@example.com</dd>--}}
+                                </dl>
+                            </td>
+                        </div>
+                        @if(config('qseh.codeNumber'))
+                            <div {{ ($course->registration_number == 'queued') ? "wire:poll.visible.5s" : '' }}>
+                                <td class="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">{{ $course->registration_number }}</td>
                             </div>
-                            @if(config('qseh.codeNumber'))
-                                <div {{ ($course->registration_number == 'queued') ? "wire:poll.visible.5s" : '' }}>
-                                    <x-table.cell>{{ $course->registration_number }}</x-table.cell>
-                                </div>
-                            @endif
-                            <x-table.cell>{{ $course->team->display_name }}</x-table.cell>
-                            <x-table.cell>
-                                @can('update', $course)
-                                    <x-button.link wire:click="participant({{ $course->id }})">{{ _i('participants') }}</x-button.link>
-                                @endcan
-                            </x-table.cell>
-                            <x-table.cell>
-                                @can('update', $course)
-                                    <x-button.link wire:click="edit({{ $course->id }})">{{ _i('edit') }}</x-button.link>
-                                @endcan
-                            </x-table.cell>
-                        </x-table.row>
-                    @endforeach
-                </x-slot>
-            </x-table>
-            <div>
-                {{ $courses->links() }}
-            </div>
+                        @endif
+                        <td class="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">{{ $course->team->display_name }}</td>
+                        <td class="py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                            @can('update', $course)
+                                <x-button.link wire:click="participant({{ $course->id }})"><i class="fa-solid fa-users-viewfinder"></i></x-button.link>
+                            @else
+                                <x-button.link disabled><i class="fa-solid fa-users-viewfinder"></i></x-button.link>
+                            @endcan
+    {{--                        <a href="#" class="text-indigo-600 hover:text-indigo-900"></a>--}}
+                        </td>
+                        <td class="py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                            @can('update', $course)
+                                <x-button.link wire:click="edit({{ $course->id }})"><i class="fa-solid fa-pen-to-square"></i></x-button.link>
+                            @else
+                                <x-button.link disabled><i class="fa-solid fa-pen-to-square"></i></x-button.link>
+                            @endcan
+    {{--                        <a href="#" class="text-indigo-600 hover:text-indigo-900"><i class="fa-solid fa-pen-to-square"></i></a>--}}
+                        </td>
+                    </tr>
+                @endforeach
+
+                </tbody>
+            </table>
         </div>
     </div>
 

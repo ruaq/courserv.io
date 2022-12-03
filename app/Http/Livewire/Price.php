@@ -184,6 +184,8 @@ class Price extends Component
             ->layout('layouts.app', [
                 'metaTitle' => _i('Prices'),
                 'active' => 'prices',
+                'breadcrumb_back' => ['link' => route('prices'), 'text' => _i('Prices')],
+                'breadcrumbs' => [['link' => route('prices'), 'text' => _i('Prices')]],
             ]);
     }
 

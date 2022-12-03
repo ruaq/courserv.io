@@ -139,6 +139,8 @@ class CourseType extends Component
             ->layout('layouts.app', [
                 'metaTitle' => _i('Course types'),
                 'active' => 'coursetype',
+                'breadcrumb_back' => ['link' => route('coursetype'), 'text' => _i('Course types')],
+                'breadcrumbs' => [['link' => route('coursetype'), 'text' => _i('Course types')]],
             ]);
     }
 

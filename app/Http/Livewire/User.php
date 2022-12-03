@@ -169,6 +169,8 @@ class User extends Component
             ->layout('layouts.app', [
                 'metaTitle' => _i('User'),
                 'active' => 'user',
+                'breadcrumb_back' => ['link' => route('user'), 'text' => _i('User')],
+                'breadcrumbs' => [['link' => route('user'), 'text' => _i('User')]],
             ]);
     }
 

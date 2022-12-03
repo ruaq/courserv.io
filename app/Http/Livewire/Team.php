@@ -99,6 +99,8 @@ class Team extends Component
             ->layout('layouts.app', [
                 'metaTitle' => _i('Teams'),
                 'active' => 'teams',
+                'breadcrumb_back' => ['link' => route('teams'), 'text' => _i('Teams')],
+                'breadcrumbs' => [['link' => route('teams'), 'text' => _i('Teams')]],
             ]);
     }
 
