@@ -128,10 +128,89 @@
 {{--    </div>--}}
 
     <div class="px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between">
+            <div class="flex w-2/4 space-x-4">
+                <div>
+                    <div class="relative mt-1 rounded-md shadow-sm">
+                        <input type="text" wire:model="filters.search" placeholder="{{ _i('Search...') }}" class="block w-full rounded-md border-gray-300 pr-10 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                            <!-- Heroicon name: mini/magnifying-glass -->
+                            <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+{{--                <x-input.text wire:model="filters.search" placeholder="{{ _i('Search...') }}" />--}}
+
+                <x-button.link wire:click="toggleShowFilters">@if ($showFilters) <i class="fa-solid fa-magnifying-glass-minus"></i> @else <i class="fa-solid fa-magnifying-glass-plus"></i> @endif</x-button.link>
+            </div>
+
+            <div class="flex items-center space-x-2">
+                <x-input.group borderless paddingless for="perPage" label="">
+                    <x-input.select wire:model="perPage" id="perPage">
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                    </x-input.select>
+                </x-input.group>
+            </div>
+        </div>
+
+        <!-- Advanced Search -->
+        <div>
+            @if ($showFilters)
+                <div class="bg-cool-gray-200 relative flex rounded p-4 shadow-inner">
+                    <div class="w-1/2 space-y-4 pr-2">
+                        <x-input.group inline for="filter-courseType" label="{{ _i('course type') }}">
+                            <x-input.select wire:model="filters.courseType" id="filter-courseType">
+                                <option value="" disabled>{{ _i('select course type...') }}</option>
+                                @foreach($courseTypes as $category => $courseType)
+                                    <optgroup label="{{ $category }}">
+                                        @foreach($courseType as $ct)
+                                            <option value="{{ $ct['id'] }}">{{ $ct['name'] }}</option>
+                                        @endforeach
+                                    </optgroup>
+                                @endforeach
+                            </x-input.select>
+                        </x-input.group>
+
+                        <x-input.group inline for="filter-team" label="{{ _i('team') }}">
+                            <x-input.select wire:model="filters.team" id="filter-team">
+                                <option value="" disabled>{{ _i('select team...') }}</option>
+                                @foreach($teams as $team)
+                                    <option value="{{ $team['id'] }}">{{ $team['display_name'] }}</option>
+                                @endforeach
+                            </x-input.select>
+                        </x-input.group>
+
+                        <x-input.group inline for="filter-showCancelled" label="{{ _i('cancelled courses') }}">
+                            <x-input.select wire:model="filters.showCancelled" id="filter-showCancelled">
+                                <option value="">{{ _i('don\'t show cancelled courses') }}</option>
+                                <option value="true">{{ _i('show cancelled courses') }}</option>
+                            </x-input.select>
+                        </x-input.group>
+                    </div>
+
+                    <div class="w-1/2 space-y-4 pl-2">
+                        <x-input.group inline for="filter-date-min" label="{{ _i('minimum date') }}">
+                            <x-input.date wire:model="filters.date-min" id="filter-date-min" :options="$search_options"/>
+                        </x-input.group>
+
+                        <x-input.group inline for="filter-date-max" label="{{ _i('maximum date') }}">
+                            <x-input.date wire:model="filters.date-max" id="filter-date-max" :options="$search_options"/>
+                        </x-input.group>
+
+                        <x-button.link wire:click="resetFilters" class="absolute right-0 bottom-0 p-4">{{ _i('reset filters') }}</x-button.link>
+                    </div>
+                </div>
+            @endif
+        </div>
+
         <div class="sm:flex sm:items-center">
             <div class="sm:flex-auto">
-{{--                <h1 class="text-xl font-semibold text-gray-900">Users</h1>--}}
-{{--                <p class="mt-2 text-sm text-gray-700">A list of all the users in your account including their name, title, email and role.</p>--}}
+
             </div>
             <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
                 @can('create', \App\Models\Course::class)
@@ -143,21 +222,29 @@
             <table class="min-w-full divide-y divide-gray-300">
                 <thead class="bg-gray-50">
                 <tr>
-                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">{{ _i('seminar location') }}</th>
-                    <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 xl:table-cell">{{ _i('street') }}</th>
-                    <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 sm:table-cell">{{ _i('location') }}</th>
-                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">{{ _i('start') }}</th>
-                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">{{ _i('course type') }}</th>
-                    <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 lg:table-cell">{{ _i('internal') }}</th>
-                    <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 lg:hidden md:table-cell sm:hidden">{{ _i('number') }}</th>
+                    <x-table.heading sortable multi-column wire:click="sortBy('seminar_location')" :direction="$sorts['seminar_location'] ?? null" class="py-3.5 pl-4 pr-3 text-left text-xs lg:text-sm font-semibold text-gray-900 sm:pl-6">{{ _i('seminar location') }}</x-table.heading>
+{{--                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">{{ _i('seminar location') }}</th>--}}
+                    <x-table.heading sortable multi-column wire:click="sortBy('street')" :direction="$sorts['street'] ?? null" class="hidden px-3 py-3.5 text-left text-xs lg:text-sm font-semibold text-gray-900 xl:table-cell">{{ _i('street') }}</x-table.heading>
+{{--                    <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 xl:table-cell">{{ _i('street') }}</th>--}}
+                    <x-table.heading sortable multi-column wire:click="sortBy('location')" :direction="$sorts['location'] ?? null" class="hidden px-3 py-3.5 text-left text-xs lg:text-sm font-semibold text-gray-900 sm:table-cell">{{ _i('location') }}</x-table.heading>
+{{--                    <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 sm:table-cell">{{ _i('location') }}</th>--}}
+                    <x-table.heading sortable multi-column wire:click="sortBy('start')" :direction="$sorts['start'] ?? null" class="px-3 py-3.5 text-left text-xs lg:text-sm font-semibold text-gray-900">{{ _i('start') }}</x-table.heading>
+{{--                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">{{ _i('start') }}</th>--}}
+                    <x-table.heading sortable multi-column wire:click="sortBy('course_type_id')" :direction="$sorts['course_type_id'] ?? null" class="px-3 py-3.5 text-left text-xs lg:text-sm font-semibold text-gray-900">{{ _i('course type') }}</x-table.heading>
+{{--                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">{{ _i('course type') }}</th>--}}
+                    <x-table.heading sortable multi-column wire:click="sortBy('internal_number')" :direction="$sorts['internal_number'] ?? null" class="hidden px-3 py-3.5 text-left text-xs lg:text-sm font-semibold text-gray-900 lg:table-cell">{{ _i('internal') }}</x-table.heading>
+{{--                    <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 lg:table-cell">{{ _i('internal') }}</th>--}}
+                    <th scope="col" class="hidden px-3 py-3.5 text-left text-xs lg:text-sm font-semibold text-gray-900 lg:hidden md:table-cell sm:hidden">{{ _i('number') }}</th>
                     @if(config('qseh.codeNumber'))
-                        <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 lg:table-cell">{{ _i('qseh') }}</th>
+                        <x-table.heading sortable multi-column wire:click="sortBy('registration_number')" :direction="$sorts['registration_number'] ?? null" class="hidden px-3 py-3.5 text-left text-xs lg:text-sm font-semibold text-gray-900 lg:table-cell">{{ _i('qseh') }}</x-table.heading>
+{{--                        <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 lg:table-cell">{{ _i('qseh') }}</th>--}}
                     @endif
-                    <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 lg:table-cell">{{ _i('team') }}</th>
+                    <x-table.heading sortable multi-column wire:click="sortBy('team_id')" :direction="$sorts['team_id'] ?? null" class="hidden px-3 py-3.5 text-left text-xs lg:text-sm font-semibold text-gray-900 lg:table-cell">{{ _i('team') }}</x-table.heading>
+{{--                    <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 lg:table-cell">{{ _i('team') }}</th>--}}
                     <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
 {{--                        <span class="sr-only">Edit</span>--}}
                     </th>
-                    <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
+                    <th scope="col" class="hidden relative py-3.5 pl-3 pr-4 sm:pr-6 sm:table-cell">
 {{--                        <span class="sr-only">Edit</span>--}}
                     </th>
                 </tr>
@@ -165,32 +252,32 @@
                 <tbody class="divide-y divide-gray-200 bg-white">
                 @foreach($courses as $course)
                     <tr class="{{ $course->cancelled ? 'line-through' : '' }}">
-                        <td class="w-full max-w-0 py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:w-auto sm:max-w-none sm:pl-6">
+                        <td class="w-full max-w-0 py-4 pl-4 pr-3 text-xs lg:text-sm font-medium text-gray-900 sm:w-auto sm:max-w-none sm:pl-6">
                             {{ $course->seminar_location }}
                             <dl class="font-normal lg:hidden">
-    {{--                            <dt class="sr-only">Title</dt>--}}
+                                <dt class="sr-only">{{ _i('location') }}</dt>
     {{--                            <dd class="mt-1 truncate text-gray-700">XXX-end Developer</dd>--}}
 {{--                                <dt class="sr-only sm:hidden">Email</dt>--}}
                                 <dd class="mt-1 truncate text-gray-500 sm:hidden">{{ $course->location }}</dd>
                             </dl>
                         </td>
-                        <td class="hidden px-3 py-4 text-sm text-gray-500 xl:table-cell">{{ $course->street }}</td>
-                        <td class="hidden px-3 py-4 text-sm text-gray-500 sm:table-cell">
+                        <td class="hidden px-3 py-4 text-xs lg:text-sm text-gray-500 xl:table-cell">{{ $course->street }}</td>
+                        <td class="hidden px-3 py-4 text-xs lg:text-sm text-gray-500 sm:table-cell">
                             <dl class="xl:hidden">
-{{--                                <dt class="sr-only">Title</dt>--}}
+                                <dt class="sr-only">{{ _i('street') }}</dt>
                                 <dd class="mt-1 truncate text-gray-500">{{ $course->street }}</dd>
     {{--                            <dt class="sr-only sm:hidden">Email</dt>--}}
     {{--                            <dd class="mt-1 truncate text-gray-500 sm:hidden">lindsay.walton@example.com</dd>--}}
                             </dl>
                             {{ $course->zipcode }} {{ $course->location }}
                         </td>
-                        <td class="px-3 py-4 text-sm text-gray-500">{{ $course->start->format('d.m.Y H:i') }}</td>
-                        <td class="px-3 py-4 text-sm text-gray-500">{{ $course->type->name }}</td>
+                        <td class="px-3 py-4 text-xs lg:text-sm text-gray-500">{{ $course->start->format('d.m.Y H:i') }}</td>
+                        <td class="px-3 py-4 text-xs lg:text-sm text-gray-500">{{ $course->type->name }}</td>
                         <div {{ ($course->internal_number == 'queued') ? "wire:poll.visible.5s" : '' }}>
-                            <td class="hidden px-3 py-4 text-sm text-gray-500 md:table-cell">
+                            <td class="hidden px-3 py-4 text-xs lg:text-sm text-gray-500 md:table-cell">
                                 {{ $course->internal_number }}
                                 <dl class="lg:hidden">
-{{--                                    <dt class="sr-only">Title</dt>--}}
+                                    <dt class="sr-only">{{ _i('qseh') }}</dt>
                                     <dd class="mt-1 truncate text-gray-500">{{ $course->registration_number }}</dd>
                                     {{--                            <dt class="sr-only sm:hidden">Email</dt>--}}
                                     {{--                            <dd class="mt-1 truncate text-gray-500 sm:hidden">lindsay.walton@example.com</dd>--}}
@@ -199,11 +286,11 @@
                         </div>
                         @if(config('qseh.codeNumber'))
                             <div {{ ($course->registration_number == 'queued') ? "wire:poll.visible.5s" : '' }}>
-                                <td class="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">{{ $course->registration_number }}</td>
+                                <td class="hidden px-3 py-4 text-xs lg:text-sm text-gray-500 lg:table-cell">{{ $course->registration_number }}</td>
                             </div>
                         @endif
-                        <td class="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">{{ $course->team->display_name }}</td>
-                        <td class="py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                        <td class="hidden px-3 py-4 text-xs lg:text-sm text-gray-500 lg:table-cell">{{ $course->team->display_name }}</td>
+                        <td class="py-4 pl-3 pr-4 text-right text-xs lg:text-sm font-medium sm:pr-6">
                             @can('update', $course)
                                 <x-button.link wire:click="participant({{ $course->id }})"><i class="fa-solid fa-users-viewfinder"></i></x-button.link>
                             @else
@@ -211,7 +298,7 @@
                             @endcan
     {{--                        <a href="#" class="text-indigo-600 hover:text-indigo-900"></a>--}}
                         </td>
-                        <td class="py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                        <td class="hidden py-4 pl-3 pr-4 text-right text-xs lg:text-sm font-medium sm:pr-6 sm:table-cell">
                             @can('update', $course)
                                 <x-button.link wire:click="edit({{ $course->id }})"><i class="fa-solid fa-pen-to-square"></i></x-button.link>
                             @else
@@ -224,6 +311,9 @@
 
                 </tbody>
             </table>
+            <div>
+                {{ $courses->links() }}
+            </div>
         </div>
     </div>
 
