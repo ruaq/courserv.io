@@ -21,9 +21,7 @@
                         <nav aria-label="Global" class="hidden lg:ml-6 lg:flex lg:items-center lg:space-x-4">
                             <a href="{{ route('home') }}" class="px-3 py-2 text-sm font-medium text-gray-900">Dashboard</a>
 
-                            @can('viewAny', \App\Models\Course::class)
-                                <a href="{{ route('course') }}" class="px-3 py-2 text-sm font-medium text-gray-900">{{ _i('Courses') }}</a>
-                            @endcan
+                            <a href="{{ route('course') }}" class="px-3 py-2 text-sm font-medium text-gray-900">{{ _i('Courses') }}</a>
 
                             @can('viewAny', \App\Models\Participant::class)
                                 <a href="#" class="px-3 py-2 text-sm font-medium text-gray-900">{{ _i('participants') }}</a>
@@ -119,9 +117,7 @@
                                     <div class="mt-3 space-y-1 px-2">
                                         <a href="{{ route('home') }}" class="block rounded-md px-3 py-2 text-base font-medium text-gray-900 hover:bg-gray-100 hover:text-gray-800">Dashboard</a>
 
-                                        @can('viewAny', \App\Models\Course::class)
-                                            <a href="{{ route('course') }}" class="block rounded-md px-3 py-2 text-base font-medium text-gray-900 hover:bg-gray-100 hover:text-gray-800">{{ _i('Courses') }}</a>
-                                        @endcan
+                                        <a href="{{ route('course') }}" class="block rounded-md px-3 py-2 text-base font-medium text-gray-900 hover:bg-gray-100 hover:text-gray-800">{{ _i('Courses') }}</a>
 
                                         @can('viewAny', \App\Models\Participant::class)
                                             <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-900 hover:bg-gray-100 hover:text-gray-800">{{ _i('participants') }}</a>

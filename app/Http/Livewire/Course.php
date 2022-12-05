@@ -784,11 +784,24 @@ class Course extends Component
      */
     public function getRowsQueryProperty(): mixed
     {
+        $team_ids = [];
+        $courses = '';
+        if (! Auth::user()->isAbleTo('user.*')) { // can't see all courses
+            $teams = Auth::user()->teams()->pluck('id');
+
+            foreach ($teams as $team) {
+                if (Auth::user()->isAbleTo('course.*', $team)) {
+                    $team_ids[]['team_id'] = $team;
+                }
+            }
+            $courses = CourseModel::whereIn('team_id', $team_ids)
+                ->orWhereIn('id', Auth::user()->courses()->pluck('course_id'));
+        }
+
         $query = CourseModel::query()
             ->when(
-                ! Auth::user()->isAbleTo('team.*'), // can't see all teams
-                fn ($query, $user_teams) => $query
-                    ->whereIn('team_id', Auth::user()->teams()->pluck('id'))
+                is_object($courses), // can't see all courses
+                fn ($query, $user_teams) => $query->whereIn('id', $courses->pluck('id'))
             )
             ->when(
                 $this->filters['courseType'],
@@ -824,12 +837,10 @@ class Course extends Component
             )
             ->when(
                 $this->filters['search'],
-                fn ($query, $search) => $query
-                ->where('seminar_location', 'like', '%' . $search . '%')
-                ->orWhere('street', 'like', '%' . $search . '%')
-                ->orWhere('seminar_location', 'like', '%' . $search . '%')
-                ->orWhere('internal_number', 'like', '%' . $search . '%')
-                ->orWhere('registration_number', 'like', '%' . $search . '%')
+                fn ($query, $search) => $query->whereLike(
+                    ['seminar_location', 'street', 'location', 'internal_number', 'registration_number'],
+                    $search
+                )
             )
             ->with('type')
             ->with('team')
@@ -863,8 +874,6 @@ class Course extends Component
      */
     public function render()
     {
-        $this->authorize('viewAny', CourseModel::class);
-
         // if no date is manually set, set it to today
         if ($this->filters['date-min'] === null) {
             $this->filters['date-min'] = today()->format('d.m.Y');

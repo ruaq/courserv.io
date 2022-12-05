@@ -256,15 +256,15 @@
                             <td class="hidden px-3 py-4 text-sm text-gray-500 sm:table-cell">{{ $participant->firstname }}</td>
                             <td class="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">{{ \Carbon\Carbon::parse($participant->date_of_birth)->isoFormat('DD.MM.YYYY') }}</td>
                             <td class="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">
-                                @can('viewAny', $participant)
+                                @can('view', $participant)
                                     {{ $participant->phone }}
                                 @else
                                     <span class="blur">{{ substr(sha1(time()), 0, strlen($participant->phone)) }}</span>
                                 @endcan
                                 <dl class="xl:hidden">
-                                    <dt class="sr-only">Title</dt>
+                                    <dt class="sr-only">{{ _i('email') }}</dt>
                                     <dd class="mt-1 truncate text-gray-500">
-                                        @can('viewAny', $participant)
+                                        @can('view', $participant)
                                             {{ $participant->email }}
                                         @else
                                             <span class="blur">{{ substr(sha1(time()), 0, strlen($participant->email)) }}</span>
@@ -273,7 +273,7 @@
                                 </dl>
                             </td>
                             <td class="hidden px-3 py-4 text-sm text-gray-500 xl:table-cell">
-                                @can('viewAny', $participant)
+                                @can('view', $participant)
                                     {{ $participant->email }}
                                 @else
                                     <span class="blur">{{ substr(sha1(time()), 0, strlen($participant->email)) }}</span>
@@ -283,7 +283,7 @@
                             <td class="px-3 py-4 text-sm text-gray-500">{{ $participant->currency }} {{ $participant->price_gross }}</td>
                             <td class="py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
                                 <span class="inline-flex {{ $participant->participated ? 'text-green-800' : 'text-red-800' }}">
-                                    @if($can_update && !$participant->cancelled)
+                                    @if(auth()->user()->can('update', $participant) && !$participant->cancelled)
                                         <x-button.link wire:click="participate({{ $participant->id }})">{!! $participant->participated ? '<i class="fa-solid fa-user-plus"></i>' : '<i class="fa-solid fa-user-xmark"></i>' !!}</x-button.link>
                                     @else
                                         <x-button.link disabled>{!! $participant->participated ? '<i class="fa-solid fa-user-plus"></i>' : '<i class="fa-solid fa-user-xmark"></i>' !!}</x-button.link>
@@ -292,22 +292,22 @@
                             </td>
                             <td class="py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
                                 <span class="inline-flex {{ $participant->payed ? 'text-green-800' : 'text-red-800' }}">
-                                    @if($can_update)
+                                    @can('update', $participant)
                                         <x-button.link wire:click="pay({{ $participant->id }})"><i class="{{ \App\Models\Participant::PAYMENTMETHOD[$participant->payment] }}"></i></x-button.link>
                                     @else
                                         <x-button.link disabled><i class="{{ \App\Models\Participant::PAYMENTMETHOD[$participant->payment] }}"></i></x-button.link>
-                                    @endif
+                                    @endcan
                                 </span>
                             </td>
                             <td class="py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                                @can('viewAny', $participant)
+                                @can('view', $participant)
                                     <x-button.link wire:click="showDetails({{ $participant->id }})"><i class="fa-solid fa-address-card"></i></x-button.link>
                                 @else
                                     <x-button.link disabled><i class="fa-solid fa-address-card"></i></x-button.link>
                                 @endif
                             </td>
                             <td class="py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                                @if($can_update && !$participant->cancelled && (\Carbon\Carbon::parse($course_data->start)->format('Y-m-d H:i') > \Carbon\Carbon::parse(now())->format('Y-m-d H:i')) )
+                                @if(auth()->user()->can('update', $participant) && !$participant->cancelled && (\Carbon\Carbon::parse($course_data->start)->format('Y-m-d H:i') > \Carbon\Carbon::parse(now())->format('Y-m-d H:i')) )
                                     <x-button.link wire:click="showCancelModal({{ $participant->id }})"><i class="fa-solid fa-user-slash"></i></x-button.link>
                                 @else
                                     <x-button.link disabled><i class="fa-solid fa-user-slash"></i></x-button.link>

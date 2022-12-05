@@ -291,7 +291,7 @@
                         @endif
                         <td class="hidden px-3 py-4 text-xs lg:text-sm text-gray-500 lg:table-cell">{{ $course->team->display_name }}</td>
                         <td class="py-4 pl-3 pr-4 text-right text-xs lg:text-sm font-medium sm:pr-6">
-                            @can('update', $course)
+                            @can('viewParticipants', $course)
                                 <x-button.link wire:click="participant({{ $course->id }})"><i class="fa-solid fa-users-viewfinder"></i></x-button.link>
                             @else
                                 <x-button.link disabled><i class="fa-solid fa-users-viewfinder"></i></x-button.link>

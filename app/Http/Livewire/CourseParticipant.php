@@ -6,8 +6,6 @@ use App\Events\CertificateRequested;
 use App\Models\Course;
 use App\Models\CourseType;
 use App\Models\Participant;
-use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Auth;
@@ -55,7 +53,7 @@ class CourseParticipant extends Component
 
     public function participate(Participant $participant)
     {
-        $this->auth('update', $participant);
+        $this->authorize('update', $participant);
 
         $this->participant = $participant;
 
@@ -67,7 +65,7 @@ class CourseParticipant extends Component
 
     public function pay(Participant $participant)
     {
-        $this->auth('update', $participant);
+        $this->authorize('update', $participant);
 
         $this->participant = $participant;
 
@@ -79,14 +77,14 @@ class CourseParticipant extends Component
 
     public function showCancelModal(Participant $participant)
     {
-        $this->auth('update', $participant);
+        $this->authorize('update', $participant);
         $this->participant = $participant;
         $this->showCancelModal = true;
     }
 
     public function cancel()
     {
-        $this->auth('update', $this->participant);
+        $this->authorize('update', $this->participant);
 
         $this->participant->participated = 0;
         $this->participant->cancelled = now();
@@ -98,7 +96,7 @@ class CourseParticipant extends Component
 
     public function showDetails(Participant $participant)
     {
-        $this->authorize('viewAny', $participant);
+        $this->authorize('view', $participant);
 
         return $this->redirect(
             route(
@@ -147,11 +145,11 @@ class CourseParticipant extends Component
 
     public function render()
     {
-        $this->auth();
-
         $this->participants = Participant::whereCourseId(Hashids::decode($this->course))->orderBy('company')->get();
 
         $this->course_data = Course::whereId(Hashids::decode($this->course))->first();
+
+        $this->authorize('viewParticipants', $this->course_data);
 
         // get the available cert templates for the course type - deprecated
 //        $this->course_types = CourseType::whereId($this->course_data->course_type_id)
@@ -195,33 +193,5 @@ class CourseParticipant extends Component
     protected function makeBlankParticipant(): Participant
     {
         return new Participant();
-    }
-
-    // viewing is authorized if the user is trainer at this course and end of the course less than a week ago
-    // or is authorized by the role
-    protected function auth($ability = 'viewAny', $participant = Participant::class)
-    {
-        $user = auth()->id();
-        $course = Course::whereId(Hashids::decode($this->course))
-            ->where('end', '>', Carbon::now()->subWeek())
-            ->with('trainer')
-                ->whereHas('trainer', function (Builder $query) use ($user) {
-                    $query->where('user_id', '=', $user)
-                        ->where('confirmed', '=', 1);
-                })
-            ->get();
-
-        $this->can_view = auth()->user()->isAbleTo('participant.*');
-
-        // is trainer
-        if (count($course)) {
-            $this->can_update = true;
-
-            return;
-        }
-
-        // else check the role authorizations
-        $this->can_update = auth()->user()->isAbleTo('participant.update');
-        $this->authorize($ability, $participant);
     }
 }

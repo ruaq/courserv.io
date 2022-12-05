@@ -113,9 +113,4 @@ class Participant extends Model
     {
         return $this->belongsTo(ContactPerson::class, 'contact_id');
     }
-
-    public function trainer(): \Illuminate\Database\Eloquent\Relations\HasMany
-    {
-        return $this->hasMany(TrainerDay::class);
-    }
 }

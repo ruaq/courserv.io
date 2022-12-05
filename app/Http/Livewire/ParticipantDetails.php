@@ -37,7 +37,7 @@ class ParticipantDetails extends Component
             ->with('course')
             ->first();
 
-        $this->authorize('viewAny', $participant);
+        $this->authorize('view', $participant);
 
         $this->part = $participant;
 

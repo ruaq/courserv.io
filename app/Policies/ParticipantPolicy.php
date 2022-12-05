@@ -4,7 +4,9 @@ namespace App\Policies;
 
 use App\Models\Participant;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Auth\Access\Response;
 
 class ParticipantPolicy
 {
@@ -31,17 +33,21 @@ class ParticipantPolicy
         return $user->isAbleTo('participant.*');
     }
 
-//    /**
-//     * Determine whether the user can view the model.
-//     *
-//     * @param User $user
-//     * @param  \App\Models\Participant  $participant
-//     * @return \Illuminate\Auth\Access\Response|bool
-//     */
-//    public function view(User $user, Participant $participant)
-//    {
-//        //
-//    }
+    /**
+     * Determine whether the user can view the model.
+     *
+     * @param User $user
+     * @param Participant $participant
+     * @return Response|bool
+     */
+    public function view(User $user, Participant $participant): Response|bool
+    {
+        if (! $user->isAbleTo('participant.view', (string) $participant->team_id)) {
+            return $user->isAbleTo('participant.view');
+        }
+
+        return $user->isAbleTo('participant.view', (string) $participant->team_id);
+    }
 
     /**
      * Determine whether the user can create models.
@@ -73,17 +79,19 @@ class ParticipantPolicy
      */
     public function update(User $user, Participant $participant): bool
     {
-        if (! $user->isAbleTo('participant.update')) {
-            foreach ($user->teams()->pluck('id') as $participant) {
-                if ($user->isAbleTo('participant.update', $participant)) {
-                    return true;
-                }
+        if (! $user->isAbleTo('participant.update', (string) $participant->team_id)) {
+            if (
+                in_array($user->id, $participant->course->trainer->pluck('user_id')->toArray()) // user is trainer
+                && $participant->course->start < Carbon::now()->addWeek()
+                && $participant->course->end > Carbon::now()->subWeek()
+            ) {
+                return true;
             }
 
-            return false;
+            return $user->isAbleTo('participant.update');
         }
 
-        return $user->isAbleTo('participant.update');
+        return $user->isAbleTo('participant.update', (string) $participant->team_id);
     }
 
 //    /**

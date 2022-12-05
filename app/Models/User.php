@@ -123,9 +123,14 @@ class User extends Authenticatable implements MustVerifyEmail
         );
     }
 
-    public function teams()
+    public function teams(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Team::class);
+    }
+
+    public function courses(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(TrainerDay::class, 'user_id');
     }
 
     // bg-{{ $user->status_color }}-100 text-{{ $user->status_color }}-800
