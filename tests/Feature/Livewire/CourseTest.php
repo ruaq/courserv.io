@@ -79,44 +79,42 @@ it('needs permission to create a course', function () {
         ->assertSuccessful();
 });
 
-// TODO rewrite and reactivate
+it('needs permission to update a course', function () {
+    $this->user->attachPermission('course.view'); // avoid 'fingerprint' error
 
-//it('needs permission to update a course', function () {
-//    $this->user->attachPermission('course.view'); // avoid 'fingerprint' error
-//
-//    Livewire::test('course')
-//        ->call('edit')
-//        ->assertForbidden();
-//
-//    $this->user->attachPermission('course.update');
-//
-//    Livewire::test('course')
-//        ->call('edit')
-//        ->assertSuccessful();
-//});
-//
-//it('needs permission to save a new course or update it', function () {
-//    $this->user->attachPermission('course.view'); // avoid 'fingerprint' error
-//
-//    Livewire::test('course')
-//        ->call('save')
-//        ->assertForbidden();
-//
-//    $this->user->attachPermission('course.create');
-//
-//    Livewire::test('course')
-//        ->call('save')
-//        ->assertSuccessful();
-//
-//    $this->user->detachPermission('course.create');
-//
-//    Livewire::test('course')
-//        ->call('save')
-//        ->assertForbidden();
-//
-//    $this->user->attachPermission('course.update');
-//
-//    Livewire::test('course')
-//        ->call('save')
-//        ->assertSuccessful();
-//});
+    Livewire::test('course')
+        ->call('edit')
+        ->assertForbidden();
+
+    $this->user->attachPermission('course.update');
+
+    Livewire::test('course')
+        ->call('edit')
+        ->assertSuccessful();
+});
+
+it('needs permission to save a new course or update it', function () {
+    $this->user->attachPermission('course.view'); // avoid 'fingerprint' error
+
+    Livewire::test('course')
+        ->call('save')
+        ->assertForbidden();
+
+    $this->user->attachPermission('course.create');
+
+    Livewire::test('course')
+        ->call('save')
+        ->assertSuccessful();
+
+    $this->user->detachPermission('course.create');
+
+    Livewire::test('course')
+        ->call('save')
+        ->assertForbidden();
+
+    $this->user->attachPermission('course.update');
+
+    Livewire::test('course')
+        ->call('save')
+        ->assertSuccessful();
+});

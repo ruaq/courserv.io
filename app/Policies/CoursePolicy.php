@@ -87,11 +87,11 @@ class CoursePolicy
      */
     public function update(User $user, Course $course): Response|bool
     {
-        if (! $user->isAbleTo('course.update', (string) $course->team_id)) {
-            return $user->isAbleTo('course.update');
+        if ($course->team_id && $user->isAbleTo('course.update', (string) $course->team_id)) {
+            return $user->isAbleTo('course.update', (string) $course->team_id);
         }
 
-        return $user->isAbleTo('course.update', (string) $course->team_id);
+        return $user->isAbleTo('course.update');
     }
 
     /**
