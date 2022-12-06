@@ -53,6 +53,8 @@ class Course extends Component
 
     public bool $showRegisterCourse = false;
 
+    public bool $showOnlyOwnCourses = false;
+
     public CourseModel $editing;
 
     public Collection $courseTypes;
@@ -786,7 +788,7 @@ class Course extends Component
     {
         $team_ids = [];
         $courses = '';
-        if (! Auth::user()->isAbleTo('user.*')) { // can't see all courses
+        if (! Auth::user()->isAbleTo('user.*') && ! $this->showOnlyOwnCourses) { // can't see all courses
             $teams = Auth::user()->teams()->pluck('id');
 
             foreach ($teams as $team) {
@@ -796,6 +798,10 @@ class Course extends Component
             }
             $courses = CourseModel::whereIn('team_id', $team_ids)
                 ->orWhereIn('id', Auth::user()->courses()->pluck('course_id'));
+        }
+
+        if ($this->showOnlyOwnCourses) {
+            $courses = CourseModel::whereIn('id', Auth::user()->courses()->pluck('course_id'));
         }
 
         $query = CourseModel::query()
