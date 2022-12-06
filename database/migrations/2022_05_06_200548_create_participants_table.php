@@ -4,18 +4,17 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class () extends Migration {
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('participants', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('course_id');
+            $table->foreignId('course_id')->constrained('courses')->cascadeOnDelete();
             $table->foreignId('contact_id')->nullable()->constrained('contact_people')->nullOnDelete();
             $table->foreignId('team_id')->nullable()->constrained('teams')->nullOnDelete();
             $table->string('lastname');
@@ -48,7 +47,7 @@ return new class extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('participants');
     }

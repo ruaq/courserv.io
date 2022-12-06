@@ -4,18 +4,17 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class () extends Migration {
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('prices', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('team_id')->nullable();
+            $table->foreignId('team_id')->nullable()->constrained('teams')->cascadeOnDelete();
             $table->foreignId('cert_template_id')->nullable()->constrained('cert_templates')->nullOnDelete();
             $table->string('title');
             $table->string('description')->nullable();
@@ -26,8 +25,6 @@ return new class extends Migration
             $table->smallInteger('tax_rate')->default(0)->nullable();
             $table->boolean('active')->default(1);
             $table->timestamps();
-
-            $table->foreign('team_id')->references('id')->on('teams')->onDelete('cascade');
         });
     }
 
@@ -36,7 +33,7 @@ return new class extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('prices');
     }
