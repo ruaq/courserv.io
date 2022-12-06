@@ -371,7 +371,7 @@ class Course extends Component
     {
         foreach ($this->trainer as $item => $value) {
             $array = array_filter($value); // remove empty values
-            $array = array_values($array); // order new
+            $array = array_unique($array); // remove duplicates
             $this->trainer[$item] = $array;
         }
     }
