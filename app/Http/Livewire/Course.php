@@ -719,7 +719,7 @@ class Course extends Component
             if ($trainer > 0) { // count trainer choose
                 $trainerDays[] = [
                     'course_id' => $this->editing->id,
-                    'user_id' => 0,
+                    'user_id' => null,
                     'date' => $date,
                     'bookable' => 1,
                     'count' => $trainer,
@@ -730,7 +730,7 @@ class Course extends Component
             if ($later > 0) { // count 'select later'
                 $trainerDays[] = [
                     'course_id' => $this->editing->id,
-                    'user_id' => 0,
+                    'user_id' => null,
                     'date' => $date,
                     'bookable' => 0,
                     'count' => $later,
