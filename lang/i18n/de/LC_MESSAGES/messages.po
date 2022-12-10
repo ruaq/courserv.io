@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: courserv.io\n"
-"POT-Creation-Date: 2022-12-06 00:57+0100\n"
-"PO-Revision-Date: 2022-12-06 00:57+0100\n"
+"POT-Creation-Date: 2022-12-10 20:11+0100\n"
+"PO-Revision-Date: 2022-12-10 20:12+0100\n"
 "Last-Translator: Holger Schmermbeck <hosch@mailbox.org>\n"
 "Language-Team: Holger Schmermbeck <hosch@mailbox.org>\n"
 "Language: de\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.2\n"
+"X-Generator: Poedit 3.2.2\n"
 "X-Poedit-KeywordsList: _;__;_i;_s;gettext;_n:1,2;ngettext:1,2;dgettext:2\n"
 "X-Poedit-Basepath: ../../../../app\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -352,12 +352,12 @@ msgstr "Kursdatum"
 #: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:924
 #: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:1023
 msgid "trainer"
-msgstr "Ausbilder"
+msgstr "Ausbilder*in"
 
 #: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:926
 #: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:1025
 msgid "select / remove a trainer"
-msgstr "Ausbilder auswählen / entfernen"
+msgstr "Ausbilder*in auswählen / entfernen"
 
 #: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:927
 #: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:1026
@@ -367,12 +367,12 @@ msgstr "später auswählen"
 #: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:928
 #: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:1027
 msgid "trainer can choose"
-msgstr "Trainer können sich melden"
+msgstr "Ausbilder*innen können sich melden"
 
 #: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:946
 #: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:1045
 msgid "add a new trainer"
-msgstr "einen neuen Ausbilder hinzufügen"
+msgstr "eine neue Ausbilder*in hinzufügen"
 
 #: ../storage/framework/messages/2cd3c9f81d73793567d022499c12807b1f5af706.php.php:1101
 msgid "the seminar location or company"
@@ -708,8 +708,8 @@ msgstr ""
 msgid ""
 "I agree that the details from the booking form are collected and processed "
 "for the purpose of handling the booking. Detailed information on the "
-"handling of user data can be found in the <a href=\"%s\" target=\"_blank"
-"\">privacy policy</a>."
+"handling of user data can be found in the <a href=\"%s\" "
+"target=\"_blank\">privacy policy</a>."
 msgstr ""
 "Ich bin damit einverstanden, dass die Angaben aus dem Buchungsformular zum "
 "Zwecke der Buchungsabwicklung erhoben und verarbeitet werden. Detaillierte "
@@ -720,8 +720,8 @@ msgstr ""
 #, php-format
 msgid ""
 "I agree that you start the execution of the contract before the expiry of "
-"the revocation period of 14 days and in this respect I waive the <a href=\"%s"
-"\" target=\"_blank\">right of revocation</a> to which I am entitled."
+"the revocation period of 14 days and in this respect I waive the <a "
+"href=\"%s\" target=\"_blank\">right of revocation</a> to which I am entitled."
 msgstr ""
 "Ich stimme zu, dass Sie vor Ablauf der Widerrufsfrist von 14 Tagen mit der "
 "Ausführung des Vertrages beginnen und verzichte insoweit auf das mir "
@@ -1411,8 +1411,9 @@ msgstr "Datenschutz"
 #~ msgstr ""
 #~ "Ich verlange und bin ausdrücklich damit einverstanden, dass Sie mit der "
 #~ "von mir bestellten Dienstleistung vor Ablauf der Widerrufsfrist beginnen. "
-#~ "Mir ist bekannt, dass mein <a href=\"%s\" target=\"_blank"
-#~ "\">Widerrufsrecht</a> erlischt, wenn der Vertrag vollständig erfüllt ist."
+#~ "Mir ist bekannt, dass mein <a href=\"%s\" "
+#~ "target=\"_blank\">Widerrufsrecht</a> erlischt, wenn der Vertrag "
+#~ "vollständig erfüllt ist."
 
 #~ msgid "course start"
 #~ msgstr "Kursbeginn"
