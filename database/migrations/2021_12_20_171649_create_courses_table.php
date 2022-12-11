@@ -27,6 +27,7 @@ return new class () extends Migration {
             $table->timestamp('cancelled')->nullable();
             $table->unsignedSmallInteger('seats');
             $table->boolean('public_bookable')->nullable();
+            $table->text('bag')->nullable();
             $table->timestamps();
         });
     }

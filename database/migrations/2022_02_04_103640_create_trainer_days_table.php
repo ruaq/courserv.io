@@ -15,13 +15,13 @@ return new class () extends Migration {
         Schema::create('trainer_days', function (Blueprint $table) {
             $table->foreignId('course_id')->constrained('courses')->cascadeOnDelete();
             $table->foreignId('user_id')->nullable()->constrained('users')->cascadeOnDelete();
-            $table->date('date')->nullable();
-            $table->boolean('bookable')->default(0);
-            $table->tinyInteger('count')->default(0);
-            $table->boolean('confirmed')->default(0);
+            $table->foreignId('course_day_id')->nullable()->constrained('course_days')->cascadeOnDelete();
+            $table->foreignId('position')->nullable()->constrained('positions')->nullOnDelete();
+            $table->tinyInteger('order')->default(0);
+            $table->string('option')->nullable();
             $table->timestamps();
 
-            $table->unique(['course_id', 'user_id', 'date', 'bookable']);
+            $table->unique(['course_id', 'user_id', 'course_day_id']);
         });
     }
 

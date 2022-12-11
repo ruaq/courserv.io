@@ -25,6 +25,8 @@ use Vinkla\Hashids\Facades\Hashids;
  * @property \Illuminate\Support\Carbon|null $reset_valid_until
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\TrainerDay[] $courses
+ * @property-read int|null $courses_count
  * @property-read int|null $notifications_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Permission[] $permissions
  * @property-read int|null $permissions_count

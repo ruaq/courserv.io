@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property int $id
  * @property int $course_type_id
- * @property int $team_id
+ * @property int|null $team_id
  * @property string|null $internal_number
  * @property string|null $registration_number
  * @property string $seminar_location
@@ -22,15 +22,16 @@ use Illuminate\Database\Eloquent\Model;
  * @property mixed|null $cancelled
  * @property int $seats
  * @property int|null $public_bookable
- * @property \Carbon\Carbon|null $created_at
- * @property \Carbon\Carbon|null $updated_at
+ * @property string|null $bag
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\CourseDay[] $days
  * @property-read int|null $days_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Participant[] $participants
  * @property-read int|null $participants_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Price[] $prices
  * @property-read int|null $prices_count
- * @property-read \App\Models\Team $team
+ * @property-read \App\Models\Team|null $team
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\TrainerDay[] $trainer
  * @property-read int|null $trainer_count
  * @property-read \App\Models\CourseType $type
@@ -38,6 +39,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Course newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Course newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Course query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Course whereBag($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Course whereCancelled($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Course whereCourseTypeId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Course whereCreatedAt($value)

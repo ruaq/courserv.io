@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * App\Models\CourseDay
  *
+ * @property int $id
  * @property int $course_id
  * @property string $date
  * @property string $startPlan
@@ -18,6 +19,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $unitsReal
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\TrainerDay[] $trainer
+ * @property-read int|null $trainer_count
  * @method static \Illuminate\Database\Eloquent\Builder|CourseDay newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|CourseDay newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|CourseDay query()
@@ -26,6 +29,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|CourseDay whereDate($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CourseDay whereEndPlan($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CourseDay whereEndReal($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CourseDay whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CourseDay whereStartPlan($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CourseDay whereStartReal($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CourseDay whereUnitsPlan($value)
@@ -36,6 +40,11 @@ use Illuminate\Database\Eloquent\Model;
 class CourseDay extends Model
 {
     use HasFactory;
+
+    public function trainer(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(TrainerDay::class, 'course_day_id');
+    }
 
 //    protected $casts = [
 //        'startPlan' => 'datetime:Y-m-d H:i',

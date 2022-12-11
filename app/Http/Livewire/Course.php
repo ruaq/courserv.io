@@ -12,6 +12,7 @@ use App\Http\Livewire\DataTable\WithSorting;
 use App\Models\Course as CourseModel;
 use App\Models\CourseDay;
 use App\Models\CourseType as CourseTypeModel;
+use App\Models\Position;
 use App\Models\Price as PriceModel;
 use App\Models\Team as TeamModel;
 use App\Models\TrainerDay;
@@ -27,6 +28,7 @@ use Vinkla\Hashids\Facades\Hashids;
  * @property mixed $rows
  * @property mixed $rowsQuery
  * @property mixed $teamsRows
+ * @property mixed $positionsRows
  */
 class Course extends Component
 {
@@ -36,6 +38,8 @@ class Course extends Component
     use AuthorizesRequests;
 
     protected $queryString = ['sorts'];
+
+    public array $bag = [];
 
     public array $courseTypeCategories;
 
@@ -369,11 +373,46 @@ class Course extends Component
 
     public function updatedTrainer()
     {
+        $this->bag = [];
         foreach ($this->trainer as $item => $value) {
-            $array = array_filter($value); // remove empty values
-            $array = array_unique($array); // remove duplicates
+            foreach ($value as $i => $v) {
+                if (
+                    // if trainer can choose or is selected later and not on the leading position
+                    isset($v['trainer']) && $v['trainer'] == 'later' && $i !== 0
+                    || isset($v['trainer']) && $v['trainer'] == 'choose' && $i !== 0
+                ) {
+                    $this->bag[$item][] = $v;
+                    unset($value[$i]);
+                }
+            }
+
+            // remove empty entry's
+            $result = [];
+            $filtered = array_filter($value, function ($el) {
+                return ! empty($el['trainer']);
+            });
+
+            // remove duplicates
+            foreach ($filtered as $a) {
+                $result[$a['trainer']] ??= $a; // only store if first occurrence of trainer
+            }
+            $array = array_values($result); // re-index and print
+
             $this->trainer[$item] = $array;
         }
+
+        // combine trainer and trainer bag - array_merge_recursive won't work
+        foreach ($this->trainer as $value => $item) {
+            if (isset($this->bag[$value])) {
+                foreach ($this->bag[$value] as $v) {
+                    $this->trainer[$value][] = $v;
+                }
+            }
+        }
+
+        // quick & dirty -> set course leader TODO change / find better way?
+        $trainer = Position::whereLeading(1)->first();
+        $this->trainer['general'][0]['position'] = $trainer->id;
     }
 
     public function addTrainer($x)
@@ -534,7 +573,7 @@ class Course extends Component
             $this->trainer = [];
             $i = 0;
 
-            foreach ($this->editing->days->toArray() as $courseDay) {
+            foreach ($this->editing->days as $courseDay) {
                 $this->courseDays[] = [
                     'date' => Carbon::createFromFormat('Y-m-d', $courseDay['date'])->format('d.m.Y'),
                     'startTime' => Carbon::createFromFormat('H:i:s', $courseDay['startPlan'])->format('H:i'),
@@ -543,53 +582,52 @@ class Course extends Component
                 ];
 
                 // add the trainer
-                foreach ($this->editing->trainer->where('date', $courseDay['date']) as $trainer) {
-                    if (! $trainer->user_id) {
-                        if ($trainer->bookable) {
-                            for ($x = 1; $x <= $trainer->count; $x++) {
-                                $this->trainer[$i][] = 'trainer';
-                            }
-                        } else {
-                            for ($x = 1; $x <= $trainer->count; $x++) {
-                                $this->trainer[$i][] = 'later';
-                            }
-                        }
+                $x = 0;
+                foreach ($courseDay->trainer as $trainer) {
+                    if ($trainer->user_id === null) {
+                        $t_id = $trainer->option;
                     } else {
-                        $this->trainer[$i][] = $trainer->user_id;
+                        $t_id = $trainer->user_id;
                     }
+                    $this->trainer[$i][$x]['trainer'] = $t_id;
+                    $this->trainer[$i][$x]['position'] = $trainer->position;
+                    $x++;
                 }
 
-                // and an empty one
+                // or an empty array to prevent error
                 if (! isset($this->trainer[$i])) {
-                    $this->trainer[$i][] = [];
+                    $this->trainer[$i] = [];
                 }
                 $i++;
             }
 
-            // and also the trainer for the whole course
-            foreach (
-                $this->editing->trainer->where(
-                    'date',
-                    $this->editing->start->subDay()->format('Y-m-d')
-                ) as $trainer
-            ) {
-                if (! $trainer->user_id) {
-                    if ($trainer->bookable) {
-                        for ($x = 1; $x <= $trainer->count; $x++) {
-                            $this->trainer['general'][] = 'trainer';
-                        }
-                    } else {
-                        for ($x = 1; $x <= $trainer->count; $x++) {
-                            $this->trainer['general'][] = 'later';
+            $trainer = $this->editing->trainer->where('course_day_id', null)->sortBy('order');
+
+            $i = 0;
+            foreach ($trainer as $t) {
+                if ($t->user_id === null) {
+                    $t_id = $t->option;
+                } else {
+                    $t_id = $t->user_id;
+                }
+                $this->trainer['general'][$i]['trainer'] = $t_id;
+                $this->trainer['general'][$i]['position'] = $t->position;
+                $i++;
+            }
+
+            if ($this->editing->bag) {
+                $bag = unserialize($this->editing->bag);
+                foreach ($this->trainer as $value => $item) {
+                    if (isset($bag[$value]) && count($bag[$value])) {
+                        foreach ($bag[$value] as $v) {
+                            $this->trainer[$value][] = $v;
                         }
                     }
-                } else {
-                    $this->trainer['general'][] = $trainer->user_id;
                 }
             }
 
-            if (! isset($this->trainer['general'])) {
-                $this->trainer['general'][] = [];
+            if (! isset($this->trainer['general']) || ! count($this->trainer['general'])) {
+                $this->trainer['general'][]['trainer'] = [];
             }
         }
 
@@ -641,6 +679,13 @@ class Course extends Component
 
         $this->editing->end = Carbon::parse($this->editing->end->format('Y-m-d H:i:s'));
 
+        // check if there is a trainer bag and the course longer than 1 day
+        if (count($this->bag) && $this->courseDays) {
+            $this->editing->bag = serialize($this->bag);
+        } else {
+            $this->editing->bag = '';
+        }
+
         $this->editing->save();
 
         $this->editing->prices()->sync($this->priceIds);
@@ -679,71 +724,76 @@ class Course extends Component
             ->whereNotIn('date', $date)
             ->delete();
 
+        // update the course_days from the database to get actual ids
+        $this->editing = $this->editing->fresh();
+
         $trainerDays = [];
 
         // save the trainer for the days TODO is this the best way?
         foreach ($this->trainer as $item => $value) {
-            if ($item != 'general') {
-                if (isset($this->courseDays[$item]['date'])) {
-                    $date = Carbon::createFromFormat('d.m.Y', $this->courseDays[$item]['date']);
-                }
-            } else {
-                // set day before start as date, if set for all days TODO better ideas?
-                $date = $this->editing->start->subDay()->format('Y-m-d');
-            }
+            if ($item == 'general') { // for the complete course
+                foreach ($value as $i => $v) {
+                    if (
+                        // it's a trainer / user_id
+                        isset($v['trainer']) && is_numeric($v['trainer'])
+                        || isset($v['trainer']) && $i === 0
+                    ) {
+                        $option = '';
+                        if (! is_numeric($v['trainer'])) {
+                            $option = $v['trainer'];
+                            $v['trainer'] = null;
+                        }
 
-            $trainer = 0;
-            $later = 0;
-
-            foreach ($value as $item => $value) {
-                if (is_numeric($value) && $value) { // it's a trainer / user_id
-                    $trainerDays[] = [
-                        'course_id' => $this->editing->id,
-                        'user_id' => $value,
-                        'date' => $date,
-                        'bookable' => 0,
-                        'count' => 0,
-                        'confirmed' => 1,
-                    ];
-                } elseif (! is_numeric($value) && $value) { // it's another option
-                    if ($value === 'trainer') {
-                        $trainer = $trainer + 1;
-                    }
-
-                    if ($value === 'later') {
-                        $later = $later + 1;
+                        $trainerDays[] = [
+                            'course_id' => $this->editing->id,
+                            'user_id' => $v['trainer'],
+                            'course_day_id' => null,
+                            'position' => $v['position'],
+                            'order' => $i,
+                            'option' => $option,
+                        ];
                     }
                 }
+
+                continue;
             }
 
-            if ($trainer > 0) { // count trainer choose
-                $trainerDays[] = [
-                    'course_id' => $this->editing->id,
-                    'user_id' => null,
-                    'date' => $date,
-                    'bookable' => 1,
-                    'count' => $trainer,
-                    'confirmed' => 0,
-                ];
-            }
+            if (count($this->courseDays) > 1) { // more than one day
+                // for a specific day
+                foreach ($value as $i => $v) {
+                    if (
+                        // it's a trainer / user_id
+                        isset($v['trainer'])
+                            && is_numeric($v['trainer'])
+                            && isset($this->editing->days[$item]->id)
+                        || isset($v['trainer'])
+                            && $i === 0
+                            && isset($this->editing->days[$item]->id)
+                    ) {
+                        $option = '';
+                        if (! is_numeric($v['trainer'])) {
+                            $option = $v['trainer'];
+                            $v['trainer'] = null;
+                        }
 
-            if ($later > 0) { // count 'select later'
-                $trainerDays[] = [
-                    'course_id' => $this->editing->id,
-                    'user_id' => null,
-                    'date' => $date,
-                    'bookable' => 0,
-                    'count' => $later,
-                    'confirmed' => 0,
-                ];
+                        $trainerDays[] = [
+                            'course_id' => $this->editing->id,
+                            'user_id' => $v['trainer'],
+                            'course_day_id' => $this->editing->days[$item]->id,
+                            'position' => $v['position'],
+                            'order' => $i,
+                            'option' => $option,
+                        ];
+                    }
+                }
             }
         }
 
         // create / update the trainer
         TrainerDay::upsert(
             $trainerDays,
-            ['user_id', 'course_id', 'date', 'bookable'],
-            ['count', 'confirmed']
+            ['course_id', 'user_id', 'course_day_id'],
+            ['position', 'order', 'option']
         );
 
         // TODO better way to clean up?
@@ -863,6 +913,11 @@ class Course extends Component
         });
     }
 
+    public function getPositionsRowsProperty(): \Illuminate\Database\Eloquent\Collection
+    {
+        return Position::all()->sortBy('title');
+    }
+
     /**
      * @return \Illuminate\Database\Eloquent\Collection|array
      */
@@ -888,6 +943,7 @@ class Course extends Component
         return view('livewire.course', [
             'courses' => $this->rows,
             'teams' => $this->teamsRows,
+            'positions' => $this->positionsRows,
         ])
             ->layout('layouts.app', [
                 'metaTitle' => _i('Courses'),

@@ -37,8 +37,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\ContactPerson|null $contactPerson
  * @property-read \App\Models\Course $course
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\TrainerDay[] $trainer
- * @property-read int|null $trainer_count
  * @method static \Illuminate\Database\Eloquent\Builder|Participant newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Participant newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Participant query()

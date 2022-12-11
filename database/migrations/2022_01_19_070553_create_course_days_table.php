@@ -13,6 +13,7 @@ return new class () extends Migration {
     public function up(): void
     {
         Schema::create('course_days', function (Blueprint $table) {
+            $table->id();
             $table->foreignId('course_id')->constrained('courses')->cascadeOnDelete();
             $table->date('date');
             $table->time('startPlan');
