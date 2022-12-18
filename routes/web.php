@@ -90,6 +90,8 @@ Route::get('/', function () {
     return redirect(config('app.redirect'));
 });
 
+Route::get('setup', \App\Http\Livewire\Setup::class);
+
 Route::get('coordinates', [App\Http\Controllers\CoordinatesController::class, 'import']);
 Route::get('locations', [App\Http\Controllers\CoordinatesController::class, 'locations']);
 

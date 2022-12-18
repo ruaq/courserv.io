@@ -17,6 +17,8 @@ return [
 
     'redirect' => env('STARTPAGE_REDIRECT_URL', 'https://courserv.io'),
 
+    'owner' => env('OWNER_EMAIL'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment
