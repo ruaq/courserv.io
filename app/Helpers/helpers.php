@@ -6,8 +6,10 @@
  * @return response()
  */
 
+use Illuminate\Support\Facades\Auth;
+
 if (! function_exists('formatCurrency')) {
-    function formatCurrency($amount, $currency)
+    function formatCurrency($amount, $currency): bool|string
     {
         $fmt = new NumberFormatter(app()->getLocale(), NumberFormatter::CURRENCY);
 
@@ -37,5 +39,22 @@ if (! function_exists('canonical_url')) {
         }
 
         return LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), $current);
+    }
+}
+
+// function to get an array of teams to a permission
+if (! function_exists('authorizedTeams')) {
+    function authorizedTeams($permission): array
+    {
+        $team_ids = [];
+        $teams = Auth::user()->teams()->pluck('id');
+
+        foreach ($teams as $team) {
+            if (Auth::user()->isAbleTo($permission, $team)) {
+                $team_ids[]['team_id'] = $team;
+            }
+        }
+
+        return $team_ids;
     }
 }

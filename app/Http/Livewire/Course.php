@@ -836,16 +836,9 @@ class Course extends Component
      */
     public function getRowsQueryProperty(): mixed
     {
-        $team_ids = [];
         $courses = '';
         if (! Auth::user()->isAbleTo('user.*') && ! $this->showOnlyOwnCourses) { // can't see all courses
-            $teams = Auth::user()->teams()->pluck('id');
-
-            foreach ($teams as $team) {
-                if (Auth::user()->isAbleTo('course.*', $team)) {
-                    $team_ids[]['team_id'] = $team;
-                }
-            }
+            $team_ids = authorizedTeams('course.*');
             $courses = CourseModel::whereIn('team_id', $team_ids)
                 ->orWhereIn('id', Auth::user()->courses()->pluck('course_id'));
         }
