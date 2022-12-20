@@ -152,7 +152,28 @@ class PermissionSeeder extends Seeder
             'name' => 'certTemplate.update',
             'display_name' => 'Edit Certificate Template',
             'description' => 'can edit a certificate template',
-            'group' => 'participants',
+            'group' => 'certTemplate',
+        ]);
+
+        Permission::create([
+            'name' => 'position.create',
+            'display_name' => 'Create Position',
+            'description' => 'create a new position',
+            'group' => 'position',
+        ]);
+
+        Permission::create([
+            'name' => 'position.view',
+            'display_name' => 'View Position',
+            'description' => 'can see the positions',
+            'group' => 'position',
+        ]);
+
+        Permission::create([
+            'name' => 'position.update',
+            'display_name' => 'Edit Position',
+            'description' => 'can edit a position',
+            'group' => 'position',
         ]);
 
         // create an administrator role as standard

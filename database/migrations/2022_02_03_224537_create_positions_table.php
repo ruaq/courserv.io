@@ -16,7 +16,8 @@ return new class () extends Migration {
             $table->id();
             $table->foreignId('team_id')->nullable()->constrained('teams')->cascadeOnDelete();
             $table->string('title');
-            $table->boolean('leading')->default(0);
+            $table->boolean('leading')->nullable();
+            $table->string('description')->nullable();
             $table->timestamps();
         });
     }

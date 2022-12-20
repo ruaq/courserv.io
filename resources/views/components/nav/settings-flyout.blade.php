@@ -28,7 +28,7 @@
                     @endcan
 
                         <li class="flow-root">
-                            <a href="#" class="-m-3 flex items-center rounded-md p-3 text-base font-medium text-gray-900 transition duration-150 ease-in-out hover:bg-gray-50">
+                            <a href="{{ route('positions') }}" class="-m-3 flex items-center rounded-md p-3 text-base font-medium text-gray-900 transition duration-150 ease-in-out hover:bg-gray-50">
                                 <!--! Font Awesome Pro 6.2.1 by @fontawesome - https://fontawesome.com - Copyright 2022 Fonticons, Inc. -->
                                 <svg class="h-6 w-6 flex-shrink-0 fill-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
                                     <path d="M160 64c0-35.3 28.7-64 64-64H576c35.3 0 64 28.7 64 64V352c0 35.3-28.7 64-64 64H336.8c-11.8-25.5-29.9-47.5-52.4-64H384V320c0-17.7 14.3-32 32-32h64c17.7 0 32 14.3 32 32v32h64V64L224 64v49.1C205.2 102.2 183.3 96 160 96V64zm0 256c-53 0-96-43-96-96s43-96 96-96s96 43 96 96s-43 96-96 96zm-26.7 32h53.3C260.3 352 320 411.7 320 485.3c0 14.7-11.9 26.7-26.7 26.7H26.7C11.9 512 0 500.1 0 485.3C0 411.7 59.7 352 133.3 352z"/>

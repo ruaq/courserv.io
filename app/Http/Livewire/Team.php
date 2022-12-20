@@ -3,10 +3,12 @@
 namespace App\Http\Livewire;
 
 use App\Models\Team as TeamModel;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Illuminate\Validation\ValidationException;
 use Livewire\Component;
 
 class Team extends Component
@@ -38,7 +40,7 @@ class Team extends Component
     }
 
     /**
-     * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @throws AuthorizationException
      */
     public function create()
     {
@@ -51,7 +53,7 @@ class Team extends Component
     }
 
     /**
-     * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @throws AuthorizationException
      */
     public function edit(TeamModel $team)
     {
@@ -64,13 +66,16 @@ class Team extends Component
     }
 
     /**
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function updated($propertyName)
     {
         $this->validateOnly($propertyName);
     }
 
+    /**
+     * @throws AuthorizationException
+     */
     public function save()
     {
         $this->authorize('update', $this->editing);
@@ -81,7 +86,7 @@ class Team extends Component
     }
 
     /**
-     * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @throws AuthorizationException
      */
     public function render()
     {

@@ -56,6 +56,9 @@ Route::group(
         Route::get('prices', \App\Http\Livewire\Price::class)
             ->name('prices');
 
+        Route::get('positions', \App\Http\Livewire\Position::class)
+            ->name('positions');
+
         Route::get('cert-templates', \App\Http\Livewire\CertTemplate::class)
             ->name('certTemplates');
 

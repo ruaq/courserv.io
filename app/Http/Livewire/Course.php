@@ -65,6 +65,8 @@ class Course extends Component
 
     public Collection $prices;
 
+    public Collection $positions;
+
     public string $date_range;
 
     public string $time_start;
@@ -369,6 +371,8 @@ class Course extends Component
                 $this->trainer[$index] = [0];
             }
         }
+
+        $this->positions = $this->positionsRows;
     }
 
     public function updatedTrainer()
@@ -410,9 +414,23 @@ class Course extends Component
             }
         }
 
-        // quick & dirty -> set course leader TODO change / find better way?
-        $trainer = Position::whereLeading(1)->first();
-        $this->trainer['general'][0]['position'] = $trainer->id;
+        $trainer = Position::query()
+            ->where('team_id', null)
+            ->where('leading', 1)
+            ->orWhere('team_id', $this->editing->team_id)
+            ->where('leading', 1)
+            ->get()
+            ->sortByDesc('team_id')
+        ;
+
+        // if the first position isn't set or no leading position
+        if (
+            ! isset($this->trainer['general'][0]['position'])
+            || ! $trainer->contains('id', $this->trainer['general'][0]['position'])
+        ) {
+            // set it to the first leading position
+            $this->trainer['general'][0]['position'] = $trainer->first()->id;
+        }
     }
 
     public function addTrainer($x)
@@ -642,6 +660,9 @@ class Course extends Component
         $this->showEditModal = true;
     }
 
+    /**
+     * @throws AuthorizationException
+     */
     public function cancel()
     {
         $this->authorize('save', $this->editing);
@@ -908,7 +929,10 @@ class Course extends Component
 
     public function getPositionsRowsProperty(): \Illuminate\Database\Eloquent\Collection
     {
-        return Position::all()->sortBy('title');
+        return Position::where('team_id', null)
+            ->orWhere('team_id', $this->editing->team_id)
+            ->get()
+            ->sortBy('title');
     }
 
     /**
@@ -936,7 +960,6 @@ class Course extends Component
         return view('livewire.course', [
             'courses' => $this->rows,
             'teams' => $this->teamsRows,
-            'positions' => $this->positionsRows,
         ])
             ->layout('layouts.app', [
                 'metaTitle' => _i('Courses'),

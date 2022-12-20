@@ -153,7 +153,7 @@
                         <span class="text-sm font-medium text-gray-900">{{ _i('show only own courses') }}</span>
                     </span>
                     <button type="button" class="relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 bg-gray-200" role="switch" aria-checked="false" x-ref="switch" :aria-checked="showOnlyOwnCourses" @click="showOnlyOwnCourses = !showOnlyOwnCourses" x-state:on="Enabled" x-state:off="Not Enabled" :class="{ 'bg-indigo-600': showOnlyOwnCourses, 'bg-gray-200': !(showOnlyOwnCourses) }">
-                        <span class="sr-only">{{ _i('public bookable') }}</span>
+                        <span class="sr-only">{{ _i('show only own courses') }}</span>
                         <span class="pointer-events-none relative inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200 translate-x-0" x-state:on="Enabled" x-state:off="Not Enabled" :class="{ 'translate-x-5': showOnlyOwnCourses, 'translate-x-0': !(showOnlyOwnCourses) }">
                             <span class="absolute inset-0 h-full w-full flex items-center justify-center transition-opacity opacity-100 ease-in duration-200" aria-hidden="true" x-state:on="Enabled" x-state:off="Not Enabled" :class="{ 'opacity-0 ease-out duration-100': showOnlyOwnCourses, 'opacity-100 ease-in duration-200': !(showOnlyOwnCourses) }">
                                 <svg class="h-3 w-3 text-gray-400" fill="none" viewBox="0 0 12 12">
@@ -379,7 +379,7 @@
                                 @if(!$courseRegistered && config('qseh.password'))
                                     <div class="flex items-center">
                                         <button type="button" class="relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 bg-gray-200" role="switch" aria-checked="false" x-ref="switch" :aria-checked="registerCourse" @click="registerCourse = !registerCourse" x-state:on="Enabled" x-state:off="Not Enabled" :class="{ 'bg-indigo-600': registerCourse, 'bg-gray-200': !(registerCourse) }">
-                                            <span class="sr-only">{{ _i('public bookable') }}</span>
+                                            <span class="sr-only">{{ _i('register automatically at QSEH') }}</span>
                                             <span class="pointer-events-none relative inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200 translate-x-0" x-state:on="Enabled" x-state:off="Not Enabled" :class="{ 'translate-x-5': registerCourse, 'translate-x-0': !(registerCourse) }">
                                             <span class="absolute inset-0 h-full w-full flex items-center justify-center transition-opacity opacity-100 ease-in duration-200" aria-hidden="true" x-state:on="Enabled" x-state:off="Not Enabled" :class="{ 'opacity-0 ease-out duration-100': registerCourse, 'opacity-100 ease-in duration-200': !(registerCourse) }">
                                                 <svg class="h-3 w-3 text-gray-400" fill="none" viewBox="0 0 12 12">
