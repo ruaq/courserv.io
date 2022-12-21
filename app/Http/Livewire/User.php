@@ -4,9 +4,11 @@ namespace App\Http\Livewire;
 
 use App\Models\Team;
 use App\Models\User as UserModel;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 use Livewire\Component;
 
 class User extends Component
@@ -50,6 +52,9 @@ class User extends Component
         $this->roles = \App\Models\Role::all();
     }
 
+    /**
+     * @throws AuthorizationException
+     */
     public function create()
     {
         $this->authorize('create', self::class);
@@ -64,6 +69,9 @@ class User extends Component
         $this->showEditModal = true;
     }
 
+    /**
+     * @throws AuthorizationException
+     */
     public function edit(UserModel $user)
     {
         $this->authorize('update', $user);
@@ -89,6 +97,9 @@ class User extends Component
         $this->showEditModal = true;
     }
 
+    /**
+     * @throws AuthorizationException
+     */
     public function active(UserModel $user)
     {
         $this->authorize('update', $user);
@@ -106,11 +117,17 @@ class User extends Component
         $this->editing->save();
     }
 
+    /**
+     * @throws ValidationException
+     */
     public function updated($propertyName)
     {
         $this->validateOnly($propertyName);
     }
 
+    /**
+     * @throws AuthorizationException
+     */
     public function save()
     {
         $this->authorize('update', $this->editing);
@@ -121,10 +138,17 @@ class User extends Component
         $this->editing->teams()->sync($this->teamIds);
         $this->editing->syncRoles($this->roleIds);
 
+        // remove roles if user isn’t member of the team anymore
+        foreach ($this->teamRoleIds as $key => $value) {
+            if (! in_array($key, $this->teamIds)) {
+                $this->editing->syncRoles([], $key);
+            }
+        }
+
         // sync the roles for the teams
         foreach ($this->teamIds as $team) {
             if (! isset($this->teamRoleIds[$team]) || $this->teamRoleIds[$team] == '') {
-                $this->teamRoleIds[$team] = [];
+                $this->teamRoleIds[$team] = []; // remove if no role is selected
             }
             $this->editing->syncRoles((array)$this->teamRoleIds[$team], $team);
         }
@@ -132,6 +156,9 @@ class User extends Component
         $this->showEditModal = false;
     }
 
+    /**
+     * @throws AuthorizationException
+     */
     public function render()
     {
         $this->authorize('viewAny', self::class);

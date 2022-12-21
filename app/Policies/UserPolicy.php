@@ -16,18 +16,8 @@ class UserPolicy
      * @param User $user
      * @return Response|bool
      */
-    public function viewAny(User $user)
+    public function viewAny(User $user): Response|bool
     {
-        if (! $user->isAbleTo('user.*')) {
-            foreach ($user->teams()->pluck('id') as $team_id) {
-                if ($user->isAbleTo('user.*', $team_id)) {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
         return $user->isAbleTo('user.*');
     }
 
@@ -49,13 +39,9 @@ class UserPolicy
      * @param User $user
      * @return Response|bool
      */
-    public function create(User $user)
+    public function create(User $user): Response|bool
     {
-        if ($user->isAbleTo('user.create')) {
-            return true;
-        }
-
-        return false;
+        return $user->isAbleTo('user.create');
     }
 
     /**
@@ -65,19 +51,9 @@ class UserPolicy
      * @param User $model
      * @return Response|bool
      */
-    public function update(User $user, User $model)
+    public function update(User $user, User $model): Response|bool
     {
-        if ($user->isAbleTo('user.update')) {
-            return true;
-        }
-
-        foreach ($model->teams as $team) {
-            if ($user->isAbleTo('user.update', $team)) {
-                return true;
-            }
-        }
-
-        return false;
+        return $user->isAbleTo('user.update');
     }
 
 //    /**

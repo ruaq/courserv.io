@@ -42,39 +42,40 @@ it('shows the team members only if authorized', function () {
     $response->assertSeeLivewire('user');
 });
 
-it('shows only team member', function () {
-    $user = User::factory()->create([
-        'name' => 'second user',
-    ]);
-
-    $user->teams()->attach($this->team);
-
-    // Permission for team
-    $this->user->attachPermission('user.view', $this->team);
-
-    $response = $this->get(route('user'));
-
-    $response->assertStatus(200);
-    $response->assertSee($user->name);
-    $response->assertSee($this->user->name);
-
-    $user->teams()->detach($this->team);
-
-    $response = $this->get(route('user'));
-
-    $response->assertStatus(200);
-    $response->assertDontSee($user->name);
-    $response->assertSee($this->user->name);
-
-    // global Permission
-    $this->user->attachPermission('user.view');
-
-    $response = $this->get(route('user'));
-
-    $response->assertStatus(200);
-    $response->assertSee($user->name);
-    $response->assertSee($this->user->name);
-});
+// User Permissions are only global now / at the Moment...
+//it('shows only team member', function () {
+//    $user = User::factory()->create([
+//        'name' => 'second user',
+//    ]);
+//
+//    $user->teams()->attach($this->team);
+//
+//    // Permission for team
+//    $this->user->attachPermission('user.view', $this->team);
+//
+//    $response = $this->get(route('user'));
+//
+//    $response->assertStatus(200);
+//    $response->assertSee($user->name);
+//    $response->assertSee($this->user->name);
+//
+//    $user->teams()->detach($this->team);
+//
+//    $response = $this->get(route('user'));
+//
+//    $response->assertStatus(200);
+//    $response->assertDontSee($user->name);
+//    $response->assertSee($this->user->name);
+//
+//    // global Permission
+//    $this->user->attachPermission('user.view');
+//
+//    $response = $this->get(route('user'));
+//
+//    $response->assertStatus(200);
+//    $response->assertSee($user->name);
+//    $response->assertSee($this->user->name);
+//});
 
 it('needs authorization to create a user', function () {
     $this->user->attachRole('admin');
@@ -103,24 +104,24 @@ it('needs authorization to update a user', function () {
         ->call('edit')
         ->assertForbidden();
 
-    $this->user->detachRole('admin');
-    $this->user->attachRole('admin', $this->team);
-
-    Livewire::test('user')
-        ->call('edit')
-        ->assertForbidden();
-
-    $this->user->attachRole('admin');
+//    $this->user->detachRole('admin');
+//    $this->user->attachRole('admin', $this->team);
+//
+//    Livewire::test('user')
+//        ->call('edit')
+//        ->assertForbidden();
+//
+//    $this->user->attachRole('admin');
     $this->role->attachPermission('user.update');
 
     Livewire::test('user')
         ->call('edit')
         ->assertSuccessful();
 
-    $this->user->detachRole('admin');
-    $this->user->attachRole('admin', $this->team);
-
-    Livewire::test('user')
-        ->call('edit')
-        ->assertForbidden();
+//    $this->user->detachRole('admin');
+//    $this->user->attachRole('admin', $this->team);
+//
+//    Livewire::test('user')
+//        ->call('edit')
+//        ->assertForbidden();
 });
