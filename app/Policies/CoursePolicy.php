@@ -103,7 +103,22 @@ class CoursePolicy
      */
     public function save(User $user, Course $course): Response|bool
     {
-        if ($user->can('create', $course) || $user->can('update', $course)) {
+        if ($course->exists) {
+            if (
+                $user->isAbleTo('course.update', $course->getOriginal('team_id'))
+                && $user->isAbleTo('course.update', $course->getAttribute('team_id'))
+                || $user->isAbleTo('course.update')
+            ) {
+                return true;
+            }
+
+            return false;
+        }
+
+        if (
+            $user->isAbleTo('course.create')
+            || $user->isAbleTo('course.create', (string) $course->team_id)
+        ) {
             return true;
         }
 

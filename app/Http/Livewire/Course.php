@@ -27,7 +27,7 @@ use Vinkla\Hashids\Facades\Hashids;
 /**
  * @property mixed $rows
  * @property mixed $rowsQuery
- * @property mixed $teamsRows
+ * @property mixed $ownTeamsRows
  * @property mixed $positionsRows
  */
 class Course extends Component
@@ -66,6 +66,8 @@ class Course extends Component
     public Collection $prices;
 
     public Collection $positions;
+
+    public Collection $teams;
 
     public string $date_range;
 
@@ -539,6 +541,9 @@ class Course extends Component
         );
     }
 
+    /**
+     * @throws AuthorizationException
+     */
     public function create()
     {
         $this->authorize('create', CourseModel::class);
@@ -562,6 +567,15 @@ class Course extends Component
 
         if ($this->editing->isNot($course)) {
             $this->editing = $course;
+            $this->positions = $this->positionsRows;
+
+            $team_ids = [];
+
+            if (! Auth::user()->isAbleTo('course.update')) { // can’t see all teams
+                $team_ids = authorizedTeams('course.update');
+            }
+
+            $this->teams = $this->getTeamsQuery($team_ids)->get();
 
             $this->priceIds = [];
             foreach ($this->editing->prices()->pluck('id') as $price) {
@@ -858,7 +872,7 @@ class Course extends Component
     public function getRowsQueryProperty(): mixed
     {
         $courses = '';
-        if (! Auth::user()->isAbleTo('user.*') && ! $this->showOnlyOwnCourses) { // can't see all courses
+        if (! Auth::user()->isAbleTo('course.*') && ! $this->showOnlyOwnCourses) { // can't see all courses
             $team_ids = authorizedTeams('course.*');
             $courses = CourseModel::whereIn('team_id', $team_ids)
                 ->orWhereIn('id', Auth::user()->courses()->pluck('course_id'));
@@ -915,7 +929,8 @@ class Course extends Component
             ->with('type')
             ->with('team')
             ->with('days')
-            ->with('trainer');
+            ->with('trainer')
+        ;
 
         return $this->applySorting($query);
     }
@@ -938,13 +953,25 @@ class Course extends Component
     /**
      * @return \Illuminate\Database\Eloquent\Collection|array
      */
-    public function getTeamsRowsProperty(): \Illuminate\Database\Eloquent\Collection|array
+    public function getOwnTeamsRowsProperty(): \Illuminate\Database\Eloquent\Collection|array
     {
         if (Auth::user()->isAbleTo('team.*')) {
             return TeamModel::all();
         }
 
         return Auth::user()->teams;
+    }
+
+    public function getTeamsQuery($team_ids)
+    {
+        $query = TeamModel::query()
+            ->when(
+                count($team_ids), // can't see all courses
+                fn ($query, $user_teams) => $query->whereIn('id', $team_ids)
+            )
+        ;
+
+        return $query;
     }
 
     /**
@@ -959,7 +986,7 @@ class Course extends Component
 
         return view('livewire.course', [
             'courses' => $this->rows,
-            'teams' => $this->teamsRows,
+            'ownTeams' => $this->ownTeamsRows,
         ])
             ->layout('layouts.app', [
                 'metaTitle' => _i('Courses'),
@@ -988,6 +1015,14 @@ class Course extends Component
         $this->courseDays = [];
         $this->date_range = '';
         $this->priceIds = [];
+
+        $team_ids = [];
+
+        if (! Auth::user()->isAbleTo('course.create')) { // can’t see all teams
+            $team_ids = authorizedTeams('course.create');
+        }
+
+        $this->teams = $this->getTeamsQuery($team_ids)->get();
 
         return new CourseModel();
     }
