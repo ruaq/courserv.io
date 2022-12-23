@@ -491,7 +491,7 @@
                                             <option value="">{{ _i('select / remove a trainer') }}</option>
                                             <option value="later">{{ _i('select later') }}</option>
                                             <option value="choose">{{ _i('trainer can choose') }}</option>
-                                            @foreach($editing->team->users as $user)
+                                            @foreach($actualTeam->users as $user)
                                                 @if($user->active)
                                                     <option value="{{ $user['id'] }}">{{ $user['name'] }}</option>
                                                 @endif

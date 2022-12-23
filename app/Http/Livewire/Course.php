@@ -18,6 +18,7 @@ use App\Models\Team as TeamModel;
 use App\Models\TrainerDay;
 use Carbon\Carbon;
 use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
@@ -29,6 +30,7 @@ use Vinkla\Hashids\Facades\Hashids;
  * @property mixed $rowsQuery
  * @property mixed $ownTeamsRows
  * @property mixed $positionsRows
+ * @property mixed $actualTeamRows
  */
 class Course extends Component
 {
@@ -60,6 +62,8 @@ class Course extends Component
     public bool $showOnlyOwnCourses = false;
 
     public CourseModel $editing;
+
+    public TeamModel $actualTeam;
 
     public Collection $courseTypes;
 
@@ -374,6 +378,7 @@ class Course extends Component
             }
         }
 
+        $this->actualTeam = $this->actualTeamRows;
         $this->positions = $this->positionsRows;
     }
 
@@ -568,6 +573,7 @@ class Course extends Component
         if ($this->editing->isNot($course)) {
             $this->editing = $course;
             $this->positions = $this->positionsRows;
+            $this->actualTeam = $this->actualTeamRows;
 
             $team_ids = [];
 
@@ -935,6 +941,9 @@ class Course extends Component
         return $this->applySorting($query);
     }
 
+    /**
+     * @return mixed
+     */
     public function getRowsProperty(): mixed
     {
         return $this->cache(function () {
@@ -942,6 +951,9 @@ class Course extends Component
         });
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
     public function getPositionsRowsProperty(): \Illuminate\Database\Eloquent\Collection
     {
         return Position::where('team_id', null)
@@ -951,9 +963,9 @@ class Course extends Component
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Collection|array
+     * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function getOwnTeamsRowsProperty(): \Illuminate\Database\Eloquent\Collection|array
+    public function getOwnTeamsRowsProperty(): \Illuminate\Database\Eloquent\Collection
     {
         if (Auth::user()->isAbleTo('team.*')) {
             return TeamModel::all();
@@ -962,16 +974,28 @@ class Course extends Component
         return Auth::user()->teams;
     }
 
-    public function getTeamsQuery($team_ids)
+    /**
+     * @return TeamModel|null
+     */
+    public function getActualTeamRowsProperty(): TeamModel|null
     {
-        $query = TeamModel::query()
+        return TeamModel::query()
+            ->where('id', $this->editing->team_id)
+            ->with('users')
+            ->first();
+    }
+
+    /**
+     * @param $team_ids
+     * @return TeamModel|Builder
+     */
+    private function getTeamsQuery($team_ids): Builder|TeamModel
+    {
+        return TeamModel::query()
             ->when(
                 count($team_ids), // can't see all courses
                 fn ($query, $user_teams) => $query->whereIn('id', $team_ids)
-            )
-        ;
-
-        return $query;
+            );
     }
 
     /**
