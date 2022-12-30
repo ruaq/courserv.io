@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "dea214b0a1e07d28f613f55061a39035",
+    "content-hash": "0f9b29536049eab3aac1c1f7d300c63f",
     "packages": [
         {
             "name": "brick/math",
@@ -8919,16 +8919,16 @@
         },
         {
             "name": "nunomaduro/larastan",
-            "version": "2.3.1",
+            "version": "2.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nunomaduro/larastan.git",
-                "reference": "2217d0725884fd68f029fe22919edd3f910683d3"
+                "reference": "8558ec396e10ac060c3e9b9e2c365dc2ea741fa1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nunomaduro/larastan/zipball/2217d0725884fd68f029fe22919edd3f910683d3",
-                "reference": "2217d0725884fd68f029fe22919edd3f910683d3",
+                "url": "https://api.github.com/repos/nunomaduro/larastan/zipball/8558ec396e10ac060c3e9b9e2c365dc2ea741fa1",
+                "reference": "8558ec396e10ac060c3e9b9e2c365dc2ea741fa1",
                 "shasum": ""
             },
             "require": {
@@ -8992,7 +8992,7 @@
             ],
             "support": {
                 "issues": "https://github.com/nunomaduro/larastan/issues",
-                "source": "https://github.com/nunomaduro/larastan/tree/2.3.1"
+                "source": "https://github.com/nunomaduro/larastan/tree/2.3.3"
             },
             "funding": [
                 {
@@ -9012,7 +9012,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2022-12-23T14:56:31+00:00"
+            "time": "2022-12-29T22:13:56+00:00"
         },
         {
             "name": "pestphp/pest",
