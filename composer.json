@@ -38,7 +38,7 @@
         "barryvdh/laravel-ide-helper": "2.12.3",
         "deployer/deployer": "^7.0",
         "fakerphp/faker": "1.21.0",
-        "friendsofphp/php-cs-fixer": "3.13.1",
+        "friendsofphp/php-cs-fixer": "3.13.2",
         "laravel/sail": "1.16.6",
         "mockery/mockery": "1.5.1",
         "nunomaduro/collision": "6.3.2",
