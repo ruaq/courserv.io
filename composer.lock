@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8dc11d9ce7b4176ff88ba75283bdfe7d",
+    "content-hash": "dbd90264e1b042417054441531a4ade5",
     "packages": [
         {
             "name": "brick/math",
@@ -2927,6 +2927,83 @@
                 }
             ],
             "time": "2022-07-24T11:55:47+00:00"
+        },
+        {
+            "name": "nekhbet/laravel-gettext",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nekhbet/laravel-gettext.git",
+                "reference": "a3c9a475b43e1e1c35b91d502522a2b7f1a50e69"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nekhbet/laravel-gettext/zipball/a3c9a475b43e1e1c35b91d502522a2b7f1a50e69",
+                "reference": "a3c9a475b43e1e1c35b91d502522a2b7f1a50e69",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^9.0",
+                "laravel/helpers": "^1.1",
+                "php": ">=8.0"
+            },
+            "require-dev": {
+                "laravel/laravel": "^9.0",
+                "mockery/mockery": "dev-master",
+                "php-coveralls/php-coveralls": "^2.1",
+                "phpunit/phpunit": "~7.0 || ^8.5 || ^9",
+                "squizlabs/php_codesniffer": "1.5.*"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Nekhbet\\LaravelGettext\\LaravelGettextServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/Nekhbet/LaravelGettext/Support/helpers.php"
+                ],
+                "psr-0": {
+                    "Nekhbet\\LaravelGettext\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolás Daniel Palumbo",
+                    "email": "n@xinax.net"
+                },
+                {
+                    "name": "Antoine Aflalo",
+                    "email": "dev+laravel_gettext@zerospam.ca"
+                },
+                {
+                    "name": "Sorin Trimbitas",
+                    "email": "trimbitassorin@hotmail.com"
+                }
+            ],
+            "description": "Adds localization support to laravel applications in an easy way using Poedit and GNU gettext.",
+            "homepage": "https://github.com/nekhbet/laravel-gettext",
+            "keywords": [
+                "gettext",
+                "laravel",
+                "laravel-gettext",
+                "localization",
+                "poEdit",
+                "translation"
+            ],
+            "support": {
+                "issues": "https://github.com/nekhbet/laravel-gettext/issues",
+                "source": "https://github.com/nekhbet/laravel-gettext/tree/master"
+            },
+            "time": "2023-01-08T20:46:20+00:00"
         },
         {
             "name": "nesbot/carbon",
@@ -7671,70 +7748,6 @@
                 "source": "https://github.com/webmozarts/assert/tree/1.11.0"
             },
             "time": "2022-06-03T18:03:27+00:00"
-        },
-        {
-            "name": "zerospam/laravel-gettext",
-            "version": "dev-patch-1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/prevplan/laravel-gettext",
-                "reference": "8face081282b333a513877712c4b4f3c12cae8e4"
-            },
-            "require": {
-                "laravel/framework": "^6.0 || ^7.0 || ^8.0 || ^9.0",
-                "laravel/helpers": "^1.1",
-                "php": ">=7.2"
-            },
-            "require-dev": {
-                "laravel/laravel": "^6.0 || ^7.0 || ^8.0 || ^9.0",
-                "mockery/mockery": "dev-master",
-                "php-coveralls/php-coveralls": "^2.1",
-                "phpunit/phpunit": "~7.0 || ^8.5 || ^9",
-                "squizlabs/php_codesniffer": "1.5.*"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Xinax\\LaravelGettext\\LaravelGettextServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Xinax\\LaravelGettext\\": "src/"
-                },
-                "files": [
-                    "src/Xinax/LaravelGettext/Support/helpers.php"
-                ]
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Nicolás Daniel Palumbo",
-                    "email": "n@xinax.net"
-                },
-                {
-                    "name": "Antoine Aflalo",
-                    "email": "dev+laravel_gettext@zerospam.ca"
-                }
-            ],
-            "description": "Adds localization support to laravel applications in an easy way using Poedit and GNU gettext.",
-            "homepage": "https://github.com/zerospam/laravel-gettext",
-            "keywords": [
-                "gettext",
-                "laravel",
-                "laravel-gettext",
-                "localization",
-                "poedit",
-                "translation"
-            ],
-            "support": {
-                "issues": "https://github.com/zerospam/laravel-gettext/issues"
-            },
-            "time": "2022-04-05T13:04:11+00:00"
         }
     ],
     "packages-dev": [
@@ -11692,9 +11705,7 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "zerospam/laravel-gettext": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

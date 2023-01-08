@@ -37,7 +37,7 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
-            \Xinax\LaravelGettext\Middleware\GettextMiddleware::class,
+            \Nekhbet\LaravelGettext\Middleware\GettextMiddleware::class,
             \App\Http\Middleware\Localization::class,
         ],
 

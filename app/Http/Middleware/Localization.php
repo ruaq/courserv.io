@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
-use Xinax\LaravelGettext\Facades\LaravelGettext;
+use Nekhbet\LaravelGettext\Facades\LaravelGettext;
 
 class Localization
 {

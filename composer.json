@@ -7,12 +7,6 @@
         "laravel"
     ],
     "license": "MIT",
-    "repositories": [
-        {
-            "type": "git",
-            "url": "https://github.com/prevplan/laravel-gettext"
-        }
-    ],
     "require": {
         "php": "^8.0",
         "danharrin/livewire-rate-limiting": "1.0.0",
@@ -25,14 +19,14 @@
         "laravel/tinker": "2.7.3",
         "livewire/livewire": "2.10.8",
         "mcamara/laravel-localization": "1.7.0",
+        "nekhbet/laravel-gettext": "dev-master",
         "phpoffice/phpword": "^1.0.0",
         "santigarcor/laratrust": "7.1.0",
         "setasign/fpdf": "^1.8",
         "setasign/fpdi-protection": "^2.0",
         "spatie/laravel-sitemap": "6.2.3",
         "vinkla/hashids": "10.0.1",
-        "vyuldashev/xml-to-array": "1.1.0",
-        "zerospam/laravel-gettext": "dev-patch-1"
+        "vyuldashev/xml-to-array": "1.1.0"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "2.12.3",
