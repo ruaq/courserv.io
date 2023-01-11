@@ -33,7 +33,7 @@
         "deployer/deployer": "^7.0",
         "fakerphp/faker": "1.21.0",
         "friendsofphp/php-cs-fixer": "3.13.2",
-        "laravel/sail": "1.17.0",
+        "laravel/sail": "1.18.0",
         "mockery/mockery": "1.5.1",
         "nunomaduro/collision": "6.4.0",
         "nunomaduro/larastan": "2.3.5",
