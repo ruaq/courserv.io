@@ -1,4 +1,5 @@
-window._ = require('lodash');
+import _ from 'lodash';
+window._ = _;
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
@@ -22,7 +23,7 @@ window._ = require('lodash');
 
 // window.Echo = new Echo({
 //     broadcaster: 'pusher',
-//     key: process.env.MIX_PUSHER_APP_KEY,
-//     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
+//     key: import.meta.env.VITE_PUSHER_APP_KEY,
+//     cluster: import.meta.env.VITE_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
