@@ -3,14 +3,14 @@
         <div class="space-y-8 divide-y divide-gray-200">
             <div>
                 <div>
-                    <h1 class="text-center text-2xl leading-6 font-medium text-gray-900">{{ $course_data->type->name }}</h1>
-                    <p class="text-center mt-1 text-gray-500">{{ $course_data->street }}, {{ $course_data->zipcode }} {{ $course_data->location }} - {{ \Carbon\Carbon::parse($course_data->start)->isoFormat('DD.MM.YYYY, HH:mm') }} Uhr</p>
+                    <h1 class="text-center text-2xl font-medium leading-6 text-gray-900">{{ $course_data->type->name }}</h1>
+                    <p class="mt-1 text-center text-gray-500">{{ $course_data->street }}, {{ $course_data->zipcode }} {{ $course_data->location }} - {{ \Carbon\Carbon::parse($course_data->start)->isoFormat('DD.MM.YYYY, HH:mm') }} Uhr</p>
                 </div>
             </div>
 
             <div class="pt-8">
                 <div>
-                    <h3 class="text-lg leading-6 font-medium text-gray-900">{{ _i('contact person') }}</h3>
+                    <h3 class="text-lg font-medium leading-6 text-gray-900">{{ _i('contact person') }}</h3>
                     <p class="mt-1 text-sm text-gray-500">{{ _i('Information about you as the contact person for this booking.') }}</p>
                 </div>
 
@@ -19,12 +19,12 @@
 {{--                        <legend class="sr-only">Notification method</legend>--}}
                         <div class="space-y-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-10">
                             <div class="flex items-center">
-                                <input wire:model="samePerson" id="samePerson" type="radio" value="1" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300">
+                                <input wire:model="samePerson" id="samePerson" type="radio" value="1" class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500">
                                 <label for="samePerson" class="ml-3 block text-sm font-medium text-gray-700">{{ _i('The contact person is also the participant') }} </label>
                             </div>
 
                             <div class="flex items-center">
-                                <input wire:model="samePerson" id="sms" type="radio" value="0" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300">
+                                <input wire:model="samePerson" id="sms" type="radio" value="0" class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500">
                                 <label for="sms" class="ml-3 block text-sm font-medium text-gray-700"> {{ _i('Participant is another person') }} </label>
                             </div>
                         </div>
@@ -35,16 +35,16 @@
                     <div class="sm:col-span-4">
                         <label for="company" class="block text-sm font-medium text-gray-700"> {{ _i('company') }} <span class="text-xs text-gray-500">({{ _i('optional') }})</span></label>
                         <div class="mt-1">
-                            <input wire:model.lazy="contactPerson.company" id="company" name="company" type="text" autocomplete="company" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                            <input wire:model.lazy="contactPerson.company" id="company" name="company" type="text" autocomplete="company" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                         </div>
                     </div>
 
                     <div class="sm:col-span-3">
                         <label for="first-name" class="block text-sm font-medium text-gray-700">{{ _i('First name') }}</label>
-                        <div class="mt-1 relative rounded-md shadow-sm">
+                        <div class="relative mt-1 rounded-md shadow-sm">
                             <input wire:model.lazy="contactPerson.firstname" type="text" name="first-name" id="first-name" required autocomplete="first-name" class="@error('contactPerson.firstname') pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 @enderror shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
                             @error('contactPerson.firstname')
-                                <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
                                     <!-- Heroicon name: solid/exclamation-circle -->
                                     <svg class="h-5 w-5 text-red-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                         <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
@@ -59,10 +59,10 @@
 
                     <div class="sm:col-span-3">
                         <label for="last-name" class="block text-sm font-medium text-gray-700">{{ _i('Last name') }}</label>
-                        <div class="mt-1 relative rounded-md shadow-sm">
+                        <div class="relative mt-1 rounded-md shadow-sm">
                             <input wire:model.lazy="contactPerson.lastname" type="text" name="last-name" id="last-name" required autocomplete="last-name" class="@error('contactPerson.lastname') pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 @enderror shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
                             @error('contactPerson.lastname')
-                                <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
                                     <!-- Heroicon name: solid/exclamation-circle -->
                                     <svg class="h-5 w-5 text-red-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                         <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
@@ -77,10 +77,10 @@
 
                     <div class="sm:col-span-6">
                         <label for="street-address" class="block text-sm font-medium text-gray-700">{{ _i('Street address') }}</label>
-                        <div class="mt-1 relative rounded-md shadow-sm">
+                        <div class="relative mt-1 rounded-md shadow-sm">
                             <input wire:model.lazy="contactPerson.street" type="text" name="street-address" id="street-address" required autocomplete="street-address" class="@error('contactPerson.street') pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 @enderror shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
                             @error('contactPerson.street')
-                                <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
                                     <!-- Heroicon name: solid/exclamation-circle -->
                                     <svg class="h-5 w-5 text-red-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                         <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
@@ -95,10 +95,10 @@
 
                     <div class="sm:col-span-3">
                         <label for="postal-code" class="block text-sm font-medium text-gray-700"> {{ _i('zipcode') }} </label>
-                        <div class="mt-1 relative rounded-md shadow-sm">
+                        <div class="relative mt-1 rounded-md shadow-sm">
                             <input wire:model.lazy="contactPerson.zipcode" type="text" name="postal-code" id="postal-code" required autocomplete="postal-code" class="@error('contactPerson.zipcode') pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 @enderror shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
                             @error('contactPerson.zipcode')
-                            <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
                                 <!-- Heroicon name: solid/exclamation-circle -->
                                 <svg class="h-5 w-5 text-red-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                     <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
@@ -113,10 +113,10 @@
 
                     <div class="sm:col-span-3">
                         <label for="city" class="block text-sm font-medium text-gray-700">{{ _i('City') }}</label>
-                        <div class="mt-1 relative rounded-md shadow-sm">
+                        <div class="relative mt-1 rounded-md shadow-sm">
                             <input wire:model.lazy="contactPerson.location" type="text" name="city" id="city" required autocomplete="city" class="@error('contactPerson.location') pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 @enderror shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
                             @error('contactPerson.location')
-                                <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
                                     <!-- Heroicon name: solid/exclamation-circle -->
                                     <svg class="h-5 w-5 text-red-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                         <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
@@ -131,10 +131,10 @@
 
                     <div class="sm:col-span-3">
                         <label for="email" class="block text-sm font-medium text-gray-700">{{ _i('Email address') }}</label>
-                        <div class="mt-1 relative rounded-md shadow-sm">
+                        <div class="relative mt-1 rounded-md shadow-sm">
                             <input wire:model.lazy="contactPerson.email" id="email" name="email" type="email" required autocomplete="email" class="@error('contactPerson.email') pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 @enderror shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
                             @error('contactPerson.email')
-                                <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
                                     <!-- Heroicon name: solid/exclamation-circle -->
                                     <svg class="h-5 w-5 text-red-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                         <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
@@ -149,10 +149,10 @@
 
                     <div class="sm:col-span-3">
                         <label for="phone" class="block text-sm font-medium text-gray-700">{{ _i('phone') }}</label>
-                        <div class="mt-1 relative rounded-md shadow-sm">
+                        <div class="relative mt-1 rounded-md shadow-sm">
                             <input wire:model.lazy="contactPerson.phone" id="phone" name="phone" type="text" required autocomplete="phone" class="@error('contactPerson.phone') pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 @enderror shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
                             @error('contactPerson.phone')
-                                <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
                                     <!-- Heroicon name: solid/exclamation-circle -->
                                     <svg class="h-5 w-5 text-red-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                         <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
@@ -170,7 +170,7 @@
             <div>
                 <div class="pt-4">
                     <div>
-                        <h3 class="text-lg leading-6 font-medium text-gray-900">{{ _i('participants') }}</h3>
+                        <h3 class="text-lg font-medium leading-6 text-gray-900">{{ _i('participants') }}</h3>
                         <p class="mt-1 text-sm text-gray-500">{{ _i('Information about the participants') }}</p>
                     </div>
 
@@ -181,10 +181,10 @@
                                     <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
                                         <div class="sm:col-span-3">
                                             <label for="first-name" class="block text-sm font-medium text-gray-700">{{ _i('First name') }}</label>
-                                            <div class="mt-1 relative rounded-md shadow-sm">
+                                            <div class="relative mt-1 rounded-md shadow-sm">
                                                 <input wire:model.lazy="participants.{{ $loop->index }}.firstname" type="text" name="first-name" id="first-name" required autocomplete="given-name" class="@error('participants.' . $loop->index . '.firstname') pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 @enderror shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
                                                 @error('participants.' . $loop->index . '.firstname')
-                                                    <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                                                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
                                                         <!-- Heroicon name: solid/exclamation-circle -->
                                                         <svg class="h-5 w-5 text-red-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                                             <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
@@ -199,10 +199,10 @@
 
                                         <div class="sm:col-span-3">
                                             <label for="last-name" class="block text-sm font-medium text-gray-700">{{ _i('Last name') }}</label>
-                                            <div class="mt-1 relative rounded-md shadow-sm">
+                                            <div class="relative mt-1 rounded-md shadow-sm">
                                                 <input wire:model.lazy="participants.{{ $loop->index }}.lastname" type="text" name="last-name" id="last-name" required autocomplete="family-name" class="@error('participants.' . $loop->index . '.lastname') pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 @enderror shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
                                                 @error('participants.' . $loop->index . '.lastname')
-                                                    <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                                                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
                                                         <!-- Heroicon name: solid/exclamation-circle -->
                                                         <svg class="h-5 w-5 text-red-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" /></svg>
                                                     </div>
@@ -215,10 +215,10 @@
 
                                         <div class="sm:col-span-1">
                                             <label for="date" class="block text-sm font-medium text-gray-700">{{ _i('date of birth') }}</label>
-                                            <div class="mt-1 relative rounded-md shadow-sm">
+                                            <div class="relative mt-1 rounded-md shadow-sm">
                                                 <input wire:model.lazy="participants.{{ $loop->index }}.date_of_birth" id="date" name="date" type="text" required autocomplete="date" placeholder="01.12.1992" class="@error('participants.' . $loop->index . '.date_of_birth') pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 @enderror placeholder-gray-200 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
                                                 @error('participants.' . $loop->index . '.date_of_birth')
-                                                    <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                                                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
                                                         <!-- Heroicon name: solid/exclamation-circle -->
                                                         <svg class="h-5 w-5 text-red-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                                             <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
@@ -237,7 +237,7 @@
                                                 <span class="text-xs text-gray-500" id="email-optional">{{ _i('optional') }}</span>
                                             </div>
                                             <div class="mt-1">
-                                                <input wire:model.lazy="participants.{{ $loop->index }}.email" id="email" name="email" type="email" autocomplete="email" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                                                <input wire:model.lazy="participants.{{ $loop->index }}.email" id="email" name="email" type="email" autocomplete="email" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                                             </div>
                                         </div>
 
@@ -247,7 +247,7 @@
                                                 <span class="text-xs text-gray-500" id="phone-optional">{{ _i('optional') }}</span>
                                             </div>
                                             <div class="mt-1">
-                                                <input wire:model.lazy="participants.{{ $loop->index }}.phone" id="phone" name="phone" type="text" autocomplete="phone" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                                                <input wire:model.lazy="participants.{{ $loop->index }}.phone" id="phone" name="phone" type="text" autocomplete="phone" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                                             </div>
                                         </div>
 
@@ -274,9 +274,9 @@
                 </div>
             </div>
 
-            <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+            <div class="overflow-hidden bg-white shadow sm:rounded-lg">
                 <div class="px-4 py-5 sm:px-6">
-                    <h3 class="text-lg leading-6 font-medium text-gray-900">{{ _i('Booking overview') }}</h3>
+                    <h3 class="text-lg font-medium leading-6 text-gray-900">{{ _i('Booking overview') }}</h3>
                     <p class="mt-1 max-w-2xl text-sm text-gray-500">{{ _i('Summary of the data about your booking') }}</p>
                 </div>
                 <div class="border-t border-gray-200 px-4 py-5 sm:px-6">
@@ -311,7 +311,7 @@
                                     @foreach(unserialize($course_data->prices[0]->payment) as $option => $foo)
                                         <label class="relative bg-white border rounded-lg shadow-sm p-4 flex cursor-pointer focus:outline-none {{ $payment === $option ? 'border-transparent border-indigo-500 ring-2 ring-indigo-500' : 'border-gray-300' }}">
                                             <input wire:model="payment" type="radio" name="payment" required value="{{ $option }}" class="sr-only" aria-labelledby="project-type-0-label" aria-describedby="project-type-0-description-0 project-type-0-description-1">
-                                            <div class="flex-1 flex">
+                                            <div class="flex flex-1">
                                                 <div class="flex flex-col">
                                                     <span id="project-type-0-label" class="block text-sm font-bold text-gray-900"> {{ __('payments.' . $option . '.title')  }} </span>
                                                     <span id="project-type-0-description-0" class="mt-1 flex items-center text-sm text-gray-500"> {{ __('payments.' . $option . '.description') }}</span>
@@ -336,8 +336,8 @@
                                 <legend class="text-sm font-medium text-gray-500">{{ _i('Consents') }}</legend>
                                 @if(config('booking.gtc'))
                                     <div class="relative flex items-start">
-                                        <div class="flex items-center h-5">
-                                            <input id="gtc" name="gtc" type="checkbox" required class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded">
+                                        <div class="flex h-5 items-center">
+                                            <input id="gtc" name="gtc" type="checkbox" required class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
                                         </div>
                                         <div class="ml-3 text-sm">
                                             <label for="gtc" class="font-medium text-gray-700">{!! _i('I have read and accepted the <a href="%s" target="_blank">terms and conditions</a>.', config('booking.gtc')) !!}</label>
@@ -346,8 +346,8 @@
                                 @endif
                                 @if(config('booking.privacy'))
                                     <div class="relative flex items-start">
-                                        <div class="flex items-center h-5">
-                                            <input id="privacy" name="privacy" type="checkbox" required class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded">
+                                        <div class="flex h-5 items-center">
+                                            <input id="privacy" name="privacy" type="checkbox" required class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
                                         </div>
                                         <div class="ml-3 text-sm">
                                             <label for="privacy" class="font-medium text-gray-700">{!! _i('I agree that the details from the booking form are collected and processed for the purpose of handling the booking. Detailed information on the handling of user data can be found in the <a href="%s" target="_blank">privacy policy</a>.', config('booking.gtc')) !!}</label>
@@ -356,8 +356,8 @@
                                 @endif
                                 @if(config('booking.revocation') && !isset($contactPerson['company']))
                                     <div class="relative flex items-start">
-                                        <div class="flex items-center h-5">
-                                            <input id="revocation" name="revocation" type="checkbox" required class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded">
+                                        <div class="flex h-5 items-center">
+                                            <input id="revocation" name="revocation" type="checkbox" required class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
                                         </div>
                                         @if($course_data->start < \Carbon\Carbon::now()->addDays(14))
                                             <div class="ml-3 text-sm">
@@ -378,7 +378,7 @@
 
             <div class="pt-5">
                 <div class="flex justify-end">
-                    <x-button.primary class="uppercase px-6 py-3 umami--click--booking-button" type="submit">{{ _i('book with obligation to pay') }}</x-button.primary>
+                    <x-button.primary class="umami--click--booking-button px-6 py-3 uppercase" type="submit">{{ _i('book with obligation to pay') }}</x-button.primary>
                 </div>
             </div>
         </div>
@@ -391,20 +391,20 @@
         <div x-show="success" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" x-description="Background backdrop, show/hide based on modal state." class="fixed inset-0 bg-gray-500 transition-opacity"></div>
 
 
-        <div class="fixed z-10 inset-0 overflow-y-auto">
-            <div class="flex items-end justify-center sm:min-h-screen pt-60 px-4 pb-20 text-center sm:block sm:p-0">
+        <div class="fixed inset-0 z-10 overflow-y-auto">
+            <div class="flex items-end justify-center px-4 pt-60 pb-20 text-center sm:block sm:min-h-screen sm:p-0">
                 <!-- This element is to trick the browser into centering the modal contents. -->
-                <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">​</span>
+                <span class="hidden sm:inline-block sm:h-screen sm:align-middle" aria-hidden="true">​</span>
 
-                <div x-show="success" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100" x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100" x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" x-description="Modal panel, show/hide based on modal state." class="relative inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-sm sm:w-full sm:p-6">
+                <div x-show="success" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100" x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100" x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" x-description="Modal panel, show/hide based on modal state." class="relative inline-block transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left align-bottom shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-sm sm:p-6 sm:align-middle">
                     <div>
-                        <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100">
+                        <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-green-100">
                             <svg class="h-6 w-6 text-green-600" x-description="Heroicon name: outline/check" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
                             </svg>
                         </div>
                         <div class="mt-3 text-center sm:mt-5">
-                            <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">
+                            <h3 class="text-lg font-medium leading-6 text-gray-900" id="modal-title">
                                 {{ _i('booking successful') }}
                             </h3>
                             <div class="mt-2">
@@ -415,7 +415,7 @@
                         </div>
                     </div>
 {{--                    <div class="mt-5 sm:mt-6">--}}
-{{--                        <button type="button" class="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm">--}}
+{{--                        <button type="button" class="inline-flex w-full justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:text-sm">--}}
 {{--                            Go back to dashboard--}}
 {{--                        </button>--}}
 {{--                    </div>--}}
@@ -429,20 +429,20 @@
             <div class="relative z-10" aria-labelledby="modal-title" x-ref="dialog" aria-modal="true">
                 <div x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" x-description="Background backdrop, show/hide based on modal state." class="fixed inset-0 bg-gray-500 transition-opacity"></div>
 
-                <div class="fixed z-10 inset-0 overflow-y-auto">
-                    <div class="flex items-end justify-center sm:min-h-screen pt-60 px-4 pb-20 text-center sm:block sm:p-0">
+                <div class="fixed inset-0 z-10 overflow-y-auto">
+                    <div class="flex items-end justify-center px-4 pt-60 pb-20 text-center sm:block sm:min-h-screen sm:p-0">
                         <!-- This element is to trick the browser into centering the modal contents. -->
-                        <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">​</span>
+                        <span class="hidden sm:inline-block sm:h-screen sm:align-middle" aria-hidden="true">​</span>
 
-                        <div x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100" x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100" x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" x-description="Modal panel, show/hide based on modal state." class="relative inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-sm sm:w-full sm:p-6">
+                        <div x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100" x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100" x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" x-description="Modal panel, show/hide based on modal state." class="relative inline-block transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left align-bottom shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-sm sm:p-6 sm:align-middle">
                             <div>
-                                <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100">
+                                <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-red-100">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
                                     </svg>
                                 </div>
                                 <div class="mt-3 text-center sm:mt-5">
-                                    <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">
+                                    <h3 class="text-lg font-medium leading-6 text-gray-900" id="modal-title">
                                         {{ _i('Booking not possible') }}
                                     </h3>
                                     <div class="mt-2">
@@ -453,7 +453,7 @@
                                 </div>
                             </div>
                                 <div class="mt-5 sm:mt-6">
-                                    <a type="button" href="javascript:history.back()" class="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm">
+                                    <a type="button" href="javascript:history.back()" class="inline-flex w-full justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:text-sm">
                                         {{ _i('back') }}
                                     </a>
                                 </div>
@@ -466,9 +466,9 @@
 
     <div>
         @if(($course_data->seats - $course_data->participants_count) - count($participants) < 0)
-            <div aria-live="assertive" class="fixed inset-0 flex items-end px-4 py-6 pointer-events-none sm:p-6 sm:items-start">
-                <div class="w-full flex flex-col items-center space-y-4 sm:items-end">
-                    <div class="max-w-sm w-full bg-white shadow-lg rounded-lg pointer-events-auto ring-1 ring-black ring-opacity-5 overflow-hidden">
+            <div aria-live="assertive" class="pointer-events-none fixed inset-0 flex items-end px-4 py-6 sm:items-start sm:p-6">
+                <div class="flex w-full flex-col items-center space-y-4 sm:items-end">
+                    <div class="pointer-events-auto w-full max-w-sm overflow-hidden rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5">
                         <div class="p-4">
                             <div class="flex items-start">
                                 <div class="flex-shrink-0">

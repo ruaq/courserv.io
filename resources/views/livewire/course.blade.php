@@ -152,15 +152,15 @@
                     <span class="mr-3 hidden lg:block" id="public-bookable-label" @click="showOnlyOwnCourses = !showOnlyOwnCourses; $refs.switch.focus()">
                         <span class="text-sm font-medium text-gray-900">{{ _i('show only own courses') }}</span>
                     </span>
-                    <button type="button" class="relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 bg-gray-200" role="switch" aria-checked="false" x-ref="switch" :aria-checked="showOnlyOwnCourses" @click="showOnlyOwnCourses = !showOnlyOwnCourses" x-state:on="Enabled" x-state:off="Not Enabled" :class="{ 'bg-indigo-600': showOnlyOwnCourses, 'bg-gray-200': !(showOnlyOwnCourses) }">
+                    <button type="button" class="relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent bg-gray-200 transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" role="switch" aria-checked="false" x-ref="switch" :aria-checked="showOnlyOwnCourses" @click="showOnlyOwnCourses = !showOnlyOwnCourses" x-state:on="Enabled" x-state:off="Not Enabled" :class="{ 'bg-indigo-600': showOnlyOwnCourses, 'bg-gray-200': !(showOnlyOwnCourses) }">
                         <span class="sr-only">{{ _i('show only own courses') }}</span>
-                        <span class="pointer-events-none relative inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200 translate-x-0" x-state:on="Enabled" x-state:off="Not Enabled" :class="{ 'translate-x-5': showOnlyOwnCourses, 'translate-x-0': !(showOnlyOwnCourses) }">
-                            <span class="absolute inset-0 h-full w-full flex items-center justify-center transition-opacity opacity-100 ease-in duration-200" aria-hidden="true" x-state:on="Enabled" x-state:off="Not Enabled" :class="{ 'opacity-0 ease-out duration-100': showOnlyOwnCourses, 'opacity-100 ease-in duration-200': !(showOnlyOwnCourses) }">
+                        <span class="pointer-events-none relative inline-block h-5 w-5 translate-x-0 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out" x-state:on="Enabled" x-state:off="Not Enabled" :class="{ 'translate-x-5': showOnlyOwnCourses, 'translate-x-0': !(showOnlyOwnCourses) }">
+                            <span class="absolute inset-0 flex h-full w-full items-center justify-center opacity-100 transition-opacity duration-200 ease-in" aria-hidden="true" x-state:on="Enabled" x-state:off="Not Enabled" :class="{ 'opacity-0 ease-out duration-100': showOnlyOwnCourses, 'opacity-100 ease-in duration-200': !(showOnlyOwnCourses) }">
                                 <svg class="h-3 w-3 text-gray-400" fill="none" viewBox="0 0 12 12">
                                   <path d="M4 8l2-2m0 0l2-2M6 6L4 4m2 2l2 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                                 </svg>
                             </span>
-                            <span class="absolute inset-0 h-full w-full flex items-center justify-center transition-opacity opacity-0 ease-out duration-100" aria-hidden="true" x-state:on="Enabled" x-state:off="Not Enabled" :class="{ 'opacity-100 ease-in duration-200': showOnlyOwnCourses, 'opacity-0 ease-out duration-100': !(showOnlyOwnCourses) }">
+                            <span class="absolute inset-0 flex h-full w-full items-center justify-center opacity-0 transition-opacity duration-100 ease-out" aria-hidden="true" x-state:on="Enabled" x-state:off="Not Enabled" :class="{ 'opacity-100 ease-in duration-200': showOnlyOwnCourses, 'opacity-0 ease-out duration-100': !(showOnlyOwnCourses) }">
                                 <svg class="h-3 w-3 text-indigo-600" fill="currentColor" viewBox="0 0 12 12">
                                   <path d="M3.707 5.293a1 1 0 00-1.414 1.414l1.414-1.414zM5 8l-.707.707a1 1 0 001.414 0L5 8zm4.707-3.293a1 1 0 00-1.414-1.414l1.414 1.414zm-7.414 2l2 2 1.414-1.414-2-2-1.414 1.414zm3.414 2l4-4-1.414-1.414-4 4 1.414 1.414z"></path>
                                 </svg>
@@ -243,29 +243,29 @@
             <table class="min-w-full divide-y divide-gray-300">
                 <thead class="bg-gray-50">
                 <tr>
-                    <x-table.heading sortable multi-column wire:click="sortBy('seminar_location')" :direction="$sorts['seminar_location'] ?? null" class="py-3.5 pl-4 pr-3 text-left text-xs lg:text-sm font-semibold text-gray-900 sm:pl-6">{{ _i('seminar location') }}</x-table.heading>
+                    <x-table.heading sortable multi-column wire:click="sortBy('seminar_location')" :direction="$sorts['seminar_location'] ?? null" class="py-3.5 pl-4 pr-3 text-left text-xs font-semibold text-gray-900 sm:pl-6 lg:text-sm">{{ _i('seminar location') }}</x-table.heading>
 {{--                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">{{ _i('seminar location') }}</th>--}}
-                    <x-table.heading sortable multi-column wire:click="sortBy('street')" :direction="$sorts['street'] ?? null" class="hidden px-3 py-3.5 text-left text-xs lg:text-sm font-semibold text-gray-900 xl:table-cell">{{ _i('street') }}</x-table.heading>
+                    <x-table.heading sortable multi-column wire:click="sortBy('street')" :direction="$sorts['street'] ?? null" class="hidden px-3 py-3.5 text-left text-xs font-semibold text-gray-900 lg:text-sm xl:table-cell">{{ _i('street') }}</x-table.heading>
 {{--                    <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 xl:table-cell">{{ _i('street') }}</th>--}}
-                    <x-table.heading sortable multi-column wire:click="sortBy('location')" :direction="$sorts['location'] ?? null" class="hidden px-3 py-3.5 text-left text-xs lg:text-sm font-semibold text-gray-900 sm:table-cell">{{ _i('location') }}</x-table.heading>
+                    <x-table.heading sortable multi-column wire:click="sortBy('location')" :direction="$sorts['location'] ?? null" class="hidden px-3 py-3.5 text-left text-xs font-semibold text-gray-900 sm:table-cell lg:text-sm">{{ _i('location') }}</x-table.heading>
 {{--                    <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 sm:table-cell">{{ _i('location') }}</th>--}}
-                    <x-table.heading sortable multi-column wire:click="sortBy('start')" :direction="$sorts['start'] ?? null" class="px-3 py-3.5 text-left text-xs lg:text-sm font-semibold text-gray-900">{{ _i('start') }}</x-table.heading>
+                    <x-table.heading sortable multi-column wire:click="sortBy('start')" :direction="$sorts['start'] ?? null" class="px-3 py-3.5 text-left text-xs font-semibold text-gray-900 lg:text-sm">{{ _i('start') }}</x-table.heading>
 {{--                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">{{ _i('start') }}</th>--}}
-                    <x-table.heading sortable multi-column wire:click="sortBy('course_type_id')" :direction="$sorts['course_type_id'] ?? null" class="px-3 py-3.5 text-left text-xs lg:text-sm font-semibold text-gray-900">{{ _i('course type') }}</x-table.heading>
+                    <x-table.heading sortable multi-column wire:click="sortBy('course_type_id')" :direction="$sorts['course_type_id'] ?? null" class="px-3 py-3.5 text-left text-xs font-semibold text-gray-900 lg:text-sm">{{ _i('course type') }}</x-table.heading>
 {{--                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">{{ _i('course type') }}</th>--}}
-                    <x-table.heading sortable multi-column wire:click="sortBy('internal_number')" :direction="$sorts['internal_number'] ?? null" class="hidden px-3 py-3.5 text-left text-xs lg:text-sm font-semibold text-gray-900 lg:table-cell">{{ _i('internal') }}</x-table.heading>
+                    <x-table.heading sortable multi-column wire:click="sortBy('internal_number')" :direction="$sorts['internal_number'] ?? null" class="hidden px-3 py-3.5 text-left text-xs font-semibold text-gray-900 lg:table-cell lg:text-sm">{{ _i('internal') }}</x-table.heading>
 {{--                    <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 lg:table-cell">{{ _i('internal') }}</th>--}}
-                    <th scope="col" class="hidden px-3 py-3.5 text-left text-xs lg:text-sm font-semibold text-gray-900 lg:hidden md:table-cell sm:hidden">{{ _i('number') }}</th>
+                    <th scope="col" class="hidden px-3 py-3.5 text-left text-xs font-semibold text-gray-900 sm:hidden md:table-cell lg:hidden lg:text-sm">{{ _i('number') }}</th>
                     @if(config('qseh.codeNumber'))
-                        <x-table.heading sortable multi-column wire:click="sortBy('registration_number')" :direction="$sorts['registration_number'] ?? null" class="hidden px-3 py-3.5 text-left text-xs lg:text-sm font-semibold text-gray-900 lg:table-cell">{{ _i('qseh') }}</x-table.heading>
+                        <x-table.heading sortable multi-column wire:click="sortBy('registration_number')" :direction="$sorts['registration_number'] ?? null" class="hidden px-3 py-3.5 text-left text-xs font-semibold text-gray-900 lg:table-cell lg:text-sm">{{ _i('qseh') }}</x-table.heading>
 {{--                        <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 lg:table-cell">{{ _i('qseh') }}</th>--}}
                     @endif
-                    <x-table.heading sortable multi-column wire:click="sortBy('team_id')" :direction="$sorts['team_id'] ?? null" class="hidden px-3 py-3.5 text-left text-xs lg:text-sm font-semibold text-gray-900 lg:table-cell">{{ _i('team') }}</x-table.heading>
+                    <x-table.heading sortable multi-column wire:click="sortBy('team_id')" :direction="$sorts['team_id'] ?? null" class="hidden px-3 py-3.5 text-left text-xs font-semibold text-gray-900 lg:table-cell lg:text-sm">{{ _i('team') }}</x-table.heading>
 {{--                    <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 lg:table-cell">{{ _i('team') }}</th>--}}
                     <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
 {{--                        <span class="sr-only">Edit</span>--}}
                     </th>
-                    <th scope="col" class="hidden relative py-3.5 pl-3 pr-4 sm:pr-6 sm:table-cell">
+                    <th scope="col" class="relative hidden py-3.5 pl-3 pr-4 sm:table-cell sm:pr-6">
 {{--                        <span class="sr-only">Edit</span>--}}
                     </th>
                 </tr>
@@ -273,7 +273,7 @@
                 <tbody class="divide-y divide-gray-200 bg-white">
                 @foreach($courses as $course)
                     <tr class="{{ $course->cancelled ? 'line-through' : '' }}">
-                        <td class="w-full max-w-0 py-4 pl-4 pr-3 text-xs lg:text-sm font-medium text-gray-900 sm:w-auto sm:max-w-none sm:pl-6">
+                        <td class="w-full max-w-0 py-4 pl-4 pr-3 text-xs font-medium text-gray-900 sm:w-auto sm:max-w-none sm:pl-6 lg:text-sm">
                             {{ $course->seminar_location }}
                             <dl class="font-normal lg:hidden">
                                 <dt class="sr-only">{{ _i('location') }}</dt>
@@ -282,8 +282,8 @@
                                 <dd class="mt-1 truncate text-gray-500 sm:hidden">{{ $course->location }}</dd>
                             </dl>
                         </td>
-                        <td class="hidden px-3 py-4 text-xs lg:text-sm text-gray-500 xl:table-cell">{{ $course->street }}</td>
-                        <td class="hidden px-3 py-4 text-xs lg:text-sm text-gray-500 sm:table-cell">
+                        <td class="hidden px-3 py-4 text-xs text-gray-500 lg:text-sm xl:table-cell">{{ $course->street }}</td>
+                        <td class="hidden px-3 py-4 text-xs text-gray-500 sm:table-cell lg:text-sm">
                             <dl class="xl:hidden">
                                 <dt class="sr-only">{{ _i('street') }}</dt>
                                 <dd class="mt-1 truncate text-gray-500">{{ $course->street }}</dd>
@@ -292,10 +292,10 @@
                             </dl>
                             {{ $course->zipcode }} {{ $course->location }}
                         </td>
-                        <td class="px-3 py-4 text-xs lg:text-sm text-gray-500">{{ $course->start->format('d.m.Y H:i') }}</td>
-                        <td class="px-3 py-4 text-xs lg:text-sm text-gray-500">{{ $course->type->name }}</td>
+                        <td class="px-3 py-4 text-xs text-gray-500 lg:text-sm">{{ $course->start->format('d.m.Y H:i') }}</td>
+                        <td class="px-3 py-4 text-xs text-gray-500 lg:text-sm">{{ $course->type->name }}</td>
                         <div {{ ($course->internal_number == 'queued') ? "wire:poll.visible.5s" : '' }}>
-                            <td class="hidden px-3 py-4 text-xs lg:text-sm text-gray-500 md:table-cell">
+                            <td class="hidden px-3 py-4 text-xs text-gray-500 md:table-cell lg:text-sm">
                                 {{ $course->internal_number }}
                                 <dl class="lg:hidden">
                                     <dt class="sr-only">{{ _i('qseh') }}</dt>
@@ -307,11 +307,11 @@
                         </div>
                         @if(config('qseh.codeNumber'))
                             <div {{ ($course->registration_number == 'queued') ? "wire:poll.visible.5s" : '' }}>
-                                <td class="hidden px-3 py-4 text-xs lg:text-sm text-gray-500 lg:table-cell">{{ $course->registration_number }}</td>
+                                <td class="hidden px-3 py-4 text-xs text-gray-500 lg:table-cell lg:text-sm">{{ $course->registration_number }}</td>
                             </div>
                         @endif
-                        <td class="hidden px-3 py-4 text-xs lg:text-sm text-gray-500 lg:table-cell">{{ $course->team->display_name }}</td>
-                        <td class="py-4 pl-3 pr-4 text-right text-xs lg:text-sm font-medium sm:pr-6">
+                        <td class="hidden px-3 py-4 text-xs text-gray-500 lg:table-cell lg:text-sm">{{ $course->team->display_name }}</td>
+                        <td class="py-4 pl-3 pr-4 text-right text-xs font-medium sm:pr-6 lg:text-sm">
                             @can('viewParticipants', $course)
                                 <x-button.link wire:click="participant({{ $course->id }})"><i class="fa-solid fa-users-viewfinder"></i></x-button.link>
                             @else
@@ -319,7 +319,7 @@
                             @endcan
     {{--                        <a href="#" class="text-indigo-600 hover:text-indigo-900"></a>--}}
                         </td>
-                        <td class="hidden py-4 pl-3 pr-4 text-right text-xs lg:text-sm font-medium sm:pr-6 sm:table-cell">
+                        <td class="hidden py-4 pl-3 pr-4 text-right text-xs font-medium sm:table-cell sm:pr-6 lg:text-sm">
                             @can('update', $course)
                                 <x-button.link wire:click="edit({{ $course->id }})"><i class="fa-solid fa-pen-to-square"></i></x-button.link>
                             @else
@@ -378,15 +378,15 @@
                             <div x-data="{ registerCourse: @entangle('registerCourse').defer }" class="space-y-3">
                                 @if(!$courseRegistered && config('qseh.password'))
                                     <div class="flex items-center">
-                                        <button type="button" class="relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 bg-gray-200" role="switch" aria-checked="false" x-ref="switch" :aria-checked="registerCourse" @click="registerCourse = !registerCourse" x-state:on="Enabled" x-state:off="Not Enabled" :class="{ 'bg-indigo-600': registerCourse, 'bg-gray-200': !(registerCourse) }">
+                                        <button type="button" class="relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent bg-gray-200 transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" role="switch" aria-checked="false" x-ref="switch" :aria-checked="registerCourse" @click="registerCourse = !registerCourse" x-state:on="Enabled" x-state:off="Not Enabled" :class="{ 'bg-indigo-600': registerCourse, 'bg-gray-200': !(registerCourse) }">
                                             <span class="sr-only">{{ _i('register automatically at QSEH') }}</span>
-                                            <span class="pointer-events-none relative inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200 translate-x-0" x-state:on="Enabled" x-state:off="Not Enabled" :class="{ 'translate-x-5': registerCourse, 'translate-x-0': !(registerCourse) }">
-                                            <span class="absolute inset-0 h-full w-full flex items-center justify-center transition-opacity opacity-100 ease-in duration-200" aria-hidden="true" x-state:on="Enabled" x-state:off="Not Enabled" :class="{ 'opacity-0 ease-out duration-100': registerCourse, 'opacity-100 ease-in duration-200': !(registerCourse) }">
+                                            <span class="pointer-events-none relative inline-block h-5 w-5 translate-x-0 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out" x-state:on="Enabled" x-state:off="Not Enabled" :class="{ 'translate-x-5': registerCourse, 'translate-x-0': !(registerCourse) }">
+                                            <span class="absolute inset-0 flex h-full w-full items-center justify-center opacity-100 transition-opacity duration-200 ease-in" aria-hidden="true" x-state:on="Enabled" x-state:off="Not Enabled" :class="{ 'opacity-0 ease-out duration-100': registerCourse, 'opacity-100 ease-in duration-200': !(registerCourse) }">
                                                 <svg class="h-3 w-3 text-gray-400" fill="none" viewBox="0 0 12 12">
                                                   <path d="M4 8l2-2m0 0l2-2M6 6L4 4m2 2l2 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                                                 </svg>
                                             </span>
-                                            <span class="absolute inset-0 h-full w-full flex items-center justify-center transition-opacity opacity-0 ease-out duration-100" aria-hidden="true" x-state:on="Enabled" x-state:off="Not Enabled" :class="{ 'opacity-100 ease-in duration-200': registerCourse, 'opacity-0 ease-out duration-100': !(registerCourse) }">
+                                            <span class="absolute inset-0 flex h-full w-full items-center justify-center opacity-0 transition-opacity duration-100 ease-out" aria-hidden="true" x-state:on="Enabled" x-state:off="Not Enabled" :class="{ 'opacity-100 ease-in duration-200': registerCourse, 'opacity-0 ease-out duration-100': !(registerCourse) }">
                                                 <svg class="h-3 w-3 text-indigo-600" fill="currentColor" viewBox="0 0 12 12">
                                                   <path d="M3.707 5.293a1 1 0 00-1.414 1.414l1.414-1.414zM5 8l-.707.707a1 1 0 001.414 0L5 8zm4.707-3.293a1 1 0 00-1.414-1.414l1.414 1.414zm-7.414 2l2 2 1.414-1.414-2-2-1.414 1.414zm3.414 2l4-4-1.414-1.414-4 4 1.414 1.414z"></path>
                                                 </svg>
@@ -422,15 +422,15 @@
 
                     <div x-data="{ publicBookable: @entangle('editing.public_bookable').defer }" class="space-y-3">
                         <div class="flex items-center">
-                            <button type="button" class="relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 bg-gray-200" role="switch" aria-checked="false" x-ref="switch" :aria-checked="publicBookable" @click="publicBookable = !publicBookable" x-state:on="Enabled" x-state:off="Not Enabled" :class="{ 'bg-indigo-600': publicBookable, 'bg-gray-200': !(publicBookable) }">
+                            <button type="button" class="relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent bg-gray-200 transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" role="switch" aria-checked="false" x-ref="switch" :aria-checked="publicBookable" @click="publicBookable = !publicBookable" x-state:on="Enabled" x-state:off="Not Enabled" :class="{ 'bg-indigo-600': publicBookable, 'bg-gray-200': !(publicBookable) }">
                                 <span class="sr-only">{{ _i('public bookable') }}</span>
-                                <span class="pointer-events-none relative inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200 translate-x-0" x-state:on="Enabled" x-state:off="Not Enabled" :class="{ 'translate-x-5': publicBookable, 'translate-x-0': !(publicBookable) }">
-                                    <span class="absolute inset-0 h-full w-full flex items-center justify-center transition-opacity opacity-100 ease-in duration-200" aria-hidden="true" x-state:on="Enabled" x-state:off="Not Enabled" :class="{ 'opacity-0 ease-out duration-100': publicBookable, 'opacity-100 ease-in duration-200': !(publicBookable) }">
+                                <span class="pointer-events-none relative inline-block h-5 w-5 translate-x-0 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out" x-state:on="Enabled" x-state:off="Not Enabled" :class="{ 'translate-x-5': publicBookable, 'translate-x-0': !(publicBookable) }">
+                                    <span class="absolute inset-0 flex h-full w-full items-center justify-center opacity-100 transition-opacity duration-200 ease-in" aria-hidden="true" x-state:on="Enabled" x-state:off="Not Enabled" :class="{ 'opacity-0 ease-out duration-100': publicBookable, 'opacity-100 ease-in duration-200': !(publicBookable) }">
                                         <svg class="h-3 w-3 text-gray-400" fill="none" viewBox="0 0 12 12">
                                           <path d="M4 8l2-2m0 0l2-2M6 6L4 4m2 2l2 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                                         </svg>
                                     </span>
-                                    <span class="absolute inset-0 h-full w-full flex items-center justify-center transition-opacity opacity-0 ease-out duration-100" aria-hidden="true" x-state:on="Enabled" x-state:off="Not Enabled" :class="{ 'opacity-100 ease-in duration-200': publicBookable, 'opacity-0 ease-out duration-100': !(publicBookable) }">
+                                    <span class="absolute inset-0 flex h-full w-full items-center justify-center opacity-0 transition-opacity duration-100 ease-out" aria-hidden="true" x-state:on="Enabled" x-state:off="Not Enabled" :class="{ 'opacity-100 ease-in duration-200': publicBookable, 'opacity-0 ease-out duration-100': !(publicBookable) }">
                                         <svg class="h-3 w-3 text-indigo-600" fill="currentColor" viewBox="0 0 12 12">
                                           <path d="M3.707 5.293a1 1 0 00-1.414 1.414l1.414-1.414zM5 8l-.707.707a1 1 0 001.414 0L5 8zm4.707-3.293a1 1 0 00-1.414-1.414l1.414 1.414zm-7.414 2l2 2 1.414-1.414-2-2-1.414 1.414zm3.414 2l4-4-1.414-1.414-4 4 1.414 1.414z"></path>
                                         </svg>
@@ -447,8 +447,8 @@
                                 <legend class="sr-only">{{ _i('Prices') }}</legend>
                                 @foreach($prices as $price)
                                     <div class="relative flex items-start">
-                                        <div class="flex items-center h-5">
-                                            <input wire:model="priceIds" value="{{ $price->id }}" id="{{ $price->title }}-{{ $price->id }}" aria-describedby="{{ $price->title }}-{{ $price->id }}-description" name="{{ $price->title }}-{{ $price->id }}" type="checkbox" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded">
+                                        <div class="flex h-5 items-center">
+                                            <input wire:model="priceIds" value="{{ $price->id }}" id="{{ $price->title }}-{{ $price->id }}" aria-describedby="{{ $price->title }}-{{ $price->id }}-description" name="{{ $price->title }}-{{ $price->id }}" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
                                         </div>
                                         <div class="ml-3 text-sm">
                                             <label for="{{ $price->title }}-{{ $price->id }}" class="font-medium text-gray-700">{{ $price->title }}</label>

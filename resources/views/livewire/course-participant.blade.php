@@ -205,7 +205,7 @@
     <div class="px-4 sm:px-6 lg:px-8">
         <div class="sm:flex sm:items-center">
             <div class="sm:flex-auto">
-                <x-button.link wire:click="$set('showCertModal', true)" class="hidden mt-2 text-sm text-gray-700 sm:inline">{{ _i('Create certificates') }}</x-button.link>
+                <x-button.link wire:click="$set('showCertModal', true)" class="mt-2 hidden text-sm text-gray-700 sm:inline">{{ _i('Create certificates') }}</x-button.link>
             </div>
             <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
                 <button type="button" class="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto">Add user</button>
@@ -217,12 +217,12 @@
                 <tr>
                     <th scope="col" class="hidden sm:table-cell"></th>
                     <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:hidden">{{ _i('name') }}</th>
-                    <th scope="col" class="hidden py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 sm:table-cell">{{ _i('lastname') }}</th>
+                    <th scope="col" class="hidden py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:table-cell sm:pl-6">{{ _i('lastname') }}</th>
                     <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 sm:table-cell">{{ _i('firstname') }}</th>
                     <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 lg:table-cell">{{ _i('date of birth') }}</th>
                     <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 xl:table-cell">{{ _i('phone') }}</th>
                     <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 xl:table-cell">{{ _i('email') }}</th>
-                    <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 xl:hidden lg:table-cell md:hidden">{{ _i('contact') }}</th>
+                    <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 md:hidden lg:table-cell xl:hidden">{{ _i('contact') }}</th>
                     <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 md:table-cell">{{ _i('booked on') }}</th>
                     <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">{{ _i('price') }}</th>
                     <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
@@ -344,7 +344,7 @@
 {{--                    </div>--}}
 
 {{--                    @if($certTemplate)--}}
-                        <p class="text-sm mt-5 text-gray-500">
+                        <p class="mt-5 text-sm text-gray-500">
                             {{ _i('Are you sure you want to create the certificates?') }}
                         </p>
 {{--                    @endif--}}

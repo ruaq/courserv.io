@@ -104,15 +104,15 @@
                                 </select>
 
                             </div>
-                            <div class="mt-1 relative rounded-md shadow-sm">
+                            <div class="relative mt-1 rounded-md shadow-sm">
                                 <label for="amount_net" class="block text-sm font-medium text-gray-700">{{ _i('price (net)') }}</label>
-                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                                     <span class="text-gray-500 sm:text-sm"> {{ $sign }} </span>
                                 </div>
-                                <input type="text" wire:model.lazy="editing.amount_net" name="price" id="price" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md" placeholder="0.00">
+                                <input type="text" wire:model.lazy="editing.amount_net" name="price" id="price" class="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="0.00">
                                 <div class="absolute inset-y-0 right-0 flex items-center">
                                     <label for="currency" class="sr-only">Currency</label>
-                                    <select wire:model.lazy="editing.currency" id="currency" name="currency" class="focus:ring-indigo-500 focus:border-indigo-500 h-full py-0 pl-2 pr-7 border-transparent bg-transparent text-gray-500 sm:text-sm rounded-md">
+                                    <select wire:model.lazy="editing.currency" id="currency" name="currency" class="h-full rounded-md border-transparent bg-transparent py-0 pl-2 pr-7 text-gray-500 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                                         @foreach(\App\Models\Price::CURRENCY as $currency)
                                             <option value="{{ $currency }}">{{ $currency }}</option>
                                         @endforeach
@@ -120,15 +120,15 @@
                                 </div>
                                 <label for="amount_net" class="block text-sm font-medium text-gray-700">{{ _i('net / gross is calculated automatically') }}</label>
                             </div>
-                            <div class="mt-1 relative rounded-md shadow-sm">
+                            <div class="relative mt-1 rounded-md shadow-sm">
                                 <label for="amount_gross" class="block text-sm font-medium text-gray-700">{{ _i('price (gross)') }}</label>
-                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                                     <span class="text-gray-500 sm:text-sm"> {{ $sign }} </span>
                                 </div>
-                                <input type="text" wire:model.lazy="editing.amount_gross" name="amount_gross" id="amount_gross" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md" placeholder="0.00">
+                                <input type="text" wire:model.lazy="editing.amount_gross" name="amount_gross" id="amount_gross" class="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="0.00">
                                 <div class="absolute inset-y-0 right-0 flex items-center">
                                     <label for="currency" class="sr-only">Currency</label>
-                                    <select wire:model.lazy="editing.currency" id="currency" name="currency" class="focus:ring-indigo-500 focus:border-indigo-500 h-full py-0 pl-2 pr-7 border-transparent bg-transparent text-gray-500 sm:text-sm rounded-md">
+                                    <select wire:model.lazy="editing.currency" id="currency" name="currency" class="h-full rounded-md border-transparent bg-transparent py-0 pl-2 pr-7 text-gray-500 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                                         @foreach(\App\Models\Price::CURRENCY as $currency)
                                             <option value="{{ $currency }}">{{ $currency }}</option>
                                         @endforeach
@@ -155,8 +155,8 @@
                         <legend class="sr-only">Notifications</legend>
                         @foreach(config('payment.methods') as $method)
                             <div class="relative flex items-start">
-                                <div class="flex items-center h-5">
-                                    <input wire:model.lazy="payment.{{ $method }}" id="{{ $method }}" aria-describedby="{{ $method }}-description" name="{{ $method }}" type="checkbox" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded">
+                                <div class="flex h-5 items-center">
+                                    <input wire:model.lazy="payment.{{ $method }}" id="{{ $method }}" aria-describedby="{{ $method }}-description" name="{{ $method }}" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
                                 </div>
                                 <div class="ml-3 text-sm">
                                     <label for="{{ $method }}" class="font-medium text-gray-700">{{ __('payments.' . $method . '.title')  }}</label>
