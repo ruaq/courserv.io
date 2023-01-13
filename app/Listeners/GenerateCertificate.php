@@ -33,8 +33,9 @@ class GenerateCertificate implements ShouldQueue
     /**
      * Handle the event.
      *
-     * @param CertificateRequested $event
+     * @param  CertificateRequested  $event
      * @return void
+     *
      * @throws CrossReferenceException
      * @throws FilterException
      * @throws PdfParserException
@@ -45,8 +46,7 @@ class GenerateCertificate implements ShouldQueue
     {
         $course = Course::whereId($event->course)
             ->with(
-                ['participants' => fn ($query) =>
-                $query->whereIn('id', $event->participants)
+                ['participants' => fn ($query) => $query->whereIn('id', $event->participants)
                     ->where('cancelled', 0),
                 ]
             )
@@ -71,7 +71,6 @@ class GenerateCertificate implements ShouldQueue
         if ($courseType->cert_template_id) {
             $templates[0]['filename'] = $courseType->certTemplate->filename;
         }
-
 
         $prices = [];
         foreach ($course->prices as $price) {

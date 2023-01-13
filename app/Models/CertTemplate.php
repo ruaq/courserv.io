@@ -18,6 +18,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\CourseType[] $courseTypes
  * @property-read int|null $course_types_count
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|CertTemplate newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|CertTemplate newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|CertTemplate query()

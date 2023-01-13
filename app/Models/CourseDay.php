@@ -21,6 +21,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\TrainerDay[] $trainer
  * @property-read int|null $trainer_count
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|CourseDay newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|CourseDay newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|CourseDay query()

@@ -35,6 +35,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\TrainerDay[] $trainer
  * @property-read int|null $trainer_count
  * @property-read \App\Models\CourseType $type
+ *
  * @method static \Database\Factories\CourseFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|Course newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Course newQuery()

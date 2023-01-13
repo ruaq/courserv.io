@@ -24,7 +24,7 @@ class Position extends Component
     protected function rules(): array
     {
         return [
-            'editing.title' => 'required|unique:positions,title,' . $this->editing->id,
+            'editing.title' => 'required|unique:positions,title,'.$this->editing->id,
             'editing.leading' => 'sometimes',
             'editing.team_id' => 'required|int|nullable',
             'editing.description' => 'nullable',
@@ -118,8 +118,7 @@ class Position extends Component
                 count($team_ids), // can't see all courses
                 fn ($query, $user_teams) => $query->whereIn('id', $team_ids)
             )
-            ->get()
-        ;
+            ->get();
 
         return view('livewire.position', [
             'teams' => $teams,

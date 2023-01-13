@@ -36,7 +36,7 @@ class User extends Component
     {
         return [
             'editing.name' => 'required',
-            'editing.email' => 'required|email:rfc|unique:users,email,' . $this->editing->id,
+            'editing.email' => 'required|email:rfc|unique:users,email,'.$this->editing->id,
             'editing.active' => 'bool|nullable',
         ];
     }
@@ -90,7 +90,7 @@ class User extends Component
                 if (isset($role->pivot->team_id)) { // it's a team specific role
                     $this->teamRoleIds[$role->pivot->team_id] = $role->id;
                 } else { // global role
-                    $this->roleIds[] = (string)$role->id;
+                    $this->roleIds[] = (string) $role->id;
                 }
             }
         }
@@ -150,7 +150,7 @@ class User extends Component
             if (! isset($this->teamRoleIds[$team]) || $this->teamRoleIds[$team] == '') {
                 $this->teamRoleIds[$team] = []; // remove if no role is selected
             }
-            $this->editing->syncRoles((array)$this->teamRoleIds[$team], $team);
+            $this->editing->syncRoles((array) $this->teamRoleIds[$team], $team);
         }
 
         $this->showEditModal = false;

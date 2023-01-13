@@ -18,23 +18,34 @@ class CourseParticipant extends Component
     use AuthorizesRequests;
 
     public bool $can_update = false;
+
     public bool $can_view = false;
+
     public bool $showCertModal = false;
+
     public bool $showDownloadModal = false;
+
     public bool $showCancelModal = false;
+
     public string $course;
+
     public array $select;
+
     public Course $course_data;
+
     public $course_types;
+
     public Participant $participant;
+
     public Collection $participants;
+
     public $certTemplate;
 
     protected function rules(): array
     {
         return [
-//            'editing.name' => 'required',
-//            'editing.email' => 'required|email:rfc|unique:users,email,'.$this->editing->id,
+            //            'editing.name' => 'required',
+            //            'editing.email' => 'required|email:rfc|unique:users,email,'.$this->editing->id,
             'participant.payed' => 'bool|nullable',
             'participant.participated' => 'bool|nullable',
         ];
@@ -115,7 +126,7 @@ class CourseParticipant extends Component
         }
 
         // If file is already exists, delete
-        $file = 'certTmp/' . Hashids::encode(auth()->id()) . '-' . $this->course . '.pdf';
+        $file = 'certTmp/'.Hashids::encode(auth()->id()).'-'.$this->course.'.pdf';
         if (Storage::exists($file)) {
             Storage::delete($file);
         }
@@ -135,11 +146,11 @@ class CourseParticipant extends Component
 
     public function checkDownload()
     {
-        $file = 'certTmp/' . Hashids::encode(auth()->id()) . '-' . $this->course . '.pdf';
+        $file = 'certTmp/'.Hashids::encode(auth()->id()).'-'.$this->course.'.pdf';
         if (Storage::exists($file)) {
             $this->showDownloadModal = false;
 
-            return Storage::download($file, 'cert-' . $this->course . '.pdf', ['Content-Type: application/pdf']);
+            return Storage::download($file, 'cert-'.$this->course.'.pdf', ['Content-Type: application/pdf']);
         }
     }
 

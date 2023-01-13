@@ -9,7 +9,9 @@ use Livewire\Component;
 class Setup extends Component
 {
     public string $name = '';
+
     public string $email = '';
+
     public bool $userAdded = false;
 
     protected array $rules = [
@@ -26,7 +28,6 @@ class Setup extends Component
         // check if a user already exists (again)
         $user = User::first();
         abort_if(isset($user), 403);
-
 
         // reset and seed database
         $exitCode = Artisan::call('migrate:fresh', [

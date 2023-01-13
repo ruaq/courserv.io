@@ -14,7 +14,7 @@ class CertTemplatePolicy
     /**
      * Determine whether the user can view any models.
      *
-     * @param User $user
+     * @param  User  $user
      * @return Response|bool
      */
     public function viewAny(User $user): Response|bool
@@ -47,7 +47,7 @@ class CertTemplatePolicy
     /**
      * Determine whether the user can create models.
      *
-     * @param User $user
+     * @param  User  $user
      * @return Response|bool
      */
     public function create(User $user): Response|bool
@@ -68,8 +68,8 @@ class CertTemplatePolicy
     /**
      * Determine whether the user can update the model.
      *
-     * @param User $user
-     * @param CertTemplate $certTemplate
+     * @param  User  $user
+     * @param  CertTemplate  $certTemplate
      * @return bool
      */
     public function update(User $user, CertTemplate $certTemplate): bool
@@ -90,8 +90,8 @@ class CertTemplatePolicy
     /**
      * Determine whether the user can create or update a model.
      *
-     * @param User $user
-     * @param CertTemplate $certTemplate
+     * @param  User  $user
+     * @param  CertTemplate  $certTemplate
      * @return bool
      */
     public function save(User $user, CertTemplate $certTemplate): bool

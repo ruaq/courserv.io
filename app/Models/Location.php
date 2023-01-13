@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $zipcode
  * @property string $location
  * @property string $state
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|Location newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Location newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Location query()

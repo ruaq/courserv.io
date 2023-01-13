@@ -47,8 +47,7 @@ class GenerateSitemap extends Command
             ])
             ->with('type')
             ->with('prices')
-            ->get()
-        ;
+            ->get();
 
         if (! count($yesterday_courses)) {
             exit();
@@ -60,8 +59,7 @@ class GenerateSitemap extends Command
             ->orderByDesc('updated_at')
             ->with('type')
             ->with('prices')
-            ->get()
-        ;
+            ->get();
 
         // and create new sitemaps...
         $sitemap_locations = Sitemap::create();
@@ -90,7 +88,7 @@ class GenerateSitemap extends Command
 
                 $url_location->addAlternate(
                     preg_replace(
-                        '/\/' . LaravelLocalization::getDefaultLocale() . '/',
+                        '/\/'.LaravelLocalization::getDefaultLocale().'/',
                         '',
                         LaravelLocalization::getLocalizedURL(
                             LaravelLocalization::getDefaultLocale(),
@@ -126,14 +124,14 @@ class GenerateSitemap extends Command
                         $url_course->addAlternate(LaravelLocalization::getLocalizedURL(
                             $languagesKey,
                             route('booking', ['course' => Hashids::encode($course->id),
-                            'price' => Hashids::encode($price->id), ]),
+                                'price' => Hashids::encode($price->id), ]),
                             [],
                             true
                         ), $languagesKey);
                     }
 
                     $url_course->addAlternate(preg_replace(
-                        '/\/' . LaravelLocalization::getDefaultLocale() . '/',
+                        '/\/'.LaravelLocalization::getDefaultLocale().'/',
                         '',
                         LaravelLocalization::getLocalizedURL(
                             LaravelLocalization::getDefaultLocale(),
@@ -161,8 +159,7 @@ class GenerateSitemap extends Command
             ])
             ->with('type')
             ->with('prices')
-            ->get()
-        ;
+            ->get();
 
         // create a sitemap to delete them from search-engines
         foreach ($past_courses as $course) {
@@ -205,7 +202,7 @@ class GenerateSitemap extends Command
                     }
 
                     $url_past_course->addAlternate(preg_replace(
-                        '/\/' . LaravelLocalization::getDefaultLocale() . '/',
+                        '/\/'.LaravelLocalization::getDefaultLocale().'/',
                         '',
                         LaravelLocalization::getLocalizedURL(
                             LaravelLocalization::getDefaultLocale(),
@@ -236,11 +233,10 @@ class GenerateSitemap extends Command
             ->writeToFile(public_path('sitemap.xml'));
 
         // send a crawl ping to google
-        Http::get('https://www.google.com/ping?sitemap=' . config('app.url') . '/sitemap.xml');
-        Http::get('https://www.google.com/ping?sitemap=' . config('app.url') . '/sitemap_locations.xml');
-        Http::get('https://www.google.com/ping?sitemap=' . config('app.url') . '/sitemap_courses.xml');
-        Http::get('https://www.google.com/ping?sitemap=' . config('app.url') . '/sitemap_past_courses.xml');
-
+        Http::get('https://www.google.com/ping?sitemap='.config('app.url').'/sitemap.xml');
+        Http::get('https://www.google.com/ping?sitemap='.config('app.url').'/sitemap_locations.xml');
+        Http::get('https://www.google.com/ping?sitemap='.config('app.url').'/sitemap_courses.xml');
+        Http::get('https://www.google.com/ping?sitemap='.config('app.url').'/sitemap_past_courses.xml');
 
         if (config('services.indexnow.key') && config('services.indexnow.url')) {
             $indexnow_urls = [];

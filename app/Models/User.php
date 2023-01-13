@@ -51,6 +51,7 @@ use Vinkla\Hashids\Facades\Hashids;
  * @property-read int|null $teams_count
  * @property-read Collection|PersonalAccessToken[] $tokens
  * @property-read int|null $tokens_count
+ *
  * @method static UserFactory factory(...$parameters)
  * @method static Builder|User newModelQuery()
  * @method static Builder|User newQuery()
@@ -94,7 +95,6 @@ class User extends Authenticatable implements MustVerifyEmail
 
     /**
      * The attributes that should be hidden for serialization.
-     *
      */
     protected $hidden = [
         'password',
@@ -103,7 +103,6 @@ class User extends Authenticatable implements MustVerifyEmail
 
     /**
      * The attributes that should be cast.
-     *
      */
     protected $casts = [
         'email_verified_at' => 'datetime',

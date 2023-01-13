@@ -9,9 +9,13 @@ use Livewire\Component;
 class LocationSearch extends Component
 {
     public string $courseType;
+
     public string $term = '';
+
     public string $slug;
+
     public string $redirectUrl;
+
     public string $error = '';
 
     protected $listeners = ['located', 'error'];
@@ -29,7 +33,7 @@ class LocationSearch extends Component
         $locations = Location::search(trim($this->term))->groupBy('location', 'state')->limit(5)->get();
 
         return view('livewire.location-search', [
-            'metaTitle' => $this->courseType . ' - ' . _i('our course dates at a glance'),
+            'metaTitle' => $this->courseType.' - '._i('our course dates at a glance'),
             'index' => true,
             'locations' => $locations,
         ])

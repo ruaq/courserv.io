@@ -13,7 +13,7 @@ class UserPolicy
     /**
      * Determine whether the user can view any models.
      *
-     * @param User $user
+     * @param  User  $user
      * @return Response|bool
      */
     public function viewAny(User $user): Response|bool
@@ -36,7 +36,7 @@ class UserPolicy
     /**
      * Determine whether the user can create models.
      *
-     * @param User $user
+     * @param  User  $user
      * @return Response|bool
      */
     public function create(User $user): Response|bool
@@ -47,8 +47,8 @@ class UserPolicy
     /**
      * Determine whether the user can update the model.
      *
-     * @param User $user
-     * @param User $model
+     * @param  User  $user
+     * @param  User  $model
      * @return Response|bool
      */
     public function update(User $user, User $model): Response|bool

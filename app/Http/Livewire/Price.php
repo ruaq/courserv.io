@@ -28,8 +28,11 @@ class Price extends Component
     protected $queryString = ['sorts'];
 
     public bool $showEditModal = false;
+
     public string $sign = '€';
+
     public array $payment = [];
+
     public Collection $certTemplates;
 
     public PriceModel $editing;

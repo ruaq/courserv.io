@@ -24,7 +24,7 @@ class UpdateQsehCourse implements ShouldQueue
     /**
      * Handle the event.
      *
-     * @param QsehCourseUpdated $event
+     * @param  QsehCourseUpdated  $event
      * @return void
      */
     public function handle(QsehCourseUpdated $event)

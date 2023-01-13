@@ -20,6 +20,7 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property-read Team|null $team
+ *
  * @method static Builder|Position newModelQuery()
  * @method static Builder|Position newQuery()
  * @method static Builder|Position query()

@@ -13,6 +13,7 @@ class ParticipantDetails extends Component
     use AuthorizesRequests;
 
     public string $participant;
+
     public Participant $part;
 
     public function mount()
@@ -79,7 +80,7 @@ class ParticipantDetails extends Component
                                 'participant' => Hashids::encode($participant->id),
                             ]
                         ),
-                        'text' => $participant->firstname . ' ' . $participant->lastname,
+                        'text' => $participant->firstname.' '.$participant->lastname,
                     ],
                 ],
             ]);

@@ -24,8 +24,8 @@ class Team extends Component
     protected function rules(): array
     {
         return [
-            'editing.name' => 'required|unique:teams,name,' . $this->editing->id,
-            'editing.display_name' => 'required|unique:teams,display_name,' . $this->editing->id,
+            'editing.name' => 'required|unique:teams,name,'.$this->editing->id,
+            'editing.display_name' => 'required|unique:teams,display_name,'.$this->editing->id,
             'editing.description' => 'nullable',
         ];
     }

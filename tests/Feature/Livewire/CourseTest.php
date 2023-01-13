@@ -95,7 +95,6 @@ it('needs permission to update a course', function () {
         ->assertSuccessful();
 });
 
-
 // TODO rewrite test (team is missing)
 //it('needs permission to save a new course or update it', function () {
 //    $this->user->attachPermission('course.view'); // avoid 'fingerprint' error

@@ -204,11 +204,11 @@ class Course extends Component
 
         $this->editing->start = Carbon::createFromFormat(
             'd.m.y H:i',
-            $range[0] . ' ' . $this->time_start
+            $range[0].' '.$this->time_start
         );
         $this->editing->end = Carbon::createFromFormat(
             'd.m.y H:i',
-            $range[array_key_last($range)] . ' ' . $this->time_end
+            $range[array_key_last($range)].' '.$this->time_end
         );
 
         $this->checkCourseLength();
@@ -267,7 +267,7 @@ class Course extends Component
             // start time of the first day
             if ($split[1] == 0 && $split[2] === 'startTime') {
                 // prevent that's not before the start time
-                $firstDay = Carbon::createFromFormat('d.m.Y H:i', $this->courseDays[0]['date'] . ' ' . $newValue);
+                $firstDay = Carbon::createFromFormat('d.m.Y H:i', $this->courseDays[0]['date'].' '.$newValue);
                 if ($firstDay->lt($this->editing->start)) {
                     $this->courseDays[0]['startTime'] = $this->editing->start->format('H:i');
                 }
@@ -295,7 +295,7 @@ class Course extends Component
                 // prevent that's not after the end time
                 $lastDay = Carbon::createFromFormat(
                     'd.m.Y H:i',
-                    $this->courseDays[array_key_last($this->courseDays)]['date'] . ' ' . $newValue
+                    $this->courseDays[array_key_last($this->courseDays)]['date'].' '.$newValue
                 );
                 if ($lastDay->gt($this->editing->end)) {
                     $this->courseDays[
@@ -427,8 +427,7 @@ class Course extends Component
             ->orWhere('team_id', $this->editing->team_id)
             ->where('leading', 1)
             ->get()
-            ->sortByDesc('team_id')
-        ;
+            ->sortByDesc('team_id');
 
         // if the first position isn't set or no leading position
         if (
@@ -450,7 +449,7 @@ class Course extends Component
         if (isset($this->editing->start)) {
             $this->editing->start = Carbon::createFromFormat(
                 'd.m.Y H:i',
-                $this->editing->start->format('d.m.Y') . ' ' . $this->time_start
+                $this->editing->start->format('d.m.Y').' '.$this->time_start
             );
             $this->setStartTimeOptions([
                 'defaultHour' => $this->editing->start->format('H'),
@@ -465,7 +464,7 @@ class Course extends Component
         if (isset($this->editing->end)) {
             $this->editing->end = Carbon::createFromFormat(
                 'd.m.Y H:i',
-                $this->editing->end->format('d.m.Y') . ' ' . $this->time_end
+                $this->editing->end->format('d.m.Y').' '.$this->time_end
             );
             $this->setEndTimeOptions([
                 'defaultHour' => $this->editing->end->format('H'),
@@ -493,13 +492,13 @@ class Course extends Component
         }
 
         if ($this->editing->type->units_per_day) {
-            $unit_length = (int)$this->editing->type->units_per_day * 45;
+            $unit_length = (int) $this->editing->type->units_per_day * 45;
         } else {
             $unit_length = 9 * 45;
         }
 
         $breaks = $this->editing->type->breaks;
-        $length = (int)$unit_length + (int)$breaks;
+        $length = (int) $unit_length + (int) $breaks;
 
         // no end before start date, please
         if (
@@ -589,7 +588,7 @@ class Course extends Component
             }
 
             $this->date_range = $this->editing->start
-                    ->format('d.m.y') . ' ' . _i('to') . ' ' . $this->editing->end->format('d.m.y');
+                    ->format('d.m.y').' '._i('to').' '.$this->editing->end->format('d.m.y');
 
             $this->resetFlatpickr();
             $this->setDayOptions();
@@ -935,8 +934,7 @@ class Course extends Component
             ->with('type')
             ->with('team')
             ->with('days')
-            ->with('trainer')
-        ;
+            ->with('trainer');
 
         return $this->applySorting($query);
     }

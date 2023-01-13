@@ -6,7 +6,7 @@ trait Search
 {
     private function buildWildCards($term)
     {
-        if ($term == "") {
+        if ($term == '') {
             return $term;
         }
 
@@ -18,7 +18,7 @@ trait Search
         foreach ($words as $idx => $word) {
             // Add operators, so we can leverage the boolean mode of
             // fulltext indices.
-            $words[$idx] = "+" . $word . "*";
+            $words[$idx] = '+'.$word.'*';
         }
         $term = implode(' ', $words);
 

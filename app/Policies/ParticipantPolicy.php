@@ -15,7 +15,7 @@ class ParticipantPolicy
     /**
      * Determine whether the user can view any models.
      *
-     * @param User $user
+     * @param  User  $user
      * @return bool
      */
     public function viewAny(User $user): bool
@@ -36,8 +36,8 @@ class ParticipantPolicy
     /**
      * Determine whether the user can view the model.
      *
-     * @param User $user
-     * @param Participant $participant
+     * @param  User  $user
+     * @param  Participant  $participant
      * @return Response|bool
      */
     public function view(User $user, Participant $participant): Response|bool
@@ -52,7 +52,7 @@ class ParticipantPolicy
     /**
      * Determine whether the user can create models.
      *
-     * @param User $user
+     * @param  User  $user
      * @return bool
      */
     public function create(User $user): bool
@@ -73,8 +73,8 @@ class ParticipantPolicy
     /**
      * Determine whether the user can update the model.
      *
-     * @param User $user
-     * @param Participant $participant
+     * @param  User  $user
+     * @param  Participant  $participant
      * @return bool
      */
     public function update(User $user, Participant $participant): bool

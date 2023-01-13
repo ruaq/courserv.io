@@ -32,6 +32,6 @@ return [
 
     'indexnow' => [
         'key' => env('INDEXNOW_KEY'),
-        'url' => env('INDEXNOW_URL', 'https://api.indexnow.org/indexnow')
+        'url' => env('INDEXNOW_URL', 'https://api.indexnow.org/indexnow'),
     ],
 ];

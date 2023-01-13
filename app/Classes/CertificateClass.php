@@ -15,11 +15,17 @@ use Vinkla\Hashids\Facades\Hashids;
 class CertificateClass
 {
     public Course $course;
+
     public User $user;
+
     public string|int $filename;
+
     public string $path;
+
     private array $files = [];
+
     public string $certTemplate;
+
     private string $trainer;
 
     public function __construct()
@@ -77,7 +83,7 @@ class CertificateClass
 //        dd($this->certTemplate);
 
         $templateProcessor = new TemplateProcessor(
-            Storage::path('/certTemplates/' . $this->certTemplate)
+            Storage::path('/certTemplates/'.$this->certTemplate)
         );
 
         $templateProcessor->setValues([
@@ -97,13 +103,13 @@ class CertificateClass
             'registration_number' => $this->course->registration_number,
         ]);
 
-        $pathToSave = $this->path . $this->filename . '.docx';
+        $pathToSave = $this->path.$this->filename.'.docx';
         $templateProcessor->saveAs($pathToSave);
     }
 
     private function deleteTemplate(): void
     {
-        Storage::delete('certTmp/' . $this->filename . '.docx');
+        Storage::delete('certTmp/'.$this->filename.'.docx');
     }
 
     private function addFile($file): void
@@ -115,13 +121,13 @@ class CertificateClass
     {
         $response = Http::attach(
             'data',
-            file_get_contents($this->path . $this->filename . '.docx'),
-            $this->filename . '.docx'
-        )->post(config('convert.server') . '/cool/convert-to/pdf');
+            file_get_contents($this->path.$this->filename.'.docx'),
+            $this->filename.'.docx'
+        )->post(config('convert.server').'/cool/convert-to/pdf');
 
-        Storage::put('certTmp/' . $this->filename . '.pdf', $response->body());
+        Storage::put('certTmp/'.$this->filename.'.pdf', $response->body());
 
-        $this->addFile($this->path . $this->filename . '.pdf');
+        $this->addFile($this->path.$this->filename.'.pdf');
         $this->deleteTemplate();
     }
 
@@ -146,7 +152,7 @@ class CertificateClass
 
         $pdf->Output(
             'F',
-            $this->path . Hashids::encode($this->user->id) . '-' . Hashids::encode($this->course->id) . '.pdf'
+            $this->path.Hashids::encode($this->user->id).'-'.Hashids::encode($this->course->id).'.pdf'
         );
     }
 }

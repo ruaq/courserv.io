@@ -12,14 +12,17 @@ class CertificateRequested
     use SerializesModels;
 
     public $course;
+
     public User $user;
+
     public int $certTemplate;
+
     public array $participants;
 
     /**
      * Create a new event instance.
      *
-     * @param User $user
+     * @param  User  $user
      * @param $course
      * @param $participants
      */

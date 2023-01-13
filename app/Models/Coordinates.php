@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $lon
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|Coordinates newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Coordinates newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Coordinates query()

@@ -20,6 +20,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $email
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|ContactPerson newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ContactPerson newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ContactPerson query()

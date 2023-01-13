@@ -25,7 +25,9 @@ class CertTemplate extends Component
     public CertTemplateModel $editing;
 
     public bool $showEditModal = false;
+
     public $newTemplate;
+
     public $uploadId;
 
     protected function rules(): array
@@ -50,11 +52,11 @@ class CertTemplate extends Component
 //    public function getRowsQueryProperty(): mixed
 //    {
 //        $query = CertTemplateModel::query();
-////            ->when(
-////                ! Auth::user()->isAbleTo('team.*'), // can't see all teams
-////                fn ($query, $user_teams) => $query
-////                    ->whereIn('team_id', Auth::user()->teams()->pluck('id'))
-////            );
+    ////            ->when(
+    ////                ! Auth::user()->isAbleTo('team.*'), // can't see all teams
+    ////                fn ($query, $user_teams) => $query
+    ////                    ->whereIn('team_id', Auth::user()->teams()->pluck('id'))
+    ////            );
 //
 //        return $this->applySorting($query);
 //    }
@@ -119,7 +121,7 @@ class CertTemplate extends Component
         $templates = CertTemplateModel::all();
 
         return view('livewire.cert-template', [
-//            'templates' => $this->rows,
+            //            'templates' => $this->rows,
             'templates' => $templates,
         ])
             ->layout('layouts.app', [
@@ -145,7 +147,7 @@ class CertTemplate extends Component
         }
 
         $str = Str::random();
-        $tmpDir = Storage::disk('tmp')->getConfig()['root'] . '/' . $str;
+        $tmpDir = Storage::disk('tmp')->getConfig()['root'].'/'.$str;
 
         $zip = new ZipArchive();
 
@@ -164,7 +166,7 @@ class CertTemplate extends Component
 
         // sort files in the correct order
         foreach ($files as $file) {
-            $f = str_replace($str . '/', '', $file);
+            $f = str_replace($str.'/', '', $file);
 
             if ($f == '[Content_Types].xml') {
                 $fileArray[0] = $f;

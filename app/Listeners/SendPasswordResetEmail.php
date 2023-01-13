@@ -25,8 +25,9 @@ class SendPasswordResetEmail implements ShouldQueue
     /**
      * Handle the event.
      *
-     * @param UserForgotPassword $event
+     * @param  UserForgotPassword  $event
      * @return void
+     *
      * @throws \Exception
      */
     public function handle(UserForgotPassword $event)

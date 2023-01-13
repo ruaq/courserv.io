@@ -12,6 +12,7 @@ class CourseBooked
     use SerializesModels;
 
     public Participant $participant;
+
     public string $locale;
 
     /**

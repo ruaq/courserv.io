@@ -12,12 +12,19 @@ use Vinkla\Hashids\Facades\Hashids;
 class BookingOverview extends Component
 {
     public bool $showPriceModal = false;
+
     public string $courseType;
+
     public string $slug;
+
     public string $location;
+
     public string $location2;
+
     public string $lat;
+
     public string $lon;
+
     public Course $actual;
 
     public array $searchLocations = [];
@@ -34,7 +41,7 @@ class BookingOverview extends Component
 
         if (! isset($this->lat) || ! isset($this->lon)) { // no coordinates set, yet
             if (isset($this->location2)) {
-                $this->location = $this->location . '/' . $this->location2;
+                $this->location = $this->location.'/'.$this->location2;
             }
 
             $coordinates = Coordinates::whereLocation($this->location)->firstOrFail();
@@ -99,8 +106,7 @@ class BookingOverview extends Component
             if (! $found) { // no course < 25 km
                 // select the first result
                 $this->searchLocations[$perimeter_locations->first()->location] =
-                    $perimeter_locations->first()->location
-                ;
+                    $perimeter_locations->first()->location;
             }
         }
 
@@ -118,7 +124,7 @@ class BookingOverview extends Component
             'courses' => $courses,
         ])
             ->layout('layouts.booking', [
-                'metaTitle' => $this->courseType . ' ' . (is_numeric($this->location)
+                'metaTitle' => $this->courseType.' '.(is_numeric($this->location)
                         ? _i('near you')
                         : _i('in %s and surroundings', $this->location)),
                 'index' => true,

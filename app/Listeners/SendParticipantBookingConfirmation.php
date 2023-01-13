@@ -26,7 +26,7 @@ class SendParticipantBookingConfirmation implements ShouldQueue
     /**
      * Handle the event.
      *
-     * @param CourseBooked $event
+     * @param  CourseBooked  $event
      * @return void
      */
     public function handle(CourseBooked $event)

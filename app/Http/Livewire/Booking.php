@@ -15,11 +15,17 @@ use Vinkla\Hashids\Facades\Hashids;
 class Booking extends Component
 {
     public bool $samePerson = true;
+
     public bool $bookingSuccessful = false;
+
     public string $course;
+
     public string $price;
+
     public string $payment = '';
+
     public array $participants = [[]];
+
     public array $contactPerson = [];
 
     protected function rules(): array

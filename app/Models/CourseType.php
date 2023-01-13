@@ -22,6 +22,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\CertTemplate|null $certTemplate
+ *
  * @method static \Database\Factories\CourseTypeFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|CourseType newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|CourseType newQuery()
