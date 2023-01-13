@@ -11,12 +11,16 @@ beforeEach(function () {
 });
 
 it('has login page', function () {
+    $this->withoutVite();
+
     $response = $this->get(route('login'));
 
     $response->assertStatus(200);
 });
 
 it('shows a Livewire component at Login', function () {
+    $this->withoutVite();
+
     $this->get(route('login'))->assertSeeLivewire('auth.login');
 });
 

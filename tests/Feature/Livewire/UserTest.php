@@ -21,6 +21,8 @@ beforeEach(function () {
 });
 
 it('has a user page', function () {
+    $this->withoutVite();
+
     $this->user->attachRole('admin');
 
     $response = $this->get(route('user'));
@@ -31,6 +33,8 @@ it('has a user page', function () {
 });
 
 it('shows the team members only if authorized', function () {
+    $this->withoutVite();
+
     $response = $this->get(route('user'));
     $response->assertForbidden();
 

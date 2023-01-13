@@ -6,7 +6,6 @@
     @if(!$attributes['index'])
         <meta name="robots" content="noindex">
     @endif
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <title>{{ $attributes['metaTitle'] }} | {{ config('app.name') }}</title>
 
     <link rel="canonical" href="{{ canonical_url() }}" />
@@ -17,7 +16,7 @@
     <link rel="alternate" hreflang="x-default" href="{{ preg_replace( '/\/' . LaravelLocalization::getDefaultLocale() . '/', '', LaravelLocalization::getLocalizedURL(LaravelLocalization::getDefaultLocale(), canonical_url()), 1) }}" />
 
     @livewireStyles
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
     @if(config('umami.url') && config('umami.id') && $attributes['umami'])
         <script async defer data-website-id="{{ config('umami.id') }}" src="{{ config('umami.url') }}"></script>

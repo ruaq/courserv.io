@@ -14,6 +14,8 @@ beforeEach(function () {
 });
 
 it('has course type page which needs to be logged in', function () {
+    $this->withoutVite();
+
     $response = $this->get(route('coursetype'));
 
     $response->assertStatus(200);

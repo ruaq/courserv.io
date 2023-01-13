@@ -40,6 +40,8 @@ it('can render the component', function () {
 });
 
 it('has course page which needs to be logged in', function () {
+    $this->withoutVite();
+
     $this->user->attachRole('admin');
 
     $response = $this->get(route('course'));

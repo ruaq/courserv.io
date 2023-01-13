@@ -23,6 +23,8 @@ beforeEach(function () {
 });
 
 it('has course type page which needs to be logged in and authorized', function () {
+    $this->withoutVite();
+
     $response = $this->get(route('roles'));
     $response->assertForbidden();
 
@@ -45,6 +47,8 @@ it('has course type page which needs to be logged in and authorized', function (
 });
 
 it('shows role menu only to authorized users', function () {
+    $this->withoutVite();
+
     $this->get(route('home'))->assertDontSee(_i('Roles'));
 
     $this->user->attachPermission('role.create');

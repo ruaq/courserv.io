@@ -26,6 +26,8 @@ beforeEach(function () {
 });
 
 it('has team page', function () {
+    $this->withoutVite();
+
     $response = $this->get(route('teams'));
 
     $response->assertStatus(200);
@@ -34,6 +36,8 @@ it('has team page', function () {
 });
 
 it('shows team menu only to authorized users', function () {
+    $this->withoutVite();
+
     $this->get(route('home'))->assertSee('Teams');
 
     $this->user->detachRole('admin');
