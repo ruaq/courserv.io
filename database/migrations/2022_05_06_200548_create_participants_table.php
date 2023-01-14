@@ -27,7 +27,7 @@ return new class() extends Migration
             $table->string('location')->nullable();
             $table->string('phone')->nullable();
             $table->string('email')->nullable();
-            $table->timestamp('email_reminder')->nullable();
+            $table->dateTime('email_reminder')->nullable();
             $table->boolean('rating')->default(0);
             $table->string('payee')->nullable();
             $table->boolean('participated')->default(0);
@@ -38,7 +38,7 @@ return new class() extends Migration
             $table->unsignedBigInteger('price_id');
             $table->boolean('payed')->default(0);
             $table->string('transaction_id')->nullable()->unique();
-            $table->timestamp('cancelled')->nullable();
+            $table->dateTime('cancelled')->nullable();
             $table->timestamps();
         });
     }
