@@ -7,12 +7,15 @@ use App\Events\CourseBooked;
 use App\Events\CourseCancelled;
 use App\Events\CourseCreated;
 use App\Events\CourseRegisterRequired;
+use App\Events\GeodataUpdated;
 use App\Events\QsehCourseUpdated;
 use App\Events\UserCreated;
 use App\Events\UserForgotPassword;
 use App\Listeners\CancelCourse;
 use App\Listeners\GenerateCertificate;
 use App\Listeners\GenerateInternalNumber;
+use App\Listeners\ImportGeoCoordinates;
+use App\Listeners\ImportGeoLocations;
 use App\Listeners\RegisterCourse;
 use App\Listeners\SendParticipantBookingConfirmation;
 use App\Listeners\SendPasswordResetEmail;
@@ -64,6 +67,11 @@ class EventServiceProvider extends ServiceProvider
 
         CertificateRequested::class => [
             GenerateCertificate::class,
+        ],
+
+        GeodataUpdated::class => [
+            ImportGeoCoordinates::class,
+            ImportGeoLocations::class,
         ],
     ];
 

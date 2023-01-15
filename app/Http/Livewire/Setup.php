@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Events\GeodataUpdated;
 use App\Models\User;
 use Artisan;
 use Livewire\Component;
@@ -46,6 +47,8 @@ class Setup extends Component
         ]);
 
         $user->attachRole('admin');
+
+        event(new GeodataUpdated());
 
         $this->redirect(route('login'));
     }

@@ -79,6 +79,8 @@ Route::group(
     }
 );
 
+Route::get('setup', \App\Http\Livewire\Setup::class);
+
 if (config('services.indexnow.key')) {
     Route::get('{key}.txt', function (Request $request, $key) {
         if ($key === config('services.indexnow.key')) {
@@ -92,11 +94,6 @@ if (config('services.indexnow.key')) {
 Route::get('/', function () {
     return redirect(config('app.redirect'));
 });
-
-Route::get('setup', \App\Http\Livewire\Setup::class);
-
-Route::get('coordinates', [App\Http\Controllers\CoordinatesController::class, 'import']);
-Route::get('locations', [App\Http\Controllers\CoordinatesController::class, 'locations']);
 
 Route::get(
     '/email/verify',

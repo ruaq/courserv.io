@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class() extends Migration
+return new class () extends Migration
 {
     /**
      * Run the migrations.
@@ -14,15 +14,18 @@ return new class() extends Migration
     public function up(): void
     {
         Schema::create('locations', function (Blueprint $table) {
+            // needs to have a defined length for indexing
             $table->string('zipcode', 5);
             $table->string('location', 255);
             $table->string('state', 255);
 
-            if (getenv('DB_CONNECTION') === 'mysql') { // prevent errors in sqlite (pest)
-                $table->fullText(['zipcode', 'location'], 'fulltext_index');
+            $table->unique(['zipcode', 'location']);
+
+            if (getenv('DB_CONNECTION') === 'sqlite') { // prevent errors in sqlite (pest)
+                return;
             }
 
-            $table->unique(['zipcode', 'location']);
+            $table->fullText(['zipcode', 'location'], 'fulltext_index');
         });
     }
 

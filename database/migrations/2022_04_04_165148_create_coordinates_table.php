@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class() extends Migration
+return new class () extends Migration
 {
     /**
      * Run the migrations.
@@ -15,17 +15,19 @@ return new class() extends Migration
     {
         Schema::create('coordinates', function (Blueprint $table) {
             $table->id();
+            // needs to have a defined length for indexing
             $table->string('country_code', 2);
             $table->string('zipcode', 5);
-            $table->text('location');
-            $table->text('state');
-            $table->text('lat');
-            $table->text('lon');
-            $table->timestamps();
+            $table->string('location', 255);
+            $table->string('state', 255);
+            $table->string('lat', 255);
+            $table->string('lon', 255);
 
-            if (getenv('DB_CONNECTION') === 'mysql') { // prevent errors in sqlite (pest)
-                $table->fullText(['zipcode', 'location'], 'fulltext_index');
+            if (getenv('DB_CONNECTION') === 'sqlite') { // prevent errors in sqlite (pest)
+                return;
             }
+
+            $table->fullText(['zipcode', 'location'], 'fulltext_index');
         });
     }
 
