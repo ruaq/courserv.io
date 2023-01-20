@@ -5,10 +5,12 @@ namespace App\Http\Livewire;
 use App\Models\Team;
 use App\Models\User as UserModel;
 use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
+use Innoge\LaravelPolicySoftCache\LaravelPolicySoftCache;
 use Livewire\Component;
 
 class User extends Component
@@ -127,6 +129,7 @@ class User extends Component
 
     /**
      * @throws AuthorizationException
+     * @throws BindingResolutionException
      */
     public function save()
     {
@@ -152,6 +155,8 @@ class User extends Component
             }
             $this->editing->syncRoles((array) $this->teamRoleIds[$team], $team);
         }
+
+        LaravelPolicySoftCache::flushCache();
 
         $this->showEditModal = false;
     }

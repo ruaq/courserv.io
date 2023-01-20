@@ -13,10 +13,12 @@
         "doctrine/dbal": "^3.5",
         "fruitcake/laravel-cors": "3.0.0",
         "guzzlehttp/guzzle": "7.5.0",
+        "innoge/laravel-policy-soft-cache": "^1.0",
         "itsgoingd/clockwork": "5.1.12",
         "laravel/framework": "9.48.0",
         "laravel/sanctum": "3.2.1",
         "laravel/tinker": "2.8.0",
+        "league/csv": "^9.0",
         "livewire/livewire": "2.11.0",
         "mcamara/laravel-localization": "1.7.0",
         "nekhbet/laravel-gettext": "dev-master",
@@ -27,7 +29,6 @@
         "spatie/laravel-ray": "^1.32",
         "spatie/laravel-sitemap": "6.2.3",
         "vinkla/hashids": "10.0.1",
-        "league/csv": "^9.0",
         "vyuldashev/xml-to-array": "1.1.0"
     },
     "require-dev": {

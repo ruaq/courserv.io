@@ -4,9 +4,12 @@ namespace App\Http\Livewire;
 
 use App\Models\Permission;
 use App\Models\Role as RoleModel;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
+use Innoge\LaravelPolicySoftCache\LaravelPolicySoftCache;
 use Livewire\Component;
 
 class Role extends Component
@@ -42,6 +45,9 @@ class Role extends Component
         $this->permissions = Permission::all();
     }
 
+    /**
+     * @throws AuthorizationException
+     */
     public function create()
     {
         $this->authorize('create', RoleModel::class);
@@ -53,6 +59,9 @@ class Role extends Component
         $this->showEditModal = true;
     }
 
+    /**
+     * @throws AuthorizationException
+     */
     public function edit(RoleModel $role)
     {
         $this->authorize('update', $role);
@@ -68,6 +77,10 @@ class Role extends Component
         $this->showEditModal = true;
     }
 
+    /**
+     * @throws AuthorizationException
+     * @throws BindingResolutionException
+     */
     public function save()
     {
         $this->authorize('viewAny', RoleModel::class);
@@ -76,6 +89,9 @@ class Role extends Component
 
         $this->editing->save();
         $this->editing->syncPermissions($this->permIds);
+
+        LaravelPolicySoftCache::flushCache();
+
         $this->showEditModal = false;
     }
 

@@ -79,19 +79,22 @@ class ParticipantPolicy
      */
     public function update(User $user, Participant $participant): bool
     {
-        if (! $user->isAbleTo('participant.update', (string) $participant->team_id)) {
-            if (
-                in_array($user->id, $participant->course->trainer->pluck('user_id')->toArray()) // user is trainer
-                && $participant->course->start < Carbon::now()->addWeek()
-                && $participant->course->end > Carbon::now()->subWeek()
-            ) {
-                return true;
+        // cache the course id for listing course participants... preventing n+1
+        return cache()->remember("user-can-update-participant-{$user->id}-{$participant->course_id}", 60, function () use ($user, $participant) {
+            if (! $user->isAbleTo('participant.update', (string) $participant->team_id)) {
+                if (
+                    in_array($user->id, $participant->course->trainer->pluck('user_id')->toArray()) // user is trainer
+                    && $participant->course->start < Carbon::now()->addWeek()
+                    && $participant->course->end > Carbon::now()->subWeek()
+                ) {
+                    return true;
+                }
+
+                return $user->isAbleTo('participant.update');
             }
 
-            return $user->isAbleTo('participant.update');
-        }
-
-        return $user->isAbleTo('participant.update', (string) $participant->team_id);
+            return $user->isAbleTo('participant.update', (string) $participant->team_id);
+        });
     }
 
 //    /**

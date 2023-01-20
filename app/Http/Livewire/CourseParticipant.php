@@ -3,9 +3,10 @@
 namespace App\Http\Livewire;
 
 use App\Events\CertificateRequested;
+use App\Http\Livewire\DataTable\WithCachedRows;
 use App\Models\Course;
-use App\Models\CourseType;
 use App\Models\Participant;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Auth;
@@ -13,13 +14,15 @@ use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Vinkla\Hashids\Facades\Hashids;
 
+/**
+ * @property mixed $participantsRows
+ * @property mixed $courseDataRows
+ * @property mixed $participantsRowsQuery
+ */
 class CourseParticipant extends Component
 {
     use AuthorizesRequests;
-
-    public bool $can_update = false;
-
-    public bool $can_view = false;
+    use WithCachedRows;
 
     public bool $showCertModal = false;
 
@@ -27,13 +30,13 @@ class CourseParticipant extends Component
 
     public bool $showCancelModal = false;
 
+    public int $courseId;
+
     public string $course;
 
     public array $select;
 
     public Course $course_data;
-
-    public $course_types;
 
     public Participant $participant;
 
@@ -60,6 +63,36 @@ class CourseParticipant extends Component
         $this->select = [];
         $this->participant = $this->makeBlankParticipant();
         $this->certTemplate = false;
+
+        $this->courseId = Hashids::decode($this->course)[0];
+
+        $this->course_data = $this->courseDataRows;
+
+        $this->authorize('viewParticipants', $this->course_data);
+    }
+
+    public function getParticipantsRowsQueryProperty()
+    {
+        $query = Participant::query()
+            ->where('course_id', $this->courseId)
+            ->orderBy('company')
+        ;
+
+        return $query->get();
+    }
+
+    public function getParticipantsRowsProperty()
+    {
+        return $this->cache(callback: function () {
+            return $this->participantsRowsQuery;
+        });
+    }
+
+    public function getCourseDataRowsProperty()
+    {
+        return $this->cache(callback: function () {
+            return Course::whereId(Hashids::decode($this->course))->first();
+        });
     }
 
     public function participate(Participant $participant)
@@ -89,6 +122,7 @@ class CourseParticipant extends Component
     public function showCancelModal(Participant $participant)
     {
         $this->authorize('update', $participant);
+        $this->useCachedRows();
         $this->participant = $participant;
         $this->showCancelModal = true;
     }
@@ -108,6 +142,7 @@ class CourseParticipant extends Component
     public function showDetails(Participant $participant)
     {
         $this->authorize('view', $participant);
+        $this->useCachedRows();
 
         return $this->redirect(
             route(
@@ -154,13 +189,12 @@ class CourseParticipant extends Component
         }
     }
 
+    /**
+     * @throws AuthorizationException
+     */
     public function render()
     {
-        $this->participants = Participant::whereCourseId(Hashids::decode($this->course))->orderBy('company')->get();
-
-        $this->course_data = Course::whereId(Hashids::decode($this->course))->first();
-
-        $this->authorize('viewParticipants', $this->course_data);
+        $this->participants = $this->participantsRows;
 
         // get the available cert templates for the course type - deprecated
 //        $this->course_types = CourseType::whereId($this->course_data->course_type_id)

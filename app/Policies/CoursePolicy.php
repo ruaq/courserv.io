@@ -16,9 +16,9 @@ class CoursePolicy
      * Determine whether the user can view any models.
      *
      * @param  User  $user
-     * @return Response|bool
+     * @return bool
      */
-    public function viewAny(User $user)
+    public function viewAny(User $user): bool
     {
         if (! $user->isAbleTo('course.*')) {
             foreach ($user->teams()->pluck('id') as $team_id) {
@@ -38,9 +38,9 @@ class CoursePolicy
      *
      * @param  User  $user
      * @param  Course  $course
-     * @return Response|bool
+     * @return bool
      */
-    public function viewParticipants(User $user, Course $course)
+    public function viewParticipants(User $user, Course $course): bool
     {
         if (! $user->isAbleTo('participant.view', (string) $course->team_id)) {
             if (
@@ -61,9 +61,9 @@ class CoursePolicy
      * Determine whether the user can create models.
      *
      * @param  User  $user
-     * @return Response|bool
+     * @return bool
      */
-    public function create(User $user)
+    public function create(User $user): bool
     {
         if (! $user->isAbleTo('course.create')) {
             foreach ($user->teams()->pluck('id') as $team_id) {
