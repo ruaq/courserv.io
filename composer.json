@@ -27,7 +27,7 @@
         "setasign/fpdf": "^1.8",
         "setasign/fpdi-protection": "^2.0",
         "spatie/laravel-ray": "^1.32",
-        "spatie/laravel-sitemap": "6.2.3",
+        "spatie/laravel-sitemap": "6.2.4",
         "vinkla/hashids": "10.0.1",
         "vyuldashev/xml-to-array": "1.1.0"
     },
