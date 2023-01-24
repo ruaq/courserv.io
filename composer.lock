@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "50d55a85121e2bc17b1c080148d800a6",
+    "content-hash": "733b3bdd8db14e39587df3ca84265526",
     "packages": [
         {
             "name": "brick/math",
@@ -64,25 +64,25 @@
         },
         {
             "name": "danharrin/livewire-rate-limiting",
-            "version": "v1.0.0",
+            "version": "v1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danharrin/livewire-rate-limiting.git",
-                "reference": "b99facf5b607fb0cde92a6f254f437295339f7de"
+                "reference": "50ddf2064757c46bea96f84ef73a3d7a9126efcd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danharrin/livewire-rate-limiting/zipball/b99facf5b607fb0cde92a6f254f437295339f7de",
-                "reference": "b99facf5b607fb0cde92a6f254f437295339f7de",
+                "url": "https://api.github.com/repos/danharrin/livewire-rate-limiting/zipball/50ddf2064757c46bea96f84ef73a3d7a9126efcd",
+                "reference": "50ddf2064757c46bea96f84ef73a3d7a9126efcd",
                 "shasum": ""
             },
             "require": {
-                "illuminate/support": "^8.0|^9.0",
+                "illuminate/support": "^8.0|^9.0|^10.0",
                 "php": "^8.0"
             },
             "require-dev": {
                 "livewire/livewire": "^2.3",
-                "orchestra/testbench": "^6.2|^7.0",
+                "orchestra/testbench": "^6.2|^7.0|^8.0",
                 "phpunit/phpunit": "^9.4",
                 "symplify/monorepo-builder": "^9.0"
             },
@@ -114,7 +114,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-01-21T11:26:58+00:00"
+            "time": "2023-01-23T17:16:14+00:00"
         },
         {
             "name": "dflydev/dot-access-data",
