@@ -2,6 +2,11 @@
 
 namespace App\Classes;
 
+use setasign\Fpdi\PdfParser\CrossReference\CrossReferenceException;
+use setasign\Fpdi\PdfParser\Filter\FilterException;
+use setasign\Fpdi\PdfParser\PdfParserException;
+use setasign\Fpdi\PdfParser\Type\PdfTypeException;
+use setasign\Fpdi\PdfReader\PdfReaderException;
 use setasign\FpdiProtection\FpdiProtection;
 
 class ConcatPdf extends FpdiProtection
@@ -14,11 +19,11 @@ class ConcatPdf extends FpdiProtection
     }
 
     /**
-     * @throws \setasign\Fpdi\PdfParser\CrossReference\CrossReferenceException
-     * @throws \setasign\Fpdi\PdfReader\PdfReaderException
-     * @throws \setasign\Fpdi\PdfParser\PdfParserException
-     * @throws \setasign\Fpdi\PdfParser\Filter\FilterException
-     * @throws \setasign\Fpdi\PdfParser\Type\PdfTypeException
+     * @throws CrossReferenceException
+     * @throws PdfReaderException
+     * @throws PdfParserException
+     * @throws FilterException
+     * @throws PdfTypeException
      */
     public function concat()
     {

@@ -40,6 +40,11 @@ return [
             'root' => storage_path('app/certTemplates'),
         ],
 
+        'certTmp' => [
+            'driver' => 'local',
+            'root' => storage_path('app/certTmp'),
+        ],
+
         'tmp' => [
             'driver' => 'local',
             'root' => storage_path('app/tmp'),

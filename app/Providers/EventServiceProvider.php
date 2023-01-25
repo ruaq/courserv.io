@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use App\Events\CertificateRequested;
 use App\Events\CourseBooked;
 use App\Events\CourseCancelled;
 use App\Events\CourseCreated;
@@ -12,7 +11,6 @@ use App\Events\QsehCourseUpdated;
 use App\Events\UserCreated;
 use App\Events\UserForgotPassword;
 use App\Listeners\CancelCourse;
-use App\Listeners\GenerateCertificate;
 use App\Listeners\GenerateInternalNumber;
 use App\Listeners\ImportGeoCoordinates;
 use App\Listeners\ImportGeoLocations;
@@ -63,10 +61,6 @@ class EventServiceProvider extends ServiceProvider
 
         CourseBooked::class => [
             SendParticipantBookingConfirmation::class,
-        ],
-
-        CertificateRequested::class => [
-            GenerateCertificate::class,
         ],
 
         GeodataUpdated::class => [

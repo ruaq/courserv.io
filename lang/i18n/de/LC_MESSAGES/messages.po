@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: courserv.io\n"
-"POT-Creation-Date: 2023-01-15 03:33+0100\n"
-"PO-Revision-Date: 2023-01-15 03:37+0100\n"
+"POT-Creation-Date: 2023-01-24 00:31+0100\n"
+"PO-Revision-Date: 2023-01-24 00:34+0100\n"
 "Last-Translator: Holger Schmermbeck <hosch@mailbox.org>\n"
 "Language-Team: Holger Schmermbeck <hosch@mailbox.org>\n"
 "Language: de\n"
@@ -80,7 +80,7 @@ msgstr "Beschreibung"
 
 #: ../storage/framework/messages/068769daca845f83d9c4abcad9e8d0784df74cad.php.php:23
 #: ../storage/framework/messages/2108c4791f7585156080063cd51c8610f292eb50.php.php:20
-#: ../storage/framework/messages/9fca439e1021e8f697fa5d8cbd1b0deb5a83abef.php.php:240
+#: ../storage/framework/messages/9fca439e1021e8f697fa5d8cbd1b0deb5a83abef.php.php:254
 msgid "price"
 msgstr "Preis"
 
@@ -142,7 +142,7 @@ msgstr "Keine Bescheinigungsvorlage"
 #: ../storage/framework/messages/068769daca845f83d9c4abcad9e8d0784df74cad.php.php:262
 #: ../storage/framework/messages/2108c4791f7585156080063cd51c8610f292eb50.php.php:24
 #: ../storage/framework/messages/2108c4791f7585156080063cd51c8610f292eb50.php.php:25
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:849
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:813
 #: ../storage/framework/messages/8fbf366e20f831a79a84394f5769ef4f0cf0c63a.php.php:552
 #: ../storage/framework/messages/8fbf366e20f831a79a84394f5769ef4f0cf0c63a.php.php:553
 #: ../storage/framework/messages/9dea9cca9a4f3dc1a706bbbe2a18ea62bb4ca6c1.php.php:51
@@ -152,10 +152,12 @@ msgstr ""
 
 #: ../storage/framework/messages/068769daca845f83d9c4abcad9e8d0784df74cad.php.php:279
 #: ../storage/framework/messages/25234aa6311cc535fee14fdbfc111fe14a312984.php.php:283
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:1341
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:1397
-#: ../storage/framework/messages/9fca439e1021e8f697fa5d8cbd1b0deb5a83abef.php.php:514
-#: ../storage/framework/messages/9fca439e1021e8f697fa5d8cbd1b0deb5a83abef.php.php:613
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:1377
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:1433
+#: ../storage/framework/messages/9fca439e1021e8f697fa5d8cbd1b0deb5a83abef.php.php:523
+#: ../storage/framework/messages/9fca439e1021e8f697fa5d8cbd1b0deb5a83abef.php.php:580
+#: ../storage/framework/messages/9fca439e1021e8f697fa5d8cbd1b0deb5a83abef.php.php:798
+#: ../storage/framework/messages/9fca439e1021e8f697fa5d8cbd1b0deb5a83abef.php.php:847
 msgid "Cancel"
 msgstr "Abbrechen"
 
@@ -231,10 +233,10 @@ msgstr "Position hinzufügen"
 
 #: ../storage/framework/messages/1a6edcf21733330d861c7fcbf282d96472902867.php.php:21
 #: ../storage/framework/messages/1a6edcf21733330d861c7fcbf282d96472902867.php.php:164
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:266
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:273
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:546
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:699
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:164
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:171
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:446
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:601
 msgid "team"
 msgstr "Team"
 
@@ -275,7 +277,7 @@ msgid "every team"
 msgstr "jedes Team"
 
 #: ../storage/framework/messages/1a6edcf21733330d861c7fcbf282d96472902867.php.php:169
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:701
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:604
 msgid "select a team"
 msgstr "Team auswählen"
 
@@ -396,8 +398,8 @@ msgstr "Vorlagen Datei"
 msgid "The Template File"
 msgstr "Die Vorlagendatei"
 
-#: ../storage/framework/messages/30d8ed3a9179a2c9b8cc649820079865db67d43a.php.php:176
-#: ../storage/framework/messages/30d8ed3a9179a2c9b8cc649820079865db67d43a.php.php:198
+#: ../storage/framework/messages/30d8ed3a9179a2c9b8cc649820079865db67d43a.php.php:349
+#: ../storage/framework/messages/30d8ed3a9179a2c9b8cc649820079865db67d43a.php.php:371
 #: ../storage/framework/messages/5bc313defd34f3392dccb6e0372daf6729d479fa.php.php:59
 #: ../storage/framework/messages/5bc313defd34f3392dccb6e0372daf6729d479fa.php.php:169
 #: ../storage/framework/messages/830e9b3a8c6879913b18132b92efb986186ee92f.php.php:10
@@ -406,16 +408,16 @@ msgstr "Die Vorlagendatei"
 #: ../storage/framework/messages/e6a662e84b3d62a7665e36fda84b24d1088e49a7.php.php:47
 #: ../storage/framework/messages/e6a662e84b3d62a7665e36fda84b24d1088e49a7.php.php:56
 #: ../storage/framework/messages/e6a662e84b3d62a7665e36fda84b24d1088e49a7.php.php:74
-#: Http/Livewire/CourseParticipant.php:176
-#: Http/Livewire/CourseParticipant.php:198
+#: Http/Livewire/CourseParticipant.php:349
+#: Http/Livewire/CourseParticipant.php:371
 #: Http/Livewire/ParticipantDetails.php:47
 #: Http/Livewire/ParticipantDetails.php:56
 #: Http/Livewire/ParticipantDetails.php:74
 msgid "participants"
 msgstr "Teilnehmer*innen"
 
-#: ../storage/framework/messages/30d8ed3a9179a2c9b8cc649820079865db67d43a.php.php:180
-#: ../storage/framework/messages/30d8ed3a9179a2c9b8cc649820079865db67d43a.php.php:185
+#: ../storage/framework/messages/30d8ed3a9179a2c9b8cc649820079865db67d43a.php.php:353
+#: ../storage/framework/messages/30d8ed3a9179a2c9b8cc649820079865db67d43a.php.php:358
 #: ../storage/framework/messages/4647b2605cff923581932e06efc3775289a44bed.php.php:10
 #: ../storage/framework/messages/5bc313defd34f3392dccb6e0372daf6729d479fa.php.php:56
 #: ../storage/framework/messages/5bc313defd34f3392dccb6e0372daf6729d479fa.php.php:166
@@ -426,8 +428,8 @@ msgstr "Teilnehmer*innen"
 #: ../storage/framework/messages/c7c8b35415fe58276b5300a104a4300ed90122bf.php.php:1017
 #: ../storage/framework/messages/e6a662e84b3d62a7665e36fda84b24d1088e49a7.php.php:61
 #: Http/Livewire/Course.php:1014 Http/Livewire/Course.php:1016
-#: Http/Livewire/Course.php:1017 Http/Livewire/CourseParticipant.php:180
-#: Http/Livewire/CourseParticipant.php:185
+#: Http/Livewire/Course.php:1017 Http/Livewire/CourseParticipant.php:353
+#: Http/Livewire/CourseParticipant.php:358
 #: Http/Livewire/ParticipantDetails.php:61
 msgid "Courses"
 msgstr "Kurse"
@@ -445,126 +447,126 @@ msgstr "in Ihrer Nähe"
 msgid "in %s and surroundings"
 msgstr "in %s und Umgebung"
 
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:135
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:8
 msgid "Search..."
 msgstr "Suchen…"
 
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:166
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:169
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:48
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:56
 msgid "show only own courses"
 msgstr "nur eigene Kurse anzeigen"
 
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:227
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:234
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:498
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:719
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:125
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:132
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:397
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:623
 msgid "course type"
 msgstr "Kursart"
 
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:244
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:142
 msgid "select course type..."
 msgstr "Kursart auswählen…"
 
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:283
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:181
 msgid "select team..."
 msgstr "Team auswählen…"
 
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:301
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:308
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:199
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:206
 msgid "cancelled courses"
 msgstr "stornierte Kurse"
 
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:318
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:216
 msgid "don't show cancelled courses"
 msgstr "keine stornierten Kurse anzeigen"
 
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:319
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:217
 msgid "show cancelled courses"
 msgstr "stornierte Kurse anzeigen"
 
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:336
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:343
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:234
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:241
 msgid "minimum date"
 msgstr "frühestens Datum"
 
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:367
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:374
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:265
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:272
 msgid "maximum date"
 msgstr "spätestes Datum"
 
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:405
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:303
 msgid "reset filters"
 msgstr "Filter zurücksetzen"
 
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:422
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:321
 msgid "Add Course"
 msgstr "Kurs hinzufügen"
 
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:438
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:337
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:1080
 #: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:1083
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:1085
 #: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:1092
 msgid "seminar location"
 msgstr "Seminarort"
 
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:453
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:577
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:1131
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:1133
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:352
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:477
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:1138
 #: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:1140
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:1149
 msgid "street"
 msgstr "Straße"
 
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:367
 #: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:468
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:568
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:1223
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:1225
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:1232
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:1245
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:1247
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:1257
 msgid "location"
 msgstr "Ort"
 
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:483
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:382
 msgid "start"
 msgstr "Beginn"
 
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:513
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:412
 msgid "internal"
 msgstr "intern"
 
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:520
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:420
 msgid "number"
 msgstr "Nummer"
 
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:530
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:592
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:430
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:492
 msgid "qseh"
 msgstr "QSEH"
 
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:695
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:597
 msgid "edit course"
 msgstr "Kurs bearbeiten"
 
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:721
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:626
 msgid "select a course type"
 msgstr "Kursart auswählen"
 
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:748
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:763
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:659
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:689
 msgid "register automatically at QSEH"
 msgstr "automatisch bei der QSEH registrieren"
 
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:769
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:771
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:778
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:696
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:700
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:709
 msgid "QSEH registration number"
 msgstr "QSEH-Registrierungsnummer"
 
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:820
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:835
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:763
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:790
 msgid "public bookable"
 msgstr "öffentlich buchbar"
 
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:841
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:796
 #: ../storage/framework/messages/84963e6525e9fd966abc3660ff7c2610633eed95.php.php:47
 #: ../storage/framework/messages/8d789bf43909f0644f39031cc61f634ab5e518a9.php.php:10
 #: ../storage/framework/messages/d5133e5b84da52fdb34d438b26a8a65bc451e0f6.php.php:10
@@ -576,59 +578,59 @@ msgstr "öffentlich buchbar"
 msgid "Prices"
 msgstr "Preise"
 
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:860
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:827
 msgid "course date"
 msgstr "Kursdatum"
 
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:925
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:1035
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:893
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:1017
 msgid "trainer"
 msgstr "Ausbilder*in"
 
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:927
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:1037
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:898
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:1024
 msgid "select / remove a trainer"
 msgstr "Ausbilder*in auswählen / entfernen"
 
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:928
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:1038
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:899
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:1025
 msgid "select later"
 msgstr "später auswählen"
 
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:929
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:1039
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:900
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:1027
 msgid "trainer can choose"
 msgstr "Ausbilder*innen können sich melden"
 
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:938
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:1048
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:910
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:1039
 msgid "position"
 msgstr "Position"
 
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:940
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:1050
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:915
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:1045
 msgid "select position"
 msgstr "Position wählen"
 
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:957
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:1067
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:932
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:1063
 msgid "add a new trainer"
 msgstr "eine neue Ausbilder*in hinzufügen"
 
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:1123
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:1130
 msgid "the seminar location or company"
 msgstr "der Seminarort oder das Unternehmen"
 
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:1177
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:1179
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:1186
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:1191
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:1193
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:1202
 #: ../storage/framework/messages/8fbf366e20f831a79a84394f5769ef4f0cf0c63a.php.php:160
 msgid "zipcode"
 msgstr "Postleitzahl"
 
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:1269
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:1271
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:1278
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:1299
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:1301
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:1310
 #: ../storage/framework/messages/b8d97d8491bab8059bc2498d5efabe135f55ce1d.php.php:91
 #: ../storage/framework/messages/b8d97d8491bab8059bc2498d5efabe135f55ce1d.php.php:123
 #: ../storage/framework/messages/b8d97d8491bab8059bc2498d5efabe135f55ce1d.php.php:584
@@ -637,13 +639,13 @@ msgstr "Postleitzahl"
 msgid "seats"
 msgstr "Plätze"
 
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:1326
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:1380
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:1411
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:1362
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:1416
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:1447
 msgid "Cancel course"
 msgstr "Kurs stornieren"
 
-#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:1383
+#: ../storage/framework/messages/3cfae82365742fc88edd3dd73040f45fe01c4647.php.php:1419
 msgid ""
 "Are you sure you want to cancel this course? This action cannot be undone."
 msgstr ""
@@ -653,11 +655,11 @@ msgstr ""
 #: ../storage/framework/messages/57ebfa33ed2d8f8d562d9dbdae6070c88f21d404.php.php:10
 #: ../storage/framework/messages/84963e6525e9fd966abc3660ff7c2610633eed95.php.php:96
 #: ../storage/framework/messages/ad375579f034ec8807a5e030626988bf63e9c848.php.php:10
-#: ../storage/framework/messages/e2c3caa5b0502e5534134ee3388ade6b0c5b0bae.php.php:197
-#: ../storage/framework/messages/e2c3caa5b0502e5534134ee3388ade6b0c5b0bae.php.php:199
-#: ../storage/framework/messages/e2c3caa5b0502e5534134ee3388ade6b0c5b0bae.php.php:200
-#: Http/Livewire/User.php:197 Http/Livewire/User.php:199
-#: Http/Livewire/User.php:200
+#: ../storage/framework/messages/e2c3caa5b0502e5534134ee3388ade6b0c5b0bae.php.php:202
+#: ../storage/framework/messages/e2c3caa5b0502e5534134ee3388ade6b0c5b0bae.php.php:204
+#: ../storage/framework/messages/e2c3caa5b0502e5534134ee3388ade6b0c5b0bae.php.php:205
+#: Http/Livewire/User.php:202 Http/Livewire/User.php:204
+#: Http/Livewire/User.php:205
 msgid "User"
 msgstr "Benutzer"
 
@@ -710,17 +712,17 @@ msgstr "Ausloggen"
 msgid "Certification Templates"
 msgstr "Bescheinigungen (Vorlagen)"
 
-#: ../storage/framework/messages/610e9dd6c0ac6dd632511251e8b0d2e87696b95b.php.php:90
-#: ../storage/framework/messages/610e9dd6c0ac6dd632511251e8b0d2e87696b95b.php.php:92
-#: ../storage/framework/messages/610e9dd6c0ac6dd632511251e8b0d2e87696b95b.php.php:93
+#: ../storage/framework/messages/610e9dd6c0ac6dd632511251e8b0d2e87696b95b.php.php:106
+#: ../storage/framework/messages/610e9dd6c0ac6dd632511251e8b0d2e87696b95b.php.php:108
+#: ../storage/framework/messages/610e9dd6c0ac6dd632511251e8b0d2e87696b95b.php.php:109
 #: ../storage/framework/messages/84963e6525e9fd966abc3660ff7c2610633eed95.php.php:120
 #: ../storage/framework/messages/b8244990db0ca650373a74eb15ae646e5be2aac1.php.php:10
 #: ../storage/framework/messages/c19336aa6f71fe38241f2931bf0a66169b5f7a84.php.php:27
 #: ../storage/framework/messages/c19336aa6f71fe38241f2931bf0a66169b5f7a84.php.php:311
 #: ../storage/framework/messages/c19336aa6f71fe38241f2931bf0a66169b5f7a84.php.php:314
 #: ../storage/framework/messages/d5cd777b72d4b93bee19b9f4d0156aa9220305cb.php.php:10
-#: Http/Livewire/Role.php:90 Http/Livewire/Role.php:92
-#: Http/Livewire/Role.php:93
+#: Http/Livewire/Role.php:106 Http/Livewire/Role.php:108
+#: Http/Livewire/Role.php:109
 msgid "Roles"
 msgstr "Rollen"
 
@@ -921,7 +923,7 @@ msgstr "Ihre E-Mail-Adresse ist erforderlich."
 #: ../storage/framework/messages/8fbf366e20f831a79a84394f5769ef4f0cf0c63a.php.php:456
 #: ../storage/framework/messages/9dea9cca9a4f3dc1a706bbbe2a18ea62bb4ca6c1.php.php:80
 #: ../storage/framework/messages/9dea9cca9a4f3dc1a706bbbe2a18ea62bb4ca6c1.php.php:165
-#: ../storage/framework/messages/9fca439e1021e8f697fa5d8cbd1b0deb5a83abef.php.php:236
+#: ../storage/framework/messages/9fca439e1021e8f697fa5d8cbd1b0deb5a83abef.php.php:246
 msgid "phone"
 msgstr "Telefonnummer"
 
@@ -942,7 +944,7 @@ msgid "Last name is required."
 msgstr "Ein Nachname ist erforderlich."
 
 #: ../storage/framework/messages/8fbf366e20f831a79a84394f5769ef4f0cf0c63a.php.php:406
-#: ../storage/framework/messages/9fca439e1021e8f697fa5d8cbd1b0deb5a83abef.php.php:235
+#: ../storage/framework/messages/9fca439e1021e8f697fa5d8cbd1b0deb5a83abef.php.php:244
 msgid "date of birth"
 msgstr "Geburtsdatum"
 
@@ -1130,7 +1132,7 @@ msgid "payment"
 msgstr "Zahlung"
 
 #: ../storage/framework/messages/9dea9cca9a4f3dc1a706bbbe2a18ea62bb4ca6c1.php.php:143
-#: ../storage/framework/messages/9fca439e1021e8f697fa5d8cbd1b0deb5a83abef.php.php:232
+#: ../storage/framework/messages/9fca439e1021e8f697fa5d8cbd1b0deb5a83abef.php.php:238
 #: ../storage/framework/messages/c19336aa6f71fe38241f2931bf0a66169b5f7a84.php.php:156
 #: ../storage/framework/messages/c19336aa6f71fe38241f2931bf0a66169b5f7a84.php.php:158
 #: ../storage/framework/messages/c19336aa6f71fe38241f2931bf0a66169b5f7a84.php.php:167
@@ -1139,64 +1141,98 @@ msgstr "Zahlung"
 msgid "name"
 msgstr "Name"
 
-#: ../storage/framework/messages/9fca439e1021e8f697fa5d8cbd1b0deb5a83abef.php.php:216
-#: ../storage/framework/messages/9fca439e1021e8f697fa5d8cbd1b0deb5a83abef.php.php:471
-#: ../storage/framework/messages/9fca439e1021e8f697fa5d8cbd1b0deb5a83abef.php.php:529
+#: ../storage/framework/messages/9fca439e1021e8f697fa5d8cbd1b0deb5a83abef.php.php:218
+#: ../storage/framework/messages/9fca439e1021e8f697fa5d8cbd1b0deb5a83abef.php.php:498
+#: ../storage/framework/messages/9fca439e1021e8f697fa5d8cbd1b0deb5a83abef.php.php:537
+#: ../storage/framework/messages/9fca439e1021e8f697fa5d8cbd1b0deb5a83abef.php.php:618
 msgid "Create certificates"
 msgstr "Bescheinigungen erstellen"
 
-#: ../storage/framework/messages/9fca439e1021e8f697fa5d8cbd1b0deb5a83abef.php.php:233
+#: ../storage/framework/messages/9fca439e1021e8f697fa5d8cbd1b0deb5a83abef.php.php:240
 msgid "lastname"
 msgstr "Nachname"
 
-#: ../storage/framework/messages/9fca439e1021e8f697fa5d8cbd1b0deb5a83abef.php.php:234
+#: ../storage/framework/messages/9fca439e1021e8f697fa5d8cbd1b0deb5a83abef.php.php:242
 msgid "firstname"
 msgstr "Vorname"
 
-#: ../storage/framework/messages/9fca439e1021e8f697fa5d8cbd1b0deb5a83abef.php.php:237
-#: ../storage/framework/messages/9fca439e1021e8f697fa5d8cbd1b0deb5a83abef.php.php:294
+#: ../storage/framework/messages/9fca439e1021e8f697fa5d8cbd1b0deb5a83abef.php.php:248
+#: ../storage/framework/messages/9fca439e1021e8f697fa5d8cbd1b0deb5a83abef.php.php:311
 msgid "email"
 msgstr "E-Mail"
 
-#: ../storage/framework/messages/9fca439e1021e8f697fa5d8cbd1b0deb5a83abef.php.php:238
+#: ../storage/framework/messages/9fca439e1021e8f697fa5d8cbd1b0deb5a83abef.php.php:250
 msgid "contact"
 msgstr "Kontakt"
 
-#: ../storage/framework/messages/9fca439e1021e8f697fa5d8cbd1b0deb5a83abef.php.php:239
+#: ../storage/framework/messages/9fca439e1021e8f697fa5d8cbd1b0deb5a83abef.php.php:252
 msgid "booked on"
 msgstr "gebucht am"
 
-#: ../storage/framework/messages/9fca439e1021e8f697fa5d8cbd1b0deb5a83abef.php.php:258
+#: ../storage/framework/messages/9fca439e1021e8f697fa5d8cbd1b0deb5a83abef.php.php:273
 msgid "no company"
 msgstr "Keine Firma"
 
-#: ../storage/framework/messages/9fca439e1021e8f697fa5d8cbd1b0deb5a83abef.php.php:491
+#: ../storage/framework/messages/9fca439e1021e8f697fa5d8cbd1b0deb5a83abef.php.php:502
 msgid "Are you sure you want to create the certificates?"
 msgstr "Sind Sie sicher, dass Sie die Bescheinigungen erstellen wollen?"
 
-#: ../storage/framework/messages/9fca439e1021e8f697fa5d8cbd1b0deb5a83abef.php.php:499
-msgid "Create certificates ... Please wait ..."
-msgstr "Erstelle Bescheinigungen ... Bitte warten ..."
+#: ../storage/framework/messages/9fca439e1021e8f697fa5d8cbd1b0deb5a83abef.php.php:508
+#: ../storage/framework/messages/9fca439e1021e8f697fa5d8cbd1b0deb5a83abef.php.php:832
+msgid "Is being prepared ... Please wait ..."
+msgstr "Wird vorbereitet ... Bitte warten ..."
 
-#: ../storage/framework/messages/9fca439e1021e8f697fa5d8cbd1b0deb5a83abef.php.php:554
-msgid "Certificates created"
-msgstr "Bescheinigungen erstellt"
-
-#: ../storage/framework/messages/9fca439e1021e8f697fa5d8cbd1b0deb5a83abef.php.php:561
-msgid "Certificates will now be downloaded."
-msgstr "Die Bescheinigungen werden nun heruntergeladen."
-
-#: ../storage/framework/messages/9fca439e1021e8f697fa5d8cbd1b0deb5a83abef.php.php:596
-#: ../storage/framework/messages/9fca439e1021e8f697fa5d8cbd1b0deb5a83abef.php.php:627
+#: ../storage/framework/messages/9fca439e1021e8f697fa5d8cbd1b0deb5a83abef.php.php:563
+#: ../storage/framework/messages/9fca439e1021e8f697fa5d8cbd1b0deb5a83abef.php.php:594
 msgid "Cancel booking"
 msgstr "Buchung stornieren"
 
-#: ../storage/framework/messages/9fca439e1021e8f697fa5d8cbd1b0deb5a83abef.php.php:599
+#: ../storage/framework/messages/9fca439e1021e8f697fa5d8cbd1b0deb5a83abef.php.php:566
 msgid ""
 "Are you sure you want to cancel this booking? This action cannot be undone."
 msgstr ""
 "Sind Sie sicher, dass Sie diese Buchung stornieren möchten? Diese Aktion "
 "kann nicht rückgängig gemacht werden."
+
+#: ../storage/framework/messages/9fca439e1021e8f697fa5d8cbd1b0deb5a83abef.php.php:631
+#: ../storage/framework/messages/9fca439e1021e8f697fa5d8cbd1b0deb5a83abef.php.php:692
+#: ../storage/framework/messages/9fca439e1021e8f697fa5d8cbd1b0deb5a83abef.php.php:770
+msgid "Select participants"
+msgstr "Teilnehmer*innen auswählen"
+
+#: ../storage/framework/messages/9fca439e1021e8f697fa5d8cbd1b0deb5a83abef.php.php:658
+#: ../storage/framework/messages/9fca439e1021e8f697fa5d8cbd1b0deb5a83abef.php.php:705
+msgid "Generate Certificate"
+msgstr "Zertifikat generieren"
+
+#: ../storage/framework/messages/9fca439e1021e8f697fa5d8cbd1b0deb5a83abef.php.php:676
+#: ../storage/framework/messages/9fca439e1021e8f697fa5d8cbd1b0deb5a83abef.php.php:716
+msgid "Generate .pdf File"
+msgstr "Erstelle .pdf Datei"
+
+#: ../storage/framework/messages/9fca439e1021e8f697fa5d8cbd1b0deb5a83abef.php.php:733
+msgid "Preparing Download"
+msgstr "Bereite Download vor"
+
+#: ../storage/framework/messages/9fca439e1021e8f697fa5d8cbd1b0deb5a83abef.php.php:758
+msgid "Creation failed"
+msgstr "Erstellung fehlgeschlagen"
+
+#: ../storage/framework/messages/9fca439e1021e8f697fa5d8cbd1b0deb5a83abef.php.php:782
+msgid ".pdf creating failed. Please try again."
+msgstr ".pdf-Erstellung fehlgeschlagen. Bitte versuchen Sie es erneut."
+
+#: ../storage/framework/messages/9fca439e1021e8f697fa5d8cbd1b0deb5a83abef.php.php:822
+msgid "Creation successful"
+msgstr "Erstellung erfolgreich"
+
+#: ../storage/framework/messages/9fca439e1021e8f697fa5d8cbd1b0deb5a83abef.php.php:826
+msgid ".pdf File was successfully created."
+msgstr ".pdf Datei wurde erfolgreich erstellt."
+
+#: ../storage/framework/messages/9fca439e1021e8f697fa5d8cbd1b0deb5a83abef.php.php:861
+msgid "Download"
+msgstr "Herunterladen"
 
 #: ../storage/framework/messages/b7b062b44f1485d84ead6a450d3f914cf2290eea.php.php:10
 msgid "Add Role"
@@ -1402,7 +1438,7 @@ msgstr "Die gesamte Datenbank wird zurückgesetzt!"
 msgid "add account"
 msgstr "Account anlegen"
 
-#: ../storage/framework/messages/d5d17b4903186a8e3a6766491a7ea9de731c8d9b.php.php:113
+#: ../storage/framework/messages/d5d17b4903186a8e3a6766491a7ea9de731c8d9b.php.php:94
 msgid "Generating Database ..."
 msgstr "Datenbank generieren ..."
 
@@ -1451,8 +1487,14 @@ msgstr ""
 "Der Link ist nur begrenzt gültig. Wenn er abgelaufen ist, gehen Sie zum "
 "[login](%s) und verwenden Sie die Passwort vergessen Funktion"
 
-#~ msgid "Processing ... Please wait ..."
-#~ msgstr "in Arbeit ... Bitte warten ..."
+#~ msgid "Certificates created"
+#~ msgstr "Bescheinigungen erstellt"
+
+#~ msgid "Certificates will now be downloaded."
+#~ msgstr "Die Bescheinigungen werden nun heruntergeladen."
+
+#~ msgid "Create certificates ... Please wait ..."
+#~ msgstr "Erstelle Bescheinigungen ... Bitte warten ..."
 
 #~ msgid "edit"
 #~ msgstr "bearbeiten"

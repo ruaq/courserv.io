@@ -8,9 +8,15 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
+use PhpOffice\PhpWord\Exception\CopyFileException;
+use PhpOffice\PhpWord\Exception\CreateTemporaryFileException;
 use PhpOffice\PhpWord\TemplateProcessor;
+use setasign\Fpdi\PdfParser\CrossReference\CrossReferenceException;
+use setasign\Fpdi\PdfParser\Filter\FilterException;
+use setasign\Fpdi\PdfParser\PdfParserException;
+use setasign\Fpdi\PdfParser\Type\PdfTypeException;
+use setasign\Fpdi\PdfReader\PdfReaderException;
 use setasign\FpdiProtection\FpdiProtection;
-use Vinkla\Hashids\Facades\Hashids;
 
 class CertificateClass
 {
@@ -27,6 +33,8 @@ class CertificateClass
     public string $certTemplate;
 
     private string $trainer;
+
+    private bool $encrypt = true;
 
     public function __construct()
     {
@@ -58,9 +66,14 @@ class CertificateClass
         $this->trainer = $trainer;
     }
 
+    public function setEncryption(bool $encrypt): void
+    {
+        $this->encrypt = $encrypt;
+    }
+
     /**
-     * @throws \PhpOffice\PhpWord\Exception\CopyFileException
-     * @throws \PhpOffice\PhpWord\Exception\CreateTemporaryFileException
+     * @throws CopyFileException
+     * @throws CreateTemporaryFileException
      */
     public function replacePlaceholders(Participant $participant): void
     {
@@ -112,9 +125,16 @@ class CertificateClass
         Storage::delete('certTmp/'.$this->filename.'.docx');
     }
 
-    private function addFile($file): void
+    public function addFile($file): void
     {
         $this->files[] = $file;
+    }
+
+    private function deleteFiles(): void
+    {
+        foreach ($this->files as $file) {
+            @unlink($file);
+        }
     }
 
     public function generatePdf(): void
@@ -132,27 +152,31 @@ class CertificateClass
     }
 
     /**
-     * @throws \setasign\Fpdi\PdfParser\CrossReference\CrossReferenceException
-     * @throws \setasign\Fpdi\PdfReader\PdfReaderException
-     * @throws \setasign\Fpdi\PdfParser\PdfParserException
-     * @throws \setasign\Fpdi\PdfParser\Type\PdfTypeException
-     * @throws \setasign\Fpdi\PdfParser\Filter\FilterException
+     * @throws CrossReferenceException
+     * @throws PdfReaderException
+     * @throws PdfParserException
+     * @throws PdfTypeException
+     * @throws FilterException
      */
     public function concatPdfs(): void
     {
         $pdf = new ConcatPdf();
 
-        // let's encrypt the new .pdf file
-        $pdf->setProtection(
-            FpdiProtection::PERM_PRINT | FpdiProtection::PERM_DIGITAL_PRINT
-        );
+        if ($this->encrypt) {
+            // let's encrypt the new .pdf file
+            $pdf->setProtection(
+                FpdiProtection::PERM_PRINT | FpdiProtection::PERM_DIGITAL_PRINT
+            );
+        }
 
         $pdf->setFiles($this->files);
         $pdf->concat();
 
         $pdf->Output(
             'F',
-            $this->path.Hashids::encode($this->user->id).'-'.Hashids::encode($this->course->id).'.pdf'
+            $this->path.$this->filename.'.pdf'
         );
+
+        $this->deleteFiles();
     }
 }
