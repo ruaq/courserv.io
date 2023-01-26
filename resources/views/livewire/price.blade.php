@@ -1,3 +1,25 @@
+{{--
+| Copyright 2023 courservio.de
+|
+| Licensed under the EUPL, Version 1.2 or – as soon they
+| will be approved by the European Commission - subsequent
+| versions of the EUPL (the "Licence");
+| You may not use this work except in compliance with the
+| Licence.
+| You may obtain a copy of the Licence at:
+|
+| https://joinup.ec.europa.eu/software/page/eupl
+|
+| Unless required by applicable law or agreed to in
+| writing, software distributed under the Licence is
+| distributed on an "AS IS" basis,
+| WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+| express or implied.
+| See the Licence for the specific language governing
+| permissions and limitations under the Licence.
+--}}
+
+@php use App\Models\Price; @endphp
 <div>
 
     <div class="px-4 sm:px-6 lg:px-8">
@@ -6,8 +28,9 @@
 
             </div>
             <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
-                @can('create', \App\Models\Price::class)
-                    <button type="button" wire:click="create" class="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto">
+                @can('create', Price::class)
+                    <button type="button" wire:click="create"
+                            class="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto">
                         {{ _i('Add Price') }}
                     </button>
                 @endcan
@@ -17,9 +40,12 @@
             <table class="min-w-full divide-y divide-gray-300">
                 <thead class="bg-gray-50">
                 <tr>
-                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">{{ _i('title') }}</th>
-                    <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 sm:table-cell">{{ _i('description') }}</th>
-                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">{{ _i('price') }}</th>
+                    <th scope="col"
+                        class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">{{ _i('title') }}</th>
+                    <th scope="col"
+                        class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 sm:table-cell">{{ _i('description') }}</th>
+                    <th scope="col"
+                        class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">{{ _i('price') }}</th>
                     <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
                         <span class="sr-only">Edit</span>
                     </th>
@@ -27,20 +53,21 @@
                 </thead>
                 <tbody class="divide-y divide-gray-200 bg-white">
                 @foreach($prices as $price)
-                <tr>
-                    <td class="w-full max-w-0 py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:w-auto sm:max-w-none sm:pl-6">
-                        {{ $price->title }}
-                    </td>
-                    <td class="hidden px-3 py-4 text-sm text-gray-500 sm:table-cell">{{ $price->description }}</td>
-                    <td class="px-3 py-4 text-sm text-gray-500">{{ $price->amount_net }} {{ $price->amount_net != $price->amount_gross ? '/ ' . $price->amount_gross : '' }} {{ $price->currency }}</td>
-                    <td class="py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                        @can('update', $price)
-                            <x-button.link wire:click="edit({{ $price->id }})"><i class="fa-solid fa-pen-to-square"></i></x-button.link>
-                        @else
-                            <x-button.link disabled><i class="fa-solid fa-pen-to-square"></i></x-button.link>
-                        @endcan
-                    </td>
-                </tr>
+                    <tr>
+                        <td class="w-full max-w-0 py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:w-auto sm:max-w-none sm:pl-6">
+                            {{ $price->title }}
+                        </td>
+                        <td class="hidden px-3 py-4 text-sm text-gray-500 sm:table-cell">{{ $price->description }}</td>
+                        <td class="px-3 py-4 text-sm text-gray-500">{{ $price->amount_net }} {{ $price->amount_net != $price->amount_gross ? '/ ' . $price->amount_gross : '' }} {{ $price->currency }}</td>
+                        <td class="py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                            @can('update', $price)
+                                <x-button.link wire:click="edit({{ $price->id }})"><i
+                                        class="fa-solid fa-pen-to-square"></i></x-button.link>
+                            @else
+                                <x-button.link disabled><i class="fa-solid fa-pen-to-square"></i></x-button.link>
+                            @endcan
+                        </td>
+                    </tr>
                 @endforeach
 
                 </tbody>
@@ -56,80 +83,108 @@
                     <div>
                         <label for="title" class="block text-sm font-medium text-gray-700">{{ _i('title') }}</label>
                         <div class="relative mt-1 rounded-md shadow-sm">
-                            <input type="text" wire:model.lazy="editing.title" name="{{ _i('title') }}" id="units" class="@error('editing.title') border-red-300 text-red-900 placeholder-red-300 focus:border-red-500 focus:outline-none focus:ring-red-500 @enderror block w-full rounded-md border-gray-300 pr-10 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="{{ _i('title') }}" @error('editing.title') aria-invalid="true" aria-describedby="title-error" @enderror>
+                            <input type="text" wire:model.lazy="editing.title" name="{{ _i('title') }}" id="units"
+                                   class="@error('editing.title') border-red-300 text-red-900 placeholder-red-300 focus:border-red-500 focus:outline-none focus:ring-red-500 @enderror block w-full rounded-md border-gray-300 pr-10 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                   placeholder="{{ _i('title') }}" @error('editing.title') aria-invalid="true"
+                                   aria-describedby="title-error" @enderror>
                             @error('editing.title')
                             <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
                                 <!-- Heroicon name: solid/exclamation-circle -->
-                                <svg class="h-5 w-5 text-red-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                                <svg class="h-5 w-5 text-red-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                     fill="currentColor" aria-hidden="true">
+                                    <path fill-rule="evenodd"
+                                          d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                                          clip-rule="evenodd"/>
                                 </svg>
                             </div>
                             @enderror
                         </div>
                         @error('editing.title')
-                            <p class="mt-2 text-sm text-red-600" id="title-error">{{ $errors->first('editing.title') }}</p>
+                        <p class="mt-2 text-sm text-red-600" id="title-error">{{ $errors->first('editing.title') }}</p>
                         @else
                             <p class="mt-2 text-xs text-gray-500" id="title-description">{{ _i('the price title') }}</p>
-                        @enderror
+                            @enderror
                     </div>
 
                     <div>
-                        <label for="description" class="block text-sm font-medium text-gray-700">{{ _i('Description') }}</label>
+                        <label for="description"
+                               class="block text-sm font-medium text-gray-700">{{ _i('Description') }}</label>
                         <div class="relative mt-1 rounded-md shadow-sm">
-                            <textarea wire:model.lazy="editing.description" name="description" id="description" class="@error('editing.description') border-red-300 text-red-900 placeholder-red-300 focus:border-red-500 focus:outline-none focus:ring-red-500 @enderror block w-full rounded-md border-gray-300 pr-10 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="{{ _i('Description') }}" @error('editing.description') aria-invalid="true" aria-describedby="description-error" @enderror></textarea>
+                            <textarea wire:model.lazy="editing.description" name="description" id="description"
+                                      class="@error('editing.description') border-red-300 text-red-900 placeholder-red-300 focus:border-red-500 focus:outline-none focus:ring-red-500 @enderror block w-full rounded-md border-gray-300 pr-10 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                      placeholder="{{ _i('Description') }}"
+                                      @error('editing.description') aria-invalid="true"
+                                      aria-describedby="description-error" @enderror></textarea>
                             @error('editing.description')
                             <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
                                 <!-- Heroicon name: solid/exclamation-circle -->
-                                <svg class="h-5 w-5 text-red-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                                <svg class="h-5 w-5 text-red-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                     fill="currentColor" aria-hidden="true">
+                                    <path fill-rule="evenodd"
+                                          d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                                          clip-rule="evenodd"/>
                                 </svg>
                             </div>
                             @enderror
                         </div>
                         @error('editing.description')
-                            <p class="mt-2 text-sm text-red-600" id="name-error">{{ $errors->first('editing.description') }}</p>
+                        <p class="mt-2 text-sm text-red-600"
+                           id="name-error">{{ $errors->first('editing.description') }}</p>
                         @else
-                            <p class="mt-2 text-xs text-gray-500" id="description-description">{{ _i('A description for price option.') }}</p>
-                        @enderror
+                            <p class="mt-2 text-xs text-gray-500"
+                               id="description-description">{{ _i('A description for price option.') }}</p>
+                            @enderror
                     </div>
 
-                   <div>
+                    <div>
                         <div class="flex flex-row">
                             <div>
-                                <label for="tax_rate" class="block text-sm font-medium text-gray-700">{{ _i('tax') }}</label>
-                                <select wire:model.lazy="editing.tax_rate" id="tax_rate" name="tax_rate" class="mt-1 block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
-                                    @foreach(\App\Models\Price::TAX as $tax_id => $tax_rate)
+                                <label for="tax_rate"
+                                       class="block text-sm font-medium text-gray-700">{{ _i('tax') }}</label>
+                                <select wire:model.lazy="editing.tax_rate" id="tax_rate" name="tax_rate"
+                                        class="mt-1 block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                                    @foreach(Price::TAX as $tax_id => $tax_rate)
                                         <option value="{{ $tax_id }}">{{ $tax_rate }}</option>
                                     @endforeach
                                 </select>
 
                             </div>
                             <div class="relative mt-1 rounded-md shadow-sm">
-                                <label for="amount_net" class="block text-sm font-medium text-gray-700">{{ _i('price (net)') }}</label>
+                                <label for="amount_net"
+                                       class="block text-sm font-medium text-gray-700">{{ _i('price (net)') }}</label>
                                 <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                                     <span class="text-gray-500 sm:text-sm"> {{ $sign }} </span>
                                 </div>
-                                <input type="text" wire:model.lazy="editing.amount_net" name="price" id="price" class="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="0.00">
+                                <input type="text" wire:model.lazy="editing.amount_net" name="price" id="price"
+                                       class="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                       placeholder="0.00">
                                 <div class="absolute inset-y-0 right-0 flex items-center">
                                     <label for="currency" class="sr-only">Currency</label>
-                                    <select wire:model.lazy="editing.currency" id="currency" name="currency" class="h-full rounded-md border-transparent bg-transparent py-0 pl-2 pr-7 text-gray-500 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
-                                        @foreach(\App\Models\Price::CURRENCY as $currency)
+                                    <select wire:model.lazy="editing.currency" id="currency" name="currency"
+                                            class="h-full rounded-md border-transparent bg-transparent py-0 pl-2 pr-7 text-gray-500 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                                        @foreach(Price::CURRENCY as $currency)
                                             <option value="{{ $currency }}">{{ $currency }}</option>
                                         @endforeach
                                     </select>
                                 </div>
-                                <label for="amount_net" class="block text-sm font-medium text-gray-700">{{ _i('net / gross is calculated automatically') }}</label>
+                                <label for="amount_net"
+                                       class="block text-sm font-medium text-gray-700">{{ _i('net / gross is calculated automatically') }}</label>
                             </div>
                             <div class="relative mt-1 rounded-md shadow-sm">
-                                <label for="amount_gross" class="block text-sm font-medium text-gray-700">{{ _i('price (gross)') }}</label>
+                                <label for="amount_gross"
+                                       class="block text-sm font-medium text-gray-700">{{ _i('price (gross)') }}</label>
                                 <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                                     <span class="text-gray-500 sm:text-sm"> {{ $sign }} </span>
                                 </div>
-                                <input type="text" wire:model.lazy="editing.amount_gross" name="amount_gross" id="amount_gross" class="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="0.00">
+                                <input type="text" wire:model.lazy="editing.amount_gross" name="amount_gross"
+                                       id="amount_gross"
+                                       class="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                       placeholder="0.00">
                                 <div class="absolute inset-y-0 right-0 flex items-center">
                                     <label for="currency" class="sr-only">Currency</label>
-                                    <select wire:model.lazy="editing.currency" id="currency" name="currency" class="h-full rounded-md border-transparent bg-transparent py-0 pl-2 pr-7 text-gray-500 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
-                                        @foreach(\App\Models\Price::CURRENCY as $currency)
+                                    <select wire:model.lazy="editing.currency" id="currency" name="currency"
+                                            class="h-full rounded-md border-transparent bg-transparent py-0 pl-2 pr-7 text-gray-500 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                                        @foreach(Price::CURRENCY as $currency)
                                             <option value="{{ $currency }}">{{ $currency }}</option>
                                         @endforeach
                                     </select>
@@ -139,15 +194,18 @@
                     </div>
 
                     <div>
-                        <label for="certTemplate" class="block text-sm font-medium text-gray-700">{{ _i('Certification Template') }}</label>
-                        <select id="certTemplate" wire:model.lazy="editing.cert_template_id" name="certTemplate" class="mt-1 block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                        <label for="certTemplate"
+                               class="block text-sm font-medium text-gray-700">{{ _i('Certification Template') }}</label>
+                        <select id="certTemplate" wire:model.lazy="editing.cert_template_id" name="certTemplate"
+                                class="mt-1 block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
                             <option value="0">{{ _i('No Certification Template') }}</option>
                             @foreach($certTemplates as $certTemplate)
                                 <option value="{{ $certTemplate->id }}">{{ $certTemplate->title }}</option>
                             @endforeach
                         </select>
                         @error('editing.cert_template_id')
-                        <p class="mt-2 text-sm text-red-600" id="certTemplate-error">{{ $errors->first('editing.cert_template_id') }}</p>
+                        <p class="mt-2 text-sm text-red-600"
+                           id="certTemplate-error">{{ $errors->first('editing.cert_template_id') }}</p>
                         @enderror
                     </div>
 
@@ -156,11 +214,16 @@
                         @foreach(config('payment.methods') as $method)
                             <div class="relative flex items-start">
                                 <div class="flex h-5 items-center">
-                                    <input wire:model.lazy="payment.{{ $method }}" id="{{ $method }}" aria-describedby="{{ $method }}-description" name="{{ $method }}" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                    <input wire:model.lazy="payment.{{ $method }}" id="{{ $method }}"
+                                           aria-describedby="{{ $method }}-description" name="{{ $method }}"
+                                           type="checkbox"
+                                           class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
                                 </div>
                                 <div class="ml-3 text-sm">
-                                    <label for="{{ $method }}" class="font-medium text-gray-700">{{ __('payments.' . $method . '.title')  }}</label>
-                                    <p id="{{ $method }}-description" class="text-gray-500">{!! __('payments.' . $method . '.description') !!}</p>
+                                    <label for="{{ $method }}"
+                                           class="font-medium text-gray-700">{{ __('payments.' . $method . '.title')  }}</label>
+                                    <p id="{{ $method }}-description"
+                                       class="text-gray-500">{!! __('payments.' . $method . '.description') !!}</p>
                                 </div>
                             </div>
                         @endforeach

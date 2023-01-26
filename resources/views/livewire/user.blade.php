@@ -1,3 +1,25 @@
+{{--
+| Copyright 2023 courservio.de
+|
+| Licensed under the EUPL, Version 1.2 or – as soon they
+| will be approved by the European Commission - subsequent
+| versions of the EUPL (the "Licence");
+| You may not use this work except in compliance with the
+| Licence.
+| You may obtain a copy of the Licence at:
+|
+| https://joinup.ec.europa.eu/software/page/eupl
+|
+| Unless required by applicable law or agreed to in
+| writing, software distributed under the Licence is
+| distributed on an "AS IS" basis,
+| WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+| express or implied.
+| See the Licence for the specific language governing
+| permissions and limitations under the Licence.
+--}}
+
+@php use App\Models\User; @endphp
 <div>
     <div class="px-4 sm:px-6 lg:px-8">
         <div class="sm:flex sm:items-center">
@@ -5,7 +27,7 @@
 
             </div>
             <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
-                @can('create', \App\Models\User::class)
+                @can('create', User::class)
                     <button type="button" wire:click="create"
                             class="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto">
                         {{ _i('Add User') }}
